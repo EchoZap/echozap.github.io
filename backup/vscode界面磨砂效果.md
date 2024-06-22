@@ -9,7 +9,6 @@
 ![Noisefigure](https://github.com/EchoZap/echozap.github.io/assets/142982476/feaaa76f-7e47-4001-84fa-dab3b37af182)
 
 
-
 ## 3.配置文件
 
 在vscode的`.settings.json`中键入以下配置，**注意：**将`/Users/einson/Pictures/vscbg/Noisefigure.png`修改为自己的文件路径

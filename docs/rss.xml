@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan Blog</title><link>https://echozap.github.io</link><description>一个主修电子信息科学与技术又略懂计算机科学与艺术的「样样通、样样松」的佛系青年。曾接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://wowpb.pages.dev/file/e27403ca53952d3dc6f7e.jpg</url><title>avatar</title><link>https://echozap.github.io</link></image><lastBuildDate>Sat, 22 Jun 2024 07:28:07 +0000</lastBuildDate><managingEditor>Ronan Blog</managingEditor><ttl>60</ttl><webMaster>Ronan Blog</webMaster><item><title>SDCC编译链接</title><link>https://echozap.github.io/post/SDCC-bian-yi-lian-jie.html</link><description>## 1.编译源文件&#13;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan Blog</title><link>https://echozap.github.io</link><description>一个主修电子信息科学与技术又略懂计算机科学与艺术的「样样通、样样松」的佛系青年。曾接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://wowpb.pages.dev/file/e27403ca53952d3dc6f7e.jpg</url><title>avatar</title><link>https://echozap.github.io</link></image><lastBuildDate>Sat, 22 Jun 2024 07:29:38 +0000</lastBuildDate><managingEditor>Ronan Blog</managingEditor><ttl>60</ttl><webMaster>Ronan Blog</webMaster><item><title>SDCC编译链接</title><link>https://echozap.github.io/post/SDCC-bian-yi-lian-jie.html</link><description>## 1.编译源文件&#13;
 &#13;
 首先，你需要编译你的源文件（例如 `main.c`）以生成目标文件（.rel）。</description><guid isPermaLink="true">https://echozap.github.io/post/SDCC-bian-yi-lian-jie.html</guid><pubDate>Sat, 22 Jun 2024 07:27:46 +0000</pubDate></item><item><title>PlatformIO烧录失败解决方法</title><link>https://echozap.github.io/post/PlatformIO-shao-lu-shi-bai-jie-jue-fang-fa.html</link><description>## 遭遇问题&#13;
 ​***platformIO一直卡在烧录程序中，导致开发版一直处于断电状态***&#13;
@@ -45,7 +45,6 @@ auth sufficient pam_tid.so&#13;
 ## 2.下载图片&#13;
 右键图片-&gt;`图片另存为`即可&#13;
 ![Noisefigure](https://github.com/EchoZap/echozap.github.io/assets/142982476/feaaa76f-7e47-4001-84fa-dab3b37af182)&#13;
-&#13;
 &#13;
 &#13;
 ## 3.配置文件&#13;
