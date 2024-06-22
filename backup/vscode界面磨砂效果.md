@@ -31,7 +31,7 @@
 ## 4.意想不到的问题(无问题可忽略)
 
 有可能最终配置效果不尽人意，所以在这里可以安装一款字体(可选)，在vscode的`.settings.json`键入以下内容。
-[Cascadia Code](https://github.com/microsoft/cascadia-code/releases)
 ```json
 "editor.fontFamily": "Cascadia Code Light, OperatorMono Nerd Font, Monaco, 'Courier New', monospace",
 ```
+[Cascadia Code](https://github.com/microsoft/cascadia-code/releases)
