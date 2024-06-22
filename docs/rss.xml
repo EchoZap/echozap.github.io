@@ -1,2 +1,34 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan Blog</title><link>https://echozap.github.io</link><description>一个主修电子信息科学与技术又略懂计算机科学与艺术的「样样通、样样松」的佛系青年。曾接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://wowpb.pages.dev/file/e27403ca53952d3dc6f7e.jpg</url><title>avatar</title><link>https://echozap.github.io</link></image><lastBuildDate>Fri, 21 Jun 2024 15:39:32 +0000</lastBuildDate><managingEditor>Ronan Blog</managingEditor><ttl>60</ttl><webMaster>Ronan Blog</webMaster><item><title>静态库与动态库</title><link>https://echozap.github.io/post/jing-tai-ku-yu-dong-tai-ku.html</link><description>不管是Linux还是Windows中的库文件其本质和工作模式都是相同的, 只不过在不同的平台上库对应的文件格式和文件后缀不同。</description><guid isPermaLink="true">https://echozap.github.io/post/jing-tai-ku-yu-dong-tai-ku.html</guid><pubDate>Fri, 21 Jun 2024 15:35:13 +0000</pubDate></item></channel></rss>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan Blog</title><link>https://echozap.github.io</link><description>一个主修电子信息科学与技术又略懂计算机科学与艺术的「样样通、样样松」的佛系青年。曾接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://wowpb.pages.dev/file/e27403ca53952d3dc6f7e.jpg</url><title>avatar</title><link>https://echozap.github.io</link></image><lastBuildDate>Sat, 22 Jun 2024 06:54:39 +0000</lastBuildDate><managingEditor>Ronan Blog</managingEditor><ttl>60</ttl><webMaster>Ronan Blog</webMaster><item><title>vscode界面磨砂效果</title><link>https://echozap.github.io/post/vscode-jie-mian-mo-sha-xiao-guo.html</link><description>## 1.安装插件&#13;
+&#13;
+[Apc Customize UI++ ](https://marketplace.visualstudio.com/items?itemName=drcika.apc-extension)&#13;
+&#13;
+&#13;
+&#13;
+## 2.下载图片&#13;
+右键图片-&gt;`图片另存为`即可&#13;
+![Noisefigure](https://github.com/EchoZap/echozap.github.io/assets/142982476/feaaa76f-7e47-4001-84fa-dab3b37af182)&#13;
+&#13;
+&#13;
+&#13;
+## 3.配置文件&#13;
+&#13;
+在vscode的`.settings.json`中键入以下配置，**注意：**将`/Users/einson/Pictures/vscbg/Noisefigure.png`修改为自己的文件路径&#13;
+&#13;
+```json&#13;
+'apc.stylesheet': {&#13;
+    'body': {&#13;
+        'background-image': 'url(/Users/einson/Pictures/vscbg/Noisefigure.png), linear-gradient(to top,rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2))',&#13;
+        'background-size': 'cover',&#13;
+        'background-blend-mode': 'multiply',&#13;
+        'background-repeat': 'no-repeat',&#13;
+        'opacity': 0.89&#13;
+    },&#13;
+}&#13;
+```&#13;
+&#13;
+&#13;
+&#13;
+## 4.意想不到的问题(无问题可忽略)&#13;
+&#13;
+有可能最终配置效果不尽人意，所以在这里可以安装一款字体(可选)，在vscode的`.settings.json`键入以下内容。</description><guid isPermaLink="true">https://echozap.github.io/post/vscode-jie-mian-mo-sha-xiao-guo.html</guid><pubDate>Sat, 22 Jun 2024 06:54:14 +0000</pubDate></item><item><title>静态库与动态库</title><link>https://echozap.github.io/post/jing-tai-ku-yu-dong-tai-ku.html</link><description>不管是Linux还是Windows中的库文件其本质和工作模式都是相同的, 只不过在不同的平台上库对应的文件格式和文件后缀不同。</description><guid isPermaLink="true">https://echozap.github.io/post/jing-tai-ku-yu-dong-tai-ku.html</guid><pubDate>Fri, 21 Jun 2024 15:35:13 +0000</pubDate></item></channel></rss>
