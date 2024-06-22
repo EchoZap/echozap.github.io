@@ -1,5 +1,18 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan Blog</title><link>https://echozap.github.io</link><description>一个主修电子信息科学与技术又略懂计算机科学与艺术的「样样通、样样松」的佛系青年。曾接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://wowpb.pages.dev/file/e27403ca53952d3dc6f7e.jpg</url><title>avatar</title><link>https://echozap.github.io</link></image><lastBuildDate>Sat, 22 Jun 2024 07:01:36 +0000</lastBuildDate><managingEditor>Ronan Blog</managingEditor><ttl>60</ttl><webMaster>Ronan Blog</webMaster><item><title>macOS以指纹授权sudo指令</title><link>https://echozap.github.io/post/macOS-yi-zhi-wen-shou-quan-sudo-zhi-ling.html</link><description>使用以下命令打开；&#13;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan Blog</title><link>https://echozap.github.io</link><description>一个主修电子信息科学与技术又略懂计算机科学与艺术的「样样通、样样松」的佛系青年。曾接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://wowpb.pages.dev/file/e27403ca53952d3dc6f7e.jpg</url><title>avatar</title><link>https://echozap.github.io</link></image><lastBuildDate>Sat, 22 Jun 2024 07:16:40 +0000</lastBuildDate><managingEditor>Ronan Blog</managingEditor><ttl>60</ttl><webMaster>Ronan Blog</webMaster><item><title>PlatformIO烧录失败解决方法</title><link>https://echozap.github.io/post/PlatformIO-shao-lu-shi-bai-jie-jue-fang-fa.html</link><description>## 遭遇问题&#13;
+​***platformIO一直卡在烧录程序中，导致开发版一直处于断电状态***&#13;
+![问题](https://github.com/EchoZap/echozap.github.io/assets/142982476/2dfc517c-8c7c-4c60-ad4f-dd4dfb1e962a)&#13;
+&#13;
+&#13;
+## 解决方法&#13;
+&#13;
+将main.py里的这一行注释即可&#13;
+![解决1](https://github.com/EchoZap/echozap.github.io/assets/142982476/0dd7bc37-7fea-4edd-b501-8ef816e5d3b9)&#13;
+&#13;
+&#13;
+该文件在以下路径&#13;
+![解决2](https://github.com/EchoZap/echozap.github.io/assets/142982476/fd91b26a-cfbc-4eac-b416-b46d0b05fb97)&#13;
+。</description><guid isPermaLink="true">https://echozap.github.io/post/PlatformIO-shao-lu-shi-bai-jie-jue-fang-fa.html</guid><pubDate>Sat, 22 Jun 2024 07:16:18 +0000</pubDate></item><item><title>macOS以指纹授权sudo指令</title><link>https://echozap.github.io/post/macOS-yi-zhi-wen-shou-quan-sudo-zhi-ling.html</link><description>使用以下命令打开；&#13;
 &#13;
 ```zsh&#13;
 sudo vim /etc/pam.d/sudo&#13;
