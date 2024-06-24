@@ -79,7 +79,7 @@ all: \$(OUTPUT_FILE) post_build_cleanup
 post_build_cleanup:
 	-rm -f \$(BUILD_DIR)/*.asm \$(BUILD_DIR)/*.lst \$(BUILD_DIR)/*.rst \$(BUILD_DIR)/*.sym \$(BUILD_DIR)/*.lk \\
 	\$(BUILD_DIR)/*.map \$(BUILD_DIR)/*.mem
-    @echo "可烧录文件out.hex已存放到
+        @echo "可烧录文件out.hex已存放到build目录下"
 	@echo "什么？你居然构建成功啦，这里一个错误警告都没有耶，泰裤辣..."
 
 # 定义一个clean目标，用于手动清理所有生成的文件
