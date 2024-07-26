@@ -9,6 +9,7 @@
 <meta property="og:image" content="{{ blogBase['ogImage'] }}">
 <title>{{ blogBase['postTitle'] }}</title>
 {% if blogBase['highlight']==1 %}<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />{% endif %}
+{{ blogBase['head'] }}
 {% endblock %}
 
 {% block style %}
@@ -57,8 +58,10 @@
 {% block content %}
 <div class="markdown-body" id="postBody">{{ blogBase['postBody'] }}</div>
 <div style="font-size:small;margin-top:8px;float:right;">{{ blogBase['bottomText'] }}</div>
+{% if blogBase['needComment']==1 %}
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">{{ i18n['comments'] }}</button>
 <div class="comments" id="comments"></div>
+{% endif %}
 {% endblock %}
 
 {% block script %}
@@ -72,6 +75,8 @@ document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
     span.innerHTML="{{ blogBase['commentNum'] }}";
     cmButton.appendChild(span);
 {%- endif %}
+
+{% if blogBase['needComment']==1 %}
 function openComments(){
     cm=document.getElementById("comments");
     cmButton=document.getElementById("cmButton");
@@ -109,6 +114,7 @@ function iFrameLoading(){
         }
     }
 }
+{%- endif %}
 </script>
 {{ blogBase['script'] }}
 {% endblock %}
