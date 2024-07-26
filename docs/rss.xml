@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan Blog</title><link>https://echozap.github.io</link><description>一个主修电子信息科学与技术又略懂计算机科学与艺术的「样样通、样样松」的佛系青年。曾接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://wowpb.pages.dev/file/e27403ca53952d3dc6f7e.jpg</url><title>avatar</title><link>https://echozap.github.io</link></image><lastBuildDate>Mon, 24 Jun 2024 11:56:52 +0000</lastBuildDate><managingEditor>Ronan Blog</managingEditor><ttl>60</ttl><webMaster>Ronan Blog</webMaster><item><title>typora图床自动上传脚本</title><link>https://echozap.github.io/post/typora-tu-chuang-zi-dong-shang-chuan-jiao-ben.html</link><description>&gt; typroa的图片上传脚本，针对[[Telegraph-Image](https://github.com/cf-pages/Telegraph-Image)](https://github.com/cf-pages/Telegraph-Image)项目，适用于macOS和Linux系统。</description><guid isPermaLink="true">https://echozap.github.io/post/typora-tu-chuang-zi-dong-shang-chuan-jiao-ben.html</guid><pubDate>Mon, 24 Jun 2024 11:56:31 +0000</pubDate></item><item><title>sdcc工程创建模版程序</title><link>https://echozap.github.io/post/sdcc-gong-cheng-chuang-jian-mo-ban-cheng-xu.html</link><description>## 1.程序构建&#13;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan Blog</title><link>https://EchoZap.github.io/gmeekechozap.github.io</link><description>一个主修电子信息科学与技术又略懂计算机科学与艺术的「样样通、样样松」的佛系青年。曾接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://wowpb.pages.dev/file/e27403ca53952d3dc6f7e.jpg</url><title>avatar</title><link>https://EchoZap.github.io/gmeekechozap.github.io</link></image><lastBuildDate>Fri, 26 Jul 2024 11:07:34 +0000</lastBuildDate><managingEditor>Ronan Blog</managingEditor><ttl>60</ttl><webMaster>Ronan Blog</webMaster><item><title>typora图床自动上传脚本</title><link>https://EchoZap.github.io/gmeekechozap.github.io/post/typora-tu-chuang-zi-dong-shang-chuan-jiao-ben.html</link><description>&gt; typroa的图片上传脚本，针对[[Telegraph-Image](https://github.com/cf-pages/Telegraph-Image)](https://github.com/cf-pages/Telegraph-Image)项目，适用于macOS和Linux系统。</description><guid isPermaLink="true">https://EchoZap.github.io/gmeekechozap.github.io/post/typora-tu-chuang-zi-dong-shang-chuan-jiao-ben.html</guid><pubDate>Mon, 24 Jun 2024 11:56:31 +0000</pubDate></item><item><title>sdcc工程创建模版程序</title><link>https://EchoZap.github.io/gmeekechozap.github.io/post/sdcc-gong-cheng-chuang-jian-mo-ban-cheng-xu.html</link><description>## 1.程序构建&#13;
 &#13;
-新建一个txt文件并将以下代码复制到`xxx.txt`，之后将`xxx.txt（例如sdccpj.txt）`后缀名修改为`.sh（例如sdccpj.sh）`或者直接去掉后缀名只保留文件名（这在类linux系统中就是可执行程序）`sdccpj`。</description><guid isPermaLink="true">https://echozap.github.io/post/sdcc-gong-cheng-chuang-jian-mo-ban-cheng-xu.html</guid><pubDate>Mon, 24 Jun 2024 11:21:30 +0000</pubDate></item><item><title>SSH 远程登录以及 SFTP 文件传输</title><link>https://echozap.github.io/post/SSH%20-yuan-cheng-deng-lu-yi-ji-%20SFTP%20-wen-jian-chuan-shu.html</link><description>**SSH 默认端口号是22.**&#13;
+新建一个txt文件并将以下代码复制到`xxx.txt`，之后将`xxx.txt（例如sdccpj.txt）`后缀名修改为`.sh（例如sdccpj.sh）`或者直接去掉后缀名只保留文件名（这在类linux系统中就是可执行程序）`sdccpj`。</description><guid isPermaLink="true">https://EchoZap.github.io/gmeekechozap.github.io/post/sdcc-gong-cheng-chuang-jian-mo-ban-cheng-xu.html</guid><pubDate>Mon, 24 Jun 2024 11:21:30 +0000</pubDate></item><item><title>SSH 远程登录以及 SFTP 文件传输</title><link>https://EchoZap.github.io/gmeekechozap.github.io/post/SSH%20-yuan-cheng-deng-lu-yi-ji-%20SFTP%20-wen-jian-chuan-shu.html</link><description>**SSH 默认端口号是22.**&#13;
 &#13;
 # SSH 远程登录主机&#13;
 &#13;
@@ -9,13 +9,13 @@
 ssh username@hostname&#13;
 ```&#13;
 &#13;
-其中，`username`是用户名，`hostname` 是主机名或IP 地址。</description><guid isPermaLink="true">https://echozap.github.io/post/SSH%20-yuan-cheng-deng-lu-yi-ji-%20SFTP%20-wen-jian-chuan-shu.html</guid><pubDate>Sun, 23 Jun 2024 09:29:41 +0000</pubDate></item><item><title>typora_orangeheart主题</title><link>https://echozap.github.io/post/typora_orangeheart-zhu-ti.html</link><description>## installation&#13;
+其中，`username`是用户名，`hostname` 是主机名或IP 地址。</description><guid isPermaLink="true">https://EchoZap.github.io/gmeekechozap.github.io/post/SSH%20-yuan-cheng-deng-lu-yi-ji-%20SFTP%20-wen-jian-chuan-shu.html</guid><pubDate>Sun, 23 Jun 2024 09:29:41 +0000</pubDate></item><item><title>typora_orangeheart主题</title><link>https://EchoZap.github.io/gmeekechozap.github.io/post/typora_orangeheart-zhu-ti.html</link><description>## installation&#13;
 &#13;
 1.  将压缩包解压&#13;
 	[压缩包地址](https://wwf.lanzouo.com/iut9T1z6qe1e)&#13;
-2.  启动 Typora 并从应用菜单中打开 `Preferences (设置)`。</description><guid isPermaLink="true">https://echozap.github.io/post/typora_orangeheart-zhu-ti.html</guid><pubDate>Sun, 23 Jun 2024 09:26:15 +0000</pubDate></item><item><title>SDCC编译链接</title><link>https://echozap.github.io/post/SDCC-bian-yi-lian-jie.html</link><description>## 1.编译源文件&#13;
+2.  启动 Typora 并从应用菜单中打开 `Preferences (设置)`。</description><guid isPermaLink="true">https://EchoZap.github.io/gmeekechozap.github.io/post/typora_orangeheart-zhu-ti.html</guid><pubDate>Sun, 23 Jun 2024 09:26:15 +0000</pubDate></item><item><title>SDCC编译链接</title><link>https://EchoZap.github.io/gmeekechozap.github.io/post/SDCC-bian-yi-lian-jie.html</link><description>## 1.编译源文件&#13;
 &#13;
-首先，你需要编译你的源文件（例如 `main.c`）以生成目标文件（.rel）。</description><guid isPermaLink="true">https://echozap.github.io/post/SDCC-bian-yi-lian-jie.html</guid><pubDate>Sat, 22 Jun 2024 07:27:46 +0000</pubDate></item><item><title>PlatformIO烧录失败解决方法</title><link>https://echozap.github.io/post/PlatformIO-shao-lu-shi-bai-jie-jue-fang-fa.html</link><description>## 遭遇问题&#13;
+首先，你需要编译你的源文件（例如 `main.c`）以生成目标文件（.rel）。</description><guid isPermaLink="true">https://EchoZap.github.io/gmeekechozap.github.io/post/SDCC-bian-yi-lian-jie.html</guid><pubDate>Sat, 22 Jun 2024 07:27:46 +0000</pubDate></item><item><title>PlatformIO烧录失败解决方法</title><link>https://EchoZap.github.io/gmeekechozap.github.io/post/PlatformIO-shao-lu-shi-bai-jie-jue-fang-fa.html</link><description>## 遭遇问题&#13;
 ​***platformIO一直卡在烧录程序中，导致开发版一直处于断电状态***&#13;
 ![问题](https://github.com/EchoZap/echozap.github.io/assets/142982476/2dfc517c-8c7c-4c60-ad4f-dd4dfb1e962a)&#13;
 &#13;
@@ -28,7 +28,7 @@ ssh username@hostname&#13;
 &#13;
 该文件在以下路径&#13;
 ![解决2](https://github.com/EchoZap/echozap.github.io/assets/142982476/fd91b26a-cfbc-4eac-b416-b46d0b05fb97)&#13;
-。</description><guid isPermaLink="true">https://echozap.github.io/post/PlatformIO-shao-lu-shi-bai-jie-jue-fang-fa.html</guid><pubDate>Sat, 22 Jun 2024 07:16:18 +0000</pubDate></item><item><title>macOS以指纹授权sudo指令</title><link>https://echozap.github.io/post/macOS-yi-zhi-wen-shou-quan-sudo-zhi-ling.html</link><description>使用以下命令打开；&#13;
+。</description><guid isPermaLink="true">https://EchoZap.github.io/gmeekechozap.github.io/post/PlatformIO-shao-lu-shi-bai-jie-jue-fang-fa.html</guid><pubDate>Sat, 22 Jun 2024 07:16:18 +0000</pubDate></item><item><title>macOS以指纹授权sudo指令</title><link>https://EchoZap.github.io/gmeekechozap.github.io/post/macOS-yi-zhi-wen-shou-quan-sudo-zhi-ling.html</link><description>使用以下命令打开；&#13;
 &#13;
 ```zsh&#13;
 sudo vim /etc/pam.d/sudo&#13;
@@ -50,7 +50,7 @@ auth sufficient pam_smartcard.so&#13;
 auth sufficient pam_tid.so&#13;
 ```&#13;
 &#13;
-保存并退出即可。</description><guid isPermaLink="true">https://echozap.github.io/post/macOS-yi-zhi-wen-shou-quan-sudo-zhi-ling.html</guid><pubDate>Sat, 22 Jun 2024 07:01:13 +0000</pubDate></item><item><title>vscode界面磨砂效果</title><link>https://echozap.github.io/post/vscode-jie-mian-mo-sha-xiao-guo.html</link><description>## 1.安装插件&#13;
+保存并退出即可。</description><guid isPermaLink="true">https://EchoZap.github.io/gmeekechozap.github.io/post/macOS-yi-zhi-wen-shou-quan-sudo-zhi-ling.html</guid><pubDate>Sat, 22 Jun 2024 07:01:13 +0000</pubDate></item><item><title>vscode界面磨砂效果</title><link>https://EchoZap.github.io/gmeekechozap.github.io/post/vscode-jie-mian-mo-sha-xiao-guo.html</link><description>## 1.安装插件&#13;
 &#13;
 [Apc Customize UI++ ](https://marketplace.visualstudio.com/items?itemName=drcika.apc-extension)&#13;
 &#13;
@@ -81,4 +81,4 @@ auth sufficient pam_tid.so&#13;
 &#13;
 ## 4.意想不到的问题(无问题可忽略)&#13;
 &#13;
-有可能最终配置效果不尽人意，所以在这里可以安装一款字体(可选)，在vscode的`.settings.json`键入以下内容。</description><guid isPermaLink="true">https://echozap.github.io/post/vscode-jie-mian-mo-sha-xiao-guo.html</guid><pubDate>Sat, 22 Jun 2024 06:54:14 +0000</pubDate></item><item><title>静态库与动态库</title><link>https://echozap.github.io/post/jing-tai-ku-yu-dong-tai-ku.html</link><description>不管是Linux还是Windows中的库文件其本质和工作模式都是相同的, 只不过在不同的平台上库对应的文件格式和文件后缀不同。</description><guid isPermaLink="true">https://echozap.github.io/post/jing-tai-ku-yu-dong-tai-ku.html</guid><pubDate>Fri, 21 Jun 2024 15:35:13 +0000</pubDate></item></channel></rss>
+有可能最终配置效果不尽人意，所以在这里可以安装一款字体(可选)，在vscode的`.settings.json`键入以下内容。</description><guid isPermaLink="true">https://EchoZap.github.io/gmeekechozap.github.io/post/vscode-jie-mian-mo-sha-xiao-guo.html</guid><pubDate>Sat, 22 Jun 2024 06:54:14 +0000</pubDate></item><item><title>静态库与动态库</title><link>https://EchoZap.github.io/gmeekechozap.github.io/post/jing-tai-ku-yu-dong-tai-ku.html</link><description>不管是Linux还是Windows中的库文件其本质和工作模式都是相同的, 只不过在不同的平台上库对应的文件格式和文件后缀不同。</description><guid isPermaLink="true">https://EchoZap.github.io/gmeekechozap.github.io/post/jing-tai-ku-yu-dong-tai-ku.html</guid><pubDate>Fri, 21 Jun 2024 15:35:13 +0000</pubDate></item></channel></rss>
