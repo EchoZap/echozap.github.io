@@ -38,6 +38,7 @@ class GMEEK():
         self.options=options
         
         self.root_dir='docs/'
+        self.static_dir='static/'
         self.post_folder='post/'
         self.backup_dir='backup/'
         self.post_dir=self.root_dir+self.post_folder
@@ -51,7 +52,6 @@ class GMEEK():
         for label in self.repo.get_labels():
             self.labelColorDict[label.name]='#'+label.color
         print(self.labelColorDict)
-
         self.defaultConfig()
 
     def cleanFile(self):
@@ -72,8 +72,21 @@ class GMEEK():
         os.mkdir(self.root_dir)
         os.mkdir(self.post_dir)
 
+        if os.path.exists(self.static_dir):
+            for item in os.listdir(self.static_dir):
+                src = os.path.join(self.static_dir, item)
+                dst = os.path.join(self.root_dir, item)
+                if os.path.isfile(src):
+                    shutil.copy(src, dst)
+                    print(f"Copied {item} to docs")
+                elif os.path.isdir(src):
+                    shutil.copytree(src, dst)
+                    print(f"Copied directory {item} to docs")
+        else:
+            print("static does not exist")
+
     def defaultConfig(self):
-        dconfig={"singlePage":[],"startSite":"","filingNum":"","onePageListNum":15,"commentLabelColor":"#006b75","yearColorList":["#bc4c00", "#0969da", "#1f883d", "#A333D0"],"i18n":"CN","themeMode":"manual","dayTheme":"light","nightTheme":"dark","urlMode":"pinyin","script":"","style":"","indexScript":"","indexStyle":"","bottomText":"","showPostSource":1,"iconList":{},"UTC":+8,"rssSplit":"sentence","exlink":{}}
+        dconfig={"singlePage":[],"startSite":"","filingNum":"","onePageListNum":15,"commentLabelColor":"#006b75","yearColorList":["#bc4c00", "#0969da", "#1f883d", "#A333D0"],"i18n":"CN","themeMode":"manual","dayTheme":"light","nightTheme":"dark","urlMode":"pinyin","script":"","style":"","head":"","indexScript":"","indexStyle":"","bottomText":"","showPostSource":1,"iconList":{},"UTC":+8,"rssSplit":"sentence","exlink":{},"needComment":1,"allHead":""}
         config=json.loads(open('config.json', 'r', encoding='utf-8').read())
         self.blogBase={**dconfig,**config}.copy()
         self.blogBase["postListJson"]=json.loads('{}')
@@ -87,6 +100,9 @@ class GMEEK():
 
         if "ogImage" not in self.blogBase:
             self.blogBase["ogImage"]=self.blogBase["avatarUrl"]
+
+        if "primerCSS" not in self.blogBase:
+            self.blogBase["primerCSS"]="<link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />"
 
         if "homeUrl" not in self.blogBase:
             if str(self.repo.name).lower() == (str(self.repo.owner.login) + ".github.io").lower():
@@ -170,6 +186,7 @@ class GMEEK():
         postBase["commentNum"]=issue["commentNum"]
         postBase["style"]=issue["style"]
         postBase["script"]=issue["script"]
+        postBase["head"]=issue["head"]
         postBase["top"]=issue["top"]
         postBase["postSourceUrl"]=issue["postSourceUrl"]
         postBase["repoName"]=options.repo_name
@@ -309,11 +326,12 @@ class GMEEK():
 
             self.blogBase[listJsonName][postNum]["postSourceUrl"]="https://github.com/"+options.repo_name+"/issues/"+str(issue.number)
             self.blogBase[listJsonName][postNum]["commentNum"]=issue.get_comments().totalCount
-            self.blogBase[listJsonName][postNum]["wordCount"]=len(issue.body)
 
             if issue.body==None:
                 self.blogBase[listJsonName][postNum]["description"]=''
+                self.blogBase[listJsonName][postNum]["wordCount"]=0
             else:
+                self.blogBase[listJsonName][postNum]["wordCount"]=len(issue.body)
                 if self.blogBase["rssSplit"]=="sentence":
                     if self.blogBase["i18n"]=="CN":
                         period="。"
@@ -351,6 +369,11 @@ class GMEEK():
                 self.blogBase[listJsonName][postNum]["script"]=self.blogBase["script"]+str(postConfig["script"])
             else:
                 self.blogBase[listJsonName][postNum]["script"]=self.blogBase["script"]
+
+            if "head" in postConfig:
+                self.blogBase[listJsonName][postNum]["head"]=self.blogBase["head"]+str(postConfig["head"])
+            else:
+                self.blogBase[listJsonName][postNum]["head"]=self.blogBase["head"]
 
             if "ogImage" in postConfig:
                 self.blogBase[listJsonName][postNum]["ogImage"]=postConfig["ogImage"]
@@ -440,8 +463,8 @@ else:
         oldBlogBase=json.loads(f.read())
         for key, value in oldBlogBase.items():
             blog.blogBase[key] = value
-
         f.close()
+        blog.blogBase["labelColorDict"]=blog.labelColorDict
         blog.runOne(options.issue_number)
 
 listFile=open("blogBase.json","w")
@@ -461,6 +484,9 @@ for i in blog.blogBase["postListJson"]:
     del blog.blogBase["postListJson"][i]["style"]
     del blog.blogBase["postListJson"][i]["top"]
     del blog.blogBase["postListJson"][i]["ogImage"]
+
+    if 'head' in blog.blogBase["postListJson"][i]:
+        del blog.blogBase["postListJson"][i]["head"]
 
     if 'commentNum' in blog.blogBase["postListJson"][i]:
         commentNumSum=commentNumSum+blog.blogBase["postListJson"][i]["commentNum"]
