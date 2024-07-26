@@ -53,7 +53,7 @@ class GMEEK():
             self.labelColorDict[label.name]='#'+label.color
         print(self.labelColorDict)
         self.defaultConfig()
-
+        
     def cleanFile(self):
         workspace_path = os.environ.get('GITHUB_WORKSPACE')
         if os.path.exists(workspace_path+"/"+self.backup_dir):
