@@ -1,5 +1,13 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan Blog</title><link>https://echozap.github.io</link><description>一个主修电子信息科学与技术又略懂计算机科学与艺术的「样样通、样样松」的佛系青年。接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.jpg</url><title>avatar</title><link>https://echozap.github.io</link></image><lastBuildDate>Sat, 27 Jul 2024 07:26:42 +0000</lastBuildDate><managingEditor>Ronan Blog</managingEditor><ttl>60</ttl><webMaster>Ronan Blog</webMaster><item><title>vscode搭建用于8051单片机的sdcc环境</title><link>https://echozap.github.io/post/vscode-da-jian-yong-yu-8051-dan-pian-ji-de-sdcc-huan-jing.html</link><description>## 查找sdcc以及8051头文件位置&#13;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan Blog</title><link>https://echozap.github.io</link><description>一个主修电子信息科学与技术又略懂计算机科学与艺术的「样样通、样样松」的佛系青年。接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.jpg</url><title>avatar</title><link>https://echozap.github.io</link></image><lastBuildDate>Sat, 27 Jul 2024 07:33:43 +0000</lastBuildDate><managingEditor>Ronan Blog</managingEditor><ttl>60</ttl><webMaster>Ronan Blog</webMaster><item><title>shell 编程</title><link>https://echozap.github.io/post/shell%20-bian-cheng.html</link><description># 一、运算符&#13;
+&#13;
+## 1、算术运算符&#13;
+&#13;
+下表列出了常用的算术运算符，假定变量 a 为 10，变量 b 为 20：&#13;
+&#13;
+|运算符|说明|举例|&#13;
+| :----: | :-------------------------------------------: | :------------------------: |&#13;
+|+|加法|`expr $a + $b` 结果为 30。</description><guid isPermaLink="true">https://echozap.github.io/post/shell%20-bian-cheng.html</guid><pubDate>Sat, 27 Jul 2024 07:33:17 +0000</pubDate></item><item><title>vscode搭建用于8051单片机的sdcc环境</title><link>https://echozap.github.io/post/vscode-da-jian-yong-yu-8051-dan-pian-ji-de-sdcc-huan-jing.html</link><description>## 查找sdcc以及8051头文件位置&#13;
 &#13;
 ```shell&#13;
 ❯ which sdcc&#13;

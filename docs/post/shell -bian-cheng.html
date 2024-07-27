@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    <script src='https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/plugins/GmeekVercount.js'></script>
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.jpg"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="# 一、运算符
+
+## 1、算术运算符
+
+下表列出了常用的算术运算符，假定变量 a 为 10，变量 b 为 20：
+
+|运算符|说明|举例|
+| :----: | :-------------------------------------------: | :------------------------: |
+|+|加法|`expr $a + $b` 结果为 30。">
+<meta property="og:title" content="shell 编程">
+<meta property="og:description" content="# 一、运算符
+
+## 1、算术运算符
+
+下表列出了常用的算术运算符，假定变量 a 为 10，变量 b 为 20：
+
+|运算符|说明|举例|
+| :----: | :-------------------------------------------: | :------------------------: |
+|+|加法|`expr $a + $b` 结果为 30。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://echozap.github.io/post/shell%20-bian-cheng.html">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.jpg">
+<title>shell 编程</title>
+<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">shell 编程</h1>
+<div class="title-right">
+    <a href="https://echozap.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><h1>一、运算符</h1>
+<h2>1、算术运算符</h2>
+<p>下表列出了常用的算术运算符，假定变量 a 为 10，变量 b 为 20：</p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">说明</th>
+<th align="center">举例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">+</td>
+<td align="center">加法</td>
+<td align="center"><code class="notranslate">expr $a + $b</code> 结果为 30。</td>
+</tr>
+<tr>
+<td align="center">-</td>
+<td align="center">减法</td>
+<td align="center"><code class="notranslate">expr $a - $b</code> 结果为 -10。</td>
+</tr>
+<tr>
+<td align="center">*</td>
+<td align="center">乘法</td>
+<td align="center"><code class="notranslate">expr $a \* $b</code> 结果为  200。</td>
+</tr>
+<tr>
+<td align="center">/</td>
+<td align="center">除法</td>
+<td align="center"><code class="notranslate">expr $b / $a</code> 结果为 2。</td>
+</tr>
+<tr>
+<td align="center">%</td>
+<td align="center">取余</td>
+<td align="center"><code class="notranslate">expr $b % $a</code> 结果为 0。</td>
+</tr>
+<tr>
+<td align="center">=</td>
+<td align="center">赋值</td>
+<td align="center">a=$b 把变量 b 的值赋给 a。</td>
+</tr>
+<tr>
+<td align="center">==</td>
+<td align="center">相等。用于比较两个数字，相同则返回 true。</td>
+<td align="center">[ $a ==$b ] 返回 false。</td>
+</tr>
+<tr>
+<td align="center">!=</td>
+<td align="center">不相等。用于比较两个数字，不相同则返回 true。</td>
+<td align="center">[ $a !=$b ] 返回 true。</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p><strong>注意：</strong> 条件表达式要放在方括号之间，并且要有空格，例如:  <strong>[​$a==$​b]</strong>  是错误的，必须写成  <strong>[ ​$a ==$​b ]</strong> 。</p>
+<ul>
+<li>乘号(*)前边必须加反斜杠()才能实现乘法运算；</li>
+<li>if...then...fi 是条件语句，后续将会讲解。</li>
+<li>在 MAC 中 shell 的 expr 语法是： <strong>$((表达式))</strong> ，此处表达式中的 "*" 不需要转义符号 "" 。</li>
+</ul>
+<h2>2、关系运算符</h2>
+<p>关系运算符只支持数字，不支持字符串，除非字符串的值是数字。</p>
+<p>下表列出了常用的关系运算符，假定变量 a 为 10，变量 b 为 20：</p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">说明</th>
+<th align="center">举例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">-eq</td>
+<td align="center">检测两个数是否相等，相等返回 true。</td>
+<td align="center">[ $a -eq$b ] 返回 false。</td>
+</tr>
+<tr>
+<td align="center">-ne</td>
+<td align="center">检测两个数是否不相等，不相等返回 true。</td>
+<td align="center">[ $a -ne$b ] 返回 true。</td>
+</tr>
+<tr>
+<td align="center">-gt</td>
+<td align="center">检测左边的数是否大于右边的，如果是，则返回 true。</td>
+<td align="center">[ $a -gt$b ] 返回 false。</td>
+</tr>
+<tr>
+<td align="center">-lt</td>
+<td align="center">检测左边的数是否小于右边的，如果是，则返回 true。</td>
+<td align="center">[ $a -lt$b ] 返回 true。</td>
+</tr>
+<tr>
+<td align="center">-ge</td>
+<td align="center">检测左边的数是否大于等于右边的,如果是,则返回 true。</td>
+<td align="center">[ $a -ge$b ] 返回 false。</td>
+</tr>
+<tr>
+<td align="center">-le</td>
+<td align="center">检测左边的数是否小于等于右边的,如果是,则返回 true。</td>
+<td align="center">[ $a -le$b ] 返回 true。</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<h2>3、布尔运算符</h2>
+<p>下表列出了常用的布尔运算符，假定变量 a 为 10，变量 b 为 20：</p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">说明</th>
+<th align="center">举例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">!</td>
+<td align="center">非运算，表达式为 true 则返回 false，</td>
+<td align="center">[ ! false ] 返回 true。</td>
+</tr>
+<tr>
+<td align="center">-o</td>
+<td align="center">或运算，有一个表达式为 true 则返回 true。</td>
+<td align="center">[ $a -lt 20 -o$b -gt 100 ] 返回 true。</td>
+</tr>
+<tr>
+<td align="center">-a</td>
+<td align="center">与运算，两个表达式都为 true 才返回 true。</td>
+<td align="center">[ $a -lt 20 -a$b -gt 100 ] 返回 false。</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<h2>4、逻辑运算符</h2>
+<p>以下介绍 Shell 的逻辑运算符，假定变量 a 为 10，变量 b 为 20:</p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">&amp;&amp;</td>
+<td align="center">逻辑的 AND</td>
+</tr>
+<tr>
+<td align="center">||</td>
+<td align="center">逻辑的 OR</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<h2>5、字符串运算符</h2>
+<p>下表列出了常用的字符串运算符，假定变量 a 为 "abc"，变量 b 为 "efg"：</p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th align="center">运算符</th>
+<th align="center">说明</th>
+<th align="center">举例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">=</td>
+<td align="center">检测两个字符串是否相等，相等返回 true。</td>
+<td align="center">[ $a =$b ] 返回 false。</td>
+</tr>
+<tr>
+<td align="center">!=</td>
+<td align="center">检测两个字符串是否不相等，不相等返回 true。</td>
+<td align="center">[ $a !=$b ] 返回 true。</td>
+</tr>
+<tr>
+<td align="center">-z</td>
+<td align="center">检测字符串长度是否为0，为0返回 true。</td>
+<td align="center">[ -z $a ] 返回 false。</td>
+</tr>
+<tr>
+<td align="center">-n</td>
+<td align="center">检测字符串长度是否不为 0，不为 0 返回 true。</td>
+<td align="center">[ -n "$a" ] 返回 true。</td>
+</tr>
+<tr>
+<td align="center">$</td>
+<td align="center">检测字符串是否不为空，不为空返回 true。</td>
+<td align="center">[ $a ] 返回 true。</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<h2>6、文件测试运算符</h2>
+<p>文件测试运算符用于检测 Unix 文件的各种属性。</p>
+<p>属性检测描述如下：</p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th align="center">操作符</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">-b file</td>
+<td align="center">检测文件是否是块设备文件，如果是，则返回 true。</td>
+</tr>
+<tr>
+<td align="center">-c file</td>
+<td align="center">检测文件是否是字符设备文件，如果是，则返回 true。</td>
+</tr>
+<tr>
+<td align="center">-d file</td>
+<td align="center">检测文件是否是目录，如果是，则返回 true。</td>
+</tr>
+<tr>
+<td align="center">-e file</td>
+<td align="center">检测文件是否存在，如果是，则返回 true。</td>
+</tr>
+<tr>
+<td align="center">-f file</td>
+<td align="center">检测文件是否是普通文件（既不是目录，也不是设备文件），如果是，则返回 true。</td>
+</tr>
+<tr>
+<td align="center">-g file</td>
+<td align="center">检测文件是否设置了 SGID 位，如果是，则返回 true。</td>
+</tr>
+<tr>
+<td align="center">-k file</td>
+<td align="center">检测文件是否设置了粘着位(Sticky Bit)，如果是，则返回 true。</td>
+</tr>
+<tr>
+<td align="center">-p file</td>
+<td align="center">检测文件是否是有名管道，如果是，则返回 true。</td>
+</tr>
+<tr>
+<td align="center">-u file</td>
+<td align="center">检测文件是否设置了 SUID 位，如果是，则返回 true。</td>
+</tr>
+<tr>
+<td align="center">-r file</td>
+<td align="center">检测文件是否可读，如果是，则返回 true。</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p>其他检查符：</p>
+<ul>
+<li><strong>-S</strong>: 判断某文件是否 socket。</li>
+<li><strong>-L</strong>: 检测文件是否存在并且是一个符号链接。</li>
+</ul>
+<hr>
+<h1>二、字符串处理</h1>
+<h2>1、字符串切片</h2>
+<div class="highlight highlight-source-shell"><pre class="notranslate">＄{变量：偏移量：截取长度｝
+
+--------------------------example
+[192.168.2.230] - root@ubuntu20.04.5-template:/ root
+$ MYPATH=<span class="pl-s"><span class="pl-pds">'</span> /usr/bin/wget<span class="pl-pds">'</span></span>
+
+[192.168.2.230］ - root@ubuntu20.04.5-template:/root
+$ <span class="pl-c1">echo</span> <span class="pl-smi">${MYPATH<span class="pl-k">:</span> 4<span class="pl-k">:</span>4}</span>
+/bin     			  <span class="pl-c"><span class="pl-c">#</span>其会左向右从第四位向后取四位（字符串第一位为0）</span>
+
+[192.168.2.230] - root@ubuntu20.04.5-template:/ root
+$ <span class="pl-c1">echo</span> <span class="pl-smi">${MYPATH<span class="pl-k">:</span> -4}</span>  <span class="pl-c"><span class="pl-c">#</span>这会右向左从末尾向前取四位，「-4和冒号之间要有一个空格」</span>
+</pre></div>
+<h2>2、基于模式取子串</h2>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-smi">${var<span class="pl-k">#*</span>word}</span>
+其中word可以是指定的任意字符，自左而右，删除字符串开头至第一次出现word字符之间的所有字符。
+
+<span class="pl-smi">${var<span class="pl-k">##*</span>word}</span>
+其中word可以是指定的任意字符，自左而右，删除字符串开头至最后一次出现word字符之间的所有字符。
+
+<span class="pl-smi">${var<span class="pl-k">%</span>sword<span class="pl-k">*</span>}</span>
+其中word可以是指定的任意字符，自右而左，删除字符串尾部至第一次出现word字符之间的所有字符。
+
+<span class="pl-smi">${var<span class="pl-k">%%</span>sword<span class="pl-k">*</span>}</span>
+其中word可以是指定的任意字符，自右而左，删除字符串尾部至最后一次出现word字符之间的所有字符</pre></div>
+<h2>3、查找删除</h2>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-smi">${var<span class="pl-k">/</span>匹配文本｝</span>
+<span class="pl-smi">删除第一次匹配到的内容</span>
+<span class="pl-smi"></span>
+<span class="pl-smi"><span class="pl-smi">${var<span class="pl-k">//</span>pattern｝</span></span>
+<span class="pl-smi"><span class="pl-smi">删除所有匹配到的内容</span></span>
+<span class="pl-smi"><span class="pl-smi"></span></span>
+<span class="pl-smi"><span class="pl-smi"><span class="pl-smi">${var<span class="pl-k">/#</span>pattern｝</span></span></span>
+<span class="pl-smi"><span class="pl-smi"><span class="pl-smi">删除行首匹配到的内容</span></span></span>
+<span class="pl-smi"><span class="pl-smi"><span class="pl-smi"></span></span></span>
+<span class="pl-smi"><span class="pl-smi"><span class="pl-smi"><span class="pl-smi">${var<span class="pl-k">/%</span>pattern｝</span></span></span></span>
+<span class="pl-smi"><span class="pl-smi"><span class="pl-smi"><span class="pl-smi">删除行尾匹配到的内容</span></span></span></span></pre></div>
+<h2>4、查找替换</h2>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-smi">${var<span class="pl-k">/</span>匹配文本<span class="pl-k">/</span>替换文本｝</span>
+<span class="pl-smi">替换第一次匹配到的内容</span>
+<span class="pl-smi"></span>
+<span class="pl-smi"><span class="pl-smi">${var<span class="pl-k">//</span>匹配文本<span class="pl-k">/</span>替换文本｝</span></span>
+<span class="pl-smi"><span class="pl-smi">替换所有匹配到的内容</span></span>
+<span class="pl-smi"><span class="pl-smi"></span></span>
+<span class="pl-smi"><span class="pl-smi"><span class="pl-smi">${var<span class="pl-k">/#</span>匹配文本<span class="pl-k">/</span>替换文本｝</span></span></span>
+<span class="pl-smi"><span class="pl-smi"><span class="pl-smi">行首匹配时替换行首</span></span></span>
+<span class="pl-smi"><span class="pl-smi"><span class="pl-smi"></span></span></span>
+<span class="pl-smi"><span class="pl-smi"><span class="pl-smi"><span class="pl-smi">${var<span class="pl-k">/%</span>匹配文本<span class="pl-k">/</span>替换文本｝</span></span></span></span>
+<span class="pl-smi"><span class="pl-smi"><span class="pl-smi"><span class="pl-smi">行尾匹配时替换行尾</span></span></span></span></pre></div>
+<hr>
+<h1>三、条件判断语法格式</h1>
+<ul>
+<li>test条件表达式</li>
+<li>[ 条件表达式 ]</li>
+<li>[[ 条件表达式 ]]</li>
+</ul>
+<p><strong>特别说明</strong>：</p>
+<p>1）[ 亲亲，我两边都有空格，不空会被打死的喔～ ]</p>
+<p>2）[[ 亲亲，我两边都有空格，不空会被打死的喔～ ]]</p>
+<p>3）更多判断，<code class="notranslate">man test</code>查看，许多的参数都可用来进行条件判断</p>
+<h2>[] 和 [[]] 的区别：</h2>
+<h3><code class="notranslate">[]</code> （test 命令）</h3>
+<p><code class="notranslate">[]</code> 是传统的测试条件的命令，也称为 <code class="notranslate">test</code> 命令。这种语法适用于POSIX标准的Shell，包括sh和bash。</p>
+<ul>
+<li>
+<p><strong>基本语法</strong>：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">[ condition ]</pre></div>
+</li>
+<li>
+<p><strong>用法和特点</strong>：</p>
+<ul>
+<li>条件需要用空格分隔。</li>
+<li>只支持基本的逻辑和比较操作。</li>
+<li>适用于大多数Unix系统。</li>
+</ul>
+</li>
+<li>
+<p><strong>示例</strong>：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-k">if</span> [ <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$a</span><span class="pl-pds">"</span></span> <span class="pl-k">-eq</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$b</span><span class="pl-pds">"</span></span> ]<span class="pl-k">;</span> <span class="pl-k">then</span>
+  <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>a 等于 b<span class="pl-pds">"</span></span>
+<span class="pl-k">fi</span></pre></div>
+</li>
+</ul>
+<h3><code class="notranslate">[[]]</code> （扩展测试命令）</h3>
+<p><code class="notranslate">[[]]</code> 是Bash特有的扩展测试命令，提供了更强大的功能和更简洁的语法。</p>
+<ul>
+<li>
+<p><strong>基本语法</strong>：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">[[ condition ]]</pre></div>
+</li>
+<li>
+<p><strong>用法和特点</strong>：</p>
+<ul>
+<li>支持更复杂的条件测试，例如模式匹配（通配符）。</li>
+<li>可以直接使用逻辑运算符 <code class="notranslate">&amp;&amp;</code> 和 <code class="notranslate">||</code> 进行复合条件判断。</li>
+<li>允许在字符串比较中使用 <code class="notranslate">=~</code> 操作符进行正则表达式匹配。</li>
+<li>不需要对条件中的变量进行双引号引用，因为它可以正确处理空字符串和带空格的字符串。</li>
+</ul>
+</li>
+<li>
+<p><strong>示例</strong>：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-k">if</span> [[ <span class="pl-smi">$a</span> <span class="pl-k">==</span> <span class="pl-smi">$b</span> ]]<span class="pl-k">;</span> <span class="pl-k">then</span>
+  <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>a 等于 b<span class="pl-pds">"</span></span>
+<span class="pl-k">fi</span>
+
+<span class="pl-k">if</span> [[ <span class="pl-smi">$a</span> <span class="pl-k">=~</span> ^[0-9]+$ ]]<span class="pl-k">;</span> <span class="pl-k">then</span>
+  <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>a 是一个数字<span class="pl-pds">"</span></span>
+<span class="pl-k">fi</span></pre></div>
+</li>
+</ul>
+<h3>详细对比</h3>
+<ul>
+<li>
+<p><strong>字符串比较</strong>：</p>
+<ul>
+<li><code class="notranslate">[]</code> 使用 <code class="notranslate">=</code> 进行字符串比较，通常需要使用双引号。
+<div class="highlight highlight-source-shell"><pre class="notranslate">[ <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$a</span><span class="pl-pds">"</span></span> <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$b</span><span class="pl-pds">"</span></span> ]</pre></div>
+</li>
+<li><code class="notranslate">[[]]</code> 使用 <code class="notranslate">==</code> 进行字符串比较，不需要双引号。
+<div class="highlight highlight-source-shell"><pre class="notranslate">[[ <span class="pl-smi">$a</span> <span class="pl-k">==</span> <span class="pl-smi">$b</span> ]]</pre></div>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>逻辑运算</strong>：</p>
+<ul>
+<li>
+<p><code class="notranslate">[]</code> 需要使用 <code class="notranslate">-a</code> (AND) 和 <code class="notranslate">-o</code> (OR)。</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">[ <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$a</span><span class="pl-pds">"</span></span> <span class="pl-k">-eq</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$b</span><span class="pl-pds">"</span></span> <span class="pl-k">-a</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$c</span><span class="pl-pds">"</span></span> <span class="pl-k">-eq</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$d</span><span class="pl-pds">"</span></span> ]</pre></div>
+</li>
+<li>
+<p><code class="notranslate">[[]]</code> 可以使用 <code class="notranslate">&amp;&amp;</code> 和 <code class="notranslate">||</code>。</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">[[ <span class="pl-smi">$a</span> <span class="pl-k">-eq</span> <span class="pl-smi">$b</span> <span class="pl-k">&amp;&amp;</span> <span class="pl-smi">$c</span> <span class="pl-k">-eq</span> <span class="pl-smi">$d</span> ]]</pre></div>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>正则表达式匹配</strong>：</p>
+<ul>
+<li>
+<p><code class="notranslate">[]</code> 不支持直接的正则表达式匹配。</p>
+</li>
+<li>
+<p><code class="notranslate">[[]]</code> 支持 <code class="notranslate">=~</code> 操作符。</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">[[ <span class="pl-smi">$a</span> <span class="pl-k">=~</span> ^[0-9]+$ ]]</pre></div>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>模式匹配</strong>：</p>
+<ul>
+<li>
+<p><code class="notranslate">[]</code> 不支持模式匹配。</p>
+</li>
+<li>
+<p><code class="notranslate">[[]]</code> 支持模式匹配。</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">[[ <span class="pl-smi">$a</span> <span class="pl-k">==</span> <span class="pl-k">*</span>.txt ]]</pre></div>
+</li>
+</ul>
+</li>
+</ul>
+<h3>总结</h3>
+<ul>
+<li>使用 <code class="notranslate">[]</code> 更适合于需要兼容POSIX标准的脚本和基本条件测试。</li>
+<li>使用 <code class="notranslate">[[]]</code> 提供了更强大和简洁的语法，适合于需要进行复杂条件判断的Bash脚本。</li>
+</ul>
+<p>在实际编程中，建议在Bash脚本中尽量使用 <code class="notranslate">[[]]</code>，除非需要兼容性考虑，这样可以充分利用其扩展功能和更清晰的语法。</p>
+<hr>
+<h1>四、流程控制</h1>
+<h2>if else 语法格式</h2>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-k">if</span> condition
+<span class="pl-k">then</span>
+    command1 
+    command2
+    ...
+    commandN
+<span class="pl-k">else</span>
+    <span class="pl-c1">command</span>
+<span class="pl-k">fi</span></pre></div>
+<h2>if else-if else 语法格式</h2>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-k">if</span> condition1
+<span class="pl-k">then</span>
+    command1
+<span class="pl-k">elif</span> condition2 
+<span class="pl-k">then</span> 
+    command2
+<span class="pl-k">else</span>
+    commandN
+<span class="pl-k">fi</span></pre></div>
+<p>if else 的 [...] 判断语句中大于使用 -gt，小于使用 -lt，其他用法请参照<strong>运算符</strong>。</p>
+<pre class="notranslate"><code class="notranslate">if [ "$a" -gt "$b" ]; then
+    ...
+fi
+</code></pre>
+<p>如果使用((...)) 作为判断语句，就可以使用类c风格判断，大于和小于可以直接使用 &gt; 和 &lt;。</p>
+<pre class="notranslate"><code class="notranslate">if (( a &gt; b )); then
+    ...
+fi
+</code></pre>
+<h2>for循环</h2>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-k">for</span> <span class="pl-smi">var</span> <span class="pl-k">in</span> item1 item2 ... itemN
+<span class="pl-k">do</span>
+    command1
+    command2
+    ...
+    commandN
+<span class="pl-k">done</span></pre></div>
+<p>举个栗子🌰</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#!</span>/bin/bash</span>
+
+<span class="pl-k">for</span> <span class="pl-smi">str</span> <span class="pl-k">in</span> This is a string
+<span class="pl-k">do</span>
+    <span class="pl-c1">echo</span> <span class="pl-smi">$str</span>
+<span class="pl-k">done</span></pre></div>
+<p>输出结果：</p>
+<pre class="notranslate"><code class="notranslate">This
+is
+a
+string
+</code></pre>
+<blockquote>
+<p>要打印1 -&gt; 10的数字，可以用以下格式</p>
+</blockquote>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#!</span>/bin/zsh</span>
+
+<span class="pl-k">for</span> <span class="pl-smi">i</span> <span class="pl-k">in</span> {1..10}
+<span class="pl-k">do</span> 
+    <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$i</span><span class="pl-pds">"</span></span>
+<span class="pl-k">done</span></pre></div>
+<blockquote>
+<p>或者以下类c风格</p>
+</blockquote>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#!</span>/bin/zsh</span>
+
+<span class="pl-k">for</span> <span class="pl-s"><span class="pl-pds">((</span>i<span class="pl-k">=</span><span class="pl-c1">1</span>; i<span class="pl-k">&lt;</span><span class="pl-c1">11</span>; i<span class="pl-k">++</span><span class="pl-pds">))</span></span>
+<span class="pl-k">do</span> 
+    <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$i</span><span class="pl-pds">"</span></span>
+<span class="pl-k">done</span></pre></div>
+<h2>while循环</h2>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-k">while</span> condition
+<span class="pl-k">do</span>
+    <span class="pl-c1">command</span>
+<span class="pl-k">done</span></pre></div>
+<p>举个栗子🌰</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#!</span>/bin/bash</span>
+int=1
+while<span class="pl-s"><span class="pl-pds">((</span> <span class="pl-smi">$int</span><span class="pl-k">&lt;=</span><span class="pl-c1">5</span> <span class="pl-pds">))</span></span>
+<span class="pl-k">do</span>
+    <span class="pl-c1">echo</span> <span class="pl-smi">$int</span>
+    <span class="pl-c1">let</span> <span class="pl-s"><span class="pl-pds">"</span>int++<span class="pl-pds">"</span></span>
+<span class="pl-k">done</span></pre></div>
+<h2>无限循环</h2>
+<p>无限循环语法格式：</p>
+<pre class="notranslate"><code class="notranslate">while :
+do
+    command
+done
+</code></pre>
+<p>或者</p>
+<pre class="notranslate"><code class="notranslate">while true
+do
+    command
+done
+</code></pre>
+<p>或者</p>
+<pre class="notranslate"><code class="notranslate">for (( ; ; ))
+</code></pre>
+<hr>
+<h2>until 循环</h2>
+<p>until 循环执行一系列命令直至条件为 true 时停止。</p>
+<p>until 循环与 while 循环在处理方式上刚好相反。</p>
+<p>一般 while 循环优于 until 循环，但在某些时候—也只是极少数情况下，until 循环更加有用。</p>
+<p>until 语法格式:</p>
+<pre class="notranslate"><code class="notranslate">until condition
+do
+    command
+done
+</code></pre>
+<p>condition 一般为条件表达式，如果返回值为 false，则继续执行循环体内的语句，否则跳出循环。</p>
+<hr>
+<h1>五、获取当前日期以及时间</h1>
+<p>在 Unix 或 Linux 系统中，<code class="notranslate">date</code> 命令用于显示或设置系统日期和时间。<code class="notranslate">date</code> 命令可以接受多种格式化字符串来指定输出的格式。</p>
+<p>命令 <code class="notranslate">date +%M</code> 会返回当前时间中的“分钟”部分。例如，如果当前时间是 14:35，那么运行 <code class="notranslate">date +%M</code> 会输出 <code class="notranslate">35</code>。</p>
+<p>下面是一些常用的 <code class="notranslate">date</code> 格式化字符串及其含义：</p>
+<ul>
+<li><code class="notranslate">%Y</code>：四位数的年份（例如，2023）</li>
+<li><code class="notranslate">%m</code>：两位数的月份（例如，05 表示五月）</li>
+<li><code class="notranslate">%d</code>：两位数的日期（例如，17）</li>
+<li><code class="notranslate">%D</code>：格式化日期（例如2024年五月17日，其会输出05/17/24）</li>
+<li><code class="notranslate">%H</code>：两位数的小时（24 小时制，例如，14 表示下午 2 点）</li>
+<li><code class="notranslate">%M</code>：两位数的分钟（例如，35）</li>
+<li><code class="notranslate">%S</code>：两位数的秒（例如，45）</li>
+<li><code class="notranslate">%s</code>：当前时间的Unix时间戳（也称为纪元时间）。Unix时间戳是从1970年1月1日00:00:00 UTC（协调世界时）开始经过的秒数。</li>
+</ul>
+<p>所以，<code class="notranslate">date +%M</code> 的输出仅仅是当前时间的分钟部分。</p>
+<hr>
+<h1>六、传递参数</h1>
+<h2>特殊参数</h2>
+<p>我们可以在执行 Shell 脚本时，向脚本传递参数，脚本内获取参数的格式为 $n，<strong>n</strong> 代表一个数字，<strong>1</strong> 为执行脚本的第一个参数，<strong>2</strong> 为执行脚本的第二个参数。</p>
+<p>例如可以使用 $1、$2 等来引用传递给脚本的参数，其中$1表示第一个参数，$2 表示第二个参数，依此类推。</p>
+<p>在<code class="notranslate">#!/bin/zsh</code>脚本中，<code class="notranslate">$#</code>和<code class="notranslate">$0</code>是特定的shell变量，用于脚本参数处理和信息获取。让我们详细解释它们的含义：</p>
+<ul>
+<li><code class="notranslate">$#</code> 用于表示传递给脚本的参数数量。</li>
+<li><code class="notranslate">$0</code> 为执行的文件名（包含文件路径），即脚本自身的文件名。</li>
+<li><code class="notranslate">$?</code>显示最后命令的退出状态。0表示没有错误，其他任何值表明有错误。</li>
+<li><code class="notranslate">$-</code>显示Shell使用的当前选项，与<a href="https://www.runoob.com/linux/linux-comm-set.html" rel="nofollow">set命令</a>功能相同。</li>
+<li><code class="notranslate">$!</code>后台运行的最后一个进程的ID号</li>
+<li><code class="notranslate">$$</code>脚本运行的当前进程ID号</li>
+<li><code class="notranslate">$*</code>以一个单字符串显示所有向脚本传递的参数。</li>
+<li><code class="notranslate">$@</code>与$*相同，但是使用时加引号，并在引号中返回每个参数。</li>
+</ul>
+<h2>$# 的含义</h2>
+<p><code class="notranslate">$#</code> 代表传递给脚本的参数数量。在脚本开头，有以下代码：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-k">if</span> [ <span class="pl-smi">$#</span> <span class="pl-k">-ne</span> 1 ]<span class="pl-k">;</span> <span class="pl-k">then</span>
+    <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>Usage: <span class="pl-smi">$0</span> &lt;directory&gt;<span class="pl-pds">"</span></span>
+    <span class="pl-c1">exit</span> 1
+<span class="pl-k">fi</span></pre></div>
+<p>这段代码的意思是：检查传递给脚本的参数数量是否不等于1。如果不是1个参数（即传递了0个参数或者多于1个参数），则输出使用说明并退出脚本。换句话说，<code class="notranslate">$#</code>用于确保脚本接收正好一个参数。</p>
+<h2>$0 的含义</h2>
+<p><code class="notranslate">$0</code> 代表脚本自身的文件名（包含文件路径）。在脚本中同样的代码：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-k">if</span> [ <span class="pl-smi">$#</span> <span class="pl-k">-ne</span> 1 ]<span class="pl-k">;</span> <span class="pl-k">then</span>
+    <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span>Usage: <span class="pl-smi">$0</span> &lt;directory&gt;<span class="pl-pds">"</span></span>
+    <span class="pl-c1">exit</span> 1
+<span class="pl-k">fi</span></pre></div>
+<p>在这个例子中，<code class="notranslate">$0</code>表示脚本文件的名称。假设脚本的文件名是<code class="notranslate">rename_files.sh</code>，那么当你执行这个脚本时，<code class="notranslate">$0</code>就会被替换为<code class="notranslate">rename_files.sh</code>。因此，输出的使用说明会是：</p>
+<pre class="notranslate"><code class="notranslate">Usage: rename_files.sh &lt;directory&gt;
+</code></pre>
+<p>‍</p></div>
+<div style="font-size:small;margin-top:8px;float:right;"></div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://echozap.github.io">Ronan Blog</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek  https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","EchoZap/echozap.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+</script>
+<script src='https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/plugins/GmeekTOC.js'></script><script src='https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/plugins/lightbox.js'></script>
+
+</html>
