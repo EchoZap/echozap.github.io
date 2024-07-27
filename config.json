@@ -4,8 +4,8 @@
     "avatarUrl":"https://wowpb.pages.dev/file/e27403ca53952d3dc6f7e.jpg",
     "GMEEK_VERSION":"last",
 
-    "script":"<script src='https://raw.githubusercontent.com/EchoZap/echozap.github.io/main/static/assets/GmeekTOC.js'></script><script src='https://raw.githubusercontent.com/EchoZap/echozap.github.io/main/static/assets/lightbox.js'></script>",
-    "allHead":"<script src='https://raw.githubusercontent.com/EchoZap/echozap.github.io/main/static/assets/GmeekVercount.js'></script>",
+    "script":"<script src='https://cdn.jsdelivr.net/gh/EchoZap/gmeekechozap.github.io@main/static/assets/GmeekTOC.js'></script><script src='https://cdn.jsdelivr.net/gh/EchoZap/gmeekechozap.github.io@main/static/assets/lightbox.js'></script>",
+    "allHead":"<script src='https://cdn.jsdelivr.net/gh/EchoZap/gmeekechozap.github.io@main/static/assets/GmeekVercount.js'></script>",
 
     "onePageListNum":14,
     "showPostSource":0
