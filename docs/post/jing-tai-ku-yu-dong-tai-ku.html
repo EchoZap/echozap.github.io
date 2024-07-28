@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark_colorblind" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    <script src='https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/plugins/GmeekVercount.js'></script>
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.avg"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="不管是Linux还是Windows中的库文件其本质和工作模式都是相同的, 只不过在不同的平台上库对应的文件格式和文件后缀不同。">
+<meta property="og:title" content="静态库与动态库">
+<meta property="og:description" content="不管是Linux还是Windows中的库文件其本质和工作模式都是相同的, 只不过在不同的平台上库对应的文件格式和文件后缀不同。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://echozap.github.io/post/jing-tai-ku-yu-dong-tai-ku.html">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.avg">
+<title>静态库与动态库</title>
+<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">静态库与动态库</h1>
+<div class="title-right">
+    <a href="https://echozap.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><p>不管是Linux还是Windows中的库文件其本质和工作模式都是相同的, 只不过在不同的平台上库对应的文件格式和文件后缀不同。程序中调用的库有两种<code class="notranslate">静态库</code>和<code class="notranslate">动态库</code>，不管是哪种库文件本质是还是源文件，只不过是二进制格式只有计算机能够识别，作为一个普通人就无能为力了。</p>
+<p>在项目中使用库一般有两个目的，一个是为了使程序更加简洁不需要在项目中维护太多的源文件，另一方面是为了源代码保密，毕竟不是所有人都想把自己编写的程序开源出来。</p>
+<p>当我们拿到了库文件（动态库、静态库）之后要想使用还必须有这些库中提供的API函数的声明，也就是头文件，把这些都添加到项目中，就可以快乐的写代码了。</p>
+<h2>1.静态库</h2>
+<blockquote>
+<p>在Linux中静态库由程序 ar 生成，现在静态库已经不像之前那么普遍了，这主要是由于程序都在使用动态库。关于静态库的命名规则如下:</p>
+</blockquote>
+<ul>
+<li>在Linux中静态库以lib作为前缀, 以.a作为后缀, 中间是库的名字自己指定即可, 即: libxxx.a</li>
+<li>在Windows中静态库一般以lib作为前缀, 以lib作为后缀, 中间是库的名字需要自己指定, 即: libxxx.lib</li>
+</ul>
+<h3>1.1生成静态链接库</h3>
+<blockquote>
+<p>生成静态库，需要先对源文件进行汇编操作 (<code class="notranslate">使用参数 -c</code>) 得到二进制格式的目标文件 (<code class="notranslate">.o 格式</code>), 然后在通过<code class="notranslate"> ar</code>工具将目标文件打包就可以得到静态库文件了 (<code class="notranslate">libxxx.a</code>)。</p>
+<p>使用<code class="notranslate">ar</code>工具创建静态库的时候需要三个参数:</p>
+</blockquote>
+<ul>
+<li><code class="notranslate">参数c</code>：创建一个库，不管库是否存在，都将创建。</li>
+<li><code class="notranslate">参数s</code>：创建目标文件索引，这在创建较大的库时能加快时间。</li>
+<li><code class="notranslate">参数r</code>：在库中插入模块(替换)。默认新的成员添加在库的结尾处，如果模块名已经在库中存在，则替换同名的模块。</li>
+</ul>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/8a76dcb40d96273afdcf16d3cc53c695df3c398700dbcc3e3106fd24b671ed81/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f4563686f5a61702f6563686f7a61702e6769746875622e696f406d61696e2f7374617469632f696d67732f6c6962312e706e67"><img src="https://camo.githubusercontent.com/8a76dcb40d96273afdcf16d3cc53c695df3c398700dbcc3e3106fd24b671ed81/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f4563686f5a61702f6563686f7a61702e6769746875622e696f406d61696e2f7374617469632f696d67732f6c6962312e706e67" alt="img" data-canonical-src="https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/imgs/lib1.png" style="max-width: 100%;"></a></p>
+<p>生成静态链接库的具体步骤如下:</p>
+<p>1.需要将源文件进行汇编, 得到 .o 文件, 需要使用参数 -c</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 执行如下操作, 默认生成二进制的 .o 文件</span>
+<span class="pl-c"><span class="pl-c">#</span> -c 参数位置没有要求</span>
+$ gcc 源文件(<span class="pl-k">*</span>.c) -c
+<span class="pl-c"><span class="pl-c">#</span> 提示头文件找不到, 添加参数 -I 重新头文件路径即可</span>
+gcc 源文件(<span class="pl-k">*</span>.c) -c -I /path/</pre></div>
+<p>2.将得到的 .o 进行打包, 得到静态库</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">$ ar rcs 静态库的名字(libxxx.a) 原材料(<span class="pl-k">*</span>.o)</pre></div>
+<p>3.发布静态库</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 发布静态库</span>
+	1. 提供头文件 <span class="pl-k">**</span>.h
+	2. 提供制作出来的静态库 libxxx.a</pre></div>
+<h3>1.2 静态库制作举例</h3>
+<h4>1.2.1 准备测试程序</h4>
+<p>在某个目录中有如下的源文件, 用来实现一个简单的计算器:</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 目录结构 add.c div.c mult.c sub.c -&gt; 算法的源文件, 函数声明在头文件 head.h</span>
+<span class="pl-c"><span class="pl-c">#</span> main.c中是对接口的测试程序, 制作库的时候不需要将 main.c 算进去</span>
+<span class="pl-c1">.</span>
+├── add.c
+├── div.c
+├── include
+│   └── head.h
+├── main.c
+├── mult.c
+└── sub.c</pre></div>
+<blockquote>
+<p>加法计算源文件 add.c:</p>
+</blockquote>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">#include</span> <span class="pl-s">&lt;stdio.h&gt;</span>
+<span class="pl-k">#include</span> <span class="pl-s">"head.h"</span>
+
+<span class="pl-smi">int</span> <span class="pl-en">add</span>(<span class="pl-smi">int</span> <span class="pl-s1">a</span>, <span class="pl-smi">int</span> <span class="pl-s1">b</span>)
+{
+    <span class="pl-k">return</span> <span class="pl-s1">a</span><span class="pl-c1">+</span><span class="pl-s1">b</span>;
+}</pre></div>
+<blockquote>
+<p>减法计算源文件 sub.c:</p>
+</blockquote>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">#include</span> <span class="pl-s">&lt;stdio.h&gt;</span>
+<span class="pl-k">#include</span> <span class="pl-s">"head.h"</span>
+
+<span class="pl-smi">int</span> <span class="pl-en">subtract</span>(<span class="pl-smi">int</span> <span class="pl-s1">a</span>, <span class="pl-smi">int</span> <span class="pl-s1">b</span>)
+{
+    <span class="pl-k">return</span> <span class="pl-s1">a</span><span class="pl-c1">-</span><span class="pl-s1">b</span>;
+}</pre></div>
+<blockquote>
+<p>乘法计算源文件 mult.c:</p>
+</blockquote>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">#include</span> <span class="pl-s">&lt;stdio.h&gt;</span>
+<span class="pl-k">#include</span> <span class="pl-s">"head.h"</span>
+
+<span class="pl-smi">int</span> <span class="pl-en">multiply</span>(<span class="pl-smi">int</span> <span class="pl-s1">a</span>, <span class="pl-smi">int</span> <span class="pl-s1">b</span>)
+{
+    <span class="pl-k">return</span> <span class="pl-s1">a</span><span class="pl-c1">*</span><span class="pl-s1">b</span>;
+}</pre></div>
+<blockquote>
+<p>除法计算的源文件 div.c</p>
+</blockquote>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">#include</span> <span class="pl-s">&lt;stdio.h&gt;</span>
+<span class="pl-k">#include</span> <span class="pl-s">"head.h"</span>
+
+<span class="pl-smi">double</span> <span class="pl-en">divide</span>(<span class="pl-smi">int</span> <span class="pl-s1">a</span>, <span class="pl-smi">int</span> <span class="pl-s1">b</span>)
+{
+    <span class="pl-k">return</span> (<span class="pl-smi">double</span>)<span class="pl-s1">a</span>/<span class="pl-s1">b</span>;
+}</pre></div>
+<blockquote>
+<p>头文件 head.h</p>
+</blockquote>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">#ifndef</span> <span class="pl-s1">_HEAD_H</span>
+<span class="pl-k">#define</span> <span class="pl-s1">_HEAD_H</span>
+<span class="pl-c">// 加法</span>
+<span class="pl-smi">int</span> <span class="pl-en">add</span>(<span class="pl-smi">int</span> <span class="pl-s1">a</span>, <span class="pl-smi">int</span> <span class="pl-s1">b</span>);
+<span class="pl-c">// 减法</span>
+<span class="pl-smi">int</span> <span class="pl-en">subtract</span>(<span class="pl-smi">int</span> <span class="pl-s1">a</span>, <span class="pl-smi">int</span> <span class="pl-s1">b</span>);
+<span class="pl-c">// 乘法</span>
+<span class="pl-smi">int</span> <span class="pl-en">multiply</span>(<span class="pl-smi">int</span> <span class="pl-s1">a</span>, <span class="pl-smi">int</span> <span class="pl-s1">b</span>);
+<span class="pl-c">// 除法</span>
+<span class="pl-smi">double</span> <span class="pl-en">divide</span>(<span class="pl-smi">int</span> <span class="pl-s1">a</span>, <span class="pl-smi">int</span> <span class="pl-s1">b</span>);
+<span class="pl-k">#endif</span></pre></div>
+<blockquote>
+<p>测试文件main.c</p>
+</blockquote>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">#include</span> <span class="pl-s">&lt;stdio.h&gt;</span>
+<span class="pl-k">#include</span> <span class="pl-s">"head.h"</span>
+
+<span class="pl-smi">int</span> <span class="pl-en">main</span>()
+{
+    <span class="pl-smi">int</span> <span class="pl-s1">a</span> <span class="pl-c1">=</span> <span class="pl-c1">20</span>;
+    <span class="pl-smi">int</span> <span class="pl-s1">b</span> <span class="pl-c1">=</span> <span class="pl-c1">12</span>;
+    <span class="pl-en">printf</span>(<span class="pl-s">"a = %d, b = %d\n"</span>, <span class="pl-s1">a</span>, <span class="pl-s1">b</span>);
+    <span class="pl-en">printf</span>(<span class="pl-s">"a + b = %d\n"</span>, <span class="pl-en">add</span>(<span class="pl-s1">a</span>, <span class="pl-s1">b</span>));
+    <span class="pl-en">printf</span>(<span class="pl-s">"a - b = %d\n"</span>, <span class="pl-en">subtract</span>(<span class="pl-s1">a</span>, <span class="pl-s1">b</span>));
+    <span class="pl-en">printf</span>(<span class="pl-s">"a * b = %d\n"</span>, <span class="pl-en">multiply</span>(<span class="pl-s1">a</span>, <span class="pl-s1">b</span>));
+    <span class="pl-en">printf</span>(<span class="pl-s">"a / b = %f\n"</span>, <span class="pl-en">divide</span>(<span class="pl-s1">a</span>, <span class="pl-s1">b</span>));
+    <span class="pl-k">return</span> <span class="pl-c1">0</span>;
+}</pre></div>
+<h4>1.2.2 生成静态库</h4>
+<p>第一步: 将源文件<code class="notranslate">add.c</code>, <code class="notranslate">div.c</code>, <code class="notranslate">mult.c</code>,<code class="notranslate"> sub.c</code> 进行汇编, 得到二进制目标文件 <code class="notranslate">add.o</code>, <code class="notranslate">div.o</code>, <code class="notranslate">mult.o</code>, <code class="notranslate">sub.o</code></p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 1. 生成.o</span>
+$ gcc add.c div.c mult.c sub.c -c
+sub.c:2:18: fatal error: head.h: No such file or directory
+compilation terminated.
+
+<span class="pl-c"><span class="pl-c">#</span> 提示头文件找不到, 添加参数 -I 重新头文件路径即可</span>
+$ gcc add.c div.c mult.c sub.c -c -I ./include/
+
+<span class="pl-c"><span class="pl-c">#</span> 查看目标文件是否已经生成</span>
+$ tree
+<span class="pl-c1">.</span>
+├── add.c
+├── add.o            <span class="pl-c"><span class="pl-c">#</span> 目标文件</span>
+├── div.c
+├── div.o            <span class="pl-c"><span class="pl-c">#</span> 目标文件</span>
+├── include
+│   └── head.h
+├── main.c
+├── mult.c
+├── mult.o           <span class="pl-c"><span class="pl-c">#</span> 目标文件</span>
+├── sub.c
+└── sub.o            <span class="pl-c"><span class="pl-c">#</span> 目标文件</span></pre></div>
+<p>第二步: 将生成的目标文件通过 <code class="notranslate">ar</code>工具打包生成静态库</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 2. 将生成的目标文件 .o 打包成静态库</span>
+$ ar rcs libcalc.a a.o b.o c.o    <span class="pl-c"><span class="pl-c">#</span> a.o b.o c.o在同一个目录中可以写成 *.o</span>
+
+<span class="pl-c"><span class="pl-c">#</span> 查看目录中的文件</span>
+$ tree
+<span class="pl-c1">.</span>
+├── add.c
+├── add.o
+├── div.c
+├── div.o
+├── include
+│   └── <span class="pl-s"><span class="pl-pds">`</span>head.h  ===<span class="pl-k">&gt;</span> 和静态库一并发布</span>
+<span class="pl-s">├── <span class="pl-pds">`</span></span>libcalc.a   ===<span class="pl-k">&gt;</span> 生成的静态库
+├── main.c
+├── mult.c
+├── mult.o
+├── sub.c
+└── sub.o</pre></div>
+<p>第三步: 将生成的的静态库 <code class="notranslate">libcalc.a</code>和库对应的头文件<code class="notranslate">head.h</code>一并发布给使用者就可以了。</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 3. 发布静态库</span>
+	1. head.h    =<span class="pl-k">&gt;</span> 函数声明
+	2. libcalc.a =<span class="pl-k">&gt;</span> 函数定义(二进制格式)</pre></div>
+<h3>1.3 静态库的使用</h3>
+<p>当我们得到了一个可用的静态库之后, 需要将其放到一个目录中, 然后根据得到的头文件编写测试代码, 对静态库中的函数进行调用。</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 1. 首先拿到了发布的静态库</span>
+	<span class="pl-s"><span class="pl-pds">`</span>head.h<span class="pl-pds">`</span></span> 和 <span class="pl-s"><span class="pl-pds">`</span>libcalc.a<span class="pl-pds">`</span></span>
+
+<span class="pl-c"><span class="pl-c">#</span> 2. 将静态库, 头文件, 测试程序放到一个目录中准备进行测试</span>
+<span class="pl-c1">.</span>
+├── head.h          <span class="pl-c"><span class="pl-c">#</span> 函数声明</span>
+├── libcalc.a       <span class="pl-c"><span class="pl-c">#</span> 函数定义（二进制格式）</span>
+└── main.c          <span class="pl-c"><span class="pl-c">#</span> 函数测试</span></pre></div>
+<p>编译测试程序, 得到可执行文件。</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 3. 编译测试程序 main.c</span>
+$ gcc main.c -o app
+/tmp/ccR7Fk49.o: In <span class="pl-k">function</span> <span class="pl-en">`main':</span>
+main.c:(.text+0x38): undefined reference to <span class="pl-s"><span class="pl-pds">`</span>add<span class="pl-s"><span class="pl-pds">'</span></span></span>
+<span class="pl-s"><span class="pl-s">main.c:(.text+0x58): undefined reference to `subtract<span class="pl-pds">'</span></span></span>
+<span class="pl-s">main.c:(.text+0x78): undefined reference to <span class="pl-pds">`</span></span>multiply<span class="pl-s"><span class="pl-pds">'</span></span>
+<span class="pl-s">main.c:(.text+0x98): undefined reference to `divide<span class="pl-pds">'</span></span>
+collect2: error: ld returned 1 <span class="pl-c1">exit</span> status</pre></div>
+<blockquote>
+<p>上述错误分析:</p>
+<p>编译的源文件中包含了头文件 <code class="notranslate">head.h</code>, 这个头文件中声明的函数对应的定义（也就是函数体实现）在静态库中，程序在编译的时候没有找到函数实现，因此提示 <code class="notranslate">undefined reference to xxxx</code>。</p>
+<p>解决方案：在编译的时将<code class="notranslate">静态库的路径</code>和<code class="notranslate">名字</code>都指定出来</p>
+<p><code class="notranslate"> -L</code>: 指定库所在的目录(相对或者绝对路径)</p>
+<p><code class="notranslate">-l</code>: 指定库的名字, 需要掐头(lib)去尾(.a) 剩下的才是需要的静态库的名字</p>
+<p><code class="notranslate">-I</code>: 指定头文件所在目录</p>
+</blockquote>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 4. 编译的时候指定库信息</span>
+	-L: 指定库所在的目录(相对或者绝对路径)
+	-l: 指定库的名字, 掐头(lib)去尾(.a) ==<span class="pl-k">&gt;</span> calc
+<span class="pl-c"><span class="pl-c">#</span> -L -l, 参数和参数值之间可以有空格, 也可以没有  -L./ -lcalc</span>
+$ gcc main.c -o app -L ./ -l calc
+
+<span class="pl-c"><span class="pl-c">#</span> 查看目录信息, 发现可执行程序已经生成了</span>
+$ tree
+<span class="pl-c1">.</span>
+├── app   		<span class="pl-c"><span class="pl-c">#</span> 生成的可执行程序</span>
+├── head.h
+├── libcalc.a
+└── main.c</pre></div>
+<hr>
+<h2>2. 动态库</h2>
+<blockquote>
+<p>动态链接库是程序运行时加载的库，当动态链接库正确部署之后，运行的多个程序可以使用同一个加载到内存中的动态库，因此在Linux中动态链接库也可称之为共享库。</p>
+<p>动态链接库是目标文件的集合，目标文件在动态链接库中的组织方式是按照特殊方式形成的。库中函数和变量的地址使用的是相对地址（静态库中使用的是绝对地址），其真实地址是在应用程序加载动态库时形成的。</p>
+<p>关于动态库的命名规则如下:</p>
+</blockquote>
+<ul>
+<li>在Linux中动态库以<code class="notranslate">lib</code>作为前缀, 以.<code class="notranslate">so</code>作为后缀, 中间是库的名字自己指定即可, 即: <code class="notranslate">libxxx.so</code></li>
+<li>在Windows中动态库一般以<code class="notranslate">lib</code>作为前缀, 以<code class="notranslate">dll</code>作为后缀, 中间是库的名字需要自己指定, 即: <code class="notranslate">libxxx.dll</code></li>
+</ul>
+<h3>2.1 生成动态链接库</h3>
+<blockquote>
+<p>生成动态链接库是直接使用<code class="notranslate">gcc</code>命令并且需要添加<code class="notranslate">-fPIC（-fpic）</code> 以及<code class="notranslate">-shared </code>参数。</p>
+</blockquote>
+<ul>
+<li>-fPIC 或 -fpic 参数的作用是使得 gcc 生成的代码是与位置无关的，也就是使用相对位置。</li>
+<li>-shared参数的作用是告诉编译器生成一个动态链接库。</li>
+</ul>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/4ca4462c6a028becf1d1a8ff47ed41b6d277cb18e0d38a14ae547d9e0366a33e/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f4563686f5a61702f6563686f7a61702e6769746875622e696f406d61696e2f7374617469632f696d67732f6c6962312e312e706e67"><img src="https://camo.githubusercontent.com/4ca4462c6a028becf1d1a8ff47ed41b6d277cb18e0d38a14ae547d9e0366a33e/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f4563686f5a61702f6563686f7a61702e6769746875622e696f406d61696e2f7374617469632f696d67732f6c6962312e312e706e67" alt="img" data-canonical-src="https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/imgs/lib1.1.png" style="max-width: 100%;"></a></p>
+<p>生成动态链接库的具体步骤如下:</p>
+<p>1.将源文件进行汇编操作, 需要使用参数 -c, 还需要添加额外参数 -fpic / -fPIC</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 得到若干个 .o文件</span>
+$ gcc 源文件(<span class="pl-k">*</span>.c) -c -fpic</pre></div>
+<p>2.将得到的.o文件打包成动态库, 还是使用gcc, 使用参数 -shared 指定生成动态库(位置没有要求)</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">$ gcc -shared 与位置无关的目标文件(<span class="pl-k">*</span>.o) -o 动态库(libxxx.so)</pre></div>
+<blockquote>
+<p>也可以只用一条命令</p>
+</blockquote>
+<div class="highlight highlight-source-shell"><pre class="notranslate">$ gcc -fPIC -shared -o libadd.so <span class="pl-k">*</span>.c
+
+add.c:2:18: fatal error: head.h: No such file or directory
+compilation terminated.
+div.c:2:18: fatal error: head.h: No such file or directory
+compilation terminated.</pre></div>
+<blockquote>
+<p>以上错误可以通过-I指定头文件.h的路径解决</p>
+</blockquote>
+<div class="highlight highlight-source-shell"><pre class="notranslate">gcc -fPIC -shared -o libadd.so <span class="pl-k">*</span>.c -I ./path/</pre></div>
+<p>3.发布动态库和头文件</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 发布</span>
+ 	1. 提供头文件: xxx.h
+ 	2. 提供动态库: libxxx.so</pre></div>
+<h3>2.2 动态库制作举例</h3>
+<p>在此还是以上面制作静态库使用的实例代码为例来制作动态库, 代码目录如下:</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 举例, 示例目录如下:</span>
+<span class="pl-c"><span class="pl-c">#</span> 目录结构 add.c div.c mult.c sub.c -&gt; 算法的源文件, 函数声明在头文件 head.h</span>
+<span class="pl-c"><span class="pl-c">#</span> main.c中是对接口的测试程序, 制作库的时候不需要将 main.c 算进去</span>
+<span class="pl-c1">.</span>
+├── add.c
+├── div.c
+├── include
+│   └── head.h
+├── main.c
+├── mult.c
+└── sub.c</pre></div>
+<p>第一步: 使用<code class="notranslate">gcc</code>将源文件进行<code class="notranslate">汇编(参数-c)</code>, 生成与位置无关的目标文件, 需要使用参数 <code class="notranslate">-fpic</code>或者<code class="notranslate">-fPIC</code></p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 1. 将.c汇编得到.o, 需要额外的参数 -fpic/-fPIC</span>
+$ gcc add.c div.c mult.c sub.c -c -fpic -I ./include/
+
+<span class="pl-c"><span class="pl-c">#</span> 查看目录文件信息, 检查是否生成了目标文件</span>
+$ tree
+<span class="pl-c1">.</span>
+├── add.c
+├── add.o                <span class="pl-c"><span class="pl-c">#</span> 生成的目标文件</span>
+├── div.c
+├── div.o                <span class="pl-c"><span class="pl-c">#</span> 生成的目标文件</span>
+├── include
+│   └── head.h
+├── main.c
+├── mult.c
+├── mult.o               <span class="pl-c"><span class="pl-c">#</span> 生成的目标文件</span>
+├── sub.c
+└── sub.o                <span class="pl-c"><span class="pl-c">#</span> 生成的目标文件</span></pre></div>
+<p>第二步: 使用<code class="notranslate">gcc</code>将得到的目标文件打包生成动态库, 需要使用参数 <code class="notranslate">-shared</code></p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 2. 将得到 .o 打包成动态库, 使用gcc , 参数 -shared</span>
+$ gcc -shared add.o div.o mult.o sub.o -o libcalc.so  
+
+<span class="pl-c"><span class="pl-c">#</span> 检查目录中是否生成了动态库</span>
+$ tree
+<span class="pl-c1">.</span>
+├── add.c
+├── add.o
+├── div.c
+├── div.o
+├── include
+│   └── <span class="pl-s"><span class="pl-pds">`</span>head.h   ===<span class="pl-k">&gt;</span> 和动态库一起发布</span>
+<span class="pl-s">├── <span class="pl-pds">`</span></span>libcalc.so   ===<span class="pl-k">&gt;</span> 生成的动态库
+├── main.c
+├── mult.c
+├── mult.o
+├── sub.c
+└── sub.o</pre></div>
+<p>第三步: 发布生成的动态库和相关的头文件</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 3. 发布库文件和头文件</span>
+	1. head.h
+	2. libcalc.so</pre></div>
+<h3>2.3 动态库的使用</h3>
+<p>当我们得到了一个可用的动态库之后, 需要将其放到一个目录中, 然后根据得到的头文件编写测试代码, 对动态库中的函数进行调用。</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 1. 拿到发布的动态库</span>
+	<span class="pl-s"><span class="pl-pds">`</span>head.h   libcalc.so</span>
+<span class="pl-s"><span class="pl-c"><span class="pl-c">#</span> 2. 基于头文件编写测试程序, 测试动态库中提供的接口是否可用</span></span>
+<span class="pl-s">	<span class="pl-pds">`</span></span>main.c<span class="pl-s"><span class="pl-pds">`</span></span>
+<span class="pl-s"><span class="pl-c"><span class="pl-c">#</span> 示例目录:</span></span>
+<span class="pl-s"><span class="pl-c1">.</span></span>
+<span class="pl-s">├── head.h          ==<span class="pl-k">&gt;</span> 函数声明</span>
+<span class="pl-s">├── libcalc.so      ==<span class="pl-k">&gt;</span> 函数定义</span>
+<span class="pl-s">└── main.c          ==<span class="pl-k">&gt;</span> 函数测试</span></pre></div>
+<p>编译测试程序</p>
+<pre lang="she" class="notranslate"><code class="notranslate"># 3. 编译测试程序
+$ gcc main.c -o app
+/tmp/ccwlUpVy.o: In function `main':
+main.c:(.text+0x38): undefined reference to `add'
+main.c:(.text+0x58): undefined reference to `subtract'
+main.c:(.text+0x78): undefined reference to `multiply'
+main.c:(.text+0x98): undefined reference to `divide'
+collect2: error: ld returned 1 exit status
+</code></pre>
+<blockquote>
+<p>错误原因:</p>
+<p>和使用静态库一样, 在编译的时候需要指定库相关的信息: <code class="notranslate">库的路径 -L</code>和 <code class="notranslate">库的名字 -l</code></p>
+</blockquote>
+<p>添加库信息相关参数, 重新编译测试代码:</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 在编译的时候指定动态库相关的信息: 库的路径 -L, 库的名字 -l</span>
+$ gcc main.c -o app -L./ -lcalc
+
+<span class="pl-c"><span class="pl-c">#</span> 查看是否生成了可执行程序</span>
+$ tree
+<span class="pl-c1">.</span>
+├── app 			<span class="pl-c"><span class="pl-c">#</span> 生成的可执行程序</span>
+├── head.h
+├── libcalc.so
+└── main.c
+
+<span class="pl-c"><span class="pl-c">#</span> 执行生成的可执行程序, 错误提示 ==&gt; 可执行程序执行的时候找不到动态库</span>
+$ ./app 
+./app: error <span class="pl-k">while</span> loading shared libraries: libcalc.so: cannot open shared object file: No such file or directory</pre></div>
+<blockquote>
+<p>关于整个操作过程的报告：</p>
+<p>gcc通过指定的动态库信息生成了可执行程序, 但是可执行程序运行却提示<code class="notranslate">无法加载到动态库</code>。</p>
+</blockquote>
+<h3>2.4 解决动态库无法加载问题</h3>
+<h4>2.4.1 库的工作原理</h4>
+<ul>
+<li>
+<p>静态库如何被加载:</p>
+<p>在程序编译的最后一个阶段也就是链接阶段，提供的静态库会被打包到可执行程序中。当可执行程序被执行，静态库中的代码也会一并被加载到内存中，因此不会出现静态库找不到无法被加载的问题。</p>
+</li>
+<li>
+<p>动态库如何被加载</p>
+<ul>
+<li>
+<p>在程序编译的最后一个阶段也就是链接阶段：</p>
+<ul>
+<li>在gcc命令中虽然指定了库路径(<code class="notranslate">使用参数 -L </code>), 但是这个路径并没有记录到可执行程序中，只是检查了这个路径下的库文件是否存在。</li>
+<li>同样对应的动态库文件也没有被打包到可执行程序中，只是在可执行程序中记录了库的名字。</li>
+</ul>
+</li>
+<li>
+<p>可执行程序被执行起来之后:</p>
+<ul>
+<li>程序执行的时候会<code class="notranslate">先检测</code>需要的动态库是否可以被加载，加载不到就会提示上边的错误信息</li>
+<li><code class="notranslate">当动态库中的函数在程序中被调用了, 这个时候动态库才加载到内存，如果不被调用就不加载</code></li>
+<li>动态库的检测和内存加载操作都是由动态连接器来完成的</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4>2.4.2 动态链接器</h4>
+<blockquote>
+<p>动态链接器是一个独立于应用程序的进程, 属于操作系统, 当用户的程序需要加载动态库的时候动态连接器就开始工作了，很显然动态连接器根本就不知道用户通过 gcc 编译程序的时候通过参数 -L指定的路径。</p>
+<p>那么动态链接器是如何搜索某一个动态库的呢，在它内部有一个默认的搜索顺序，按照优先级从高到低的顺序分别是：</p>
+</blockquote>
+<pre class="notranslate"><code class="notranslate">1.可执行文件内部的 `DT_RPATH` 段
+
+2.系统的环境变量 `LD_LIBRARY_PATH`
+
+3.系统动态库的缓存文件 `/etc/ld.so.cache`
+
+4.存储动态库/静态库的系统目录` /lib/`, `/usr/lib`等
+</code></pre>
+<p>按照以上四个顺序, 依次搜索, 找到之后结束遍历, 最终还是没找到, 动态连接器就会提示动态库找不到的错误信息。</p>
+<h4>2.4.3 解决方案</h4>
+<blockquote>
+<p>可执行程序生成之后, 根据动态链接器的搜索路径, 我们可以提供三种解决方案，我们只需要将动态库的路径放到对应的环境变量或者系统配置文件中，同样也可以将动态库拷贝到系统库目录（或者是将动态库的软链接文件放到这些系统库目录中）。</p>
+</blockquote>
+<h5>方案1</h5>
+<p>将库路径添加到环境变量 <code class="notranslate">LD_LIBRARY_PATH</code> 中</p>
+<p>1.找到相关的配置文件</p>
+<pre class="notranslate"><code class="notranslate">	 `用户级别: ~/.bashrc` —&gt; 设置对当前用户有效
+
+	 `系统级别: /etc/profile` —&gt; 设置对所有用户有效
+</code></pre>
+<p>2.使用 vim 打开配置文件, 在文件最后添加这样一句话</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 自己把路径写进去就行了</span>
+<span class="pl-k">export</span> LD_LIBRARY_PATH=<span class="pl-smi">$LD_LIBRARY_PATH</span>:动态库的绝对路径</pre></div>
+<p>3.让修改的配置文件生效</p>
+<ul>
+<li>修改了用户级别的配置文件, 关闭当前终端, 打开一个新的终端配置就生效了</li>
+<li>修改了系统级别的配置文件, 注销或关闭系统, 再开机配置就生效了</li>
+<li>不想执行上边的操作, 可以执行一个命令让配置重新被加载</li>
+</ul>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 修改的是哪一个就执行对应的那个命令</span>
+<span class="pl-c"><span class="pl-c">#</span> source 可以简写为一个 . , 作用是让文件内容被重新加载</span>
+$ <span class="pl-c1">source</span> <span class="pl-k">~</span>/.bashrc          (. <span class="pl-k">~</span>/.bashrc)
+$ <span class="pl-c1">source</span> /etc/profile       (. /etc/profile)</pre></div>
+<h5>方案2</h5>
+<p>更新 /etc/ld.so.cache 文件</p>
+<p>1.找到动态库所在的绝对路径（不包括库的名字）比如：<code class="notranslate">/home/robin/Library/</code></p>
+<p>2.使用vim 修改 <code class="notranslate">/etc/ld.so.conf </code>这个文件, 将上边的路径添加到文件中(独自占一行)</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 1. 打开文件</span>
+sudo vim /etc/ld.so.conf
+
+<span class="pl-c"><span class="pl-c">#</span> 2. 添加动态库路径, 并保存退出</span></pre></div>
+<p>3.更新 <code class="notranslate">/etc/ld.so.conf</code>中的数据到 <code class="notranslate">/etc/ld.so.cache</code> 中</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 必须使用管理员权限执行这个命令</span>
+sudo ldconfig   </pre></div>
+<h5>方案3</h5>
+<p>拷贝动态库文件到系统库目录 <code class="notranslate">/lib/</code> 或者 <code class="notranslate">/usr/lib </code>中 (或者将库的软链接文件放进去)，<code class="notranslate">以下二选一</code></p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 库拷贝</span>
+sudo cp /xxx/xxx/libxxx.so /usr/lib
+
+<span class="pl-c"><span class="pl-c">#</span> 创建软连接</span>
+sudo ln -s /xxx/xxx/libxxx.so /usr/lib/libxxx.so</pre></div>
+<h5>方案4</h5>
+<p>如果上述方法仍然不行，可以在运行时指定搜索路径：尝试在编译时使用 <code class="notranslate">-Wl,-rpath</code> 选项指定共享库的运行时搜索路径，例如：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">gcc main.c -o app -L./ -ltest -Wl,-rpath,/path/library</pre></div>
+<h4>2.4.4 验证</h4>
+<p>在启动可执行程序之前, 或者在设置了动态库路径之后, 我们可以通过一个命令检测程序能不能够通过动态链接器加载到对应的动态库, 这个命令叫做<code class="notranslate"> ldd</code></p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 语法:</span>
+$ ldd 可执行程序名
+
+<span class="pl-c"><span class="pl-c">#</span> 举例:</span>
+$ ldd app
+	linux-vdso.so.1 =<span class="pl-k">&gt;</span>  (0x00007ffe8fbd6000)
+    libcalc.so =<span class="pl-k">&gt;</span> /home/robin/Linux/3Day/calc/test/libcalc.so (0x00007f5d85dd4000)
+    libc.so.6 =<span class="pl-k">&gt;</span> /lib/x86_64-linux-gnu/libc.so.6 (0x00007f5d85a0a000)
+    /lib64/ld-linux-x86-64.so.2 (0x00007f5d85fd6000)  ==<span class="pl-k">&gt;</span> 动态链接器, 操作系统提供</pre></div>
+<hr>
+<h2>3.优缺点</h2>
+<h4>3.1 静态库</h4>
+<p>优点：<br>
+静态库被打包到应用程序中加载速度快<br>
+发布程序无需提供静态库，移植方便</p>
+<p>缺点：<br>
+相同的库文件数据可能在内存中被加载多份, 消耗系统资源，浪费内存<br>
+库文件更新需要重新编译项目文件, 生成新的可执行程序, 浪费时间。</p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/e16c4046f2d5b2cf99167a045224e494910f27480017f96979098349ba473131/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f4563686f5a61702f6563686f7a61702e6769746875622e696f406d61696e2f7374617469632f696d67732f6c6962322e706e67"><img src="https://camo.githubusercontent.com/e16c4046f2d5b2cf99167a045224e494910f27480017f96979098349ba473131/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f4563686f5a61702f6563686f7a61702e6769746875622e696f406d61696e2f7374617469632f696d67732f6c6962322e706e67" alt="img" data-canonical-src="https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/imgs/lib2.png" style="max-width: 100%;"></a></p>
+<h4>3.2 动态库</h4>
+<p>优点：</p>
+<pre class="notranslate"><code class="notranslate">	可实现不同进程间的资源共享
+			动态库升级简单, 只需要替换库文件, 无需重新编译应用程序
+			程序猿可以控制何时加载动态库, 不调用库函数动态库不会被加载
+</code></pre>
+<p>缺点：</p>
+<pre class="notranslate"><code class="notranslate">	加载速度比静态库慢, 以现在计算机的性能可以忽略
+			发布程序需要提供依赖的动态库
+</code></pre>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/58299af4ef8c4b7e50001ee03a6be09c3462a1a182459eafaff6f64a3ed03934/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f4563686f5a61702f6563686f7a61702e6769746875622e696f406d61696e2f7374617469632f696d67732f6c6962332e706e67"><img src="https://camo.githubusercontent.com/58299af4ef8c4b7e50001ee03a6be09c3462a1a182459eafaff6f64a3ed03934/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f4563686f5a61702f6563686f7a61702e6769746875622e696f406d61696e2f7374617469632f696d67732f6c6962332e706e67" alt="img" data-canonical-src="https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/imgs/lib3.png" style="max-width: 100%;"></a></p></div>
+<div style="font-size:small;margin-top:8px;float:right;">要做一个有swag的人</div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://echozap.github.io">Ronan</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek  https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","EchoZap/echozap.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+</script>
+<script src='https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/plugins/GmeekTOC.js'></script><script src='https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/plugins/lightbox.js'></script>
+
+</html>
