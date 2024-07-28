@@ -1,15 +1,15 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan</title><link>https://ronan.us.kg</link><description>一个主修电子信息科学与技术又略懂计算机科学与艺术的「样样通、样样松」的佛系青年。接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.avg</url><title>avatar</title><link>https://ronan.us.kg</link></image><lastBuildDate>Sun, 28 Jul 2024 08:50:15 +0000</lastBuildDate><managingEditor>Ronan</managingEditor><ttl>60</ttl><webMaster>Ronan</webMaster><item><title>mac合盖不休眠、安装包损坏解决办法</title><link>https://ronan.us.kg/post/mac-he-gai-bu-xiu-mian-%E3%80%81-an-zhuang-bao-sun-huai-jie-jue-ban-fa.html</link><description># 'app已损坏，无法打开'问题解决方法&#13;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>罗华东's Blog</title><link>https://echozap.github.io</link><description>一个主修电子信息科学与技术又略懂计算机科学与艺术的「样样通、样样松」的佛系青年。接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>罗华东's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.avg</url><title>avatar</title><link>https://echozap.github.io</link></image><lastBuildDate>Sun, 28 Jul 2024 08:55:08 +0000</lastBuildDate><managingEditor>罗华东's Blog</managingEditor><ttl>60</ttl><webMaster>罗华东's Blog</webMaster><item><title>mac合盖不休眠、安装包损坏解决办法</title><link>https://echozap.github.io/post/mac-he-gai-bu-xiu-mian-%E3%80%81-an-zhuang-bao-sun-huai-jie-jue-ban-fa.html</link><description># 'app已损坏，无法打开'问题解决方法&#13;
 &#13;
 ```shell&#13;
 sudo xattr -rd com.apple.quarantine &lt;your_app_path&gt;&#13;
 ```&#13;
 &#13;
-将`your_app_path`替换成app路径，可以直接将应用程序里的app图标拖到终端窗口的这条命令里，按回车键执行。</description><guid isPermaLink="true">https://ronan.us.kg/post/mac-he-gai-bu-xiu-mian-%E3%80%81-an-zhuang-bao-sun-huai-jie-jue-ban-fa.html</guid><pubDate>Sun, 28 Jul 2024 08:49:50 +0000</pubDate></item><item><title>sdcc工程创建模版程序</title><link>https://ronan.us.kg/post/sdcc-gong-cheng-chuang-jian-mo-ban-cheng-xu.html</link><description>## 1.程序构建&#13;
+将`your_app_path`替换成app路径，可以直接将应用程序里的app图标拖到终端窗口的这条命令里，按回车键执行。</description><guid isPermaLink="true">https://echozap.github.io/post/mac-he-gai-bu-xiu-mian-%E3%80%81-an-zhuang-bao-sun-huai-jie-jue-ban-fa.html</guid><pubDate>Sun, 28 Jul 2024 08:49:50 +0000</pubDate></item><item><title>sdcc工程创建模版程序</title><link>https://echozap.github.io/post/sdcc-gong-cheng-chuang-jian-mo-ban-cheng-xu.html</link><description>## 1.程序构建&#13;
 &#13;
-新建一个txt文件并将以下代码复制到`xxx.txt`，之后将`xxx.txt（例如sdccpj.txt）`后缀名修改为`.sh（例如sdccpj.sh）`或者直接去掉后缀名只保留文件名（这在类linux系统中就是可执行程序）`sdccpj`。</description><guid isPermaLink="true">https://ronan.us.kg/post/sdcc-gong-cheng-chuang-jian-mo-ban-cheng-xu.html</guid><pubDate>Sun, 28 Jul 2024 06:45:46 +0000</pubDate></item><item><title>Makefile</title><link>https://ronan.us.kg/post/Makefile.html</link><description>## 1.规则&#13;
+新建一个txt文件并将以下代码复制到`xxx.txt`，之后将`xxx.txt（例如sdccpj.txt）`后缀名修改为`.sh（例如sdccpj.sh）`或者直接去掉后缀名只保留文件名（这在类linux系统中就是可执行程序）`sdccpj`。</description><guid isPermaLink="true">https://echozap.github.io/post/sdcc-gong-cheng-chuang-jian-mo-ban-cheng-xu.html</guid><pubDate>Sun, 28 Jul 2024 06:45:46 +0000</pubDate></item><item><title>Makefile</title><link>https://echozap.github.io/post/Makefile.html</link><description>## 1.规则&#13;
 &#13;
-&gt; Makefile的框架是由规则构成的。</description><guid isPermaLink="true">https://ronan.us.kg/post/Makefile.html</guid><pubDate>Sun, 28 Jul 2024 06:36:41 +0000</pubDate></item><item><title>静态库与动态库</title><link>https://ronan.us.kg/post/jing-tai-ku-yu-dong-tai-ku.html</link><description>不管是Linux还是Windows中的库文件其本质和工作模式都是相同的, 只不过在不同的平台上库对应的文件格式和文件后缀不同。</description><guid isPermaLink="true">https://ronan.us.kg/post/jing-tai-ku-yu-dong-tai-ku.html</guid><pubDate>Sun, 28 Jul 2024 03:36:47 +0000</pubDate></item><item><title>SSH 免密登录</title><link>https://ronan.us.kg/post/SSH%20-mian-mi-deng-lu.html</link><description># 1创建密钥&#13;
+&gt; Makefile的框架是由规则构成的。</description><guid isPermaLink="true">https://echozap.github.io/post/Makefile.html</guid><pubDate>Sun, 28 Jul 2024 06:36:41 +0000</pubDate></item><item><title>静态库与动态库</title><link>https://echozap.github.io/post/jing-tai-ku-yu-dong-tai-ku.html</link><description>不管是Linux还是Windows中的库文件其本质和工作模式都是相同的, 只不过在不同的平台上库对应的文件格式和文件后缀不同。</description><guid isPermaLink="true">https://echozap.github.io/post/jing-tai-ku-yu-dong-tai-ku.html</guid><pubDate>Sun, 28 Jul 2024 03:36:47 +0000</pubDate></item><item><title>SSH 免密登录</title><link>https://echozap.github.io/post/SSH%20-mian-mi-deng-lu.html</link><description># 1创建密钥&#13;
 &#13;
 在本地主机终端输入&#13;
 &#13;
@@ -49,9 +49,9 @@ ls .ssh&#13;
 ssh-copy-id -i &lt;~/.ssh/id_ed25519.pub&gt; &lt;username&gt;@&lt;remote_ip&gt;&#13;
 ```&#13;
 &#13;
-其中的`&lt;~/.ssh/id_ed25519.pub&gt;` 是公钥所处的路径，`&lt;username&gt;`是用户名，`&lt;remote_ip&gt;`是主机名或IP 地址。</description><guid isPermaLink="true">https://ronan.us.kg/post/SSH%20-mian-mi-deng-lu.html</guid><pubDate>Sun, 28 Jul 2024 03:19:49 +0000</pubDate></item><item><title>Typora土图床自动上传脚本</title><link>https://ronan.us.kg/post/Typora-tu-tu-chuang-zi-dong-shang-chuan-jiao-ben.html</link><description>&gt; typroa的图片上传脚本，针对[Telegraph-Image](https://github.com/cf-pages/Telegraph-Image)项目，适用于macOS和Linux系统。</description><guid isPermaLink="true">https://ronan.us.kg/post/Typora-tu-tu-chuang-zi-dong-shang-chuan-jiao-ben.html</guid><pubDate>Sun, 28 Jul 2024 03:03:04 +0000</pubDate></item><item><title>sdcc编译与链接</title><link>https://ronan.us.kg/post/sdcc-bian-yi-yu-lian-jie.html</link><description>## 1.编译源文件&#13;
+其中的`&lt;~/.ssh/id_ed25519.pub&gt;` 是公钥所处的路径，`&lt;username&gt;`是用户名，`&lt;remote_ip&gt;`是主机名或IP 地址。</description><guid isPermaLink="true">https://echozap.github.io/post/SSH%20-mian-mi-deng-lu.html</guid><pubDate>Sun, 28 Jul 2024 03:19:49 +0000</pubDate></item><item><title>Typora土图床自动上传脚本</title><link>https://echozap.github.io/post/Typora-tu-tu-chuang-zi-dong-shang-chuan-jiao-ben.html</link><description>&gt; typroa的图片上传脚本，针对[Telegraph-Image](https://github.com/cf-pages/Telegraph-Image)项目，适用于macOS和Linux系统。</description><guid isPermaLink="true">https://echozap.github.io/post/Typora-tu-tu-chuang-zi-dong-shang-chuan-jiao-ben.html</guid><pubDate>Sun, 28 Jul 2024 03:03:04 +0000</pubDate></item><item><title>sdcc编译与链接</title><link>https://echozap.github.io/post/sdcc-bian-yi-yu-lian-jie.html</link><description>## 1.编译源文件&#13;
 &#13;
-首先，你需要编译你的源文件（例如 `main.c`）以生成目标文件（.rel）。</description><guid isPermaLink="true">https://ronan.us.kg/post/sdcc-bian-yi-yu-lian-jie.html</guid><pubDate>Sat, 27 Jul 2024 07:37:39 +0000</pubDate></item><item><title>shell 编程</title><link>https://ronan.us.kg/post/shell%20-bian-cheng.html</link><description># 一、运算符&#13;
+首先，你需要编译你的源文件（例如 `main.c`）以生成目标文件（.rel）。</description><guid isPermaLink="true">https://echozap.github.io/post/sdcc-bian-yi-yu-lian-jie.html</guid><pubDate>Sat, 27 Jul 2024 07:37:39 +0000</pubDate></item><item><title>shell 编程</title><link>https://echozap.github.io/post/shell%20-bian-cheng.html</link><description># 一、运算符&#13;
 &#13;
 ## 1、算术运算符&#13;
 &#13;
@@ -59,7 +59,7 @@ ssh-copy-id -i &lt;~/.ssh/id_ed25519.pub&gt; &lt;username&gt;@&lt;remote_ip&gt;&
 &#13;
 |运算符|说明|举例|&#13;
 | :----: | :-------------------------------------------: | :------------------------: |&#13;
-|+|加法|`expr $a + $b` 结果为 30。</description><guid isPermaLink="true">https://ronan.us.kg/post/shell%20-bian-cheng.html</guid><pubDate>Sat, 27 Jul 2024 07:33:17 +0000</pubDate></item><item><title>vscode搭建用于8051单片机的sdcc环境</title><link>https://ronan.us.kg/post/vscode-da-jian-yong-yu-8051-dan-pian-ji-de-sdcc-huan-jing.html</link><description>## 查找sdcc以及8051头文件位置&#13;
+|+|加法|`expr $a + $b` 结果为 30。</description><guid isPermaLink="true">https://echozap.github.io/post/shell%20-bian-cheng.html</guid><pubDate>Sat, 27 Jul 2024 07:33:17 +0000</pubDate></item><item><title>vscode搭建用于8051单片机的sdcc环境</title><link>https://echozap.github.io/post/vscode-da-jian-yong-yu-8051-dan-pian-ji-de-sdcc-huan-jing.html</link><description>## 查找sdcc以及8051头文件位置&#13;
 &#13;
 ```shell&#13;
 ❯ which sdcc&#13;
@@ -67,7 +67,7 @@ ssh-copy-id -i &lt;~/.ssh/id_ed25519.pub&gt; &lt;username&gt;@&lt;remote_ip&gt;&
 /opt/homebrew/bin//sdcc&#13;
 ```&#13;
 &#13;
-这将列出sdcc的安装位置。</description><guid isPermaLink="true">https://ronan.us.kg/post/vscode-da-jian-yong-yu-8051-dan-pian-ji-de-sdcc-huan-jing.html</guid><pubDate>Sat, 27 Jul 2024 07:26:20 +0000</pubDate></item><item><title>vscode磨砂效果配置</title><link>https://ronan.us.kg/post/vscode-mo-sha-xiao-guo-pei-zhi.html</link><description>## 1.安装插件&#13;
+这将列出sdcc的安装位置。</description><guid isPermaLink="true">https://echozap.github.io/post/vscode-da-jian-yong-yu-8051-dan-pian-ji-de-sdcc-huan-jing.html</guid><pubDate>Sat, 27 Jul 2024 07:26:20 +0000</pubDate></item><item><title>vscode磨砂效果配置</title><link>https://echozap.github.io/post/vscode-mo-sha-xiao-guo-pei-zhi.html</link><description>## 1.安装插件&#13;
 &#13;
 [[Apc Customize UI++ ](https://marketplace.visualstudio.com/items?itemName=drcika.apc-extension)](https://marketplace.visualstudio.com/items?itemName=drcika.apc-extension)&#13;
 &#13;
@@ -93,7 +93,7 @@ ssh-copy-id -i &lt;~/.ssh/id_ed25519.pub&gt; &lt;username&gt;@&lt;remote_ip&gt;&
 &#13;
 ## 4.意想不到的问题(无问题可忽略)&#13;
 &#13;
-有可能最终配置效果不尽人意，所以在这里可以安装一款字体(可选)，在vscode的`.settings.json`键入以下内容。</description><guid isPermaLink="true">https://ronan.us.kg/post/vscode-mo-sha-xiao-guo-pei-zhi.html</guid><pubDate>Sat, 27 Jul 2024 01:44:00 +0000</pubDate></item><item><title>PlatformIO烧录失败解决方法</title><link>https://ronan.us.kg/post/PlatformIO-shao-lu-shi-bai-jie-jue-fang-fa.html</link><description>## 遭遇问题&#13;
+有可能最终配置效果不尽人意，所以在这里可以安装一款字体(可选)，在vscode的`.settings.json`键入以下内容。</description><guid isPermaLink="true">https://echozap.github.io/post/vscode-mo-sha-xiao-guo-pei-zhi.html</guid><pubDate>Sat, 27 Jul 2024 01:44:00 +0000</pubDate></item><item><title>PlatformIO烧录失败解决方法</title><link>https://echozap.github.io/post/PlatformIO-shao-lu-shi-bai-jie-jue-fang-fa.html</link><description>## 遭遇问题&#13;
 ​***platformIO一直卡在烧录程序中，导致开发版一直处于断电状态***&#13;
 ![问题](https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/imgs/question.png)&#13;
 &#13;
@@ -106,4 +106,4 @@ ssh-copy-id -i &lt;~/.ssh/id_ed25519.pub&gt; &lt;username&gt;@&lt;remote_ip&gt;&
 &#13;
 该文件在以下路径&#13;
 ![解决2](https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/imgs/method2.png)&#13;
-。</description><guid isPermaLink="true">https://ronan.us.kg/post/PlatformIO-shao-lu-shi-bai-jie-jue-fang-fa.html</guid><pubDate>Sat, 22 Jun 2024 07:16:18 +0000</pubDate></item></channel></rss>
+。</description><guid isPermaLink="true">https://echozap.github.io/post/PlatformIO-shao-lu-shi-bai-jie-jue-fang-fa.html</guid><pubDate>Sat, 22 Jun 2024 07:16:18 +0000</pubDate></item></channel></rss>
