@@ -14,7 +14,7 @@ ssh-keygen
 
 ---
 
-# 2检查密钥生成成功与否
+# 2检查密钥是否创建成功
 
 在终端输入
 
@@ -40,10 +40,6 @@ ssh-copy-id -i <~/.ssh/id_ed25519.pub> <username>@<remote_ip>
 
 其中的`<~/.ssh/id_ed25519.pub>` 是公钥所处的路径，`<username>`是用户名，`<remote_ip>`是主机名或IP 地址。
 
-看到以下内容
-
-![img](https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/imgs/ssh-copy-id.png)
-
 恭喜你，现在可以不再每次登录都需要输入密码了！！！
 
 ---
@@ -53,7 +49,7 @@ ssh-copy-id -i <~/.ssh/id_ed25519.pub> <username>@<remote_ip>
 有时候因为之前的服务器重装了系统，但是在本地主机仍然保存着之前的私钥，所以在重新登录远程服务器时会遇到以下问题
 
 ```shell
-❯ ssh root@aby.ronan.cloudns.ch
+❯ ssh root@<your_remote_ip>
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED!     @

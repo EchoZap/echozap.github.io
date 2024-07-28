@@ -26,7 +26,7 @@ ssh-keygen
 
 ---
 
-# 2检查密钥生成成功与否
+# 2检查密钥是否创建成功
 
 在终端输入
 
@@ -68,7 +68,7 @@ ssh-keygen
 
 ---
 
-# 2检查密钥生成成功与否
+# 2检查密钥是否创建成功
 
 在终端输入
 
@@ -153,7 +153,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/e6ce4d03dd0639d95ef5ca6def95c5b5244c82cfe0150a4763f6e94efd92365f/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f4563686f5a61702f6563686f7a61702e6769746875622e696f406d61696e2f7374617469632f696d67732f7373682d6b657967656e2e706e67"><img src="https://camo.githubusercontent.com/e6ce4d03dd0639d95ef5ca6def95c5b5244c82cfe0150a4763f6e94efd92365f/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f4563686f5a61702f6563686f7a61702e6769746875622e696f406d61696e2f7374617469632f696d67732f7373682d6b657967656e2e706e67" alt="img" data-canonical-src="https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/imgs/ssh-keygen.png" style="max-width: 100%;"></a></p>
 <p>恭喜，你已经完成第一步！</p>
 <hr>
-<h1>2检查密钥生成成功与否</h1>
+<h1>2检查密钥是否创建成功</h1>
 <p>在终端输入</p>
 <div class="highlight highlight-source-shell"><pre class="notranslate">ls .ssh</pre></div>
 <p>看到以下内容</p>
@@ -164,13 +164,11 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <p>在终端键入</p>
 <div class="highlight highlight-source-shell"><pre class="notranslate">ssh-copy-id -i <span class="pl-k">&lt;</span>~/.ssh/id_ed25519.pub<span class="pl-k">&gt;</span> <span class="pl-k">&lt;</span>username<span class="pl-k">&gt;</span>@<span class="pl-k">&lt;</span>remote_ip<span class="pl-k">&gt;</span></pre></div>
 <p>其中的<code class="notranslate">&lt;~/.ssh/id_ed25519.pub&gt;</code> 是公钥所处的路径，<code class="notranslate">&lt;username&gt;</code>是用户名，<code class="notranslate">&lt;remote_ip&gt;</code>是主机名或IP 地址。</p>
-<p>看到以下内容</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/08ada65220f75c5f489cf67eb90694dcae99f3ab129b9e7ff9ff3ead470b8bae/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f4563686f5a61702f6563686f7a61702e6769746875622e696f406d61696e2f7374617469632f696d67732f7373682d636f70792d69642e706e67"><img src="https://camo.githubusercontent.com/08ada65220f75c5f489cf67eb90694dcae99f3ab129b9e7ff9ff3ead470b8bae/68747470733a2f2f63646e2e6a7364656c6976722e6e65742f67682f4563686f5a61702f6563686f7a61702e6769746875622e696f406d61696e2f7374617469632f696d67732f7373682d636f70792d69642e706e67" alt="img" data-canonical-src="https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/imgs/ssh-copy-id.png" style="max-width: 100%;"></a></p>
 <p>恭喜你，现在可以不再每次登录都需要输入密码了！！！</p>
 <hr>
 <h1>4问题排查</h1>
 <p>有时候因为之前的服务器重装了系统，但是在本地主机仍然保存着之前的私钥，所以在重新登录远程服务器时会遇到以下问题</p>
-<div class="highlight highlight-source-shell"><pre class="notranslate">❯ ssh root@aby.ronan.cloudns.ch
+<div class="highlight highlight-source-shell"><pre class="notranslate">❯ ssh root@<span class="pl-k">&lt;</span>your_remote_ip<span class="pl-k">&gt;</span>
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @    WARNING: REMOTE HOST IDENTIFICATION HAS CHANGED<span class="pl-k">!</span>     @
