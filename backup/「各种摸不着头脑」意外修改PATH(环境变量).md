@@ -15,7 +15,7 @@ sudo apt-get install sudo
 
 如果你知道 **sudo** 命令的确切路径，你可以在使用时直接指定它的路径。例如：
 ```plain
-/usr/bin/sudo vim .bashrc
+/usr/bin/sudo /usr/bin/vim .bashrc
 ```
 
 **修复PATH环境变量**：更彻底的解决方法是修复 **PATH** 环境变量，使得系统能够找到 **sudo** 命令。你可以编辑你的  **.bashrc** 文件，将正确的路径添加到 **PATH** 环境变量中。你可以使用下面的命令来编辑  **.bashrc** 文件：

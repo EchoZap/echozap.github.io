@@ -80,7 +80,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <p>在其他发行版上，你可能需要使用不同的命令来安装 <strong>sudo</strong>。</p>
 <h1>2.<strong>手动指定sudo命令的路径</strong></h1>
 <p>如果你知道 <strong>sudo</strong> 命令的确切路径，你可以在使用时直接指定它的路径。例如：</p>
-<pre lang="plain" class="notranslate"><code class="notranslate">/usr/bin/sudo vim .bashrc
+<pre lang="plain" class="notranslate"><code class="notranslate">/usr/bin/sudo /usr/bin/vim .bashrc
 </code></pre>
 <p><strong>修复PATH环境变量</strong>：更彻底的解决方法是修复 <strong>PATH</strong> 环境变量，使得系统能够找到 <strong>sudo</strong> 命令。你可以编辑你的  <strong>.bashrc</strong> 文件，将正确的路径添加到 <strong>PATH</strong> 环境变量中。你可以使用下面的命令来编辑  <strong>.bashrc</strong> 文件：</p>
 <pre lang="plain" class="notranslate"><code class="notranslate">export PATH=$PATH:/usr/bin
