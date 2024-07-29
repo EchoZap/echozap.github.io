@@ -60,3 +60,33 @@ pip3 -V
 ```
 alias pip3='/usr/bin/python3 -m pip'
 ```
+
+
+
+# 通过pip安装的程序`command not found`
+已经明确通过pip安装，使用`pip list`列出已经安装的库或程序
+```
+❯ pip list
+Package    Version
+---------- -------
+altgraph   0.17.2
+stcgal     1.10
+```
+
+但是在运行时候出现错误：
+```
+❯ stcgal
+zsh: command not found: stcgal
+```
+### 解决方法
+1.找到stcgal的安装路径：
+```
+pip show stcgal
+```
+
+2.将该目录添加到你的PATH环境变量中：
+如果stcgal安装在一个Python环境的bin目录中，需要将该目录添加到你的PATH环境变量中。例如，如果安装路径是/Users/iaa/Library/Python/3.9/bin，你可以这样做：
+```
+export PATH=$PATH:/Users/iaa/Library/Python/3.9/bin
+```
+

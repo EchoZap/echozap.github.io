@@ -130,6 +130,26 @@ which pip3
 <p>3.创建一个新的别名<br>
 如果pip3的路径不正确，可以手动创建一个新的别名，使其与正确的python3解释器匹配。假设你要使用系统自带的Python解释器，可以这样操作：</p>
 <pre class="notranslate"><code class="notranslate">alias pip3='/usr/bin/python3 -m pip'
+</code></pre>
+<h1>通过pip安装的程序<code class="notranslate">command not found</code></h1>
+<p>已经明确通过pip安装，使用<code class="notranslate">pip list</code>列出已经安装的库或程序</p>
+<pre class="notranslate"><code class="notranslate">❯ pip list
+Package    Version
+---------- -------
+altgraph   0.17.2
+stcgal     1.10
+</code></pre>
+<p>但是在运行时候出现错误：</p>
+<pre class="notranslate"><code class="notranslate">❯ stcgal
+zsh: command not found: stcgal
+</code></pre>
+<h3>解决方法</h3>
+<p>1.找到stcgal的安装路径：</p>
+<pre class="notranslate"><code class="notranslate">pip show stcgal
+</code></pre>
+<p>2.将该目录添加到你的PATH环境变量中：<br>
+如果stcgal安装在一个Python环境的bin目录中，需要将该目录添加到你的PATH环境变量中。例如，如果安装路径是/Users/iaa/Library/Python/3.9/bin，你可以这样做：</p>
+<pre class="notranslate"><code class="notranslate">export PATH=$PATH:/Users/iaa/Library/Python/3.9/bin
 </code></pre></div>
 <div style="font-size:small;margin-top:8px;float:right;">要做一个有swag的人</div>
 
