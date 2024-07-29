@@ -108,17 +108,29 @@ which python3
 <p>这将显示出系统当前 python 和 python3 命令指向的实际路径。</p>
 <h1>切换系统上当前正在使用的 Python 解释器</h1>
 <p>有以下几种方式，根据需要选择</p>
-<h2>1.更新 PATH 环境变量</h2>
+<h3>1.更新 PATH 环境变量</h3>
 <p>根据你使用的 Shell 类型，打开相应的配置文件。例如，对于 zsh 用户，编辑 ~/.zshrc 文件；对于 bash 用户，编辑 ~/.bash_profile 或 ~/.bashrc 文件。<br>
 确保 /usr/bin 在 PATH 变量中位于其他 Python 解释器路径之前。例如，将 /usr/bin 放在最前面：</p>
 <pre class="notranslate"><code class="notranslate">export PATH="/usr/bin:/opt/homebrew/bin:$PATH"
 </code></pre>
 <p><strong>注意：在这行之后不能有任何关于<code class="notranslate">/opt/homebrew/bin:$PATH</code>的环境变量设置，先后顺序不能乱，因为shell配置文件从上往下执行。如果不，则切换设置不生效</strong></p>
-<h2>2.使用 alias 命令</h2>
+<h3>2.使用 alias 命令</h3>
 <p>在~/.zshrc 或 ~/.bashrc 中添加以下设置</p>
 <pre class="notranslate"><code class="notranslate">alias python3='/usr/bin/python3'
 </code></pre>
-<p>根据需要可以将<code class="notranslate">/usr/bin/python3</code>更换为所需。</p></div>
+<p>根据需要可以将<code class="notranslate">/usr/bin/python3</code>更换为所需。</p>
+<h1>确保当前pip或pip3命令使用的是正确的Python解释器</h1>
+<p>1.确认当前pip3命令对应的Python解释器：</p>
+<pre class="notranslate"><code class="notranslate">which pip
+which pip3
+</code></pre>
+<p>2.查看当前pip3的Python路径：</p>
+<pre class="notranslate"><code class="notranslate">pip3 -V
+</code></pre>
+<p>3.创建一个新的别名<br>
+如果pip3的路径不正确，可以手动创建一个新的别名，使其与正确的python3解释器匹配。假设你要使用系统自带的Python解释器，可以这样操作：</p>
+<pre class="notranslate"><code class="notranslate">alias pip3='/usr/bin/python3 -m pip'
+</code></pre></div>
 <div style="font-size:small;margin-top:8px;float:right;">要做一个有swag的人</div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
