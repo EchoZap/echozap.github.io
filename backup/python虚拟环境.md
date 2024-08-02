@@ -1,10 +1,12 @@
-在虚拟环境中，pip 和 pip3 通常会指向同一个 Python 版本的包管理器。虚拟环境会自动配置 pip 指向该环境中的 Python 解释器。
+
+*在虚拟环境中，pip 和 pip3 通常会指向同一个 Python 版本的包管理器。虚拟环境会自动配置 pip 指向该环境中的 Python 解释器。*  
+
 # 创建虚拟环境：
 ```
 python3 -m venv myenv
-```
-
-
+```  
+*此方法创建的虚拟环境基于系统自带的python版本，不能创建系统未安装的python版本的虚拟环境。假设系统的python3版本是3.12，那么通过 `-m venv` 创建的虚拟环境中的python也会是3.12版本的*   
+**如果要创建系统本身未安装的python版本虚拟环境，可以通过conda实现**
 
 # 激活虚拟环境：
 
@@ -28,8 +30,6 @@ myenv\Scripts\activate.bat
 myenv\Scripts\Activate.ps1
 ```
 
-
-
 # 检查pip和pip3指向的路径：
 激活虚拟环境后，运行以下命令来检查 pip 和 pip3 的路径：
 ```
@@ -41,8 +41,6 @@ which pip3
 /path/to/your/venv/bin/pip
 /path/to/your/venv/bin/pip3
 ```
-
-
 
 # 检查pip和pip3版本：
 你也可以检查pip和pip3的版本号，它们应该指向相同的Python版本：

@@ -10,9 +10,11 @@
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
-<meta name="description" content="在虚拟环境中，pip 和 pip3 通常会指向同一个 Python 版本的包管理器。">
+<meta name="description" content="
+*在虚拟环境中，pip 和 pip3 通常会指向同一个 Python 版本的包管理器。">
 <meta property="og:title" content="python虚拟环境">
-<meta property="og:description" content="在虚拟环境中，pip 和 pip3 通常会指向同一个 Python 版本的包管理器。">
+<meta property="og:description" content="
+*在虚拟环境中，pip 和 pip3 通常会指向同一个 Python 版本的包管理器。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://echozap.github.io/post/python-xu-ni-huan-jing.html">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.avg">
@@ -66,10 +68,12 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
 </div>
     <div id="content">
-<div class="markdown-body" id="postBody"><p>在虚拟环境中，pip 和 pip3 通常会指向同一个 Python 版本的包管理器。虚拟环境会自动配置 pip 指向该环境中的 Python 解释器。</p>
+<div class="markdown-body" id="postBody"><p><em>在虚拟环境中，pip 和 pip3 通常会指向同一个 Python 版本的包管理器。虚拟环境会自动配置 pip 指向该环境中的 Python 解释器。</em></p>
 <h1>创建虚拟环境：</h1>
 <pre class="notranslate"><code class="notranslate">python3 -m venv myenv
 </code></pre>
+<p><em>此方法创建的虚拟环境基于系统自带的python版本，不能创建系统未安装的python版本的虚拟环境。假设系统的python3版本是3.12，那么通过 <code class="notranslate">-m venv</code> 创建的虚拟环境中的python也会是3.12版本的</em><br>
+<strong>如果要创建系统本身未安装的python版本虚拟环境，可以通过conda实现</strong></p>
 <h1>激活虚拟环境：</h1>
 <p>1.对于 Bash 或 Zsh：</p>
 <pre class="notranslate"><code class="notranslate">source myenv/bin/activate
