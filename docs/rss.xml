@@ -1,5 +1,22 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>罗华东's Blog</title><link>https://echozap.github.io</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>罗华东's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.avg</url><title>avatar</title><link>https://echozap.github.io</link></image><lastBuildDate>Fri, 02 Aug 2024 08:19:54 +0000</lastBuildDate><managingEditor>罗华东's Blog</managingEditor><ttl>60</ttl><webMaster>罗华东's Blog</webMaster><item><title>「Gmeek进阶」强调关键信息使用</title><link>https://echozap.github.io/post/%E3%80%8CGmeek-jin-jie-%E3%80%8D-qiang-diao-guan-jian-xin-xi-shi-yong.html</link><description>Github的语法里面有5中警报强调信息，分别是`NOTE`、 `TIP`、 `IMPORTANT`、 `WARNING`、 `CAUTION` 。</description><guid isPermaLink="true">https://echozap.github.io/post/%E3%80%8CGmeek-jin-jie-%E3%80%8D-qiang-diao-guan-jian-xin-xi-shi-yong.html</guid><pubDate>Fri, 02 Aug 2024 08:15:11 +0000</pubDate></item><item><title>macOS电池管理脚本</title><link>https://echozap.github.io/post/macOS-dian-chi-guan-li-jiao-ben.html</link><description>将以下内容保存为 `power_manager.sh` 并放入系统环境变量的路径中，接下来可通过 `nohub /path/power_manager.sh &amp;` 来实现后台运行&#13;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>罗华东's Blog</title><link>https://echozap.github.io</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>罗华东's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.avg</url><title>avatar</title><link>https://echozap.github.io</link></image><lastBuildDate>Sat, 03 Aug 2024 06:54:30 +0000</lastBuildDate><managingEditor>罗华东's Blog</managingEditor><ttl>60</ttl><webMaster>罗华东's Blog</webMaster><item><title>ffmpeg常用用法</title><link>https://echozap.github.io/post/ffmpeg-chang-yong-yong-fa.html</link><description># 不改变原视频码率裁剪&#13;
+### 废话少说，直接举栗🌰&#13;
+1.从 `1时15分25秒` 开始裁剪到视频结束： &#13;
+```shell&#13;
+ffmpeg -i input.mp4 -ss 01:15:25 -c copy output.mp4&#13;
+``` &#13;
+&#13;
+2.从 `视频开始到15分5秒` ：&#13;
+```shell&#13;
+ffmpeg -i input.mp4 -to 00:15:05 -c copy output.mp4&#13;
+```  &#13;
+&#13;
+3.从 `15分25秒` 到  `1时15分25秒` ：&#13;
+```shell&#13;
+ffmpeg -i input.mp4 -ss 15:25 -to 01:15:25 -c copy output.mp4&#13;
+``` &#13;
+  &#13;
+`-i` 指定输入视频路径，`input.mp4`是要裁剪的视频文件的路径， `-ss` 裁剪视频起始时间，`-to` 裁剪视频结束时间，`-c copy` 在裁剪时不改变视频编码，从而保持原始视频码率， `output.mp4` 为裁剪后的视频文件。</description><guid isPermaLink="true">https://echozap.github.io/post/ffmpeg-chang-yong-yong-fa.html</guid><pubDate>Sat, 03 Aug 2024 06:54:09 +0000</pubDate></item><item><title>「Gmeek进阶」强调关键信息使用</title><link>https://echozap.github.io/post/%E3%80%8CGmeek-jin-jie-%E3%80%8D-qiang-diao-guan-jian-xin-xi-shi-yong.html</link><description>Github的语法里面有5中警报强调信息，分别是`NOTE`、 `TIP`、 `IMPORTANT`、 `WARNING`、 `CAUTION` 。</description><guid isPermaLink="true">https://echozap.github.io/post/%E3%80%8CGmeek-jin-jie-%E3%80%8D-qiang-diao-guan-jian-xin-xi-shi-yong.html</guid><pubDate>Fri, 02 Aug 2024 08:15:11 +0000</pubDate></item><item><title>macOS电池管理脚本</title><link>https://echozap.github.io/post/macOS-dian-chi-guan-li-jiao-ben.html</link><description>将以下内容保存为 `power_manager.sh` 并放入系统环境变量的路径中，接下来可通过 `nohub /path/power_manager.sh &amp;` 来实现后台运行&#13;
 &#13;
 ```&#13;
 #!/bin/zsh&#13;
