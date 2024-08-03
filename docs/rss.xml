@@ -1,5 +1,26 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>罗华东's Blog</title><link>https://echozap.github.io</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>罗华东's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.avg</url><title>avatar</title><link>https://echozap.github.io</link></image><lastBuildDate>Sat, 03 Aug 2024 06:54:30 +0000</lastBuildDate><managingEditor>罗华东's Blog</managingEditor><ttl>60</ttl><webMaster>罗华东's Blog</webMaster><item><title>ffmpeg常用用法</title><link>https://echozap.github.io/post/ffmpeg-chang-yong-yong-fa.html</link><description># 不改变原视频码率裁剪&#13;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>罗华东's Blog</title><link>https://echozap.github.io</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>罗华东's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.avg</url><title>avatar</title><link>https://echozap.github.io</link></image><lastBuildDate>Sat, 03 Aug 2024 07:16:33 +0000</lastBuildDate><managingEditor>罗华东's Blog</managingEditor><ttl>60</ttl><webMaster>罗华东's Blog</webMaster><item><title>Docker常用命令</title><link>https://echozap.github.io/post/Docker-chang-yong-ming-ling.html</link><description>&lt;img width='855' alt='Snipaste_2024-08-03_15-06-07' src='https://github.com/user-attachments/assets/8c53f9a1-903c-4f7e-a630-347f7de7c153'&gt;&#13;
+&#13;
+# 列出所有已下载镜像&#13;
+```shell&#13;
+❯ docker images&#13;
+REPOSITORY        TAG       IMAGE ID       CREATED         SIZE&#13;
+ubuntu            latest    ffb64c9b7e8b   3 weeks ago     101MB&#13;
+b3log/siyuan      latest    caf98195a3c3   3 weeks ago     220MB&#13;
+soulteary/flare   latest    843d799dc8b2   2 months ago    12.8MB&#13;
+hello-world       latest    ee301c921b8a   14 months ago   9.14kB&#13;
+``` &#13;
+&#13;
+# 列出当前所有容器&#13;
+```shell&#13;
+❯ docker ps -a&#13;
+CONTAINER ID   IMAGE     COMMAND                   CREATED              STATUS      &#13;
+2295f62c584b   ubuntu    '/bin/sh -c 'while t…'   1 minute ago   Up About a minute&#13;
+526462e8b92d   ubuntu    '/bin/bash'               44 minutes ago       Exited (0) &#13;
+``` &#13;
+&#13;
+输出详情介绍：&#13;
+- **CONTAINER ID:**  容器 ID。</description><guid isPermaLink="true">https://echozap.github.io/post/Docker-chang-yong-ming-ling.html</guid><pubDate>Sat, 03 Aug 2024 07:08:59 +0000</pubDate></item><item><title>ffmpeg常用用法</title><link>https://echozap.github.io/post/ffmpeg-chang-yong-yong-fa.html</link><description># 不改变原视频码率裁剪&#13;
 ### 废话少说，直接举栗🌰&#13;
 1.从 `1时15分25秒` 开始裁剪到视频结束： &#13;
 ```shell&#13;
