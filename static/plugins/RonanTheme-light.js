@@ -75,7 +75,6 @@ document.addEventListener('DOMContentLoaded', function() {
         /* 图片圆角 */
         .markdown-body img {
             border-radius: 8px;
-            border: 2px solid #a3e0e4;
         }
         
         /* notice、caution、warning等提示信息的圆角 */
