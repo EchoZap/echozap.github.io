@@ -4,13 +4,12 @@
     "subTitle":"接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。",
     "avatarUrl":"https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.avg",
     
-    "nightTheme":"dark_colorblind",
     "commentLabelColor":"#006b75",
     "yearColorList":["#bc4c00", "#0969da", "#1f883d", "#A333D0"],
     "bottomText":"要做一个有swag的人",
     
     "script":"<script src='https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/plugins/GmeekTOC.js'></script><script src='https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/plugins/lightbox.js'></script><script src='https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/plugins/copy.js'></script>",
-    "allHead":"<script src='https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/plugins/RonanTheme.js'></script>",
+    "allHead":"<script src='https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/plugins/RonanTheme.js'></script><script src='https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/plugins/GmeekVercount.js'></script>",
     
     "onePageListNum":14,
     "showPostSource":0
