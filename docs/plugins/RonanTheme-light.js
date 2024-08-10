@@ -82,12 +82,12 @@ document.addEventListener('DOMContentLoaded', function() {
             color: #c5c8c6;          /* 代码块内代码颜色 */
             background-color: #21252b;       /* 代码块内框颜色 */
             box-shadow: 0 10px 30px 0 rgba(222, 217, 217, 0.4);
-            padding-top: 20px;
+            padding-top: 12px;
             border-radius: 8px;
         }
         
         /* 代码块左上角三个点 */
-        .markdown-body pre::before {
+        /*.markdown-body pre::before {
             background: #fc625d;
             border-radius: 50%;
             box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
             left: 364px;
             margin-top: -20px;
             position: absolute;
-        }
+        }*/
 
         /* 行内代码 */
         .markdown-body code, .markdown-body tt {
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', function() {
             margin-top: 1.8rem; 
         }
         /* 标题底下一条橙色 */
-        .markdown-body h1::after {
+        /*.markdown-body h1::after {
             content: '';
             display: block;
             width: 735px; 
@@ -129,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
             position: absolute; 
             left: 352px;
             margin-top: 0.2rem; 
-        }`;
+        }*/`;
         document.head.appendChild(style);
     } 
 
