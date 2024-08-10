@@ -1,11 +1,9 @@
 document.addEventListener('DOMContentLoaded', function() {    
     let currentUrl = window.location.pathname;
 
-
-    //主页主题------------------------------------------------------------------------------
-
     if (currentUrl.includes('/index.html') || currentUrl === "/") {
 
+        //主页主题------------------------------------------------------------------------------
         console.log('应用主页主题');
         let style = document.createElement("style");
         style.innerHTML = `
@@ -46,12 +44,12 @@ document.addEventListener('DOMContentLoaded', function() {
         .pagination a:hover, .pagination a:focus, .pagination span:hover, .pagination span:focus, .pagination em:hover, .pagination em:focus {
             border-color: rebeccapurple;
         `;
-        document.head.appendChild(style);}
+        document.head.appendChild(style);
 
 
-    //文章页主题------------------------------------------------------------------------------
+    } else if (currentUrl.includes('/post/') || currentUrl.includes('/link.html') || currentUrl.includes('/about.html')) {
 
-    else if (currentUrl.includes('/post/') || currentUrl.includes('/link.html') || currentUrl.includes('/about.html')) {
+        //文章页主题------------------------------------------------------------------------------
         console.log('文章页主题');
 
     let style = document.createElement("style");
@@ -142,12 +140,12 @@ document.addEventListener('DOMContentLoaded', function() {
         display: block;         
     } */
     `;
-        document.head.appendChild(style);}
+        document.head.appendChild(style);
 
     
-    // 搜索页主题--------------------------------------------------------------------
-    
-    else if (currentUrl.includes('/tag.html')) {
+    } else if (currentUrl.includes('/tag.html')) {
+
+        // 搜索页主题--------------------------------------------------------------------
         console.log('应用搜索页主题');
         let style = document.createElement("style");
         style.innerHTML = `
