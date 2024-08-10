@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', function() {    
     let currentUrl = window.location.pathname;
-    let currentHost = window.location.hostname;
+    //let currentHost = window.location.hostname;
 
     //主页主题------------------------------------------------------------------------------
     
-    if (currentHost === 'echozap.github.io' || currentUrl === '/' || currentUrl.includes('/index.html') || currentUrl.includes('/page')) {
+    if (currentUrl == '/' || currentUrl.includes('/index.html') || currentUrl.includes('/page')) {
         console.log('应用主页主题');
         let style = document.createElement("style");
         style.innerHTML = `
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
         let style = document.createElement("style");
         style.innerHTML = `
 
-                /* 主体布局 */
+        /* 主体布局 */
         body {
             min-width: 200px;
             max-width: 830px;
@@ -82,12 +82,12 @@ document.addEventListener('DOMContentLoaded', function() {
             color: #c5c8c6;          /* 代码块内代码颜色 */
             background-color: #21252b;       /* 代码块内框颜色 */
             box-shadow: 0 10px 30px 0 rgba(222, 217, 217, 0.4);
-            padding-top: 30px;
+            padding-top: 20px;
             border-radius: 8px;
         }
         
         /* 代码块左上角三个点 */
-        .markdown-body pre::before {
+        /*.markdown-body pre::before {
             background: #fc625d;
             border-radius: 50%;
             box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
             left: 364px;
             margin-top: -20px;
             position: absolute;
-        }
+        }*/
 
         /* 行内代码 */
         .markdown-body code, .markdown-body tt {
