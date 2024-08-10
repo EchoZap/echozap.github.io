@@ -72,6 +72,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         /* markdown内容 */
+        /* 图片圆角 */
+        .markdown-body img {
+            border-radius: 8px;
+            border: 2px solid #a3e0e4;
+        }
+        
         /* notice、caution、warning等提示信息的圆角 */
         .markdown-alert {
             border-radius: 8px;
@@ -85,6 +91,8 @@ document.addEventListener('DOMContentLoaded', function() {
             padding-top: 12px;
             border-radius: 8px;
         }
+
+
         
         /* 代码块左上角三个点 */
         /*.markdown-body pre::before {
@@ -98,6 +106,8 @@ document.addEventListener('DOMContentLoaded', function() {
             margin-top: -20px;
             position: absolute;
         }*/
+
+
 
         /* 行内代码 */
         .markdown-body code, .markdown-body tt {
@@ -119,6 +129,8 @@ document.addEventListener('DOMContentLoaded', function() {
             margin-right: 2px;
             margin-top: 1.8rem; 
         }
+
+        
         /* 标题底下一条橙色 */
         /*.markdown-body h1::after {
             content: '';
