@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
         /* markdown内容 */
         /* 图片圆角 */
         .markdown-body img {
-            border-radius: 10px;
+            border-radius: 8px;
             border: 2px solid #a3e0e4;
         }
         
