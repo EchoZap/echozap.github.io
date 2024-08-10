@@ -87,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         /* 代码块左上角三个点 */
-        /*.markdown-body pre::before {
+        .markdown-body pre::before {
             background: #fc625d;
             border-radius: 50%;
             box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function() {
             left: 364px;
             margin-top: -20px;
             position: absolute;
-        }*/
+        }
 
         /* 行内代码 */
         .markdown-body code, .markdown-body tt {
