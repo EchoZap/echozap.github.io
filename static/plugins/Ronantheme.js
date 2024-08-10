@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', function() {    
     let currentUrl = window.location.pathname;
 
-    if (currentUrl.includes('/index.html') || currentUrl === "/") {
+    if (currentUrl.includes('/index.html') || currentUrl.includes('/')) {
 
         //主页主题------------------------------------------------------------------------------
         console.log('应用主页主题');
@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.head.appendChild(style);
 
     
-    } else if (currentUrl.includes('/tag.html')) {
+    } else if (currentUrl.includes('/tag')) {
 
         // 搜索页主题--------------------------------------------------------------------
         console.log('应用搜索页主题');
