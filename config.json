@@ -9,7 +9,7 @@
     "bottomText":"要做一个有swag的人",
     
     "script":"<script src='https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/plugins/GmeekTOC.js'></script><script src='https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/plugins/lightbox.js'></script><script src='https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/plugins/copy.js'></script>",
-    "allHead":"<script src='https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/plugins/RonanTheme-light.js'></script><script src='https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/plugins/GmeekVercount.js'></script>",
+    "allHead":"<script src='https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@1.0.0/static/plugins/RonanTheme-light.js'></script><script src='https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/plugins/GmeekVercount.js'></script>",
     
     "onePageListNum":14,
     "showPostSource":0
