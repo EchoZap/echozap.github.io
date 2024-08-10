@@ -1,4 +1,4 @@
-<img width="855" alt="Snipaste_2024-08-03_15-06-07" src="https://github.com/user-attachments/assets/8c53f9a1-903c-4f7e-a630-347f7de7c153">
+![DockerCheatSheet.png](https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/DockerCheatSheet.png)
 
 # 列出所有已下载镜像
 ```shell
