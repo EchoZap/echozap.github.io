@@ -1,6 +1,6 @@
 ## 1.安装插件
 
-[[Apc Customize UI++ ](https://marketplace.visualstudio.com/items?itemName=drcika.apc-extension)](https://marketplace.visualstudio.com/items?itemName=drcika.apc-extension)
+[Apc Customize UI++ ](https://marketplace.visualstudio.com/items?itemName=drcika.apc-extension)
 
 ## 2.下载图片
 
@@ -26,7 +26,7 @@
 
 有可能最终配置效果不尽人意，所以在这里可以安装一款字体(可选)，在vscode的`.settings.json`键入以下内容。
 
-[[Cascadia Code](https://github.com/microsoft/cascadia-code/releases)](https://github.com/microsoft/cascadia-code/releases)
+[Cascadia Code](https://github.com/microsoft/cascadia-code/releases)
 
 ```json
 "editor.fontFamily": "Cascadia Code Light, OperatorMono Nerd Font, Monaco, 'Courier New', monospace",
