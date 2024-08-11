@@ -10,7 +10,11 @@
     
     "script":"<script src='https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/plugins/GmeekTOC.js'></script><script src='https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/plugins/lightbox.js'></script><script src='https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/plugins/copy.js'></script>",
     "allHead":"<script src='https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io/static/plugins/RonanTheme-light.js'></script><script src='https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/plugins/GmeekVercount.js'></script>",
-    
+
+    "themeMode":"fix",
+    "dayTheme":"light",
+    "nightTheme":"github-light",
+
     "onePageListNum":14,
     "showPostSource":0
 }
