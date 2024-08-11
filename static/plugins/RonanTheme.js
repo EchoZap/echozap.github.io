@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         .SideNav-item {
-            transition: 0.25s;
+            transition: 0.1s;
         }
 
         /* 分页条 */
@@ -195,7 +195,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         .SideNav-item {
-            transition: 0.25s;
+            transition: 0.1s;
         }
         
         .subnav-search-input {
