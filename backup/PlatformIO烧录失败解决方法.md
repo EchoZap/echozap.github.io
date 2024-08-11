@@ -10,4 +10,5 @@
 
 
 该文件在以下路径
+`~/.platformio/intel_mcs51/builder/main.py`
 ![解决2](https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/imgs/method2.png)
