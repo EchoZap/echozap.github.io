@@ -8,6 +8,10 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('应用主页主题');
         let style = document.createElement("style");
         style.innerHTML = `
+        html {    
+            background: url('https://wowpb.pages.dev/file/2a84a86f2bb288032e3a1.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
 
         /* 主体布局 */
         body {
@@ -17,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
             font-size: 16px;
             font-family: sans-serif;
             line-height: 1.25;
-            background: rgba(255, 255, 255, 0.967); /* 白色背景,透明度85% */
+            background: rgba(237, 239, 233, 0.84); 
             border-radius: 10px; /* 圆角边框 */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* 添加阴影 */
             overflow: auto;
@@ -57,6 +61,11 @@ document.addEventListener('DOMContentLoaded', function() {
         let style = document.createElement("style");
         style.innerHTML = `
 
+        html {    
+            background: url('https://wowpb.pages.dev/file/2a84a86f2bb288032e3a1.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+
         /* 主体布局 */
         body {
             min-width: 200px;
@@ -65,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function() {
             font-size: 16px;
             font-family: sans-serif;
             line-height: 1.25;
-            background: rgba(255, 255, 255, 0.967); /* 白色背景,透明度85% */
+            background: rgba(237, 239, 233, 0.84); 
             border-radius: 10px; /* 圆角边框 */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* 添加阴影 */
             overflow: auto;
@@ -75,6 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
         /* 图片圆角 */
         .markdown-body img {
             border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.78); 
         }
         
         /* notice、caution、warning等提示信息的圆角 */
@@ -84,8 +94,8 @@ document.addEventListener('DOMContentLoaded', function() {
         
         /* 代码块 */
         .markdown-body .highlight pre, .markdown-body pre {
-            color: #c5c8c6;          /* 代码块内代码颜色 */
-            background-color: #21252b;       /* 代码块内框颜色 */
+            color: rgb(0, 0, 0);          /* 代码块内代码颜色 */
+            background-color: rgba(243, 244, 243, 0.967);       /* 代码块内框颜色 */
             box-shadow: 0 10px 30px 0 rgba(222, 217, 217, 0.4);
             padding-top: 12px;
             border-radius: 8px;
@@ -152,6 +162,11 @@ document.addEventListener('DOMContentLoaded', function() {
         let style = document.createElement("style");
         style.innerHTML = `
         
+        html {    
+            background: url('https://wowpb.pages.dev/file/2a84a86f2bb288032e3a1.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+
         /* 主体布局 */
         body {
             min-width: 200px;
@@ -160,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
             font-size: 16px;
             font-family: sans-serif;
             line-height: 1.25;
-            background: rgba(255, 255, 255, 0.967); /* 白色背景,透明度85% */
+            background: rgba(237, 239, 233, 0.84); 
             border-radius: 10px; /* 圆角边框 */
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* 添加阴影 */
             overflow: auto;
