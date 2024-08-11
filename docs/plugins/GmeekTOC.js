@@ -29,11 +29,12 @@ document.addEventListener("DOMContentLoaded", function() {
         transform: translateX(50%) translateX(320px);
         width:200px;
         border: 1px solid #e1e4e8;
-        border-radius: 6px;
+        border-radius: 8px;
         padding: 10px;
         overflow-y: auto;
         box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         max-height: 70vh;
+        background-color: rgba(237, 239, 233, 0.84);
     }
     .toc-title{
         font-weight: bold;
