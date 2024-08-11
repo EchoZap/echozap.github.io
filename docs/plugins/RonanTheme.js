@@ -218,8 +218,14 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
         document.head.appendChild(style);
     
-    } else {
-        console.log('未应用主题');
+        // 搜索框回车触发
+        let input = document.getElementsByClassName("form-control subnav-search-input float-left")[0];
+        let button = document.getElementsByClassName("btn float-left")[0];
+        input.addEventListener("keyup", function(event) {
+            event.preventDefault();
+            if (event.keyCode === 13) {
+                button.click();
+            }
+        });
     }
-
 })
