@@ -178,9 +178,9 @@ document.addEventListener("DOMContentLoaded", function() {
     window.onscroll = function() {
         const backToTopButton = document.querySelector('.toc-end');
         if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-            backToTopButton.style="visibility: visible;"
+            backToTopButton.style="visibility: visible;background-color: white;"
         } else {
-            backToTopButton.style="visibility: hidden;"
+            backToTopButton.style="visibility: hidden;background-color: white;"
         }
     };
     document.addEventListener('click', (e) => {
