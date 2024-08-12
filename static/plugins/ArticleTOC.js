@@ -156,10 +156,10 @@ document.addEventListener("DOMContentLoaded", function() {
             border: 1px solid var(--toc-border);      /* 可选：增加边框，使其更明显 */
         }
 
-        .toc-end:active {
+        /*.toc-end:active {
             background-color: var(--toc-icon-active-bg); /* 使用激活状态的背景色 */
             color: var(--toc-text);         /* 使用激活状态的文本颜色 */
-        } 
+        } */
     `;
     loadResource('style', {css: css});
 
@@ -168,7 +168,7 @@ document.addEventListener("DOMContentLoaded", function() {
     
     tocIcon.classList.add('active');
     
-    tocIcon.textContent = '☰';
+    tocIcon.textContent = '✖';
     tocIcon.onclick = (e) => {
         e.stopPropagation();
         toggleTOC();
