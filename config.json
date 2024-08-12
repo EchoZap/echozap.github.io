@@ -8,7 +8,7 @@
     "yearColorList":["#bc4c00", "#0969da", "#1f883d", "#A333D0"],
     "bottomText":"要做一个有swag的人",
     
-    "script":"<script src='https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io/static/plugins/articletoc.js'></script><script src='https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/plugins/lightbox.js'></script>",
+    "script":"<script src='https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io/static/plugins/ArticleTOC.js'></script><script src='https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/plugins/lightbox.js'></script>",
     "allHead":"<script src='https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io/static/plugins/RonanTheme.js'></script><script src='https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/plugins/GmeekVercount.js'></script>",
 
     "themeMode":"fix",
