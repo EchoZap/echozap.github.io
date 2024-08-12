@@ -9,6 +9,8 @@ function loadResource(type, attributes) {
 function createTOC() {
     const tocElement = document.createElement('div');
     tocElement.className = 'toc';
+    tocElement.classList.add('show');
+        
     const contentContainer = document.querySelector('.markdown-body');
     contentContainer.appendChild(tocElement);
 
@@ -34,8 +36,6 @@ function toggleTOC() {
     const tocElement = document.querySelector('.toc');
     const tocIcon = document.querySelector('.toc-icon');
     if (tocElement) {
-        tocElement.classList.add('show');
-        tocIcon.classList.add('active');
         tocElement.classList.toggle('show');
         tocIcon.classList.toggle('active');
         tocIcon.textContent = tocElement.classList.contains('show') ? '✖' : '☰';
@@ -165,6 +165,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     const tocIcon = document.createElement('div');
     tocIcon.className = 'toc-icon';
+    
+    tocIcon.classList.add('active');
+    
     tocIcon.textContent = '☰';
     tocIcon.onclick = (e) => {
         e.stopPropagation();
