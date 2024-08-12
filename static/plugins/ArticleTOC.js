@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function() {
             text-align: center;
             cursor: pointer;
             visibility: hidden;
-            background-color: var(--toc-text);
+            background-color: white;
             padding: 10px;                            /* 可选：增加一些内边距，使按钮更易点击 */
             border-radius: 8px;                       /* 可选：使按钮有圆角 */
             border: 1px solid var(--toc-border);      /* 可选：增加边框，使其更明显 */
