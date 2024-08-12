@@ -24,6 +24,10 @@ function createTOC() {
         link.style.paddingLeft = `${(parseInt(heading.tagName.charAt(1)) - 1) * 10}px`;
         tocElement.appendChild(link);
     });
+
+    
+    tocElement.insertAdjacentHTML('beforeend', '<a class="toc-end" onclick="window.scrollTo({top:0,behavior: \'smooth\'});">返回顶部</a>');
+    contentContainer.prepend(tocElement);
 }
 
 function toggleTOC() {
@@ -137,6 +141,23 @@ document.addEventListener("DOMContentLoaded", function() {
             border-color: var(--toc-icon-active-bg);
             transform: rotate(90deg);
         }
+
+
+        .toc-end {
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            visibility: hidden;
+            background-color: var(--toc-text);
+            padding: 10px;                            /* 可选：增加一些内边距，使按钮更易点击 */
+            border-radius: 8px;                       /* 可选：使按钮有圆角 */
+            border: 1px solid var(--toc-border);      /* 可选：增加边框，使其更明显 */
+        }
+
+        .toc-end:active {
+            background-color: var(--toc-icon-active-bg); /* 使用激活状态的背景色 */
+            color: var(--toc-text);         /* 使用激活状态的文本颜色 */
+        } 
     `;
     loadResource('style', {css: css});
 
@@ -149,10 +170,19 @@ document.addEventListener("DOMContentLoaded", function() {
     };
     document.body.appendChild(tocIcon);
 
+    window.onscroll = function() {
+        const backToTopButton = document.querySelector('.toc-end');
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            backToTopButton.style="visibility: visible;"
+        } else {
+            backToTopButton.style="visibility: hidden;"
+        }
+    };
     document.addEventListener('click', (e) => {
         const tocElement = document.querySelector('.toc');
         if (tocElement && tocElement.classList.contains('show') && !tocElement.contains(e.target) && !e.target.classList.contains('toc-icon')) {
             toggleTOC();
+            
         }
     });
 });
