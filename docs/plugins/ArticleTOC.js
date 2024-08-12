@@ -180,7 +180,7 @@ document.addEventListener("DOMContentLoaded", function() {
     };
     document.addEventListener('click', (e) => {
         const tocElement = document.querySelector('.toc');
-        if (tocElement && tocElement.classList.contains('show') && !tocElement.contains(e.target) && !e.target.classList.contains('toc-icon')) {
+        if (tocElement && !tocElement.classList.contains('show') && !tocElement.contains(e.target) && !e.target.classList.contains('toc-icon')) {
             toggleTOC();
             
         }
