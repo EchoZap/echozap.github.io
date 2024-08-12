@@ -7,7 +7,7 @@
     <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
     <script src='https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io/static/plugins/RonanTheme.js'></script><script src='https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/plugins/GmeekVercount.js'></script>
     <link rel="icon" href="https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.avg">
-<meta name="description" content="## 查找sdcc以及8051头文件位置
+<meta name="description" content="# 查找sdcc以及8051头文件位置
 
 ```shell
 ❯ which sdcc
@@ -17,7 +17,7 @@
 
 这将列出sdcc的安装位置。">
 <meta property="og:title" content="vscode搭建用于8051单片机的sdcc环境">
-<meta property="og:description" content="## 查找sdcc以及8051头文件位置
+<meta property="og:description" content="# 查找sdcc以及8051头文件位置
 
 ```shell
 ❯ which sdcc
@@ -66,7 +66,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
     font-size: 12px;
 }
 </style>
-
+<style>.markdown-alert{padding:0.5rem 1rem;margin-bottom:1rem;border-left:.25em solid var(--borderColor-default,var(--color-border-default));}.markdown-alert .markdown-alert-title {display:flex;font-weight:var(--base-text-weight-medium,500);align-items:center;line-height:1;}.markdown-alert>:first-child {margin-top:0;}.markdown-alert>:last-child {margin-bottom:0;}</style><style>.markdown-alert.markdown-alert-note {border-left-color:var(--borderColor-accent-emphasis, var(--color-accent-emphasis));background-color:var(--color-accent-subtle);}.markdown-alert.markdown-alert-note .markdown-alert-title {color: var(--fgColor-accent,var(--color-accent-fg));}</style>
 
 
 
@@ -90,7 +90,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
 </div>
     <div id="content">
-<div class="markdown-body" id="postBody"><h2>查找sdcc以及8051头文件位置</h2>
+<div class="markdown-body" id="postBody"><h1>查找sdcc以及8051头文件位置</h1>
 <div class="highlight highlight-source-shell"><pre class="notranslate">❯ which sdcc
 
 /opt/homebrew/bin//sdcc</pre></div>
@@ -98,7 +98,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <div class="highlight highlight-source-shell"><pre class="notranslate">❯ find /opt/homebrew -name <span class="pl-s"><span class="pl-pds">"</span>8051.h<span class="pl-pds">"</span></span>
 
 /opt/homebrew/Cellar/sdcc/4.4.0/share/sdcc/include/mcs51/8051.h</pre></div>
-<h2>#include# &lt;8051.h&gt; 报错解决方案</h2>
+<h1>#include &lt;8051.h&gt; 报错解决方案</h1>
 <p>接下来，我们需要配置 VSCode 的 IntelliSense 以包含头文件目录。</p>
 <h4>1 创建或编辑 <code class="notranslate">c_cpp_properties.json</code></h4>
 <p>打开你的项目，然后创建或编辑 <code class="notranslate">.vscode/c_cpp_properties.json</code> 文件，并添加头文件目录。</p>
@@ -124,11 +124,14 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <p>请将 <code class="notranslate">&lt;版本号&gt;</code> 替换为实际的 SDCC 版本号。</p>
 <h4>2.重启 VSCode</h4>
 <p>完成配置后，重启 VSCode 以应用更改。</p>
-<h2>编译代码</h2>
+<h1>编译代码</h1>
 <div class="highlight highlight-source-shell"><pre class="notranslate">sdcc main.c</pre></div>
 <p>之后会获得一个<code class="notranslate">.ihx</code>文件，通过以下命令将其链接为<code class="notranslate">hex</code>文件</p>
 <div class="highlight highlight-source-shell"><pre class="notranslate">packihx (your_main.ihx) <span class="pl-k">&gt;</span> (your_main.hex)</pre></div>
-<h2>烧录程序</h2>
+<h1>烧录程序</h1>
+<div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p><p>烧录程序使用的是stcgal<br>
+可以通过 <code class="notranslate">pip install stcgal</code> 来安装</p>
+</div>
 <p>首先将mac连接到单片机，之后在终端键入，会得到烧录串口号<code class="notranslate">/dev/tty.wchusbserial1140</code>或者<code class="notranslate">/dev/tty.usbserial-1140</code>(该串口号每一次连接可能会更改,所以在烧录前最好通过该命令检查)</p>
 <div class="highlight highlight-source-shell"><pre class="notranslate">❯ ls /dev/tty.<span class="pl-k">*</span>
 

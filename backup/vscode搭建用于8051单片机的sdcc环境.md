@@ -1,4 +1,4 @@
-## 查找sdcc以及8051头文件位置
+# 查找sdcc以及8051头文件位置
 
 ```shell
 ❯ which sdcc
@@ -14,7 +14,7 @@
 /opt/homebrew/Cellar/sdcc/4.4.0/share/sdcc/include/mcs51/8051.h
 ```
 
-## #include# <8051.h> 报错解决方案
+# #include <8051.h> 报错解决方案
 
 接下来，我们需要配置 VSCode 的 IntelliSense 以包含头文件目录。
 
@@ -51,7 +51,7 @@
 
 完成配置后，重启 VSCode 以应用更改。
 
-## 编译代码
+# 编译代码
 
 ```shell
 sdcc main.c
@@ -63,7 +63,11 @@ sdcc main.c
 packihx (your_main.ihx) > (your_main.hex)
 ```
 
-## 烧录程序
+# 烧录程序
+
+> [!note]
+> 烧录程序使用的是stcgal  
+可以通过 `pip install stcgal` 来安装
 
 首先将mac连接到单片机，之后在终端键入，会得到烧录串口号`/dev/tty.wchusbserial1140`或者`/dev/tty.usbserial-1140`(该串口号每一次连接可能会更改,所以在烧录前最好通过该命令检查)
 
