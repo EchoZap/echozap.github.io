@@ -34,6 +34,7 @@ function toggleTOC() {
     const tocElement = document.querySelector('.toc');
     const tocIcon = document.querySelector('.toc-icon');
     if (tocElement) {
+        tocElement.className = 'show';
         tocElement.classList.toggle('show');
         tocIcon.classList.toggle('active');
         tocIcon.textContent = tocElement.classList.contains('show') ? '✖' : '☰';
