@@ -34,7 +34,8 @@ function toggleTOC() {
     const tocElement = document.querySelector('.toc');
     const tocIcon = document.querySelector('.toc-icon');
     if (tocElement) {
-        tocElement.className = 'show';
+        tocElement.classList.add('show');
+        tocIcon.classList.add('active');
         tocElement.classList.toggle('show');
         tocIcon.classList.toggle('active');
         tocIcon.textContent = tocElement.classList.contains('show') ? '✖' : '☰';
@@ -181,7 +182,7 @@ document.addEventListener("DOMContentLoaded", function() {
     };
     document.addEventListener('click', (e) => {
         const tocElement = document.querySelector('.toc');
-        if (tocElement && !tocElement.classList.contains('show') && !tocElement.contains(e.target) && !e.target.classList.contains('toc-icon')) {
+        if (tocElement && tocElement.classList.contains('show') && !tocElement.contains(e.target) && !e.target.classList.contains('toc-icon')) {
             toggleTOC();
             
         }
