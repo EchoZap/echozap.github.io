@@ -16,6 +16,8 @@
     "dayTheme":"light",
     "nightTheme":"github-light",
 
+    "disableCamo": 1,
     "onePageListNum":14,
     "showPostSource":0
 }
+
