@@ -37,6 +37,8 @@
 `Gmeek-html<iframe style='border-radius:12px' src='https://open.spotify.com/embed/track/0U3fV7K4WFfVRgLGEAKh3g?utm_source=generator' width='100%' height='152' frameBorder='0' allowfullscreen='' allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture' loading='lazy'></iframe>`
 ```
 
+`Gmeek-html<iframe style='border-radius:12px' src='https://music.163.com/song?id=545590290' width='100%' height='152' frameBorder='0' allowfullscreen='' allow='autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture' loading='lazy'></iframe>`
+
 - 内嵌框架iframe-视频
 
 ```
@@ -45,4 +47,4 @@
 
 
 
-<!-- ##{"timestamp":1722530043}## -->
+<!-- ##{"timestamp":1722610298}## -->
