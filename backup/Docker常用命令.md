@@ -1,4 +1,4 @@
-![DockerCheatSheet.png](https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/imgs/DockerCheatSheet.png)
+![DockerCheatSheet.png](https://wowpb.pages.dev/file/38386b215292115008331.png)
 
 # 列出所有已下载镜像
 ```shell
