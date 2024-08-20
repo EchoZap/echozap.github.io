@@ -114,7 +114,7 @@ done
 
 # 3.方法2--py脚本
 
-### 2.1配置脚本
+### 3.1配置脚本
 
 > [!warning]
 >
@@ -168,7 +168,7 @@ def upload_data(title, content, labels):
             print("Service unavailable, 服务不可用")
   
 
-def get_content_title_and_labels():
+def get_post():
 
     status = input("\n 1.上传单篇文章 \n 2.批量上传 \n 按下对应数字并回车可选择相应功能：")
 
@@ -212,10 +212,10 @@ def get_content_title_and_labels():
         exit
 
 if __name__ == "__main__":
-    get_content_title_and_labels()
+    get_post()
 ```
 
-### 2.2运行脚本
+### 3.2运行脚本
 
 将以上脚本文件保存为 `blog_upload.py` ，在终端里进入到改脚本所在位置，然后通过以下命令运行，之后根据提示进行即可。
 

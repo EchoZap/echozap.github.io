@@ -381,7 +381,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <h3>2.2运行脚本</h3>
 <p>将以上脚本文件保存为 <code class="notranslate">blog_upload.sh</code> ，在终端里进入到改脚本所在位置，键入 <code class="notranslate">chmod 777 blog_upload.sh</code> ，然后通过 <code class="notranslate">./blog_upload.sh</code> 运行，之后根据提示进行即可。</p>
 <h1>3.方法2--py脚本</h1>
-<h3>2.1配置脚本</h3>
+<h3>3.1配置脚本</h3>
 <div class="markdown-alert markdown-alert-warning"><p class="markdown-alert-title"><svg class="octicon octicon-alert mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</p>
 <p>请确保python已经安装requests模块，可以通过 <code class="notranslate">pip3 install requests</code> 安装</p>
 </div>
@@ -429,7 +429,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
             <span class="pl-en">print</span>(<span class="pl-s">"Service unavailable, 服务不可用"</span>)
   
 
-<span class="pl-k">def</span> <span class="pl-en">get_content_title_and_labels</span>():
+<span class="pl-k">def</span> <span class="pl-en">get_post</span>():
 
     <span class="pl-s1">status</span> <span class="pl-c1">=</span> <span class="pl-en">input</span>(<span class="pl-s">"<span class="pl-cce">\n</span> 1.上传单篇文章 <span class="pl-cce">\n</span> 2.批量上传 <span class="pl-cce">\n</span> 按下对应数字并回车可选择相应功能："</span>)
 
@@ -473,8 +473,8 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
         <span class="pl-s1">exit</span>
 
 <span class="pl-k">if</span> <span class="pl-s1">__name__</span> <span class="pl-c1">==</span> <span class="pl-s">"__main__"</span>:
-    <span class="pl-en">get_content_title_and_labels</span>()</pre></div>
-<h3>2.2运行脚本</h3>
+    <span class="pl-en">get_post</span>()</pre></div>
+<h3>3.2运行脚本</h3>
 <p>将以上脚本文件保存为 <code class="notranslate">blog_upload.py</code> ，在终端里进入到改脚本所在位置，然后通过以下命令运行，之后根据提示进行即可。</p>
 <div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">python3</span> <span class="pl-s1">blog_upload</span>.<span class="pl-s1">py</span></pre></div>
 </div>
