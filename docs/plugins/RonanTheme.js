@@ -101,26 +101,9 @@ document.addEventListener('DOMContentLoaded', function() {
             border-radius: 8px;
         }
 
-
-        
-        /* 代码块左上角三个点 */
-        /*.markdown-body pre::before {
-            background: #fc625d;
-            border-radius: 50%;
-            box-shadow: 20px 0 #fdbc40, 40px 0 #35cd4b;
-            content: ' ';
-            height: 12px;
-            width: 12px;
-            left: 364px;
-            margin-top: -20px;
-            position: absolute;
-        }*/
-
-
-
         /* 行内代码 */
         .markdown-body code, .markdown-body tt {
-            background-color: rgb(239, 112, 96);
+            background-color: #c9daf8;
         }
         
         /* 标题橙色包裹 */
@@ -137,20 +120,8 @@ document.addEventListener('DOMContentLoaded', function() {
             border-bottom-right-radius: 8px;
             margin-right: 2px;
             margin-top: 1.8rem; 
-        }
-
-        
-        /* 标题底下一条橙色 */
-        /*.markdown-body h1::after {
-            content: '';
-            display: block;
-            width: 735px; 
-            height: 3px; 
-            background: rgb(239, 112, 96);
-            position: absolute; 
-            left: 352px;
-            margin-top: 0.2rem; 
-        }*/`;
+        }   
+        `;
         document.head.appendChild(style);
     } 
 
