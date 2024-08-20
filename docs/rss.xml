@@ -1,74 +1,74 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>罗华东's Blog</title><link>https://blog.ronan.us.kg</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>罗华东's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.avg</url><title>avatar</title><link>https://blog.ronan.us.kg</link></image><lastBuildDate>Tue, 20 Aug 2024 04:27:27 +0000</lastBuildDate><managingEditor>罗华东's Blog</managingEditor><ttl>60</ttl><webMaster>罗华东's Blog</webMaster><item><title>黄玄博客博文批量修改元信息</title><link>https://blog.ronan.us.kg/post/huang-xuan-bo-ke-bo-wen-pi-liang-xiu-gai-yuan-xin-xi.html</link><description>&gt; [!note]
-&gt;
-&gt; 改脚本适用于黄玄博客模板仓库
-&gt;
-&gt; 可以批量修改本地文件夹中所有md文件的头部元数据以适应仓库提交格式
-
-```shell
-#!/usr/bin/env bash
-
-# 检查是否提供了目录路径参数
-if [[ $# != 1 ]]; then
-    echo 'Usage: $0 &lt;directory&gt;'
-    exit 1
-fi
-
-# 检查目录是否存在
-if [ ! -d '$1' ]; then
-    echo 'Directory '$1' not found.'
-    exit 1
-fi
-
-
-read -p '' 
-
-for file in '$1'/*.md; do
-    # 获取文件名（不带后缀名、未加日期时间前缀以及绝对路径）
-    issue_name=${${file%.md}##*/}
-
-    # 定义要追加的内容
-    cont='---
-layout:       post
-title:        '${issue_name}'
-author:       'Ronan'
-header-style: text
-catalog:      true
-tags:
-    - linux
-    - shell
----'
-
-    # 获取（/Users/iaa/Desktop/s）
-    pre_name=${file%/*}
-
-    # posts_name获取（2024-05-17-filename.md）
-    posts_name='$(date +%Y-%m-%d)-${file##*/}' 
-
-    new_name='${pre_name}/${posts_name}'
-    mv $file $new_name   
-
-    # 创建临时文件存储内容
-    temp=$(mktemp)
-
-    # 将内容写入临时文件
-    {
-    echo '$cont'
-    echo '' # 添加一个空行
-    cat '$new_name'
-    } &gt; '$temp'
-
-    # 用临时文件的内容覆盖原文件
-    mv '$temp' '$new_name'
-
-    echo 'Content added to the top of $new_name successfully.'
-
-done
-
-echo 'All jobs done...'
-```
-
-&lt;!-- ##{'timestamp':1722140467}## --&gt;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>罗华东's Blog</title><link>https://blog.ronan.us.kg</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>罗华东's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.avg</url><title>avatar</title><link>https://blog.ronan.us.kg</link></image><lastBuildDate>Tue, 20 Aug 2024 04:30:54 +0000</lastBuildDate><managingEditor>罗华东's Blog</managingEditor><ttl>60</ttl><webMaster>罗华东's Blog</webMaster><item><title>黄玄博客博文批量修改元信息</title><link>https://blog.ronan.us.kg/post/huang-xuan-bo-ke-bo-wen-pi-liang-xiu-gai-yuan-xin-xi.html</link><description>&gt; [!note]&#13;
+&gt;&#13;
+&gt; 改脚本适用于黄玄博客模板仓库&#13;
+&gt;&#13;
+&gt; 可以批量修改本地文件夹中所有md文件的头部元数据以适应仓库提交格式&#13;
+&#13;
+```shell&#13;
+#!/usr/bin/env bash&#13;
+&#13;
+# 检查是否提供了目录路径参数&#13;
+if [[ $# != 1 ]]; then&#13;
+    echo 'Usage: $0 &lt;directory&gt;'&#13;
+    exit 1&#13;
+fi&#13;
+&#13;
+# 检查目录是否存在&#13;
+if [ ! -d '$1' ]; then&#13;
+    echo 'Directory '$1' not found.'&#13;
+    exit 1&#13;
+fi&#13;
+&#13;
+&#13;
+read -p '' &#13;
+&#13;
+for file in '$1'/*.md; do&#13;
+    # 获取文件名（不带后缀名、未加日期时间前缀以及绝对路径）&#13;
+    issue_name=${${file%.md}##*/}&#13;
+&#13;
+    # 定义要追加的内容&#13;
+    cont='---&#13;
+layout:       post&#13;
+title:        '${issue_name}'&#13;
+author:       'Ronan'&#13;
+header-style: text&#13;
+catalog:      true&#13;
+tags:&#13;
+    - linux&#13;
+    - shell&#13;
+---'&#13;
+&#13;
+    # 获取（/Users/iaa/Desktop/s）&#13;
+    pre_name=${file%/*}&#13;
+&#13;
+    # posts_name获取（2024-05-17-filename.md）&#13;
+    posts_name='$(date +%Y-%m-%d)-${file##*/}' &#13;
+&#13;
+    new_name='${pre_name}/${posts_name}'&#13;
+    mv $file $new_name   &#13;
+&#13;
+    # 创建临时文件存储内容&#13;
+    temp=$(mktemp)&#13;
+&#13;
+    # 将内容写入临时文件&#13;
+    {&#13;
+    echo '$cont'&#13;
+    echo '' # 添加一个空行&#13;
+    cat '$new_name'&#13;
+    } &gt; '$temp'&#13;
+&#13;
+    # 用临时文件的内容覆盖原文件&#13;
+    mv '$temp' '$new_name'&#13;
+&#13;
+    echo 'Content added to the top of $new_name successfully.'&#13;
+&#13;
+done&#13;
+&#13;
+echo 'All jobs done...'&#13;
+```&#13;
+&#13;
+&lt;!-- ##{'timestamp':1722140467}## --&gt;&#13;
 。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/huang-xuan-bo-ke-bo-wen-pi-liang-xiu-gai-yuan-xin-xi.html</guid><pubDate>Tue, 20 Aug 2024 04:27:05 +0000</pubDate></item><item><title>「Gmeek」上传脚本(单篇或批量)</title><link>https://blog.ronan.us.kg/post/%E3%80%8CGmeek%E3%80%8D-shang-chuan-jiao-ben-%28-dan-pian-huo-pi-liang-%29.html</link><description>&gt; [!note]&#13;
 &gt;&#13;
 &gt; **注意：** 该脚本仅适用于通过Gmeek项目搭建的博客网站  &#13;
