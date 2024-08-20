@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>罗华东's Blog</title><link>https://blog.ronan.us.kg</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>罗华东's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.avg</url><title>avatar</title><link>https://blog.ronan.us.kg</link></image><lastBuildDate>Tue, 20 Aug 2024 05:16:38 +0000</lastBuildDate><managingEditor>罗华东's Blog</managingEditor><ttl>60</ttl><webMaster>罗华东's Blog</webMaster><item><title>「python」打包程序</title><link>https://blog.ronan.us.kg/post/%E3%80%8Cpython%E3%80%8D-da-bao-cheng-xu.html</link><description># 通过pyinstaller打包
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>罗华东's Blog</title><link>https://blog.ronan.us.kg</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>罗华东's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.avg</url><title>avatar</title><link>https://blog.ronan.us.kg</link></image><lastBuildDate>Tue, 20 Aug 2024 05:42:08 +0000</lastBuildDate><managingEditor>罗华东's Blog</managingEditor><ttl>60</ttl><webMaster>罗华东's Blog</webMaster><item><title>「python」打包程序</title><link>https://blog.ronan.us.kg/post/%E3%80%8Cpython%E3%80%8D-da-bao-cheng-xu.html</link><description># 通过pyinstaller打包
 
 要将Python脚本打包成一个独立运行的应用程序，可以使用工具PyInstaller，其可以将Python脚本打包成一个可执行文件 (.exe) 。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/%E3%80%8Cpython%E3%80%8D-da-bao-cheng-xu.html</guid><pubDate>Tue, 20 Aug 2024 00:44:46 +0000</pubDate></item><item><title>shell 文本、字符串处理</title><link>https://blog.ronan.us.kg/post/shell%20-wen-ben-%E3%80%81-zi-fu-chuan-chu-li.html</link><description>&#13;
 ## 1、字符串切片&#13;
@@ -301,6 +301,10 @@ bash -c '$(curl -sSLf https://xy.ggbond.org/xy/docker_pull.sh)' -s 完整镜像�
 &#13;
 如有额外需求，以下是`docker_pull.sh`：&#13;
 &#13;
+&lt;details&gt;&#13;
+    &lt;summary&gt;点我查看docker_pull.sh&lt;/summary&gt;&#13;
+    &lt;pre&gt;&lt;code&gt;&#13;
+   &#13;
 ```zsh&#13;
 #!/bin/bash&#13;
 # shellcheck shell=bash&#13;
@@ -445,7 +449,9 @@ else&#13;
     done&#13;
     docker_pull '${pull_img}'&#13;
 fi&#13;
-```。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/%E3%80%8C-guo-nei-jie-jue-fang-fa-%E3%80%8Dlinux-an-zhuang-docker.html</guid><pubDate>Sun, 28 Jul 2024 09:34:41 +0000</pubDate></item><item><title>mac使用主机名代替IP地址进行ssh连接</title><link>https://blog.ronan.us.kg/post/mac-shi-yong-zhu-ji-ming-dai-ti-IP-di-zhi-jin-xing-ssh-lian-jie.html</link><description># 1编辑本地SSH配置文件&#13;
+```&#13;
+&lt;/code&gt;&lt;/pre&gt;&#13;
+&lt;/details&gt;。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/%E3%80%8C-guo-nei-jie-jue-fang-fa-%E3%80%8Dlinux-an-zhuang-docker.html</guid><pubDate>Sun, 28 Jul 2024 09:34:41 +0000</pubDate></item><item><title>mac使用主机名代替IP地址进行ssh连接</title><link>https://blog.ronan.us.kg/post/mac-shi-yong-zhu-ji-ming-dai-ti-IP-di-zhi-jin-xing-ssh-lian-jie.html</link><description># 1编辑本地SSH配置文件&#13;
 &#13;
 1. **编辑本地 SSH 配置文件**：首先，你需要编辑本地 SSH 配置文件，可以使用任何文本编辑器打开 `~/.ssh/config` 文件。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/mac-shi-yong-zhu-ji-ming-dai-ti-IP-di-zhi-jin-xing-ssh-lian-jie.html</guid><pubDate>Sun, 28 Jul 2024 09:24:43 +0000</pubDate></item><item><title>Linux用户与用户组的创建、切换及删除</title><link>https://blog.ronan.us.kg/post/Linux-yong-hu-yu-yong-hu-zu-de-chuang-jian-%E3%80%81-qie-huan-ji-shan-chu.html</link><description># 1创建新用户&#13;
 &#13;

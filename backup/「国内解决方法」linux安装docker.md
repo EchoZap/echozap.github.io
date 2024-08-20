@@ -26,6 +26,10 @@ bash -c "$(curl -sSLf https://xy.ggbond.org/xy/docker_pull.sh)" -s 完整镜像�
 
 如有额外需求，以下是`docker_pull.sh`：
 
+<details>
+    <summary>点我查看docker_pull.sh</summary>
+    <pre><code>
+   
 ```zsh
 #!/bin/bash
 # shellcheck shell=bash
@@ -171,3 +175,5 @@ else
     docker_pull "${pull_img}"
 fi
 ```
+</code></pre>
+</details>

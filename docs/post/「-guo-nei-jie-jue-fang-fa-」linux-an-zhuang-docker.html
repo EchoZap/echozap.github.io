@@ -35,6 +35,10 @@ bash -c '$(curl -sSLf https://xy.ggbond.org/xy/docker_pull.sh)' -s 完整镜像�
 
 如有额外需求，以下是`docker_pull.sh`：
 
+<details>
+    <summary>点我查看docker_pull.sh</summary>
+    <pre><code>
+   
 ```zsh
 #!/bin/bash
 # shellcheck shell=bash
@@ -179,7 +183,9 @@ else
     done
     docker_pull '${pull_img}'
 fi
-```。">
+```
+</code></pre>
+</details>。">
 <meta property="og:title" content="「国内解决方法」linux安装docker">
 <meta property="og:description" content="# 1.安装Docker
 
@@ -209,6 +215,10 @@ bash -c '$(curl -sSLf https://xy.ggbond.org/xy/docker_pull.sh)' -s 完整镜像�
 
 如有额外需求，以下是`docker_pull.sh`：
 
+<details>
+    <summary>点我查看docker_pull.sh</summary>
+    <pre><code>
+   
 ```zsh
 #!/bin/bash
 # shellcheck shell=bash
@@ -353,7 +363,9 @@ else
     done
     docker_pull '${pull_img}'
 fi
-```。">
+```
+</code></pre>
+</details>。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://blog.ronan.us.kg/post/%E3%80%8C-guo-nei-jie-jue-fang-fa-%E3%80%8Dlinux-an-zhuang-docker.html">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.avg">
@@ -433,6 +445,9 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <h1>2.镜像拉取</h1>
 <div class="highlight highlight-source-shell"><pre class="notranslate">bash -c <span class="pl-s"><span class="pl-pds">"</span><span class="pl-s"><span class="pl-pds">$(</span>curl -sSLf https://xy.ggbond.org/xy/docker_pull.sh<span class="pl-pds">)</span></span><span class="pl-pds">"</span></span> -s 完整镜像名</pre></div>
 <p>如有额外需求，以下是<code class="notranslate">docker_pull.sh</code>：</p>
+<details>
+    <summary>点我查看docker_pull.sh</summary>
+    <pre class="notranslate"><code class="notranslate">
 <div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#!</span>/bin/bash</span>
 <span class="pl-c"><span class="pl-c">#</span> shellcheck shell=bash</span>
 <span class="pl-c"><span class="pl-c">#</span> shellcheck disable=SC2086</span>
@@ -575,7 +590,9 @@ WARN=<span class="pl-s"><span class="pl-pds">"</span>[<span class="pl-smi">${Yel
         [ <span class="pl-k">-n</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">${pull_img}</span><span class="pl-pds">"</span></span> ] <span class="pl-k">&amp;&amp;</span> <span class="pl-c1">break</span>
     <span class="pl-k">done</span>
     docker_pull <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">${pull_img}</span><span class="pl-pds">"</span></span>
-<span class="pl-k">fi</span></pre></div></div>
+<span class="pl-k">fi</span></pre></div>
+</code><p><code class="notranslate"></code></p></pre><p></p>
+</details></div>
 <div style="font-size:small;margin-top:8px;float:right;">要做一个有swag的人</div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
