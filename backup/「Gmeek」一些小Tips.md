@@ -44,5 +44,16 @@ Error: utterances is not installed on xxx/xxx.github.io. If you own this repo, i
 # 7. 删除文章
 只需要「Close issue」或者「Delete issue」后，再手动全局生成一次即可。
 
+# 8.折叠代码块
+
+```
+<details>
+    <summary>点我展开看代码</summary>
+    <pre><code>
+# 这里是一个空行，然后下面可以正常写代码块
+# 在这里写折叠的代码
+    </code></pre>
+</details>
+``` 
 
 <!-- ##{"timestamp":1722598446}## -->
