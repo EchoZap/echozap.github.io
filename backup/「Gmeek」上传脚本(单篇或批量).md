@@ -10,21 +10,20 @@
 
 ![img](https://wowpb.pages.dev/file/349f3d72c80b48ba5a3f1.png)
 
-# 2.方法1--sh脚本
+# 2.使用方法
 
-使用前准备：
-
-- 系统已安装curl
-- 系统已安装jq
-- 系统可使用bash
+> [!note]
+> 以下有两个方法，分为bash环境和python环境，可根据实际情况自行采用
 
 ### 2.1配置脚本
 
-1.将第28行的 `<Token>` 替换为上面获取到的值
+1.将代码里(sh脚本在第28行，py脚本在第7行)的 `<Token>` 替换为上面获取到的Token值  
+2.将代码里(sh脚本在第30行，py脚本在第7行)的 `<OWNER>` 替换为自己的github用户名  
+3.将代码里(sh脚本在第30行，py脚本在第11行)的 `<REPO>` 替换为自己的Gmeek博客仓库名，一般是 `xxx.github.io`
 
-2.将第30行的 `<OWNER>` 替换为自己的github用户名
-
-3.将第30行的 `<REPO>` 替换为自己的Gmeek博客仓库名，一般是 `xxx.github.io`
+<details>
+  <summary> 点我展开看sh脚本代码================================= </summary>
+  <pre><code>  
 
 ```shell
 #!/usr/bin/env bash
@@ -105,26 +104,13 @@ while true;do
         ;;
     esac
 done
-```
+```  
+  </code></pre>
+</details>
 
-### 2.2运行脚本
-
-将以上脚本文件保存为 `blog_upload.sh` ，在终端里进入到改脚本所在位置，键入 `chmod 777 blog_upload.sh` ，然后通过 `./blog_upload.sh` 运行，之后根据提示进行即可。
-
-
-# 3.方法2--py脚本
-
-### 3.1配置脚本
-
-> [!warning]
->
-> 请确保python已经安装requests模块，可以通过 `pip3 install requests` 安装
-
-1.将第7行的 `<Token>` 替换为上面获取到的值
-
-2.将第7行的 `<OWNER>` 替换为自己的github用户名
-
-3.将第11行的 `<REPO>` 替换为自己的Gmeek博客仓库名，一般是 `xxx.github.io`
+<details>
+  <summary> 点我展开看py脚本代码================================= </summary>
+  <pre><code>  
 
 ```python
 import json
@@ -214,10 +200,28 @@ def get_post():
 if __name__ == "__main__":
     get_post()
 ```
+  </code></pre>
+</details>
 
-### 3.2运行脚本
 
-将以上脚本文件保存为 `blog_upload.py` ，在终端里进入到改脚本所在位置，然后通过以下命令运行，之后根据提示进行即可。
+### 2.2运行脚本
+
+- 对于sh脚本  
+> [!important]
+> 
+> 使用前需确认以下：
+> - 系统已安装curl
+> - 系统已安装jq
+> - 系统可使用bash
+
+将以上脚本代码保存为 `blog_upload.sh` ，在终端里进入到改脚本所在位置，键入 `chmod 777 blog_upload.sh` ，然后通过 `./blog_upload.sh` 运行，之后根据提示进行即可。
+
+- 对于py脚本  
+> [!important]
+>
+> 请确保python已经安装requests模块，可以通过 `pip3 install requests` 安装
+
+将脚本代码保存为 `blog_upload.py` ，在终端里进入到改脚本所在位置，然后通过以下命令运行，之后根据提示进行即可。
 
 ```python
 python3 blog_upload.py
