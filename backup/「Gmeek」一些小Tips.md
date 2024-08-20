@@ -56,4 +56,17 @@ Error: utterances is not installed on xxx/xxx.github.io. If you own this repo, i
 </details>
 ``` 
 
+- 示例
+<details>
+    <summary>点我展开看代码</summary>
+    <pre><code>   
+
+```
+echo "Just a test"
+我就说这是个测试吧
+```  
+</code></pre>  
+</details>  
+
+
 <!-- ##{"timestamp":1722598446}## -->
