@@ -12,7 +12,8 @@
 
 # 2.使用方法
 
-> [!note]
+> [!caution]
+> 由于类Linux系统的目录路径格式与Windows等系统不一致，所以，当前sh脚本仅适用于Linux与mac系统，Windows可以使用py脚本
 > 以下有两个方法，分为bash环境和python环境，可根据实际情况自行采用
 
 ### 2.1配置脚本
