@@ -1,10 +1,14 @@
 ## 1.安装插件
 
+在vscode安装以下插件。  
+
 [Apc Customize UI++ ](https://marketplace.visualstudio.com/items?itemName=drcika.apc-extension)
 
 ## 2.下载图片
 
-![Noisefigure](https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/imgs/noisefigure.png)
+右键将以下图片保存到本地，假设保存的路径为 /Users/einson/Pictures/vscbg/，保存名称为 Noisefigure.png。
+
+![img](https://wowpb.pages.dev/file/5364a4eb1420afedf3edb.png)
 
 ## 3.配置文件
 

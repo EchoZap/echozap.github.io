@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan's Blog</title><link>https://blog.ronan.us.kg</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.avg</url><title>avatar</title><link>https://blog.ronan.us.kg</link></image><lastBuildDate>Wed, 21 Aug 2024 05:37:13 +0000</lastBuildDate><managingEditor>Ronan's Blog</managingEditor><ttl>60</ttl><webMaster>Ronan's Blog</webMaster><item><title>vscode个人配置文件</title><link>https://blog.ronan.us.kg/post/vscode-ge-ren-pei-zhi-wen-jian.html</link><description>&gt; [!note]&#13;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan's Blog</title><link>https://blog.ronan.us.kg</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.avg</url><title>avatar</title><link>https://blog.ronan.us.kg</link></image><lastBuildDate>Thu, 22 Aug 2024 00:00:39 +0000</lastBuildDate><managingEditor>Ronan's Blog</managingEditor><ttl>60</ttl><webMaster>Ronan's Blog</webMaster><item><title>vscode个人配置文件</title><link>https://blog.ronan.us.kg/post/vscode-ge-ren-pei-zhi-wen-jian.html</link><description>&gt; [!note]&#13;
 &gt;&#13;
 &gt; 以下为个人自用配置文件，如需拷贝使用请把 **插件配置区** 的选项删除或者安装相应的插件。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/vscode-ge-ren-pei-zhi-wen-jian.html</guid><pubDate>Wed, 21 Aug 2024 05:25:54 +0000</pubDate></item><item><title>他决定偷一架飞机</title><link>https://blog.ronan.us.kg/post/ta-jue-ding-tou-yi-jia-fei-ji.html</link><description>
 2018年8月10日，地平线航空一架庞巴迪Dash 8 Q400在美国西雅图的塔科马国际机场（Sea-Tac）被盗。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/ta-jue-ding-tou-yi-jia-fei-ji.html</guid><pubDate>Wed, 21 Aug 2024 01:56:12 +0000</pubDate></item><item><title>「python」打包程序</title><link>https://blog.ronan.us.kg/post/%E3%80%8Cpython%E3%80%8D-da-bao-cheng-xu.html</link><description># 通过pyinstaller打包
@@ -638,31 +638,7 @@ ssh-copy-id -i &lt;~/.ssh/id_ed25519.pub&gt; &lt;username&gt;@&lt;remote_ip&gt;&
 &#13;
 这将列出sdcc的安装位置。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/vscode-da-jian-yong-yu-8051-dan-pian-ji-de-sdcc-huan-jing.html</guid><pubDate>Sat, 27 Jul 2024 07:26:20 +0000</pubDate></item><item><title>vscode磨砂效果配置</title><link>https://blog.ronan.us.kg/post/vscode-mo-sha-xiao-guo-pei-zhi.html</link><description>## 1.安装插件&#13;
 &#13;
-[Apc Customize UI++ ](https://marketplace.visualstudio.com/items?itemName=drcika.apc-extension)&#13;
-&#13;
-## 2.下载图片&#13;
-&#13;
-![Noisefigure](https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/imgs/noisefigure.png)&#13;
-&#13;
-## 3.配置文件&#13;
-&#13;
-在vscode的`.settings.json`中键入以下配置，**注意：** 将`/Users/einson/Pictures/vscbg/Noisefigure.png`修改为自己的文件路径&#13;
-&#13;
-```json&#13;
-'apc.stylesheet': {&#13;
-    'body': {&#13;
-        'background-image': 'url(/Users/einson/Pictures/vscbg/Noisefigure.png), linear-gradient(to top,rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.2))',&#13;
-        'background-size': 'cover',&#13;
-        'background-blend-mode': 'multiply',&#13;
-        'background-repeat': 'no-repeat',&#13;
-        'opacity': 0.89&#13;
-    },&#13;
-}&#13;
-```&#13;
-&#13;
-## 4.意想不到的问题(无问题可忽略)&#13;
-&#13;
-有可能最终配置效果不尽人意，所以在这里可以安装一款字体(可选)，在vscode的`.settings.json`键入以下内容。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/vscode-mo-sha-xiao-guo-pei-zhi.html</guid><pubDate>Sat, 27 Jul 2024 01:44:00 +0000</pubDate></item><item><title>PlatformIO烧录失败解决方法</title><link>https://blog.ronan.us.kg/post/PlatformIO-shao-lu-shi-bai-jie-jue-fang-fa.html</link><description>## 遭遇问题&#13;
+在vscode安装以下插件。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/vscode-mo-sha-xiao-guo-pei-zhi.html</guid><pubDate>Sat, 27 Jul 2024 01:44:00 +0000</pubDate></item><item><title>PlatformIO烧录失败解决方法</title><link>https://blog.ronan.us.kg/post/PlatformIO-shao-lu-shi-bai-jie-jue-fang-fa.html</link><description>## 遭遇问题&#13;
 ​***platformIO一直卡在烧录程序中，导致开发版一直处于断电状态***&#13;
 ![问题](https://wowpb.pages.dev/file/de26c769e7e33ab9a64bb.png)&#13;
 &#13;
