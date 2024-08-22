@@ -80,7 +80,28 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <p>如需修改发布时间，可以在文章 <code class="notranslate">最后一行(后面不能有空行)</code> 添加如下代码。里面的时间是采用时间戳的形式，可以用如下 <a href="https://tool.lu/timestamp" rel="nofollow">网站</a> 转换。</p>
 <pre class="notranslate"><code class="notranslate">&lt;!-- ##{"timestamp":1490764800}## --&gt;
 </code></pre>
-<h1>2.强调关键信息</h1>
+<h1>2.折叠代码块</h1>
+<pre class="notranslate"><code class="notranslate">&lt;details&gt;
+    &lt;summary&gt;点我展开看代码&lt;/summary&gt;
+    &lt;pre&gt;&lt;code&gt;
+# 这里空一行，下面开始写代码
+# 在这里写折叠的代码
+# 最后这两行结束标签一定要顶格写且不能接在代码后面！！！
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/details&gt;
+</code></pre>
+<ul>
+<li>示例</li>
+</ul>
+<details>
+    <summary>点我展开看代码</summary>
+    <pre class="notranslate"><code class="notranslate">   
+<pre class="notranslate"><code class="notranslate">echo "Just a test"      # 在这里写折叠的代码
+# 最后这两行结束标签一定要顶格写且不能接在代码后面！！！
+</code></pre>
+</code><p><code class="notranslate"></code></p></pre><p></p>
+</details>  
+<h1>3.强调关键信息</h1>
 <p>Github的语法里面有5中警报强调信息，分别是<code class="notranslate">NOTE</code>、 <code class="notranslate">TIP</code>、 <code class="notranslate">IMPORTANT</code>、 <code class="notranslate">WARNING</code>、 <code class="notranslate">CAUTION</code> 。在写文章的时候，适当使用可以提高文章的可读性，并且颜色也更加丰富。下面就简单描述一下使用方式，以及效果如何。</p>
 <h3>使用方式</h3>
 <pre class="notranslate"><code class="notranslate">&gt; [!NOTE]
@@ -114,34 +135,13 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <div class="markdown-alert markdown-alert-caution"><p class="markdown-alert-title"><svg class="octicon octicon-stop mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M4.47.22A.749.749 0 0 1 5 0h6c.199 0 .389.079.53.22l4.25 4.25c.141.14.22.331.22.53v6a.749.749 0 0 1-.22.53l-4.25 4.25A.749.749 0 0 1 11 16H5a.749.749 0 0 1-.53-.22L.22 11.53A.749.749 0 0 1 0 11V5c0-.199.079-.389.22-.53Zm.84 1.28L1.5 5.31v5.38l3.81 3.81h5.38l3.81-3.81V5.31L10.69 1.5ZM8 4a.75.75 0 0 1 .75.75v3.5a.75.75 0 0 1-1.5 0v-3.5A.75.75 0 0 1 8 4Zm0 8a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Caution</p><p>Advises about risks or negative outcomes of certain actions.<br>
 针对某些行动的风险或负面结果提出建议。</p>
 </div>
-<h1>3.折叠代码块</h1>
-<pre class="notranslate"><code class="notranslate">&lt;details&gt;
-    &lt;summary&gt;点我展开看代码&lt;/summary&gt;
-    &lt;pre&gt;&lt;code&gt;
-# 在这里写折叠的代码
-# 最后这两行结束标签一定要顶格写且不能接在代码后面！！！
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/details&gt;
-</code></pre>
-<ul>
-<li>示例</li>
-</ul>
-<details>
-    <summary>点我展开看代码</summary>
-    <pre class="notranslate"><code class="notranslate">   
-```
-echo "Just a test"      # 在这里写折叠的代码
-# 最后这两行结束标签一定要顶格写且不能接在代码后面！！！
-```  
-</code></pre>  
-</details>  
-<h1>4. 自定义单篇文章参数</h1>
+<h1>4.自定义单篇文章参数</h1>
 <p>自定义单篇文章页面的style和script</p>
 <pre class="notranslate"><code class="notranslate">&lt;!-- ##{"style":"&lt;style&gt;#postBody{font-size:20px}&lt;/style&gt;"}## --&gt;
 </code></pre>
 <pre class="notranslate"><code class="notranslate">&lt;!-- ##{"script":"&lt;script async src='//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js'&gt;&lt;/script&gt;"}## --&gt;
 </code></pre>
-<h1>5. 多种自定义参数</h1>
+<h1>5.多种自定义参数</h1>
 <p>可同时一起添加多种自定义参数：</p>
 <pre class="notranslate"><code class="notranslate">&lt;!-- ##{"script":"&lt;script async src='//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js'&gt;&lt;/script&gt;","style":"&lt;style&gt;#postBody{font-size:20px}&lt;/style&gt;","timestamp":1490764800}## --&gt;
 </code></pre>

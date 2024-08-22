@@ -5,7 +5,34 @@
 <!-- ##{"timestamp":1490764800}## -->
 ```
 
-# 2.强调关键信息
+
+# 2.折叠代码块
+
+```
+<details>
+    <summary>点我展开看代码</summary>
+    <pre><code>
+# 这里空一行，下面开始写代码
+# 在这里写折叠的代码
+# 最后这两行结束标签一定要顶格写且不能接在代码后面！！！
+</code></pre>
+</details>
+``` 
+
+- 示例
+<details>
+    <summary>点我展开看代码</summary>
+    <pre><code>   
+
+```
+echo "Just a test"      # 在这里写折叠的代码
+# 最后这两行结束标签一定要顶格写且不能接在代码后面！！！
+```
+</code></pre>  
+</details>  
+
+
+# 3.强调关键信息
 Github的语法里面有5中警报强调信息，分别是`NOTE`、 `TIP`、 `IMPORTANT`、 `WARNING`、 `CAUTION` 。在写文章的时候，适当使用可以提高文章的可读性，并且颜色也更加丰富。下面就简单描述一下使用方式，以及效果如何。
 
 ### 使用方式
@@ -48,31 +75,7 @@ Github的语法里面有5中警报强调信息，分别是`NOTE`、 `TIP`、 `IM
 针对某些行动的风险或负面结果提出建议。
 
 
-# 3.折叠代码块
-
-```
-<details>
-    <summary>点我展开看代码</summary>
-    <pre><code>
-# 在这里写折叠的代码
-# 最后这两行结束标签一定要顶格写且不能接在代码后面！！！
-</code></pre>
-</details>
-``` 
-
-- 示例
-<details>
-    <summary>点我展开看代码</summary>
-    <pre><code>   
-```
-echo "Just a test"      # 在这里写折叠的代码
-# 最后这两行结束标签一定要顶格写且不能接在代码后面！！！
-```  
-</code></pre>  
-</details>  
-
-
-# 4. 自定义单篇文章参数
+# 4.自定义单篇文章参数
 自定义单篇文章页面的style和script
 
 ```
@@ -83,7 +86,7 @@ echo "Just a test"      # 在这里写折叠的代码
 <!-- ##{"script":"<script async src='//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js'></script>"}## -->
 ```
 
-# 5. 多种自定义参数
+# 5.多种自定义参数
 可同时一起添加多种自定义参数：
 
 ```
