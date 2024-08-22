@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan's Blog</title><link>https://blog.ronan.us.kg</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.avg</url><title>avatar</title><link>https://blog.ronan.us.kg</link></image><lastBuildDate>Thu, 22 Aug 2024 04:49:10 +0000</lastBuildDate><managingEditor>Ronan's Blog</managingEditor><ttl>60</ttl><webMaster>Ronan's Blog</webMaster><item><title>JavaScript</title><link>https://blog.ronan.us.kg/post/JavaScript.html</link><description># 对象概述
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan's Blog</title><link>https://blog.ronan.us.kg</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.avg</url><title>avatar</title><link>https://blog.ronan.us.kg</link></image><lastBuildDate>Thu, 22 Aug 2024 16:01:41 +0000</lastBuildDate><managingEditor>Ronan's Blog</managingEditor><ttl>60</ttl><webMaster>Ronan's Blog</webMaster><item><title>JavaScript</title><link>https://blog.ronan.us.kg/post/JavaScript.html</link><description># 对象概述
 
 什么是对象？对象（object）是 JavaScript 语言的核心概念，也是最重要的数据类型
 
@@ -62,33 +62,7 @@ $ echo ${MYPATH: -4}  #这会右向左从末尾向前取四位，「-4和冒号�
 &#13;
 ## 2、基于模式取子串&#13;
 ${var#*word}&#13;
-其中word可以是指定的任意字符，自左而右，删除字符串开头至第一次出现word字符之间的所有字符。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/shell%20-wen-ben-%E3%80%81-zi-fu-chuan-chu-li.html</guid><pubDate>Wed, 14 Aug 2024 15:01:58 +0000</pubDate></item><item><title>「Python」模块和包</title><link>https://blog.ronan.us.kg/post/%E3%80%8CPython%E3%80%8D-mo-kuai-he-bao.html</link><description>Python 提供了强大的模块支持，主要体现在，不仅 Python 标准库中包含了大量的模块（称为标准模块），还有大量的第三方模块，开发者自己也可以开发自定义模块。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/%E3%80%8CPython%E3%80%8D-mo-kuai-he-bao.html</guid><pubDate>Tue, 13 Aug 2024 09:29:17 +0000</pubDate></item><item><title>「Python」异常处理</title><link>https://blog.ronan.us.kg/post/%E3%80%8CPython%E3%80%8D-yi-chang-chu-li.html</link><description>在 Python 中，常见的基本错误有两类，即语法错误和异常。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/%E3%80%8CPython%E3%80%8D-yi-chang-chu-li.html</guid><pubDate>Tue, 13 Aug 2024 07:58:22 +0000</pubDate></item><item><title>Dockerfile的简单实现</title><link>https://blog.ronan.us.kg/post/Dockerfile-de-jian-dan-shi-xian.html</link><description># 构建第一个Dockerfile&#13;
-&#13;
-假设该镜像实现的等同于我们在已经配置好python环境的机器上通过`python hello.py`命令来运行一个python脚本&#13;
-&#13;
-所以该Dockerfile的构建有以下步骤：&#13;
-&#13;
-1. 在桌面或其他位置新建一个文件夹，假设文件夹名为docker&#13;
-2. 在docker新建一个hello.py文件，hello.py已经实现所需功能&#13;
-3. 再在docker新建一个`Dockerfile`，**注意：仅开头且必须大写**&#13;
-&#13;
-以下是Dockerfile内容：&#13;
-&#13;
-```shell&#13;
-FROM python:3.9.19-alpine3.18&#13;
-COPY hello.py /hello.py&#13;
-CMD python hello.py&#13;
-```&#13;
-&#13;
-## FROM参数解析&#13;
-&#13;
-FROM为第一项，这是必须的，这是搭建镜像的基础&#13;
-&#13;
-* `python:3.9.19-alpine3.18`前面的`python`为镜像名称，可到dockerhub按需搜索，如下图&#13;
-&#13;
-![img](https://wowpb.pages.dev/file/bf1ceb0c58b78986465a5.png)&#13;
-&#13;
-* `python:3.9.19-alpine3.18`冒号后面的是tag，也就是标签(版本号)。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/Dockerfile-de-jian-dan-shi-xian.html</guid><pubDate>Mon, 12 Aug 2024 12:34:08 +0000</pubDate></item><item><title>GCC</title><link>https://blog.ronan.us.kg/post/GCC.html</link><description>&#13;
+其中word可以是指定的任意字符，自左而右，删除字符串开头至第一次出现word字符之间的所有字符。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/shell%20-wen-ben-%E3%80%81-zi-fu-chuan-chu-li.html</guid><pubDate>Wed, 14 Aug 2024 15:01:58 +0000</pubDate></item><item><title>「Python」模块和包</title><link>https://blog.ronan.us.kg/post/%E3%80%8CPython%E3%80%8D-mo-kuai-he-bao.html</link><description>Python 提供了强大的模块支持，主要体现在，不仅 Python 标准库中包含了大量的模块（称为标准模块），还有大量的第三方模块，开发者自己也可以开发自定义模块。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/%E3%80%8CPython%E3%80%8D-mo-kuai-he-bao.html</guid><pubDate>Tue, 13 Aug 2024 09:29:17 +0000</pubDate></item><item><title>「Python」异常处理</title><link>https://blog.ronan.us.kg/post/%E3%80%8CPython%E3%80%8D-yi-chang-chu-li.html</link><description>在 Python 中，常见的基本错误有两类，即语法错误和异常。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/%E3%80%8CPython%E3%80%8D-yi-chang-chu-li.html</guid><pubDate>Tue, 13 Aug 2024 07:58:22 +0000</pubDate></item><item><title>GCC</title><link>https://blog.ronan.us.kg/post/GCC.html</link><description>&#13;
 **GCC** 是 Linux 下的编译工具集，是 **GNU Compiler Collection** 的缩写，包含 gcc、g++ 等编译器。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/GCC.html</guid><pubDate>Sun, 11 Aug 2024 17:49:03 +0000</pubDate></item><item><title>「OrbStack」Mac 系统中一个更快的 Docker 可视化工具，可完全替代 Docker Desktop</title><link>https://blog.ronan.us.kg/post/%E3%80%8COrbStack%E3%80%8DMac%20-xi-tong-zhong-yi-ge-geng-kuai-de-%20Docker%20-ke-shi-hua-gong-ju-%EF%BC%8C-ke-wan-quan-ti-dai-%20Docker%20Desktop.html</link><description>&#13;
 我之前用的是 Docker Desktop，每次准备启动容器的时候，我都会把能关的应用都关闭，省的电脑卡， Docker Desktop 确实有点儿耗性能。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/%E3%80%8COrbStack%E3%80%8DMac%20-xi-tong-zhong-yi-ge-geng-kuai-de-%20Docker%20-ke-shi-hua-gong-ju-%EF%BC%8C-ke-wan-quan-ti-dai-%20Docker%20Desktop.html</guid><pubDate>Thu, 08 Aug 2024 13:53:24 +0000</pubDate></item><item><title>Docker常用命令</title><link>https://blog.ronan.us.kg/post/Docker-chang-yong-ming-ling.html</link><description>![DockerCheatSheet.png](https://wowpb.pages.dev/file/38386b215292115008331.png)&#13;
 &#13;
