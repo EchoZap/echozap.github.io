@@ -1,0 +1,1025 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="github-light" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    <script src='https://blog.ronan.us.kg/plugins/RonanTheme.js'></script><script src='https://blog.ronan.us.kg/plugins/GmeekVercount.js'></script>
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.avg">
+<meta name="description" content="# 对象概述
+
+什么是对象？对象（object）是 JavaScript 语言的核心概念，也是最重要的数据类型
+
+简单说，对象就是一组“键值对”（key-value）的集合，是一种无序的复合数据集合
+
+![image-20211025173456785](https://wowpb.pages.dev/file/b4faace2de4b182e5e956.png)
+
+```js
+var user = {
+  name: 'itbaizhan',
+  age: '13'
+};
+```
+
+对象的每一个键名又称为“属性”（property），它的“键
+
+值”可以是任何数据类型。">
+<meta property="og:title" content="JavaScript">
+<meta property="og:description" content="# 对象概述
+
+什么是对象？对象（object）是 JavaScript 语言的核心概念，也是最重要的数据类型
+
+简单说，对象就是一组“键值对”（key-value）的集合，是一种无序的复合数据集合
+
+![image-20211025173456785](https://wowpb.pages.dev/file/b4faace2de4b182e5e956.png)
+
+```js
+var user = {
+  name: 'itbaizhan',
+  age: '13'
+};
+```
+
+对象的每一个键名又称为“属性”（property），它的“键
+
+值”可以是任何数据类型。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.ronan.us.kg/post/JavaScript.html">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.avg">
+<title>JavaScript</title>
+<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+.copy-feedback {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    color: var(--color-fg-on-emphasis);
+    background-color: var(--color-fg-muted);
+    border-radius: 3px;
+    padding: 5px 8px;
+    font-size: 12px;
+}
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">JavaScript</h1>
+<div class="title-right">
+    <a href="https://blog.ronan.us.kg" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题"style="display:none;">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><h1>对象概述</h1>
+<p>什么是对象？对象（object）是 JavaScript 语言的核心概念，也是最重要的数据类型</p>
+<p>简单说，对象就是一组“键值对”（key-value）的集合，是一种无序的复合数据集合</p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/2f97d78daac61d6c8ce173d2b928070090e96377f8b1af4ee9acd217c3db8f29/68747470733a2f2f776f7770622e70616765732e6465762f66696c652f6234666161636532646534623138326535653935362e706e67"><img src="https://camo.githubusercontent.com/2f97d78daac61d6c8ce173d2b928070090e96377f8b1af4ee9acd217c3db8f29/68747470733a2f2f776f7770622e70616765732e6465762f66696c652f6234666161636532646534623138326535653935362e706e67" alt="image-20211025173456785" data-canonical-src="https://wowpb.pages.dev/file/b4faace2de4b182e5e956.png" style="max-width: 100%;"></a></p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">var</span> <span class="pl-s1">user</span> <span class="pl-c1">=</span> <span class="pl-kos">{</span>
+  <span class="pl-c1">name</span>: <span class="pl-s">'itbaizhan'</span><span class="pl-kos">,</span>
+  <span class="pl-c1">age</span>: <span class="pl-s">'13'</span>
+<span class="pl-kos">}</span><span class="pl-kos">;</span></pre></div>
+<p>对象的每一个键名又称为“属性”（property），它的“键</p>
+<p>值”可以是任何数据类型。如果一个属性的值为函数，通常把这个属性称为“方法”，它可以像函数那样调用</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">var</span> <span class="pl-s1">user</span> <span class="pl-c1">=</span> <span class="pl-kos">{</span>
+  <span class="pl-en">getName</span>: <span class="pl-k">function</span> <span class="pl-kos">(</span><span class="pl-s1">name</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+    <span class="pl-k">return</span> <span class="pl-s1">name</span><span class="pl-kos">;</span>
+  <span class="pl-kos">}</span>
+<span class="pl-kos">}</span><span class="pl-kos">;</span>
+<span class="pl-s1">user</span><span class="pl-kos">.</span><span class="pl-en">getName</span><span class="pl-kos">(</span><span class="pl-s">"itbaizhan"</span><span class="pl-kos">)</span> <span class="pl-c">// itbaizhan</span></pre></div>
+<p>如果属性的值还是一个对象，就形成了链式引用</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">var</span> <span class="pl-s1">user</span> <span class="pl-c1">=</span> <span class="pl-kos">{</span>
+    <span class="pl-c1">name</span>:<span class="pl-s">"itbaizhan"</span><span class="pl-kos">,</span>
+    <span class="pl-c1">age</span>:<span class="pl-c1">13</span><span class="pl-kos">,</span>
+    <span class="pl-c1">container</span>:<span class="pl-kos">{</span>
+        <span class="pl-c1">frontEnd</span>:<span class="pl-kos">[</span><span class="pl-s">"Web前端"</span><span class="pl-kos">,</span><span class="pl-s">"Android"</span><span class="pl-kos">,</span><span class="pl-s">"iOS"</span><span class="pl-kos">]</span><span class="pl-kos">,</span>
+        <span class="pl-c1">backEnd</span>:<span class="pl-kos">[</span><span class="pl-s">"Java"</span><span class="pl-kos">,</span><span class="pl-s">"Python"</span><span class="pl-kos">]</span>
+    <span class="pl-kos">}</span>
+<span class="pl-kos">}</span>
+<span class="pl-s1">user</span><span class="pl-kos">.</span><span class="pl-c1">container</span><span class="pl-kos">.</span><span class="pl-c1">frontEnd</span> <span class="pl-c">// ["Web前端","Android","iOS"]</span></pre></div>
+<h1>Math对象</h1>
+<p>Math是 JavaScript 的原生对象，提供各种数****学功能。</p>
+<h3>Math.abs()</h3>
+<p><strong><code class="notranslate">Math.abs</code>方法返回参数值的绝对值</strong></p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-v">Math</span><span class="pl-kos">.</span><span class="pl-en">abs</span><span class="pl-kos">(</span><span class="pl-c1">1</span><span class="pl-kos">)</span> <span class="pl-c">// 1</span>
+<span class="pl-v">Math</span><span class="pl-kos">.</span><span class="pl-en">abs</span><span class="pl-kos">(</span><span class="pl-c1">-</span><span class="pl-c1">1</span><span class="pl-kos">)</span> <span class="pl-c">// 1</span></pre></div>
+<h3>Math.max()，Math.min()</h3>
+<p><code class="notranslate">Math.max</code>方法返回参数之中最大的那个值，<code class="notranslate">Math.min</code>返回最小的那个值。如果参数为空, <code class="notranslate">Math.min</code>返回<code class="notranslate">Infinity</code>, <code class="notranslate">Math.max</code>返回<code class="notranslate">-Infinity</code>。</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-v">Math</span><span class="pl-kos">.</span><span class="pl-en">max</span><span class="pl-kos">(</span><span class="pl-c1">2</span><span class="pl-kos">,</span> <span class="pl-c1">-</span><span class="pl-c1">1</span><span class="pl-kos">,</span> <span class="pl-c1">5</span><span class="pl-kos">)</span> <span class="pl-c">// 5</span>
+<span class="pl-v">Math</span><span class="pl-kos">.</span><span class="pl-en">min</span><span class="pl-kos">(</span><span class="pl-c1">2</span><span class="pl-kos">,</span> <span class="pl-c1">-</span><span class="pl-c1">1</span><span class="pl-kos">,</span> <span class="pl-c1">5</span><span class="pl-kos">)</span> <span class="pl-c">// -1</span>
+<span class="pl-v">Math</span><span class="pl-kos">.</span><span class="pl-en">min</span><span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-c">// Infinity</span>
+<span class="pl-v">Math</span><span class="pl-kos">.</span><span class="pl-en">max</span><span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-c">// -Infinity</span></pre></div>
+<h3>Math.floor()，Math.ceil()</h3>
+<p><code class="notranslate">Math.floor</code>方法返回小于参数值的最大整数</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-v">Math</span><span class="pl-kos">.</span><span class="pl-en">floor</span><span class="pl-kos">(</span><span class="pl-c1">3.2</span><span class="pl-kos">)</span> <span class="pl-c">// 3</span>
+<span class="pl-v">Math</span><span class="pl-kos">.</span><span class="pl-en">floor</span><span class="pl-kos">(</span><span class="pl-c1">-</span><span class="pl-c1">3.2</span><span class="pl-kos">)</span> <span class="pl-c">// -4</span></pre></div>
+<p><code class="notranslate">Math.ceil</code>方法返回大于参数值的最小整数</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-v">Math</span><span class="pl-kos">.</span><span class="pl-en">ceil</span><span class="pl-kos">(</span><span class="pl-c1">3.2</span><span class="pl-kos">)</span> <span class="pl-c">// 4</span>
+<span class="pl-v">Math</span><span class="pl-kos">.</span><span class="pl-en">ceil</span><span class="pl-kos">(</span><span class="pl-c1">-</span><span class="pl-c1">3.2</span><span class="pl-kos">)</span> <span class="pl-c">// -3</span></pre></div>
+<h3>Math.random()</h3>
+<p><code class="notranslate">Math.random()</code>返回0到1之间的一个伪随机数，可能等于0，但是一定小于1</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-v">Math</span><span class="pl-kos">.</span><span class="pl-en">random</span><span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-c">// 0.28525367438365223</span></pre></div>
+<p>任意范围的随机数生成函数如下</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">function</span> <span class="pl-en">getRandomArbitrary</span><span class="pl-kos">(</span><span class="pl-s1">min</span><span class="pl-kos">,</span> <span class="pl-s1">max</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+  <span class="pl-k">return</span> <span class="pl-v">Math</span><span class="pl-kos">.</span><span class="pl-en">random</span><span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-c1">*</span> <span class="pl-kos">(</span><span class="pl-s1">max</span> <span class="pl-c1">-</span> <span class="pl-s1">min</span><span class="pl-kos">)</span> <span class="pl-c1">+</span> <span class="pl-s1">min</span><span class="pl-kos">;</span>
+<span class="pl-kos">}</span>
+
+<span class="pl-en">getRandomArbitrary</span><span class="pl-kos">(</span><span class="pl-c1">5</span><span class="pl-kos">,</span> <span class="pl-c1">10</span><span class="pl-kos">)</span></pre></div>
+<p><strong>实时效果反馈</strong></p>
+<p><strong>1. 下列代码获得一个正整数，横线处应该填写的内容是：</strong></p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">function</span> <span class="pl-v">ToInteger</span><span class="pl-kos">(</span><span class="pl-s1">x</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+    <span class="pl-s1">x</span> <span class="pl-c1">=</span> <span class="pl-v">Number</span><span class="pl-kos">(</span><span class="pl-s1">x</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+    <span class="pl-k">return</span> <span class="pl-c1">___</span><span class="pl-kos">(</span><span class="pl-c1">___</span><span class="pl-kos">(</span><span class="pl-s1">x</span><span class="pl-kos">)</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-kos">}</span>
+<span class="pl-v">ToInteger</span><span class="pl-kos">(</span><span class="pl-c1">-</span><span class="pl-c1">10.4</span><span class="pl-kos">)</span><span class="pl-kos">;</span> <span class="pl-c">// 向下取整：10</span></pre></div>
+<h1>Date对象</h1>
+<p><code class="notranslate">Date</code>对象是 JavaScript 原生的时间库。它以1970年1月1日00:00:00作为时间的零点，可以表示的时间范围是前后各1亿天（单位为毫秒）</p>
+<h3>Date.now()</h3>
+<p><code class="notranslate">Date.now</code>方法返回当前时间距离时间零点（1970年1月1日 00:00:00 UTC）的毫秒数，相当于 Unix 时间戳乘以1000</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-v">Date</span><span class="pl-kos">.</span><span class="pl-en">now</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">;</span>   <span class="pl-c">// 1635216733395</span></pre></div>
+<h3>时间戳</h3>
+<p>时间戳是指格林威治时间1970年01月01日00时00分00秒(北京时间1970年01月01日08时00分00秒)起至现在的总秒数。</p>
+<p>格林威治和北京时间就是时区的不同</p>
+<p>Unix是20世纪70年代初出现的一个操作系统，Unix认为1970年1月1日0点是时间纪元。JavaScript也就遵循了这一约束</p>
+<p><code class="notranslate">Date</code>对象提供了一系列<code class="notranslate">get*</code>方法，用来获取实例对象某个方面的值</p>
+<blockquote>
+<p><strong>实例方法get类</strong></p>
+<p>getTime()：返回实例距离1970年1月1日00:00:00的毫秒数<br>
+getDate()：返回实例对象对应每个月的几号（从1开始）<br>
+getDay()：返回星期几，星期日为0，星期一为1，以此类推<br>
+getYear()：返回距离1900的年数<br>
+getFullYear()：返回四位的年份<br>
+getMonth()：返回月份（0表示1月，11表示12月）<br>
+getHours()：返回小时（0-23）<br>
+getMilliseconds()：返回毫秒（0-999）<br>
+getMinutes()：返回分钟（0-59）<br>
+getSeconds()：返回秒（0-59）</p>
+</blockquote>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">var</span> <span class="pl-s1">d</span> <span class="pl-c1">=</span> <span class="pl-k">new</span> <span class="pl-v">Date</span><span class="pl-kos">(</span><span class="pl-s">'January 6, 2022'</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-s1">d</span><span class="pl-kos">.</span><span class="pl-en">getDate</span><span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-c">// 6</span>
+<span class="pl-s1">d</span><span class="pl-kos">.</span><span class="pl-en">getMonth</span><span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-c">// 0</span>
+<span class="pl-s1">d</span><span class="pl-kos">.</span><span class="pl-en">getYear</span><span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-c">// 122</span>
+<span class="pl-s1">d</span><span class="pl-kos">.</span><span class="pl-en">getFullYear</span><span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-c">// 2022</span></pre></div>
+<p>编写函数获得本年度剩余天数</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">function</span> <span class="pl-en">leftDays</span><span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+  <span class="pl-k">var</span> <span class="pl-s1">today</span> <span class="pl-c1">=</span> <span class="pl-k">new</span> <span class="pl-v">Date</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+  <span class="pl-k">var</span> <span class="pl-s1">endYear</span> <span class="pl-c1">=</span> <span class="pl-k">new</span> <span class="pl-v">Date</span><span class="pl-kos">(</span><span class="pl-s1">today</span><span class="pl-kos">.</span><span class="pl-en">getFullYear</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">,</span> <span class="pl-c1">11</span><span class="pl-kos">,</span> <span class="pl-c1">31</span><span class="pl-kos">,</span> <span class="pl-c1">23</span><span class="pl-kos">,</span> <span class="pl-c1">59</span><span class="pl-kos">,</span> <span class="pl-c1">59</span><span class="pl-kos">,</span> <span class="pl-c1">999</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+  <span class="pl-k">var</span> <span class="pl-s1">msPerDay</span> <span class="pl-c1">=</span> <span class="pl-c1">24</span> <span class="pl-c1">*</span> <span class="pl-c1">60</span> <span class="pl-c1">*</span> <span class="pl-c1">60</span> <span class="pl-c1">*</span> <span class="pl-c1">1000</span><span class="pl-kos">;</span>
+  <span class="pl-k">return</span> <span class="pl-v">Math</span><span class="pl-kos">.</span><span class="pl-en">round</span><span class="pl-kos">(</span><span class="pl-kos">(</span><span class="pl-s1">endYear</span><span class="pl-kos">.</span><span class="pl-en">getTime</span><span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-c1">-</span> <span class="pl-s1">today</span><span class="pl-kos">.</span><span class="pl-en">getTime</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">)</span> <span class="pl-c1">/</span> <span class="pl-s1">msPerDay</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-kos">}</span></pre></div>
+<p><strong>实时效果反馈</strong></p>
+<p><strong>1. 下列代码计算本年度剩余天数，划横线处应该填写代码是：</strong></p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">function</span> <span class="pl-en">leftDays</span><span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+  <span class="pl-k">var</span> <span class="pl-s1">today</span> <span class="pl-c1">=</span> <span class="pl-k">new</span> <span class="pl-v">Date</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+  <span class="pl-k">var</span> <span class="pl-s1">endYear</span> <span class="pl-c1">=</span> <span class="pl-k">new</span> <span class="pl-v">Date</span><span class="pl-kos">(</span><span class="pl-s1">today</span><span class="pl-kos">.</span><span class="pl-c1">___</span><span class="pl-kos">,</span> <span class="pl-c1">11</span><span class="pl-kos">,</span> <span class="pl-c1">31</span><span class="pl-kos">,</span> <span class="pl-c1">23</span><span class="pl-kos">,</span> <span class="pl-c1">59</span><span class="pl-kos">,</span> <span class="pl-c1">59</span><span class="pl-kos">,</span> <span class="pl-c1">999</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+  <span class="pl-k">var</span> <span class="pl-s1">msPerDay</span> <span class="pl-c1">=</span> <span class="pl-c1">24</span> <span class="pl-c1">*</span> <span class="pl-c1">60</span> <span class="pl-c1">*</span> <span class="pl-c1">60</span> <span class="pl-c1">*</span> <span class="pl-c1">1000</span><span class="pl-kos">;</span>
+  <span class="pl-k">return</span> <span class="pl-v">Math</span><span class="pl-kos">.</span><span class="pl-en">round</span><span class="pl-kos">(</span><span class="pl-kos">(</span><span class="pl-s1">endYear</span><span class="pl-kos">.</span><span class="pl-c1">___</span> <span class="pl-c1">-</span> <span class="pl-s1">today</span><span class="pl-kos">.</span><span class="pl-c1">___</span><span class="pl-kos">)</span> <span class="pl-c1">/</span> <span class="pl-s1">msPerDay</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-kos">}</span></pre></div>
+<h1>DOM概述</h1>
+<p>DOM 是 JavaScript 操作网页的接口，全称为“文档对象模型”（Document Object Model）。它的作用是将网页转为一个 JavaScript 对象，从而可以用脚本进行各种操作（比如对元素增删内容）</p>
+<p>浏览器会根据 DOM 模型，将结构化文档HTML解析成一系列的节点，再由这些节点组成一个树状结构（DOM Tree）。所有的节点和最终的树状结构，都有规范的对外接口</p>
+<p>DOM 只是一个接口规范，可以用各种语言实现。所以严格地说，DOM 不是 JavaScript 语法的一部分，但是 DOM 操作是 JavaScript 最常见的任务，离开了 DOM，JavaScript 就无法控制网页。另一方面，JavaScript 也是最常用于 DOM 操作的语言</p>
+<h3>节点</h3>
+<p>DOM 的最小组成单位叫做节点（node）。文档的树形结构（DOM 树），就是由各种不同类型的节点组成。每个节点可以看作是文档树的一片叶子</p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/4fdc098edd2b6e7764aeb3538a7f1011bc61241cd51a4a46cf0ccbb5aa5400ff/68747470733a2f2f776f7770622e70616765732e6465762f66696c652f3565373938376134636666396362353933306338652e706e67"><img src="https://camo.githubusercontent.com/4fdc098edd2b6e7764aeb3538a7f1011bc61241cd51a4a46cf0ccbb5aa5400ff/68747470733a2f2f776f7770622e70616765732e6465762f66696c652f3565373938376134636666396362353933306338652e706e67" alt="image-20211027131821279" data-canonical-src="https://wowpb.pages.dev/file/5e7987a4cff9cb5930c8e.png" style="max-width: 100%;"></a></p>
+<p>节点的类型有七种</p>
+<blockquote>
+<p>Document：整个文档树的顶层节点<br>
+DocumentType：doctype标签<br>
+Element：网页的各种HTML标签<br>
+Attribute：网页元素的属性（比如class="right"）<br>
+Text：标签之间或标签包含的文本<br>
+Comment：注释<br>
+DocumentFragment：文档的片段</p>
+</blockquote>
+<h3>节点树</h3>
+<p>一个文档的所有节点，按照所在的层级，可以抽象成一种树状结构。这种树状结构就是 DOM 树。它有一个顶层节点，下一层都是顶层节点的子节点，然后子节点又有自己的子节点，就这样层层衍生出一个金字塔结构，倒过来就像一棵树</p>
+<p>浏览器原生提供document节点，代表整个文档</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-smi">document</span>
+<span class="pl-c">// 整个文档树</span></pre></div>
+<p>除了根节点，其他节点都有三种层级关系</p>
+<blockquote>
+<p>父节点关系（parentNode）：直接的那个上级节点<br>
+子节点关系（childNodes）：直接的下级节点<br>
+同级节点关系（sibling）：拥有同一个父节点的节点</p>
+</blockquote>
+<h3>Node.nodeType属性</h3>
+<p>不同节点的nodeType属性值和对应的常量如下</p>
+<blockquote>
+<p>文档节点（document）：9，对应常量Node.DOCUMENT_NODE<br>
+元素节点（element）：1，对应常量Node.ELEMENT_NODE<br>
+属性节点（attr）：2，对应常量Node.ATTRIBUTE_NODE<br>
+文本节点（text）：3，对应常量Node.TEXT_NODE<br>
+文档片断节点（DocumentFragment）：11，对应常量Node.DOCUMENT_FRAGMENT_NODE</p>
+</blockquote>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-c1">nodeType</span> <span class="pl-c">// 9</span>
+<span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-c1">nodeType</span> <span class="pl-c1">===</span> <span class="pl-v">Node</span><span class="pl-kos">.</span><span class="pl-c1">DOCUMENT_NODE</span> <span class="pl-c">// true</span></pre></div>
+<h2>document对象_方法/获取元素</h2>
+<h3>document.getElementsByTagName()</h3>
+<p><code class="notranslate">document.getElementsByTagName</code>方法搜索 HTML 标签名，返回符合条件的元素。它的返回值是一个类似数组对象（<code class="notranslate">HTMLCollection</code>实例），可以实时反映 HTML 文档的变化。如果没有任何匹配的元素，就返回一个空集</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">var</span> <span class="pl-s1">paras</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-en">getElementsByTagName</span><span class="pl-kos">(</span><span class="pl-s">'p'</span><span class="pl-kos">)</span><span class="pl-kos">;</span></pre></div>
+<p>如果传入<code class="notranslate">*</code>，就可以返回文档中所有 HTML 元素</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">var</span> <span class="pl-s1">allElements</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-en">getElementsByTagName</span><span class="pl-kos">(</span><span class="pl-s">'*'</span><span class="pl-kos">)</span><span class="pl-kos">;</span></pre></div>
+<h3>document.getElementsByClassName()</h3>
+<p><code class="notranslate">document.getElementsByClassName</code>方法返回一个类似数组的对象（<code class="notranslate">HTMLCollection</code>实例），包括了所有<code class="notranslate">class</code>名字符合指定条件的元素，元素的变化实时反映在返回结果中</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">var</span> <span class="pl-s1">elements</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-en">getElementsByClassName</span><span class="pl-kos">(</span><span class="pl-s1">names</span><span class="pl-kos">)</span><span class="pl-kos">;</span></pre></div>
+<p>由于<code class="notranslate">class</code>是保留字，所以 JavaScript 一律使用<code class="notranslate">className</code>表示 CSS 的<code class="notranslate">class</code></p>
+<p>参数可以是多个<code class="notranslate">class</code>，它们之间使用空格分隔</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">var</span> <span class="pl-s1">elements</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-en">getElementsByClassName</span><span class="pl-kos">(</span><span class="pl-s">'foo bar'</span><span class="pl-kos">)</span><span class="pl-kos">;</span></pre></div>
+<h3>document.getElementsByName()</h3>
+<p><code class="notranslate">document.getElementsByName</code>方法用于选择拥有<code class="notranslate">name</code>属性的 HTML 元素（比如<code class="notranslate">&lt;form&gt;</code>、<code class="notranslate">&lt;radio&gt;</code>、<code class="notranslate">&lt;img&gt;</code>等），返回一个类似数组的的对象（<code class="notranslate">NodeList</code>实例），因为<code class="notranslate">name</code>属性相同的元素可能不止一个</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-c">// 表单为 &lt;form name="itbaizhan"&gt;&lt;/form&gt;</span>
+<span class="pl-k">var</span> <span class="pl-s1">forms</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-en">getElementsByName</span><span class="pl-kos">(</span><span class="pl-s">'itbaizhan'</span><span class="pl-kos">)</span><span class="pl-kos">;</span></pre></div>
+<h3>document.getElementById()</h3>
+<p><code class="notranslate">document.getElementById</code>方法返回匹配指定<code class="notranslate">id</code>属性的元素节点。如果没有发现匹配的节点，则返回<code class="notranslate">null</code></p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">var</span> <span class="pl-s1">elem</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-en">getElementById</span><span class="pl-kos">(</span><span class="pl-s">'para1'</span><span class="pl-kos">)</span><span class="pl-kos">;</span></pre></div>
+<p>注意，该方法的参数是大小写敏感的。比如，如果某个节点的<code class="notranslate">id</code>属性是<code class="notranslate">main</code>，那么<code class="notranslate">document.getElementById('Main')</code>将返回<code class="notranslate">null</code></p>
+<h3>document.querySelector()</h3>
+<p><code class="notranslate">document.querySelector</code>方法接受一个 CSS 选择器作为参数，返回匹配该选择器的元素节点。如果有多个节点满足匹配条件，则返回第一个匹配的节点。如果没有发现匹配的节点，则返回<code class="notranslate">null</code></p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">var</span> <span class="pl-s1">el1</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-en">querySelector</span><span class="pl-kos">(</span><span class="pl-s">'.myclass'</span><span class="pl-kos">)</span><span class="pl-kos">;</span></pre></div>
+<h3>document.querySelectorAll()</h3>
+<p><code class="notranslate">document.querySelectorAll</code>方法与<code class="notranslate">querySelector</code>用法类似，区别是返回一个<code class="notranslate">NodeList</code>对象，包含所有匹配给定选择器的节点</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">var</span> <span class="pl-s1">elementList</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-en">querySelectorAll</span><span class="pl-kos">(</span><span class="pl-s">'.myclass'</span><span class="pl-kos">)</span><span class="pl-kos">;</span></pre></div>
+<h2>document对象_方法/创建元素</h2>
+<h3>document.createElement()</h3>
+<p><code class="notranslate">document.createElement</code>方法用来生成元素节点，并返回该节点</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">var</span> <span class="pl-s1">newDiv</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-en">createElement</span><span class="pl-kos">(</span><span class="pl-s">'div'</span><span class="pl-kos">)</span><span class="pl-kos">;</span></pre></div>
+<h3>document.createTextNode()</h3>
+<p><code class="notranslate">document.createTextNode</code>方法用来生成文本节点（<code class="notranslate">Text</code>实例），并返回该节点。它的参数是文本节点的内容</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">var</span> <span class="pl-s1">newDiv</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-en">createElement</span><span class="pl-kos">(</span><span class="pl-s">'div'</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-k">var</span> <span class="pl-s1">newContent</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-en">createTextNode</span><span class="pl-kos">(</span><span class="pl-s">'Hello'</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-s1">newDiv</span><span class="pl-kos">.</span><span class="pl-en">appendChild</span><span class="pl-kos">(</span><span class="pl-s1">newContent</span><span class="pl-kos">)</span><span class="pl-kos">;</span></pre></div>
+<h3>document.createAttribute()</h3>
+<p><code class="notranslate">document.createAttribute</code>方法生成一个新的属性节点（<code class="notranslate">Attr</code>实例），并返回它</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">var</span> <span class="pl-s1">attribute</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-en">createAttribute</span><span class="pl-kos">(</span><span class="pl-s1">name</span><span class="pl-kos">)</span><span class="pl-kos">;</span></pre></div>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">var</span> <span class="pl-s1">root</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-en">getElementById</span><span class="pl-kos">(</span><span class="pl-s">'root'</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-k">var</span> <span class="pl-s1">it</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-en">createAttribute</span><span class="pl-kos">(</span><span class="pl-s">'itbaizhan'</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-s1">it</span><span class="pl-kos">.</span><span class="pl-c1">value</span> <span class="pl-c1">=</span> <span class="pl-s">'it'</span><span class="pl-kos">;</span>
+<span class="pl-s1">root</span><span class="pl-kos">.</span><span class="pl-en">setAttributeNode</span><span class="pl-kos">(</span><span class="pl-s1">it</span><span class="pl-kos">)</span><span class="pl-kos">;</span></pre></div>
+<p><strong>实时效果反馈</strong></p>
+<p><strong>1. 下列代码是创建元素，并添加内容，横线处应该填写的内容是：</strong></p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">var</span> <span class="pl-s1">newDiv</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-en">createElement</span><span class="pl-kos">(</span><span class="pl-s">'div'</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-k">var</span> <span class="pl-s1">newContent</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-en">____</span><span class="pl-kos">(</span><span class="pl-s">'Hello'</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-s1">newDiv</span><span class="pl-kos">.</span><span class="pl-en">appendChild</span><span class="pl-kos">(</span><span class="pl-s1">newContent</span><span class="pl-kos">)</span><span class="pl-kos">;</span></pre></div>
+<h2>Element对象_属性</h2>
+<p>Element对象对应网页的 HTML 元素。每一个 HTML 元素，在 DOM 树上都会转化成一个Element节点对象（以下简称元素节点）</p>
+<h3>Element.id</h3>
+<p><code class="notranslate">Element.id</code>属性返回指定元素的<code class="notranslate">id</code>属性，该属性可读写</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-c">// HTML 代码为 &lt;p id="foo"&gt;</span>
+<span class="pl-k">var</span> <span class="pl-s1">p</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-en">querySelector</span><span class="pl-kos">(</span><span class="pl-s">'p'</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-s1">p</span><span class="pl-kos">.</span><span class="pl-c1">id</span> <span class="pl-c">// "foo"</span></pre></div>
+<h3>Element.className</h3>
+<p><code class="notranslate">className</code>属性用来读写当前元素节点的<code class="notranslate">class</code>属性。它的值是一个字符串，每个<code class="notranslate">class</code>之间用空格分割</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-c">// HTML 代码 &lt;div class="one two three" id="myDiv"&gt;&lt;/div&gt;</span>
+<span class="pl-k">var</span> <span class="pl-s1">div</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-en">getElementById</span><span class="pl-kos">(</span><span class="pl-s">'myDiv'</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-s1">div</span><span class="pl-kos">.</span><span class="pl-c1">className</span></pre></div>
+<h3>Element.classList</h3>
+<p><code class="notranslate">classList</code>对象有下列方法</p>
+<blockquote>
+<ul>
+<li><code class="notranslate">add()</code>：增加一个 class。</li>
+<li><code class="notranslate">remove()</code>：移除一个 class。</li>
+<li><code class="notranslate">contains()</code>：检查当前元素是否包含某个 class。</li>
+<li><code class="notranslate">toggle()</code>：将某个 class 移入或移出当前元素。</li>
+</ul>
+</blockquote>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">var</span> <span class="pl-s1">div</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-en">getElementById</span><span class="pl-kos">(</span><span class="pl-s">'myDiv'</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+
+<span class="pl-s1">div</span><span class="pl-kos">.</span><span class="pl-c1">classList</span><span class="pl-kos">.</span><span class="pl-en">add</span><span class="pl-kos">(</span><span class="pl-s">'myCssClass'</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-s1">div</span><span class="pl-kos">.</span><span class="pl-c1">classList</span><span class="pl-kos">.</span><span class="pl-en">add</span><span class="pl-kos">(</span><span class="pl-s">'foo'</span><span class="pl-kos">,</span> <span class="pl-s">'bar'</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-s1">div</span><span class="pl-kos">.</span><span class="pl-c1">classList</span><span class="pl-kos">.</span><span class="pl-en">remove</span><span class="pl-kos">(</span><span class="pl-s">'myCssClass'</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-s1">div</span><span class="pl-kos">.</span><span class="pl-c1">classList</span><span class="pl-kos">.</span><span class="pl-en">toggle</span><span class="pl-kos">(</span><span class="pl-s">'myCssClass'</span><span class="pl-kos">)</span><span class="pl-kos">;</span> <span class="pl-c">// 如果 myCssClass 不存在就加入，否则移除</span>
+<span class="pl-s1">div</span><span class="pl-kos">.</span><span class="pl-c1">classList</span><span class="pl-kos">.</span><span class="pl-en">contains</span><span class="pl-kos">(</span><span class="pl-s">'myCssClass'</span><span class="pl-kos">)</span><span class="pl-kos">;</span> <span class="pl-c">// 返回 true 或者 false</span></pre></div>
+<h3>Element.innerHTML</h3>
+<p><code class="notranslate">Element.innerHTML</code>属性返回一个字符串，等同于该元素包含的所有 HTML 代码。该属性可读写，常用来设置某个节点的内容。它能改写所有元素节点的内容，包括<code class="notranslate">&lt;HTML&gt;</code>和<code class="notranslate">&lt;body&gt;</code>元素</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-s1">el</span><span class="pl-kos">.</span><span class="pl-c1">innerHTML</span> <span class="pl-c1">=</span> <span class="pl-s">''</span><span class="pl-kos">;</span></pre></div>
+<h3>Element.innerText</h3>
+<p><code class="notranslate">innerText</code>和<code class="notranslate">innerHTML</code>类似，不同的是<code class="notranslate">innerText</code>无法识别元素，会直接渲染成字符串</p>
+<p><strong>实时效果反馈</strong></p>
+<p><strong>1. 下列代码为div元素动态添加一个class，画横线处应该填写的内容是：</strong></p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">var</span> <span class="pl-s1">div</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-en">getElementById</span><span class="pl-kos">(</span><span class="pl-s">'myDiv'</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-s1">div</span><span class="pl-kos">.</span><span class="pl-c1">classList</span><span class="pl-kos">.</span><span class="pl-en">___</span><span class="pl-kos">(</span><span class="pl-s">'myCssClass'</span><span class="pl-kos">)</span><span class="pl-kos">;</span></pre></div>
+<h2>Element获取元素位置</h2>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th align="left">属性</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">clientHeight</td>
+<td align="center">获取元素高度包括<code class="notranslate">padding</code>部分，但是不包括<code class="notranslate">border</code>、<code class="notranslate">margin</code></td>
+</tr>
+<tr>
+<td align="left">clientWidth</td>
+<td align="center">获取元素宽度包括<code class="notranslate">padding</code>部分，但是不包括<code class="notranslate">border</code>、<code class="notranslate">margin</code></td>
+</tr>
+<tr>
+<td align="left">scrollHeight</td>
+<td align="center">元素总高度，它包括<code class="notranslate">padding</code>，但是不包括<code class="notranslate">border</code>、<code class="notranslate">margin</code>包括溢出的不可见内容</td>
+</tr>
+<tr>
+<td align="left">scrollWidth</td>
+<td align="center">元素总宽度，它包括<code class="notranslate">padding</code>，但是不包括<code class="notranslate">border</code>、<code class="notranslate">margin</code>包括溢出的不可见内容</td>
+</tr>
+<tr>
+<td align="left">scrollLeft</td>
+<td align="center">元素的水平滚动条向右滚动的像素数量</td>
+</tr>
+<tr>
+<td align="left">scrollTop</td>
+<td align="center">元素的垂直滚动条向下滚动的像素数量</td>
+</tr>
+<tr>
+<td align="left">offsetHeight</td>
+<td align="center">元素的 CSS 垂直高度（单位像素），包括元素本身的高度、padding 和 border</td>
+</tr>
+<tr>
+<td align="left">offsetWidth</td>
+<td align="center">元素的 CSS 水平宽度（单位像素），包括元素本身的高度、padding 和 border</td>
+</tr>
+<tr>
+<td align="left">offsetLeft</td>
+<td align="center">到定位父级左边界的间距</td>
+</tr>
+<tr>
+<td align="left">offsetTop</td>
+<td align="center">到定位父级上边界的间距</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<h3>Element.clientHeight，Element.clientWidth</h3>
+<p><code class="notranslate">Element.clientHeight</code>属性返回一个整数值，表示元素节点的 CSS 高度（单位像素），只对块级元素生效，对于行内元素返回<code class="notranslate">0</code>。如果块级元素没有设置 CSS 高度，则返回实际高度</p>
+<p>除了元素本身的高度，它还包括<code class="notranslate">padding</code>部分，但是不包括<code class="notranslate">border</code>、<code class="notranslate">margin</code>。如果有水平滚动条，还要减去水平滚动条的高度。注意，这个值始终是整数，如果是小数会被四舍五入。</p>
+<p><code class="notranslate">Element.clientWidth</code>属性返回元素节点的 CSS 宽度，同样只对块级元素有效，也是只包括元素本身的宽度和<code class="notranslate">padding</code>，如果有垂直滚动条，还要减去垂直滚动条的宽度。</p>
+<p><code class="notranslate">document.documentElement</code>的<code class="notranslate">clientHeight</code>属性，返回当前视口的高度（即浏览器窗口的高度）。<code class="notranslate">document.body</code>的高度则是网页的实际高度。</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-c">// 视口高度</span>
+<span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-c1">documentElement</span><span class="pl-kos">.</span><span class="pl-c1">clientHeight</span>
+
+<span class="pl-c">// 网页总高度</span>
+<span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-c1">body</span><span class="pl-kos">.</span><span class="pl-c1">clientHeight</span></pre></div>
+<h3>Element.scrollHeight，Element.scrollWidth</h3>
+<p><code class="notranslate">Element.scrollHeight</code>属性返回一个整数值（小数会四舍五入），表示当前元素的总高度（单位像素），它包括<code class="notranslate">padding</code>，但是不包括<code class="notranslate">border</code>、<code class="notranslate">margin</code>以及水平滚动条的高度（如果有水平滚动条的话）</p>
+<p><code class="notranslate">Element.scrollWidth</code>属性表示当前元素的总宽度（单位像素），其他地方都与<code class="notranslate">scrollHeight</code>属性类似。这两个属性只读</p>
+<p>整张网页的总高度可以从<code class="notranslate">document.documentElement</code>或<code class="notranslate">document.body</code>上读取</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-c">// 返回网页的总高度</span>
+<span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-c1">documentElement</span><span class="pl-kos">.</span><span class="pl-c1">scrollHeight</span>
+<span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-c1">body</span><span class="pl-kos">.</span><span class="pl-c1">scrollHeight</span></pre></div>
+<h3>Element.scrollLeft，Element.scrollTop</h3>
+<p><code class="notranslate">Element.scrollLeft</code>属性表示当前元素的水平滚动条向右侧滚动的像素数量，<code class="notranslate">Element.scrollTop</code>属性表示当前元素的垂直滚动条向下滚动的像素数量。对于那些没有滚动条的网页元素，这两个属性总是等于0</p>
+<p>如果要查看整张网页的水平的和垂直的滚动距离，要从<code class="notranslate">document.documentElement</code>元素上读取</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-c1">documentElement</span><span class="pl-kos">.</span><span class="pl-c1">scrollLeft</span>
+<span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-c1">documentElement</span><span class="pl-kos">.</span><span class="pl-c1">scrollTop</span></pre></div>
+<h3>Element.offsetHeight，Element.offsetWidth</h3>
+<p><code class="notranslate">Element.offsetHeight</code>属性返回一个整数，表示元素的 CSS 垂直高度（单位像素），包括元素本身的高度、padding 和 border，以及水平滚动条的高度（如果存在滚动条）。</p>
+<p><code class="notranslate">Element.offsetWidth</code>属性表示元素的 CSS 水平宽度（单位像素），其他都与<code class="notranslate">Element.offsetHeight</code>一致。</p>
+<p>这两个属性都是只读属性，只比<code class="notranslate">Element.clientHeight</code>和<code class="notranslate">Element.clientWidth</code>多了边框的高度或宽度。如果元素的 CSS 设为不可见（比如<code class="notranslate">display: none;</code>），则返回<code class="notranslate">0</code></p>
+<h3>Element.offsetLeft，Element.offsetTop</h3>
+<p><code class="notranslate">Element.offsetLeft</code>返回当前元素左上角相对于<code class="notranslate">Element.offsetParent</code>节点的水平位移，<code class="notranslate">Element.offsetTop</code>返回垂直位移，单位为像素。通常，这两个值是指相对于父节点的位移</p>
+<div class="highlight highlight-text-html-basic"><pre class="notranslate"><span class="pl-kos">&lt;</span><span class="pl-ent">div</span> <span class="pl-c1">class</span>="<span class="pl-s">parent</span>"<span class="pl-kos">&gt;</span>
+    <span class="pl-kos">&lt;</span><span class="pl-ent">div</span> <span class="pl-c1">class</span>="<span class="pl-s">box</span>" <span class="pl-c1">id</span>="<span class="pl-s">box</span>"<span class="pl-kos">&gt;</span><span class="pl-kos">&lt;/</span><span class="pl-ent">div</span><span class="pl-kos">&gt;</span>
+<span class="pl-kos">&lt;/</span><span class="pl-ent">div</span><span class="pl-kos">&gt;</span></pre></div>
+<div class="highlight highlight-source-css"><pre class="notranslate">.<span class="pl-c1">parent</span>{
+    <span class="pl-c1">width</span><span class="pl-kos">:</span> <span class="pl-c1">200<span class="pl-smi">px</span></span>;
+    <span class="pl-c1">height</span><span class="pl-kos">:</span> <span class="pl-c1">200<span class="pl-smi">px</span></span>;
+    <span class="pl-c1">background</span><span class="pl-kos">:</span> red;
+    <span class="pl-c1">position</span><span class="pl-kos">:</span> relative;
+    <span class="pl-c1">left</span><span class="pl-kos">:</span> <span class="pl-c1">50<span class="pl-smi">px</span></span>;
+    <span class="pl-c1">top</span><span class="pl-kos">:</span> <span class="pl-c1">50<span class="pl-smi">px</span></span>;
+}
+
+.<span class="pl-c1">box</span>{
+    <span class="pl-c1">width</span><span class="pl-kos">:</span> <span class="pl-c1">100<span class="pl-smi">px</span></span>;
+    <span class="pl-c1">height</span><span class="pl-kos">:</span> <span class="pl-c1">100<span class="pl-smi">px</span></span>;
+    <span class="pl-c1">background</span><span class="pl-kos">:</span> yellow;
+    <span class="pl-c1">position</span><span class="pl-kos">:</span> relative;
+    <span class="pl-c1">left</span><span class="pl-kos">:</span> <span class="pl-c1">50<span class="pl-smi">px</span></span>;
+    <span class="pl-c1">top</span><span class="pl-kos">:</span> <span class="pl-c1">50<span class="pl-smi">px</span></span>;
+}</pre></div>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">var</span> <span class="pl-s1">box</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-en">getElementById</span><span class="pl-kos">(</span><span class="pl-s">"box"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-smi">console</span><span class="pl-kos">.</span><span class="pl-en">log</span><span class="pl-kos">(</span><span class="pl-s1">box</span><span class="pl-kos">.</span><span class="pl-c1">offsetLeft</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-smi">console</span><span class="pl-kos">.</span><span class="pl-en">log</span><span class="pl-kos">(</span><span class="pl-s1">box</span><span class="pl-kos">.</span><span class="pl-c1">offsetTop</span><span class="pl-kos">)</span><span class="pl-kos">;</span></pre></div>
+<p><strong>实时效果反馈</strong></p>
+<p><strong>1. 下面是获得整个视口的宽度和高度：</strong></p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-c1">documentElement</span><span class="pl-kos">.</span><span class="pl-c1">___</span>
+<span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-c1">documentElement</span><span class="pl-kos">.</span><span class="pl-c1">___</span></pre></div>
+<h1>CSS操作</h1>
+<h3><code class="notranslate">HTML</code> 元素的 <code class="notranslate">style</code> 属性</h3>
+<p>操作 CSS 样式最简单的方法，就是使用网页元素节点的<code class="notranslate">setAttribute</code>方法直接操作网页元素的<code class="notranslate">style</code>属性</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-s1">div</span><span class="pl-kos">.</span><span class="pl-en">setAttribute</span><span class="pl-kos">(</span>
+  <span class="pl-s">'style'</span><span class="pl-kos">,</span>
+  <span class="pl-s">'background-color:red;'</span> <span class="pl-c1">+</span> <span class="pl-s">'border:1px solid black;'</span>
+<span class="pl-kos">)</span><span class="pl-kos">;</span></pre></div>
+<h3>元素节点的<code class="notranslate">style</code>属性</h3>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">var</span> <span class="pl-s1">divStyle</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-en">querySelector</span><span class="pl-kos">(</span><span class="pl-s">'div'</span><span class="pl-kos">)</span><span class="pl-kos">.</span><span class="pl-c1">style</span><span class="pl-kos">;</span>
+
+<span class="pl-s1">divStyle</span><span class="pl-kos">.</span><span class="pl-c1">backgroundColor</span> <span class="pl-c1">=</span> <span class="pl-s">'red'</span><span class="pl-kos">;</span>
+<span class="pl-s1">divStyle</span><span class="pl-kos">.</span><span class="pl-c1">border</span> <span class="pl-c1">=</span> <span class="pl-s">'1px solid black'</span><span class="pl-kos">;</span>
+<span class="pl-s1">divStyle</span><span class="pl-kos">.</span><span class="pl-c1">width</span> <span class="pl-c1">=</span> <span class="pl-s">'100px'</span><span class="pl-kos">;</span>
+<span class="pl-s1">divStyle</span><span class="pl-kos">.</span><span class="pl-c1">height</span> <span class="pl-c1">=</span> <span class="pl-s">'100px'</span><span class="pl-kos">;</span>
+<span class="pl-s1">divStyle</span><span class="pl-kos">.</span><span class="pl-c1">fontSize</span> <span class="pl-c1">=</span> <span class="pl-s">'10em'</span><span class="pl-kos">;</span></pre></div>
+<h3><code class="notranslate">cssText</code>属性</h3>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">var</span> <span class="pl-s1">divStyle</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-en">querySelector</span><span class="pl-kos">(</span><span class="pl-s">'div'</span><span class="pl-kos">)</span><span class="pl-kos">.</span><span class="pl-c1">style</span><span class="pl-kos">;</span>
+
+<span class="pl-s1">divStyle</span><span class="pl-kos">.</span><span class="pl-c1">cssText</span> <span class="pl-c1">=</span> <span class="pl-s">'background-color: red;'</span>
+  <span class="pl-c1">+</span> <span class="pl-s">'border: 1px solid black;'</span>
+  <span class="pl-c1">+</span> <span class="pl-s">'height: 100px;'</span>
+  <span class="pl-c1">+</span> <span class="pl-s">'width: 100px;'</span><span class="pl-kos">;</span></pre></div>
+<p><strong>实时效果反馈</strong></p>
+<p><strong>1. 下列是设置样式的代码，横线处应该填写的代码是：</strong></p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">var</span> <span class="pl-s1">divStyle</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-en">querySelector</span><span class="pl-kos">(</span><span class="pl-s">'div'</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-s1">divStyle</span><span class="pl-kos">.</span><span class="pl-c1">___</span><span class="pl-kos">.</span><span class="pl-c1">backgroundColor</span> <span class="pl-c1">=</span> <span class="pl-s">'red'</span><span class="pl-kos">;</span></pre></div>
+<h1>事件处理程序</h1>
+<p>事件处理程序分为：</p>
+<ol>
+<li>HTML事件处理</li>
+<li>DOM0级事件处理</li>
+<li>DOM2级事件处理</li>
+</ol>
+<h3>HTML事件</h3>
+<div class="highlight highlight-text-html-basic"><pre class="notranslate"><span class="pl-c1">&lt;!DOCTYPE html<span class="pl-kos">&gt;</span></span>
+<span class="pl-kos">&lt;</span><span class="pl-ent">html</span><span class="pl-kos">&gt;</span>
+    <span class="pl-kos">&lt;</span><span class="pl-ent">head</span> <span class="pl-c1">lang</span>="<span class="pl-s">en</span>"<span class="pl-kos">&gt;</span>
+        <span class="pl-kos">&lt;</span><span class="pl-ent">meta</span> <span class="pl-c1">charset</span>="<span class="pl-s">UTF-8</span>"<span class="pl-kos">&gt;</span>
+        <span class="pl-kos">&lt;</span><span class="pl-ent">title</span><span class="pl-kos">&gt;</span>Js事件详解--事件处理<span class="pl-kos">&lt;/</span><span class="pl-ent">title</span><span class="pl-kos">&gt;</span>
+    <span class="pl-kos">&lt;/</span><span class="pl-ent">head</span><span class="pl-kos">&gt;</span>
+    <span class="pl-kos">&lt;</span><span class="pl-ent">body</span><span class="pl-kos">&gt;</span>
+        <span class="pl-kos">&lt;</span><span class="pl-ent">div</span> <span class="pl-c1">id</span>="<span class="pl-s">div</span>"<span class="pl-kos">&gt;</span>
+            <span class="pl-kos">&lt;</span><span class="pl-ent">button</span> <span class="pl-c1">id</span>="<span class="pl-s">btn1</span>" <span class="pl-c1">onclick</span>="<span class="pl-s">demo()</span>"<span class="pl-kos">&gt;</span>按钮<span class="pl-kos">&lt;/</span><span class="pl-ent">button</span><span class="pl-kos">&gt;</span>
+        <span class="pl-kos">&lt;/</span><span class="pl-ent">div</span><span class="pl-kos">&gt;</span>
+        <span class="pl-kos">&lt;</span><span class="pl-ent">script</span><span class="pl-kos">&gt;</span>
+            <span class="pl-k">function</span> <span class="pl-en">demo</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
+                <span class="pl-en">alert</span><span class="pl-kos">(</span><span class="pl-s">"hello html事件处理"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+            <span class="pl-kos">}</span>
+        <span class="pl-kos">&lt;/</span><span class="pl-ent">script</span><span class="pl-kos">&gt;</span>
+    <span class="pl-kos">&lt;/</span><span class="pl-ent">body</span><span class="pl-kos">&gt;</span>
+<span class="pl-kos">&lt;/</span><span class="pl-ent">html</span><span class="pl-kos">&gt;</span> </pre></div>
+<h3>DOM0级事件处理</h3>
+<div class="highlight highlight-text-html-basic"><pre class="notranslate"><span class="pl-kos">&lt;</span><span class="pl-ent">body</span><span class="pl-kos">&gt;</span>
+    <span class="pl-kos">&lt;</span><span class="pl-ent">div</span> <span class="pl-c1">id</span>="<span class="pl-s">div</span>"<span class="pl-kos">&gt;</span>
+        <span class="pl-kos">&lt;</span><span class="pl-ent">button</span> <span class="pl-c1">id</span>="<span class="pl-s">btn1</span>"<span class="pl-kos">&gt;</span>按钮<span class="pl-kos">&lt;/</span><span class="pl-ent">button</span><span class="pl-kos">&gt;</span>
+    <span class="pl-kos">&lt;/</span><span class="pl-ent">div</span><span class="pl-kos">&gt;</span>
+    <span class="pl-kos">&lt;</span><span class="pl-ent">script</span><span class="pl-kos">&gt;</span>
+        <span class="pl-k">var</span> <span class="pl-s1">btn1</span><span class="pl-c1">=</span><span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-en">getElementById</span><span class="pl-kos">(</span><span class="pl-s">"btn1"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+        <span class="pl-s1">btn1</span><span class="pl-kos">.</span><span class="pl-en">onclick</span><span class="pl-c1">=</span><span class="pl-k">function</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">{</span><span class="pl-en">alert</span><span class="pl-kos">(</span><span class="pl-s">"Hello DOM0级事件处理程序1"</span><span class="pl-kos">)</span><span class="pl-kos">;</span><span class="pl-kos">}</span><span class="pl-c">//被覆盖掉</span>
+        <span class="pl-s1">btn1</span><span class="pl-kos">.</span><span class="pl-en">onclick</span><span class="pl-c1">=</span><span class="pl-k">function</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">{</span><span class="pl-en">alert</span><span class="pl-kos">(</span><span class="pl-s">"Hello DOM0级事件处理程序2"</span><span class="pl-kos">)</span><span class="pl-kos">;</span><span class="pl-kos">}</span>
+    <span class="pl-kos">&lt;/</span><span class="pl-ent">script</span><span class="pl-kos">&gt;</span>
+<span class="pl-kos">&lt;/</span><span class="pl-ent">body</span><span class="pl-kos">&gt;</span></pre></div>
+<h3>DOM2级事件处理</h3>
+<div class="highlight highlight-text-html-basic"><pre class="notranslate"><span class="pl-kos">&lt;</span><span class="pl-ent">body</span><span class="pl-kos">&gt;</span>
+    <span class="pl-kos">&lt;</span><span class="pl-ent">div</span> <span class="pl-c1">id</span>="<span class="pl-s">div</span>"<span class="pl-kos">&gt;</span>
+        <span class="pl-kos">&lt;</span><span class="pl-ent">button</span> <span class="pl-c1">id</span>="<span class="pl-s">btn1</span>"<span class="pl-kos">&gt;</span>按钮<span class="pl-kos">&lt;/</span><span class="pl-ent">button</span><span class="pl-kos">&gt;</span>
+    <span class="pl-kos">&lt;/</span><span class="pl-ent">div</span><span class="pl-kos">&gt;</span>
+    <span class="pl-kos">&lt;</span><span class="pl-ent">script</span><span class="pl-kos">&gt;</span>
+        <span class="pl-k">var</span> <span class="pl-s1">btn1</span><span class="pl-c1">=</span><span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-en">getElementById</span><span class="pl-kos">(</span><span class="pl-s">"btn1"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+        <span class="pl-s1">btn1</span><span class="pl-kos">.</span><span class="pl-en">addEventListener</span><span class="pl-kos">(</span><span class="pl-s">"click"</span><span class="pl-kos">,</span><span class="pl-s1">demo1</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+        <span class="pl-s1">btn1</span><span class="pl-kos">.</span><span class="pl-en">addEventListener</span><span class="pl-kos">(</span><span class="pl-s">"click"</span><span class="pl-kos">,</span><span class="pl-s1">demo2</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+        <span class="pl-s1">btn1</span><span class="pl-kos">.</span><span class="pl-en">addEventListener</span><span class="pl-kos">(</span><span class="pl-s">"click"</span><span class="pl-kos">,</span><span class="pl-s1">demo3</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+        <span class="pl-k">function</span> <span class="pl-en">demo1</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
+            <span class="pl-en">alert</span><span class="pl-kos">(</span><span class="pl-s">"DOM2级事件处理程序1"</span><span class="pl-kos">)</span>
+        <span class="pl-kos">}</span>
+        <span class="pl-k">function</span> <span class="pl-en">demo2</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
+            <span class="pl-en">alert</span><span class="pl-kos">(</span><span class="pl-s">"DOM2级事件处理程序2"</span><span class="pl-kos">)</span>
+        <span class="pl-kos">}</span>
+        <span class="pl-k">function</span> <span class="pl-en">demo3</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
+            <span class="pl-en">alert</span><span class="pl-kos">(</span><span class="pl-s">"DOM2级事件处理程序3"</span><span class="pl-kos">)</span>
+        <span class="pl-kos">}</span>
+        <span class="pl-s1">btn1</span><span class="pl-kos">.</span><span class="pl-en">removeEventListener</span><span class="pl-kos">(</span><span class="pl-s">"click"</span><span class="pl-kos">,</span><span class="pl-s1">demo2</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+    <span class="pl-kos">&lt;/</span><span class="pl-ent">script</span><span class="pl-kos">&gt;</span>
+<span class="pl-kos">&lt;/</span><span class="pl-ent">body</span><span class="pl-kos">&gt;</span></pre></div>
+<p><strong>实时效果反馈</strong></p>
+<p><strong>1. 下列代码，是属于哪种事件处理方式：</strong></p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-s1">btn2</span><span class="pl-kos">.</span><span class="pl-en">addEventListener</span><span class="pl-kos">(</span><span class="pl-s">'click'</span><span class="pl-kos">,</span><span class="pl-k">function</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
+	<span class="pl-smi">console</span><span class="pl-kos">.</span><span class="pl-en">log</span><span class="pl-kos">(</span><span class="pl-s">"触发事件"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-kos">}</span><span class="pl-kos">)</span></pre></div>
+<h1>事件类型之鼠标事件</h1>
+<h3>鼠标事件</h3>
+<p>鼠标事件指与鼠标相关的事件，具体的事件主要有以下一些</p>
+<ol>
+<li>click：按下鼠标时触发</li>
+<li>dblclick：在同一个元素上双击鼠标时触发</li>
+<li>mousedown：按下鼠标键时触发</li>
+<li>mouseup：释放按下的鼠标键时触发</li>
+<li>mousemove：当鼠标在节点内部移动时触发。当鼠标持续移动时，该事件会连触发。</li>
+<li>mouseenter：鼠标进入一个节点时触发，进入子节点不会触发这个事件</li>
+<li>mouseleave：鼠标离开一个节点时触发，离开父节点不会触发这个事件</li>
+<li>mouseover：鼠标进入一个节点时触发，进入子节点会再一次触发这个事件</li>
+<li>mouseout：鼠标离开一个节点时触发，离开父节点也会触发这个事件</li>
+<li>wheel：滚动鼠标的滚轮时触发</li>
+</ol>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">var</span> <span class="pl-s1">btn1</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-en">getElementById</span><span class="pl-kos">(</span><span class="pl-s">"btn1"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-s1">btn1</span><span class="pl-kos">.</span><span class="pl-en">onclick</span> <span class="pl-c1">=</span> <span class="pl-k">function</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
+    <span class="pl-smi">console</span><span class="pl-kos">.</span><span class="pl-en">log</span><span class="pl-kos">(</span><span class="pl-s">"click事件"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-kos">}</span></pre></div>
+<blockquote>
+<p><strong>温馨提示</strong></p>
+<p>这些方法在使用的时候，除了DOM2级事件，都需要添加前缀<code class="notranslate">on</code></p>
+</blockquote>
+<p><strong>实时效果反馈</strong></p>
+<p><strong>1. 下列代码是鼠标事件，划横线处应该填写的是：</strong></p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-c">// 需求：鼠标在元素内移动，会一直触发事件</span>
+<span class="pl-k">var</span> <span class="pl-s1">box</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-en">getElementById</span><span class="pl-kos">(</span><span class="pl-s">"box"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-s1">box</span><span class="pl-kos">.</span><span class="pl-en">___</span> <span class="pl-c1">=</span> <span class="pl-k">function</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
+    <span class="pl-smi">console</span><span class="pl-kos">.</span><span class="pl-en">log</span><span class="pl-kos">(</span><span class="pl-s">"事件在元素上会一直触发"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-kos">}</span></pre></div>
+<h1>Event事件对象</h1>
+<p>事件发生以后，会产生一个事件对象，作为参数传给监听函数。</p>
+<h3>Event对象属性</h3>
+<ol>
+<li>Event.Target</li>
+<li>Event.type</li>
+</ol>
+<h4>Event.target</h4>
+<p>Event.target属性返回事件当前所在的节点</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-c">// HTML代码为</span>
+<span class="pl-c">// &lt;p id="para"&gt;Hello&lt;/p&gt;</span>
+<span class="pl-k">function</span> <span class="pl-en">setColor</span><span class="pl-kos">(</span><span class="pl-s1">e</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+  <span class="pl-smi">console</span><span class="pl-kos">.</span><span class="pl-en">log</span><span class="pl-kos">(</span><span class="pl-smi">this</span> <span class="pl-c1">===</span> <span class="pl-s1">e</span><span class="pl-kos">.</span><span class="pl-c1">target</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+  <span class="pl-s1">e</span><span class="pl-kos">.</span><span class="pl-c1">target</span><span class="pl-kos">.</span><span class="pl-c1">style</span><span class="pl-kos">.</span><span class="pl-c1">color</span> <span class="pl-c1">=</span> <span class="pl-s">'red'</span><span class="pl-kos">;</span>
+<span class="pl-kos">}</span>
+
+<span class="pl-s1">para</span><span class="pl-kos">.</span><span class="pl-en">addEventListener</span><span class="pl-kos">(</span><span class="pl-s">'click'</span><span class="pl-kos">,</span> <span class="pl-s1">setColor</span><span class="pl-kos">)</span><span class="pl-kos">;</span></pre></div>
+<h4>Event.type</h4>
+<p>Event.type属性返回一个字符串，表示事件类型。事件的类型是在生成事件的时候。该属性只读</p>
+<h3>Event对象方法</h3>
+<ol>
+<li>Event.preventDefault()</li>
+<li>Event.stopPropagation()</li>
+</ol>
+<h4>Event.preventDefault</h4>
+<p>Event.preventDefault方法取消浏览器对当前事件的默认行为。比如点击链接后，浏览器默认会跳转到另一个页面，使用这个方法以后，就不会跳转了</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-s1">btn</span><span class="pl-kos">.</span><span class="pl-en">onclick</span> <span class="pl-c1">=</span> <span class="pl-k">function</span><span class="pl-kos">(</span><span class="pl-s1">e</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
+    <span class="pl-s1">e</span><span class="pl-kos">.</span><span class="pl-en">preventDefault</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">;</span> <span class="pl-c">// 阻止默认事件</span>
+    <span class="pl-smi">console</span><span class="pl-kos">.</span><span class="pl-en">log</span><span class="pl-kos">(</span><span class="pl-s">"点击A标签"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-kos">}</span></pre></div>
+<h4>Event.stopPropagation()</h4>
+<p>stopPropagation方法阻止事件在 DOM 中继续传播，防止再触发定义在别的节点上的监听函数，但是不包括在当前节点上其他的事件监听函数</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-s1">btn</span><span class="pl-kos">.</span><span class="pl-en">onclick</span> <span class="pl-c1">=</span> <span class="pl-k">function</span><span class="pl-kos">(</span><span class="pl-s1">e</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
+    <span class="pl-s1">e</span><span class="pl-kos">.</span><span class="pl-en">stopPropagation</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">;</span> <span class="pl-c">// 阻止事件冒泡</span>
+    <span class="pl-smi">console</span><span class="pl-kos">.</span><span class="pl-en">log</span><span class="pl-kos">(</span><span class="pl-s">"btn"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-kos">}</span></pre></div>
+<h1>事件类型之键盘事件</h1>
+<p>键盘事件由用户击打键盘触发，主要有keydown、keypress、keyup三个事件</p>
+<ol>
+<li>keydown：按下键盘时触发。</li>
+<li>keypress：按下有值的键时触发，即按下 Ctrl、Alt、Shift、Meta 这样无值的键，这个事件不会触发。对于有值的键，按下时先触发keydown事件，再触发这个事件。</li>
+<li>keyup：松开键盘时触发该事件</li>
+</ol>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-s1">username</span><span class="pl-kos">.</span><span class="pl-en">onkeypress</span> <span class="pl-c1">=</span> <span class="pl-k">function</span><span class="pl-kos">(</span><span class="pl-s1">e</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
+    <span class="pl-smi">console</span><span class="pl-kos">.</span><span class="pl-en">log</span><span class="pl-kos">(</span><span class="pl-s">"keypress事件"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-kos">}</span></pre></div>
+<h3>event对象</h3>
+<p>keyCode:唯一标识</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">var</span> <span class="pl-s1">username</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-en">getElementById</span><span class="pl-kos">(</span><span class="pl-s">"username"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-s1">username</span><span class="pl-kos">.</span><span class="pl-en">onkeydown</span> <span class="pl-c1">=</span> <span class="pl-k">function</span><span class="pl-kos">(</span><span class="pl-s1">e</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
+    <span class="pl-k">if</span><span class="pl-kos">(</span><span class="pl-s1">e</span><span class="pl-kos">.</span><span class="pl-c1">keyCode</span> <span class="pl-c1">===</span> <span class="pl-c1">13</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
+        <span class="pl-smi">console</span><span class="pl-kos">.</span><span class="pl-en">log</span><span class="pl-kos">(</span><span class="pl-s">"回车"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+    <span class="pl-kos">}</span>
+<span class="pl-kos">}</span></pre></div>
+<h1>事件类型之表单事件</h1>
+<p>表单事件是在使用表单元素及输入框元素可以监听的一系列事件</p>
+<ol>
+<li>input事件</li>
+<li>select事件</li>
+<li>Change事件</li>
+<li>reset事件</li>
+<li>submit事件</li>
+</ol>
+<h3>input事件</h3>
+<p>input事件当<code class="notranslate">&lt;input&gt;、&lt;select&gt;、&lt;textarea&gt;</code>的值发生变化时触发。对于复选框（<code class="notranslate">&lt;input type=checkbox&gt;</code>）或单选框（<code class="notranslate">&lt;input type=radio&gt;</code>），用户改变选项时，也会触发这个事件</p>
+<p>input事件的一个特点，就是会连续触发，比如用户每按下一次按键，就会触发一次input事件。</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">var</span> <span class="pl-s1">username</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-en">getElementById</span><span class="pl-kos">(</span><span class="pl-s">"username"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-s1">username</span><span class="pl-kos">.</span><span class="pl-en">oninput</span> <span class="pl-c1">=</span> <span class="pl-k">function</span><span class="pl-kos">(</span><span class="pl-s1">e</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
+    <span class="pl-smi">console</span><span class="pl-kos">.</span><span class="pl-en">log</span><span class="pl-kos">(</span><span class="pl-s1">e</span><span class="pl-kos">.</span><span class="pl-c1">target</span><span class="pl-kos">.</span><span class="pl-c1">value</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-kos">}</span></pre></div>
+<h3>select事件</h3>
+<p>select事件当在<code class="notranslate">&lt;input&gt;、&lt;textarea&gt;</code>里面选中文本时触发</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-c">// HTML 代码如下</span>
+<span class="pl-c">// &lt;input id="test" type="text" value="Select me!" /&gt;</span>
+
+<span class="pl-k">var</span> <span class="pl-s1">elem</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-en">getElementById</span><span class="pl-kos">(</span><span class="pl-s">'test'</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-s1">elem</span><span class="pl-kos">.</span><span class="pl-en">addEventListener</span><span class="pl-kos">(</span><span class="pl-s">'select'</span><span class="pl-kos">,</span> <span class="pl-k">function</span> <span class="pl-kos">(</span><span class="pl-s1">e</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+  <span class="pl-smi">console</span><span class="pl-kos">.</span><span class="pl-en">log</span><span class="pl-kos">(</span><span class="pl-s1">e</span><span class="pl-kos">.</span><span class="pl-c1">type</span><span class="pl-kos">)</span><span class="pl-kos">;</span> <span class="pl-c">// "select"</span>
+<span class="pl-kos">}</span><span class="pl-kos">,</span> <span class="pl-c1">false</span><span class="pl-kos">)</span><span class="pl-kos">;</span></pre></div>
+<h3>Change 事件</h3>
+<p>Change事件当<code class="notranslate">&lt;input&gt;、&lt;select&gt;、&lt;textarea&gt;</code>的值发生变化时触发。它与input事件的最大不同，就是不会连续触发，只有当全部修改完成时才会触发</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">var</span> <span class="pl-s1">email</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-en">getElementById</span><span class="pl-kos">(</span><span class="pl-s">"email"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-s1">email</span><span class="pl-kos">.</span><span class="pl-en">onchange</span> <span class="pl-c1">=</span> <span class="pl-k">function</span><span class="pl-kos">(</span><span class="pl-s1">e</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
+    <span class="pl-smi">console</span><span class="pl-kos">.</span><span class="pl-en">log</span><span class="pl-kos">(</span><span class="pl-s1">e</span><span class="pl-kos">.</span><span class="pl-c1">target</span><span class="pl-kos">.</span><span class="pl-c1">value</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-kos">}</span></pre></div>
+<h3>reset 事件，submit 事件</h3>
+<p>这两个事件发生在表单对象<code class="notranslate">&lt;form&gt;</code>上，而不是发生在表单的成员上。</p>
+<p>reset事件当表单重置（所有表单成员变回默认值）时触发。</p>
+<p>submit事件当表单数据向服务器提交时触发。注意，submit事件的发生对象是<code class="notranslate">&lt;form&gt;</code>元素，而不是<code class="notranslate">&lt;button&gt;</code>元素，因为提交的是表单，而不是按钮</p>
+<div class="highlight highlight-text-html-basic"><pre class="notranslate"><span class="pl-kos">&lt;</span><span class="pl-ent">form</span> <span class="pl-c1">id</span>="<span class="pl-s">myForm</span>" <span class="pl-c1">onsubmit</span>="<span class="pl-s">submitHandle</span>"<span class="pl-kos">&gt;</span>
+    <span class="pl-kos">&lt;</span><span class="pl-ent">button</span> <span class="pl-c1">onclick</span>="<span class="pl-s">resetHandle</span>"<span class="pl-kos">&gt;</span>重置数据<span class="pl-kos">&lt;/</span><span class="pl-ent">button</span><span class="pl-kos">&gt;</span>
+    <span class="pl-kos">&lt;</span><span class="pl-ent">button</span><span class="pl-kos">&gt;</span>提交<span class="pl-kos">&lt;/</span><span class="pl-ent">button</span><span class="pl-kos">&gt;</span>
+<span class="pl-kos">&lt;/</span><span class="pl-ent">form</span><span class="pl-kos">&gt;</span></pre></div>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">var</span> <span class="pl-s1">myForm</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-en">getElementById</span><span class="pl-kos">(</span><span class="pl-s">"myForm"</span><span class="pl-kos">)</span>
+<span class="pl-k">function</span> <span class="pl-en">resetHandle</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
+    <span class="pl-s1">myForm</span><span class="pl-kos">.</span><span class="pl-en">reset</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-kos">}</span>
+<span class="pl-k">function</span> <span class="pl-en">submitHandle</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
+    <span class="pl-smi">console</span><span class="pl-kos">.</span><span class="pl-en">log</span><span class="pl-kos">(</span><span class="pl-s">"提交"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-kos">}</span></pre></div>
+<p><strong>实时效果反馈</strong></p>
+<p><strong>1. 下列代码中，横线处应该填写的内容是：</strong></p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-c">// 需求：用户每次输入都需要触发的事件</span>
+<span class="pl-k">var</span> <span class="pl-s1">username</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-en">getElementById</span><span class="pl-kos">(</span><span class="pl-s">"username"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-s1">username</span><span class="pl-kos">.</span><span class="pl-en">___</span> <span class="pl-c1">=</span> <span class="pl-k">function</span><span class="pl-kos">(</span><span class="pl-s1">e</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
+    <span class="pl-smi">console</span><span class="pl-kos">.</span><span class="pl-en">log</span><span class="pl-kos">(</span><span class="pl-s1">e</span><span class="pl-kos">.</span><span class="pl-c1">target</span><span class="pl-kos">.</span><span class="pl-c1">value</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-kos">}</span></pre></div>
+<h1>事件代理(事件委托)</h1>
+<p>由于事件会在冒泡阶段向上传播到父节点，因此可以把子节点的监听函数定义在父节点上，由父节点的监听函数统一处理多个子元素的事件。这种方法叫做事件的代理（delegation）</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">var</span> <span class="pl-s1">ul</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-en">querySelector</span><span class="pl-kos">(</span><span class="pl-s">'ul'</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+
+<span class="pl-s1">ul</span><span class="pl-kos">.</span><span class="pl-en">addEventListener</span><span class="pl-kos">(</span><span class="pl-s">'click'</span><span class="pl-kos">,</span> <span class="pl-k">function</span> <span class="pl-kos">(</span><span class="pl-s1">event</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+  <span class="pl-k">if</span> <span class="pl-kos">(</span><span class="pl-s1">event</span><span class="pl-kos">.</span><span class="pl-c1">target</span><span class="pl-kos">.</span><span class="pl-c1">tagName</span><span class="pl-kos">.</span><span class="pl-en">toLowerCase</span><span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-c1">===</span> <span class="pl-s">'li'</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+    <span class="pl-c">// some code</span>
+  <span class="pl-kos">}</span>
+<span class="pl-kos">}</span><span class="pl-kos">)</span><span class="pl-kos">;</span></pre></div>
+<p><strong>实时效果反馈</strong></p>
+<p><strong>1. 下列是关于事件代理的处理，横线处应该填写的代码是：</strong></p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">var</span> <span class="pl-s1">parent</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-en">getElementById</span><span class="pl-kos">(</span><span class="pl-s">"parent"</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-s1">parent</span><span class="pl-kos">.</span><span class="pl-en">addEventListener</span><span class="pl-kos">(</span><span class="pl-s">"click"</span><span class="pl-kos">,</span><span class="pl-k">function</span><span class="pl-kos">(</span><span class="pl-s1">e</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
+    <span class="pl-k">if</span><span class="pl-kos">(</span><span class="pl-s1">e</span><span class="pl-kos">.</span><span class="pl-c1">___</span><span class="pl-kos">.</span><span class="pl-c1">tagName</span><span class="pl-kos">.</span><span class="pl-c1">___</span> <span class="pl-c1">===</span> <span class="pl-s">'li'</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
+        <span class="pl-smi">console</span><span class="pl-kos">.</span><span class="pl-en">log</span><span class="pl-kos">(</span><span class="pl-s1">e</span><span class="pl-kos">.</span><span class="pl-c1">target</span><span class="pl-kos">.</span><span class="pl-c1">innerHTML</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+    <span class="pl-kos">}</span>
+<span class="pl-kos">}</span><span class="pl-kos">)</span></pre></div>
+<h1>定时器之<code class="notranslate">setTimeout()</code></h1>
+<p>JavaScript 提供定时执行代码的功能，叫做定时器（timer），主要由<code class="notranslate">setTimeout()</code>和<code class="notranslate">setInterval()</code>这两个函数来完成。它们向任务队列添加定时任务</p>
+<p><code class="notranslate">setTimeout</code>函数用来指定某个函数或某段代码，在多少毫秒之后执行。它返回一个整数，表示定时器的编号，以后可以用来取消这个定时器。</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">var</span> <span class="pl-s1">timerId</span> <span class="pl-c1">=</span> <span class="pl-en">setTimeout</span><span class="pl-kos">(</span><span class="pl-s1">func</span><span class="pl-c1">|</span><span class="pl-s1">code</span><span class="pl-kos">,</span> <span class="pl-s1">delay</span><span class="pl-kos">)</span><span class="pl-kos">;</span></pre></div>
+<p><code class="notranslate">setTimeout</code>函数接受两个参数，第一个参数<code class="notranslate">func|code</code>是将要推迟执行的函数名或者一段代码，第二个参数<code class="notranslate">delay</code>是推迟执行的毫秒数</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-en">setTimeout</span><span class="pl-kos">(</span><span class="pl-k">function</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
+    <span class="pl-smi">console</span><span class="pl-kos">.</span><span class="pl-en">log</span><span class="pl-kos">(</span><span class="pl-s">"定时器"</span><span class="pl-kos">)</span>
+<span class="pl-kos">}</span><span class="pl-kos">,</span><span class="pl-c1">1000</span><span class="pl-kos">)</span></pre></div>
+<blockquote>
+<p><strong>温馨提示</strong></p>
+<p>还有一个需要注意的地方，如果回调函数是对象的方法，那么<code class="notranslate">setTimeout</code>使得方法内部的<code class="notranslate">this</code>关键字指向全局环境，而不是定义时所在的那个对象</p>
+</blockquote>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">var</span> <span class="pl-s1">name</span> <span class="pl-c1">=</span> <span class="pl-s">"sxt"</span><span class="pl-kos">;</span>
+<span class="pl-k">var</span> <span class="pl-s1">user</span> <span class="pl-c1">=</span> <span class="pl-kos">{</span>
+    <span class="pl-c1">name</span>: <span class="pl-s">"itbaizhan"</span><span class="pl-kos">,</span>
+    <span class="pl-en">getName</span>: <span class="pl-k">function</span> <span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+        <span class="pl-en">setTimeout</span><span class="pl-kos">(</span><span class="pl-k">function</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
+            <span class="pl-smi">console</span><span class="pl-kos">.</span><span class="pl-en">log</span><span class="pl-kos">(</span><span class="pl-smi">this</span><span class="pl-kos">.</span><span class="pl-c1">name</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+        <span class="pl-kos">}</span><span class="pl-kos">,</span><span class="pl-c1">1000</span><span class="pl-kos">)</span>
+    <span class="pl-kos">}</span>
+<span class="pl-kos">}</span><span class="pl-kos">;</span>
+<span class="pl-s1">user</span><span class="pl-kos">.</span><span class="pl-en">getName</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">;</span></pre></div>
+<p>解决方案</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">var</span> <span class="pl-s1">name</span> <span class="pl-c1">=</span> <span class="pl-s">"sxt"</span><span class="pl-kos">;</span>
+<span class="pl-k">var</span> <span class="pl-s1">user</span> <span class="pl-c1">=</span> <span class="pl-kos">{</span>
+    <span class="pl-c1">name</span>: <span class="pl-s">"itbaizhan"</span><span class="pl-kos">,</span>
+    <span class="pl-en">getName</span>: <span class="pl-k">function</span> <span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+        <span class="pl-k">var</span> <span class="pl-s1">that</span> <span class="pl-c1">=</span> <span class="pl-smi">this</span><span class="pl-kos">;</span>
+        <span class="pl-en">setTimeout</span><span class="pl-kos">(</span><span class="pl-k">function</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
+            <span class="pl-smi">console</span><span class="pl-kos">.</span><span class="pl-en">log</span><span class="pl-kos">(</span><span class="pl-s1">that</span><span class="pl-kos">.</span><span class="pl-c1">name</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+        <span class="pl-kos">}</span><span class="pl-kos">,</span><span class="pl-c1">1000</span><span class="pl-kos">)</span>
+    <span class="pl-kos">}</span>
+<span class="pl-kos">}</span><span class="pl-kos">;</span>
+<span class="pl-s1">user</span><span class="pl-kos">.</span><span class="pl-en">getName</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">;</span></pre></div>
+<p>定时器可以进行取消</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">var</span> <span class="pl-s1">id</span> <span class="pl-c1">=</span> <span class="pl-en">setTimeout</span><span class="pl-kos">(</span><span class="pl-s1">f</span><span class="pl-kos">,</span> <span class="pl-c1">1000</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-en">clearTimeout</span><span class="pl-kos">(</span><span class="pl-s1">id</span><span class="pl-kos">)</span><span class="pl-kos">;</span></pre></div>
+<p><strong>实时效果反馈</strong></p>
+<p><strong>1. 以下是关于定时器<code class="notranslate">setTimeout</code>代码，运行结果是：</strong></p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">var</span> <span class="pl-s1">name</span> <span class="pl-c1">=</span> <span class="pl-s">"sxt"</span><span class="pl-kos">;</span>
+<span class="pl-k">var</span> <span class="pl-s1">user</span> <span class="pl-c1">=</span> <span class="pl-kos">{</span>
+    <span class="pl-c1">name</span>: <span class="pl-s">"itbaizhan"</span><span class="pl-kos">,</span>
+    <span class="pl-en">getName</span>: <span class="pl-k">function</span> <span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+        <span class="pl-k">var</span> <span class="pl-s1">that</span> <span class="pl-c1">=</span> <span class="pl-smi">this</span><span class="pl-kos">;</span>
+        <span class="pl-en">setTimeout</span><span class="pl-kos">(</span><span class="pl-k">function</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
+            <span class="pl-smi">console</span><span class="pl-kos">.</span><span class="pl-en">log</span><span class="pl-kos">(</span><span class="pl-s1">that</span><span class="pl-kos">.</span><span class="pl-c1">name</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+        <span class="pl-kos">}</span><span class="pl-kos">,</span><span class="pl-c1">1000</span><span class="pl-kos">)</span>
+    <span class="pl-kos">}</span>
+<span class="pl-kos">}</span><span class="pl-kos">;</span>
+<span class="pl-s1">user</span><span class="pl-kos">.</span><span class="pl-en">getName</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">;</span></pre></div>
+<h1>定时器之<code class="notranslate">setInterval()</code></h1>
+<p><code class="notranslate">setInterval</code>函数的用法与<code class="notranslate">setTimeout</code>完全一致，区别仅仅在于<code class="notranslate">setInterval</code>指定某个任务每隔一段时间就执行一次，也就是无限次的定时执行</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">var</span> <span class="pl-s1">timer</span> <span class="pl-c1">=</span> <span class="pl-en">setInterval</span><span class="pl-kos">(</span><span class="pl-k">function</span><span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+  <span class="pl-smi">console</span><span class="pl-kos">.</span><span class="pl-en">log</span><span class="pl-kos">(</span><span class="pl-c1">2</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-kos">}</span><span class="pl-kos">,</span> <span class="pl-c1">1000</span><span class="pl-kos">)</span></pre></div>
+<p>通过setInterval方法实现网页动画</p>
+<div class="highlight highlight-text-html-basic"><pre class="notranslate"><span class="pl-c1">&lt;!DOCTYPE html<span class="pl-kos">&gt;</span></span>
+<span class="pl-kos">&lt;</span><span class="pl-ent">html</span> <span class="pl-c1">lang</span>="<span class="pl-s">en</span>"<span class="pl-kos">&gt;</span>
+<span class="pl-kos">&lt;</span><span class="pl-ent">head</span><span class="pl-kos">&gt;</span>
+	<span class="pl-kos">&lt;</span><span class="pl-ent">meta</span> <span class="pl-c1">charset</span>="<span class="pl-s">UTF-8</span>"<span class="pl-kos">&gt;</span>
+	<span class="pl-kos">&lt;</span><span class="pl-ent">meta</span> <span class="pl-c1">name</span>="<span class="pl-s">viewport</span>" <span class="pl-c1">content</span>="<span class="pl-s">width=device-width, initial-scale=1.0</span>"<span class="pl-kos">&gt;</span>
+	<span class="pl-kos">&lt;</span><span class="pl-ent">title</span><span class="pl-kos">&gt;</span>Document<span class="pl-kos">&lt;/</span><span class="pl-ent">title</span><span class="pl-kos">&gt;</span>
+	<span class="pl-kos">&lt;</span><span class="pl-ent">style</span><span class="pl-kos">&gt;</span>
+		#someDiv{
+			width: 100px;
+			height: 100px;
+			background: red;
+		}
+	<span class="pl-kos">&lt;/</span><span class="pl-ent">style</span><span class="pl-kos">&gt;</span>
+<span class="pl-kos">&lt;/</span><span class="pl-ent">head</span><span class="pl-kos">&gt;</span>
+<span class="pl-kos">&lt;</span><span class="pl-ent">body</span><span class="pl-kos">&gt;</span>
+	<span class="pl-kos">&lt;</span><span class="pl-ent">div</span> <span class="pl-c1">id</span>="<span class="pl-s">someDiv</span>"<span class="pl-kos">&gt;</span><span class="pl-kos">&lt;/</span><span class="pl-ent">div</span><span class="pl-kos">&gt;</span>
+	<span class="pl-kos">&lt;</span><span class="pl-ent">script</span><span class="pl-kos">&gt;</span>
+		<span class="pl-k">var</span> <span class="pl-s1">div</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-en">getElementById</span><span class="pl-kos">(</span><span class="pl-s">'someDiv'</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+		<span class="pl-k">var</span> <span class="pl-s1">opacity</span> <span class="pl-c1">=</span> <span class="pl-c1">1</span><span class="pl-kos">;</span>
+		<span class="pl-k">var</span> <span class="pl-s1">fader</span> <span class="pl-c1">=</span> <span class="pl-en">setInterval</span><span class="pl-kos">(</span><span class="pl-k">function</span><span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+		  <span class="pl-s1">opacity</span> <span class="pl-c1">-=</span> <span class="pl-c1">0.05</span><span class="pl-kos">;</span>
+		  <span class="pl-k">if</span> <span class="pl-kos">(</span><span class="pl-s1">opacity</span> <span class="pl-c1">&gt;</span> <span class="pl-c1">0</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+		    <span class="pl-s1">div</span><span class="pl-kos">.</span><span class="pl-c1">style</span><span class="pl-kos">.</span><span class="pl-c1">opacity</span> <span class="pl-c1">=</span> <span class="pl-s1">opacity</span><span class="pl-kos">;</span>
+		  <span class="pl-kos">}</span> <span class="pl-k">else</span> <span class="pl-kos">{</span>
+		    <span class="pl-en">clearInterval</span><span class="pl-kos">(</span><span class="pl-s1">fader</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+		  <span class="pl-kos">}</span>
+		<span class="pl-kos">}</span><span class="pl-kos">,</span> <span class="pl-c1">30</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+
+	<span class="pl-kos">&lt;/</span><span class="pl-ent">script</span><span class="pl-kos">&gt;</span>
+<span class="pl-kos">&lt;/</span><span class="pl-ent">body</span><span class="pl-kos">&gt;</span>
+<span class="pl-kos">&lt;/</span><span class="pl-ent">html</span><span class="pl-kos">&gt;</span></pre></div>
+<p>定时器可以进行取消</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">var</span> <span class="pl-s1">id</span> <span class="pl-c1">=</span> <span class="pl-en">setInterval</span><span class="pl-kos">(</span><span class="pl-s1">f</span><span class="pl-kos">,</span> <span class="pl-c1">1000</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-en">clearInterval</span><span class="pl-kos">(</span><span class="pl-s1">id</span><span class="pl-kos">)</span><span class="pl-kos">;</span></pre></div>
+<p><strong>实时效果反馈</strong></p>
+<p><strong>1. 以下是关于定时器<code class="notranslate">setInterval</code>代码，每秒打印当前时间，横线处填写代码是：</strong></p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-c1">___</span><span class="pl-kos">(</span><span class="pl-k">function</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
+    <span class="pl-smi">console</span><span class="pl-kos">.</span><span class="pl-en">log</span><span class="pl-kos">(</span><span class="pl-k">new</span> <span class="pl-v">Date</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">.</span><span class="pl-en">toLocaleTimeString</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-kos">}</span><span class="pl-kos">,</span><span class="pl-c1">1000</span><span class="pl-kos">)</span></pre></div>
+<h1>防抖(debounce)</h1>
+<p>防抖严格算起来应该属于性能优化的知识，但实际上遇到的频率相当高，处理不当或者放任不管就容易引起浏览器卡死。</p>
+<p>从滚动条监听的例子说起</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">function</span> <span class="pl-en">showTop</span>  <span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+    <span class="pl-k">var</span> <span class="pl-s1">scrollTop</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-c1">documentElement</span><span class="pl-kos">.</span><span class="pl-c1">scrollTop</span><span class="pl-kos">;</span>
+    <span class="pl-smi">console</span><span class="pl-kos">.</span><span class="pl-en">log</span><span class="pl-kos">(</span><span class="pl-s">'滚动条位置：'</span> <span class="pl-c1">+</span> <span class="pl-s1">scrollTop</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-kos">}</span>
+<span class="pl-smi">window</span><span class="pl-kos">.</span><span class="pl-c1">onscroll</span>  <span class="pl-c1">=</span> <span class="pl-s1">showTop</span></pre></div>
+<p>在运行的时候会发现存在一个问题：这个函数的默认执行频率，太！高！了！。 高到什么程度呢？以chrome为例，我们可以点击选中一个页面的滚动条，然后点击一次键盘的【向下方向键】，会发现函数执行了8-9次！</p>
+<p>然而实际上我们并不需要如此高频的反馈，毕竟浏览器的性能是有限的，不应该浪费在这里，所以接着讨论如何优化这种场景。</p>
+<p>基于上述场景，首先提出第一种思路：在第一次触发事件时，不立即执行函数，而是给出一个期限值比如200ms，然后</p>
+<ol>
+<li>如果在200ms内没有再次触发滚动事件，那么就执行函数</li>
+<li>如果在200ms内再次触发滚动事件，那么当前的计时取消，重新开始计时</li>
+</ol>
+<p>效果：如果短时间内大量触发同一事件，只会执行一次函数</p>
+<p>实现：既然前面都提到了计时，那实现的关键就在于setTimeout这个函数，由于还需要一个变量来保存计时，考虑维护全局纯净，可以借助闭包来实现</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">function</span> <span class="pl-en">debounce</span><span class="pl-kos">(</span><span class="pl-s1">fn</span><span class="pl-kos">,</span><span class="pl-s1">delay</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
+    <span class="pl-k">let</span> <span class="pl-s1">timer</span> <span class="pl-c1">=</span> <span class="pl-c1">null</span> <span class="pl-c">//借助闭包</span>
+    <span class="pl-k">return</span> <span class="pl-k">function</span><span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+        <span class="pl-k">if</span><span class="pl-kos">(</span><span class="pl-s1">timer</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
+            <span class="pl-en">clearTimeout</span><span class="pl-kos">(</span><span class="pl-s1">timer</span><span class="pl-kos">)</span> 
+        <span class="pl-kos">}</span>
+        <span class="pl-s1">timer</span> <span class="pl-c1">=</span> <span class="pl-en">setTimeout</span><span class="pl-kos">(</span><span class="pl-s1">fn</span><span class="pl-kos">,</span><span class="pl-s1">delay</span><span class="pl-kos">)</span> <span class="pl-c">// 简化写法</span>
+    <span class="pl-kos">}</span>
+<span class="pl-kos">}</span>
+<span class="pl-c">// 然后是旧代码</span>
+<span class="pl-k">function</span> <span class="pl-en">showTop</span>  <span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+    <span class="pl-k">var</span> <span class="pl-s1">scrollTop</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-c1">documentElement</span><span class="pl-kos">.</span><span class="pl-c1">scrollTop</span><span class="pl-kos">;</span>
+    <span class="pl-smi">console</span><span class="pl-kos">.</span><span class="pl-en">log</span><span class="pl-kos">(</span><span class="pl-s">'滚动条位置：'</span> <span class="pl-c1">+</span> <span class="pl-s1">scrollTop</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-kos">}</span>
+<span class="pl-smi">window</span><span class="pl-kos">.</span><span class="pl-c1">onscroll</span> <span class="pl-c1">=</span> <span class="pl-en">debounce</span><span class="pl-kos">(</span><span class="pl-s1">showTop</span><span class="pl-kos">,</span><span class="pl-c1">300</span><span class="pl-kos">)</span></pre></div>
+<p>到这里，已经把防抖实现了</p>
+<blockquote>
+<p><strong>防抖定义</strong></p>
+<p>对于短时间内连续触发的事件（上面的滚动事件），防抖的含义就是让某个时间期限（如上面的1000毫秒）内，事件处理函数只执行一次</p>
+</blockquote>
+<p><strong>实时效果反馈</strong></p>
+<p><strong>1. 以下是关于定时器防抖代码，横线处填写代码是：</strong></p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">function</span> <span class="pl-en">debounce</span><span class="pl-kos">(</span><span class="pl-s1">fn</span><span class="pl-kos">,</span><span class="pl-s1">delay</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
+    <span class="pl-k">let</span> <span class="pl-s1">timer</span> <span class="pl-c1">=</span> <span class="pl-c1">null</span> 
+    <span class="pl-k">return</span> <span class="pl-k">function</span><span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+        <span class="pl-k">if</span><span class="pl-kos">(</span><span class="pl-s1">timer</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
+            <span class="pl-c1">_2_</span><span class="pl-kos">(</span><span class="pl-s1">timer</span><span class="pl-kos">)</span> 
+        <span class="pl-kos">}</span>
+        <span class="pl-s1">timer</span> <span class="pl-c1">=</span> <span class="pl-c1">_1_</span><span class="pl-kos">(</span><span class="pl-s1">fn</span><span class="pl-kos">,</span><span class="pl-s1">delay</span><span class="pl-kos">)</span> 
+    <span class="pl-kos">}</span>
+<span class="pl-kos">}</span>
+<span class="pl-k">function</span> <span class="pl-en">showTop</span>  <span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+    <span class="pl-k">var</span> <span class="pl-s1">scrollTop</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-c1">documentElement</span><span class="pl-kos">.</span><span class="pl-c1">scrollTop</span><span class="pl-kos">;</span>
+    <span class="pl-smi">console</span><span class="pl-kos">.</span><span class="pl-en">log</span><span class="pl-kos">(</span><span class="pl-s">'滚动条位置：'</span> <span class="pl-c1">+</span> <span class="pl-s1">scrollTop</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-kos">}</span>
+<span class="pl-smi">window</span><span class="pl-kos">.</span><span class="pl-c1">onscroll</span> <span class="pl-c1">=</span> <span class="pl-en">debounce</span><span class="pl-kos">(</span><span class="pl-s1">showTop</span><span class="pl-kos">,</span><span class="pl-c1">300</span><span class="pl-kos">)</span></pre></div>
+<h1>节流(throttle)</h1>
+<p>节流严格算起来应该属于性能优化的知识，但实际上遇到的频率相当高，处理不当或者放任不管就容易引起浏览器卡死</p>
+<p>继续思考，使用上面的防抖方案来处理问题的结果是</p>
+<p>如果在限定时间段内，不断触发滚动事件（比如某个用户闲着无聊，按住滚动不断的拖来拖去），只要不停止触发，理论上就永远不会输出当前距离顶部的距离</p>
+<p>但是如果产品同学的期望处理方案是：即使用户不断拖动滚动条，也能在某个时间间隔之后给出反馈呢？</p>
+<p>其实很简单：我们可以设计一种类似控制阀门一样定期开放的函数，也就是让函数执行一次后，在某个时间段内暂时失效，过了这段时间后再重新激活（类似于技能冷却时间）</p>
+<p>效果：如果短时间内大量触发同一事件，那么在函数执行一次之后，该函数在指定的时间期限内不再工作，直至过了这段时间才重新生效</p>
+<p><strong>实现</strong></p>
+<p>这里借助setTimeout来做一个简单的实现，加上一个状态位valid来表示当前函数是否处于工作状态</p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">function</span> <span class="pl-en">throttle</span><span class="pl-kos">(</span><span class="pl-s1">fn</span><span class="pl-kos">,</span><span class="pl-s1">delay</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
+    <span class="pl-k">let</span> <span class="pl-s1">valid</span> <span class="pl-c1">=</span> <span class="pl-c1">true</span>
+    <span class="pl-k">return</span> <span class="pl-k">function</span><span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+       <span class="pl-k">if</span><span class="pl-kos">(</span><span class="pl-c1">!</span><span class="pl-s1">valid</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
+           <span class="pl-c">//休息时间 暂不接客</span>
+           <span class="pl-k">return</span> <span class="pl-c1">false</span> 
+       <span class="pl-kos">}</span>
+       <span class="pl-c">// 工作时间，执行函数并且在间隔期内把状态位设为无效</span>
+        <span class="pl-s1">valid</span> <span class="pl-c1">=</span> <span class="pl-c1">false</span>
+        <span class="pl-en">setTimeout</span><span class="pl-kos">(</span><span class="pl-k">function</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
+            <span class="pl-s1">fn</span><span class="pl-kos">(</span><span class="pl-kos">)</span>
+            <span class="pl-s1">valid</span> <span class="pl-c1">=</span> <span class="pl-c1">true</span><span class="pl-kos">;</span>
+        <span class="pl-kos">}</span><span class="pl-kos">,</span> <span class="pl-s1">delay</span><span class="pl-kos">)</span>
+    <span class="pl-kos">}</span>
+<span class="pl-kos">}</span>
+
+<span class="pl-k">function</span> <span class="pl-en">showTop</span>  <span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+    <span class="pl-k">var</span> <span class="pl-s1">scrollTop</span> <span class="pl-c1">=</span> <span class="pl-smi">document</span><span class="pl-kos">.</span><span class="pl-c1">documentElement</span><span class="pl-kos">.</span><span class="pl-c1">scrollTop</span><span class="pl-kos">;</span>
+    <span class="pl-smi">console</span><span class="pl-kos">.</span><span class="pl-en">log</span><span class="pl-kos">(</span><span class="pl-s">'滚动条位置：'</span> <span class="pl-c1">+</span> <span class="pl-s1">scrollTop</span><span class="pl-kos">)</span><span class="pl-kos">;</span>
+<span class="pl-kos">}</span>
+<span class="pl-smi">window</span><span class="pl-kos">.</span><span class="pl-c1">onscroll</span> <span class="pl-c1">=</span> <span class="pl-en">throttle</span><span class="pl-kos">(</span><span class="pl-s1">showTop</span><span class="pl-kos">,</span><span class="pl-c1">300</span><span class="pl-kos">)</span> </pre></div>
+<p>如果一直拖着滚动条进行滚动，那么会以300ms的时间间隔，持续输出当前位置和顶部的距离</p>
+<p>讲完了这两个技巧，下面介绍一下平时开发中常遇到的场景:</p>
+<ol>
+<li>搜索框input事件，例如要支持输入实时搜索可以使用节流方案（间隔一段时间就必须查询相关内容），或者实现输入间隔大于某个值（如500ms），就当做用户输入完成，然后开始搜索，具体使用哪种方案要看业务需求</li>
+<li>页面resize事件，常见于需要做页面适配的时候。需要根据最终呈现的页面情况进行dom渲染（这种情形一般是使用防抖，因为只需要判断最后一次的变化情况）</li>
+</ol>
+<p><strong>实时效果反馈</strong></p>
+<p><strong>1. 以下是关于定时器节流代码，横线处填写代码是：</strong></p>
+<div class="highlight highlight-source-js"><pre class="notranslate"><span class="pl-k">function</span> <span class="pl-en">throttle</span><span class="pl-kos">(</span><span class="pl-s1">fn</span><span class="pl-kos">,</span><span class="pl-s1">delay</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
+    <span class="pl-k">let</span> <span class="pl-s1">valid</span> <span class="pl-c1">=</span> <span class="pl-c1">true</span>
+    <span class="pl-k">return</span> <span class="pl-k">function</span><span class="pl-kos">(</span><span class="pl-kos">)</span> <span class="pl-kos">{</span>
+       <span class="pl-k">if</span><span class="pl-kos">(</span><span class="pl-c1">_1_</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
+           <span class="pl-k">return</span> <span class="pl-c1">false</span> 
+       <span class="pl-kos">}</span>
+        <span class="pl-s1">valid</span> <span class="pl-c1">=</span> <span class="pl-c1">false</span>
+        <span class="pl-c1">_2_</span><span class="pl-kos">(</span><span class="pl-k">function</span><span class="pl-kos">(</span><span class="pl-kos">)</span><span class="pl-kos">{</span>
+            <span class="pl-s1">fn</span><span class="pl-kos">(</span><span class="pl-kos">)</span>
+            <span class="pl-s1">valid</span> <span class="pl-c1">=</span> <span class="pl-c1">true</span><span class="pl-kos">;</span>
+        <span class="pl-kos">}</span><span class="pl-kos">,</span> <span class="pl-s1">delay</span><span class="pl-kos">)</span>
+    <span class="pl-kos">}</span>
+<span class="pl-kos">}</span></pre></div></div>
+<div style="font-size:small;margin-top:8px;float:right;">要做一个有swag的人</div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://blog.ronan.us.kg">Ronan's Blog</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z', 'copy': 'M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z', 'check': 'M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z'};
+var utterancesLoad=0;
+
+console.log("\n %c Gmeek  https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","EchoZap/echozap.github.io");
+    script.setAttribute("issue-term","title");
+    
+    script.setAttribute("theme","github-light");
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const createClipboardHTML = (codeContent, additionalClasses = '') => `
+        <pre class="notranslate"><code class="notranslate">${codeContent}</code></pre>
+        <div class="clipboard-container position-absolute right-0 top-0 ${additionalClasses}">
+            <clipboard-copy class="ClipboardButton btn m-2 p-0" role="button" style="display: inherit;">
+                <svg height="16" width="16" class="octicon octicon-copy m-2"><path d="${IconList["copy"]}"></path></svg>
+                <svg height="16" width="16" class="octicon octicon-check color-fg-success m-2 d-none"><path d="${IconList["check"]}"></path></svg>
+            </clipboard-copy>
+            <div class="copy-feedback">Copied!</div>
+        </div>
+    `;
+
+    const handleCodeElements = (selector = '') => {
+        document.querySelectorAll(selector).forEach(codeElement => {
+            const codeContent = codeElement.innerHTML;
+            const newStructure = document.createElement('div');
+            newStructure.className = 'snippet-clipboard-content position-relative overflow-auto';
+            newStructure.innerHTML = createClipboardHTML(codeContent);
+
+            const parentElement = codeElement.parentElement;
+            if (selector.includes('highlight')) {
+                parentElement.insertBefore(newStructure, codeElement.nextSibling);
+                parentElement.removeChild(codeElement);
+            } else {
+                parentElement.parentElement.replaceChild(newStructure, parentElement);
+            }
+        });
+    };
+
+    handleCodeElements('pre.notranslate > code.notranslate');
+    handleCodeElements('div.highlight > pre.notranslate');
+
+    let currentFeedback = null;
+    document.querySelectorAll('clipboard-copy').forEach(copyButton => {
+        copyButton.addEventListener('click', () => {
+            const codeContent = copyButton.closest('.snippet-clipboard-content').innerText;
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = codeContent;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextArea);
+
+            const copyIcon = copyButton.querySelector('.octicon-copy');
+            const checkIcon = copyButton.querySelector('.octicon-check');
+            const copyFeedback = copyButton.nextElementSibling;
+
+            if (currentFeedback && currentFeedback !== copyFeedback) {currentFeedback.style.display = 'none';}
+            currentFeedback = copyFeedback;
+
+            copyIcon.classList.add('d-none');
+            checkIcon.classList.remove('d-none');
+            copyFeedback.style.display = 'block';
+            copyButton.style.borderColor = 'var(--color-success-fg)';
+
+            setTimeout(() => {
+                copyIcon.classList.remove('d-none');
+                checkIcon.classList.add('d-none');
+                copyFeedback.style.display = 'none';
+                copyButton.style.borderColor = '';
+            }, 2000);
+        });
+    });
+});
+
+</script>
+<script src='https://blog.ronan.us.kg/plugins/ArticleTOC.js'></script><script src='https://blog.ronan.us.kg/plugins/lightbox.js'></script><script>document.querySelectorAll('a').forEach(anchor => {const img = anchor.querySelector('img');if (img && img.hasAttribute('data-canonical-src')) {const canonicalSrc = img.getAttribute('data-canonical-src');anchor.setAttribute('href', canonicalSrc);img.setAttribute('src', canonicalSrc);img.removeAttribute('data-canonical-src');}});</script>
+
+</html>
