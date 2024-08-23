@@ -41,16 +41,21 @@
 
     //控制资源管理器是否应在通过回收站删除文件时要求确认。
     "explorer.confirmDelete": false,
-  
+    
     //控制在粘贴本机文件和文件夹时资源管理器是否应要求进行确认。
     "explorer.confirmPasteNative": false,
-
-    //----------------------------------------------------------------------------------------
 
     // 文件自动保存
     "files.autoSave": "afterDelay",
 
-    //----------------------------------------------------------------------------------------
+    // html标签自动关闭
+    "html.autoClosingTags": true,
+
+    // js标签自动关闭
+    "javascript.autoClosingTags": true,
+
+    //typescript标签自动关闭
+    "typescript.autoClosingTags": true,
 
     //终端光标闪烁
     "terminal.integrated.cursorBlinking": true,
@@ -74,7 +79,7 @@
     "workbench.tree.indent": 24,
 
     //----------------------------------------------------------------------------------------
-  
+    
     //在此数组中添加的每一个设置项的键名，将在所有配置文件中保持相同的值。
     //用来配置在所有配置文件（profiles）中应用的设置项
     "workbench.settings.applyToAllProfiles": [
@@ -83,5 +88,6 @@
     ],
 
 }
+
 
 ```
