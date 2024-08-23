@@ -81,7 +81,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <div class="markdown-body" id="postBody"><div class="markdown-alert markdown-alert-note"><p class="markdown-alert-title"><svg class="octicon octicon-info mr-2" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
 <p>以下为个人自用配置文件，如需拷贝使用请把 <strong>插件配置区</strong> 的选项删除或者安装相应的插件。</p>
 </div>
-<pre class="notranslate"><code class="notranslate">{  
+<pre class="notranslate"><code class="notranslate">{
     //插件配置区*****************************************************************************************
 
     //apc customizeUI++插件，（/Users/einson/Pictures/vscbg/Noisefigure.png 换成自己的文件路径即可实现磨砂效果）
@@ -119,12 +119,24 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 
     //控制资源管理器是否应在通过回收站删除文件时要求确认。
     "explorer.confirmDelete": false,
-    
+
     //控制在粘贴本机文件和文件夹时资源管理器是否应要求进行确认。
     "explorer.confirmPasteNative": false,
 
+    // 自动重命名配对的HTML/XML标签
+    "editor.linkedEditing": true,
+
+    // 彩色缩进
+    "editor.guides.bracketPairs": true,
+
+    // 控制每个方括号类型是否具有自己的独立颜色池。
+    "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+
     // 文件自动保存
     "files.autoSave": "afterDelay",
+
+    // 启用后，将在保存文件时删除行尾的空格。
+    "files.trimTrailingWhitespace": true,
 
     // html标签自动关闭
     "html.autoClosingTags": true,
@@ -156,8 +168,22 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
     //资源管理器文件夹层级缩进大小
     "workbench.tree.indent": 24,
 
+    // "One Dark Pro Flat"括号对颜色
+    // 如更换其他主题，请更换中括号里的主题名[One Dark Pro Flat]
+    "workbench.colorCustomizations": {
+        "[One Dark Pro Flat]":{
+            "editorBracketHighlight.foreground1":"#e78009",
+            "editorBracketHighlight.foreground2":"#22990a",
+            "editorBracketHighlight.foreground3":"#ffffff",
+            "editorBracketHighlight.foreground4":"#ddcf11",
+            "editorBracketHighlight.foreground5":"#9c15c5",
+            "editorBracketHighlight.foreground6":"#1411c4",
+            "editorBracketHighlight.unexpectedBracket.foreground":"#FF2C6D"
+        }
+    },
+
     //----------------------------------------------------------------------------------------
-    
+
     //在此数组中添加的每一个设置项的键名，将在所有配置文件中保持相同的值。
     //用来配置在所有配置文件（profiles）中应用的设置项
     "workbench.settings.applyToAllProfiles": [
@@ -166,8 +192,6 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
     ],
 
 }
-
-
 </code></pre></div>
 <div style="font-size:small;margin-top:8px;float:right;">要做一个有swag的人</div>
 
