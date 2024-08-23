@@ -22,6 +22,9 @@ function createTOC() {
         const link = document.createElement('a');
         link.href = '#' + heading.id;
         link.textContent = heading.textContent;
+        
+        link.setAttribute('data-id', heading.id);
+        
         link.className = 'toc-link';
         link.style.paddingLeft = `${(parseInt(heading.tagName.charAt(1)) - 1) * 10}px`;
         tocElement.appendChild(link);
@@ -30,6 +33,34 @@ function createTOC() {
     
     tocElement.insertAdjacentHTML('beforeend', '<a class="toc-end" onclick="window.scrollTo({top:0,behavior: \'smooth\'});">返回顶部</a>');
     contentContainer.prepend(tocElement);
+}
+
+function highlightTOC() {
+    const tocLinks = document.querySelectorAll('.toc-link');
+    const fromTop = window.scrollY + 10;
+
+    let currentHeading = null;
+
+    tocLinks.forEach(link => {
+        const section = document.getElementById(link.getAttribute('data-id'));
+        if (section && section.offsetTop <= fromTop) {
+            currentHeading = link;
+        }
+    });
+
+    tocLinks.forEach(link => {
+        link.classList.remove('active-toc');
+    });
+
+    if (currentHeading) {
+        currentHeading.classList.add('active-toc');
+
+        // 确保当前高亮的目录项在可视区域的中间
+        currentHeading.scrollIntoView({
+            block: 'center',   // 确保当前高亮项滚动到视图中间位置
+            inline: 'nearest'  // 可选，保持水平滚动条不动
+        });
+    }
 }
 
 function toggleTOC() {
@@ -144,7 +175,6 @@ document.addEventListener("DOMContentLoaded", function() {
             transform: rotate(90deg);
         }
 
-
         .toc-end {
             font-weight: bold;
             text-align: center;
@@ -155,11 +185,12 @@ document.addEventListener("DOMContentLoaded", function() {
             border-radius: 8px;                       /* 可选：使按钮有圆角 */
             border: 1px solid var(--toc-border);      /* 可选：增加边框，使其更明显 */
         }
-
-        /*.toc-end:active {
-            background-color: var(--toc-icon-active-bg); /* 使用激活状态的背景色 */
-            color: var(--toc-text);         /* 使用激活状态的文本颜色 */
-        } */
+        
+        .active-toc {
+            font-weight: bold;
+            background-color: var(--toc-hover);  /* 根据你的设计，可以定制高亮颜色 */
+            padding-left: 5px;  /* 可选：增加左边距以突出当前项目 */
+        }
     `;
     loadResource('style', {css: css});
 
@@ -183,6 +214,9 @@ document.addEventListener("DOMContentLoaded", function() {
             backToTopButton.style="visibility: hidden;background-color: white;"
         }
     };
+
+    document.addEventListener('scroll', highlightTOC);
+    
     document.addEventListener('click', (e) => {
         const tocElement = document.querySelector('.toc');
         if (tocElement && tocElement.classList.contains('show') && !tocElement.contains(e.target) && e.target.classList.contains('toc-icon')) {
