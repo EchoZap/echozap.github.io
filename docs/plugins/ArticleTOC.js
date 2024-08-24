@@ -76,11 +76,11 @@ function toggleTOC() {
 document.addEventListener("DOMContentLoaded", function() {
     createTOC();
     const css = `
-        :root {
-            --toc-bg: #fff;
+       :root {
+            --toc-bg: rgba(237, 239, 233, 0.84);
             --toc-border: #e1e4e8;
             --toc-text: #24292e;
-            --toc-hover: #f6f8fa;
+            --toc-hover: #8ae9c4;
             --toc-icon-bg: #fff;
             --toc-icon-color: #ad6598;
             --toc-icon-active-bg: #813c85;
