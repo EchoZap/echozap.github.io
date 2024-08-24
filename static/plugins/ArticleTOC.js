@@ -87,19 +87,6 @@ document.addEventListener("DOMContentLoaded", function() {
             --toc-icon-active-color: #fff;
         }
 
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --toc-bg: #2d333b;
-                --toc-border: #444c56;
-                --toc-text: #adbac7;
-                --toc-hover: #373e47;
-                --toc-icon-bg: #22272e;
-                --toc-icon-color: #ad6598;
-                --toc-icon-active-bg: #813c85;
-                --toc-icon-active-color: #adbac7;
-            }
-        }
-
         .toc {
             position: fixed;
             bottom: 60px;
