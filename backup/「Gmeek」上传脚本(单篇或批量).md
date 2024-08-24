@@ -1,8 +1,6 @@
-> [!note]
+> [!important]
 >
 > **注意：** 该脚本仅适用于通过Gmeek项目搭建的博客网站  
->
-> 该脚本可以上传任意内容的markdown以及txt文件
 
 # 1.获取github个人Token
 
@@ -13,7 +11,7 @@
 # 2.使用方法
 
 > [!caution]
-> 由于类Linux系统的目录路径格式与Windows等系统不一致，所以，当前sh脚本仅适用于Linux与mac系统，Windows可以使用py脚本
+> 由于类Linux系统的目录路径格式与Windows等系统不一致，所以，当前sh脚本仅适用于Linux与mac系统并且sh脚本仅可以上传md文件，Windows可以使用py脚本
 > 以下有两个方法，分为bash环境和python环境，可根据实际情况自行采用
 
 ### 2.1配置脚本

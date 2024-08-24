@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan's Blog</title><link>https://blog.ronan.us.kg</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.avg</url><title>avatar</title><link>https://blog.ronan.us.kg</link></image><lastBuildDate>Fri, 23 Aug 2024 11:03:16 +0000</lastBuildDate><managingEditor>Ronan's Blog</managingEditor><ttl>60</ttl><webMaster>Ronan's Blog</webMaster><item><title>Conda常用用法</title><link>https://blog.ronan.us.kg/post/Conda-chang-yong-yong-fa.html</link><description># 创建一个新的虚拟环境
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan's Blog</title><link>https://blog.ronan.us.kg</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.avg</url><title>avatar</title><link>https://blog.ronan.us.kg</link></image><lastBuildDate>Sat, 24 Aug 2024 02:20:38 +0000</lastBuildDate><managingEditor>Ronan's Blog</managingEditor><ttl>60</ttl><webMaster>Ronan's Blog</webMaster><item><title>Conda常用用法</title><link>https://blog.ronan.us.kg/post/Conda-chang-yong-yong-fa.html</link><description># 创建一个新的虚拟环境
 
 可以使用以下命令创建一个名为 `jupyter_env` 的新环境，并指定 Python 版本（例如 Python 3.11）
 
@@ -151,11 +151,9 @@ ffmpeg -i input.mp4 -to 00:15:05 -c copy output.mp4&#13;
 ffmpeg -i input.mp4 -ss 15:25 -to 01:15:25 -c copy output.mp4&#13;
 ``` &#13;
   &#13;
-`-i` 指定输入视频路径，`input.mp4`是要裁剪的视频文件的路径， `-ss` 裁剪视频起始时间，`-to` 裁剪视频结束时间，`-c copy` 在裁剪时不改变视频编码，从而保持原始视频码率， `output.mp4` 为裁剪后的视频文件。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/ffmpeg-chang-yong-yong-fa.html</guid><pubDate>Sat, 03 Aug 2024 06:54:09 +0000</pubDate></item><item><title>「Gmeek」上传脚本(单篇或批量)</title><link>https://blog.ronan.us.kg/post/%E3%80%8CGmeek%E3%80%8D-shang-chuan-jiao-ben-%28-dan-pian-huo-pi-liang-%29.html</link><description>&gt; [!note]&#13;
+`-i` 指定输入视频路径，`input.mp4`是要裁剪的视频文件的路径， `-ss` 裁剪视频起始时间，`-to` 裁剪视频结束时间，`-c copy` 在裁剪时不改变视频编码，从而保持原始视频码率， `output.mp4` 为裁剪后的视频文件。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/ffmpeg-chang-yong-yong-fa.html</guid><pubDate>Sat, 03 Aug 2024 06:54:09 +0000</pubDate></item><item><title>「Gmeek」上传脚本(单篇或批量)</title><link>https://blog.ronan.us.kg/post/%E3%80%8CGmeek%E3%80%8D-shang-chuan-jiao-ben-%28-dan-pian-huo-pi-liang-%29.html</link><description>&gt; [!important]&#13;
 &gt;&#13;
 &gt; **注意：** 该脚本仅适用于通过Gmeek项目搭建的博客网站  &#13;
-&gt;&#13;
-&gt; 该脚本可以上传任意内容的markdown以及txt文件&#13;
 &#13;
 # 1.获取github个人Token&#13;
 &#13;
@@ -166,7 +164,7 @@ ffmpeg -i input.mp4 -ss 15:25 -to 01:15:25 -c copy output.mp4&#13;
 # 2.使用方法&#13;
 &#13;
 &gt; [!caution]&#13;
-&gt; 由于类Linux系统的目录路径格式与Windows等系统不一致，所以，当前sh脚本仅适用于Linux与mac系统，Windows可以使用py脚本&#13;
+&gt; 由于类Linux系统的目录路径格式与Windows等系统不一致，所以，当前sh脚本仅适用于Linux与mac系统并且sh脚本仅可以上传md文件，Windows可以使用py脚本&#13;
 &gt; 以下有两个方法，分为bash环境和python环境，可根据实际情况自行采用&#13;
 &#13;
 ### 2.1配置脚本&#13;
