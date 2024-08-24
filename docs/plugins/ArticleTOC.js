@@ -127,6 +127,7 @@ document.addEventListener("DOMContentLoaded", function() {
         .toc a:hover {
             background-color: var(--toc-hover);
             padding-left: 5px;
+            border-radius: 8px;
         }
         .toc-icon {
             position: fixed;
@@ -151,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function() {
             outline: none;
         }
         .toc-icon:hover {
-            transform: scale(1.1);
+            transform: scale(0.9);
         }
         .toc-icon:active {
             transform: scale(0.9);
