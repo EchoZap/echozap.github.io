@@ -154,7 +154,12 @@ jupyter_env               /opt/homebrew/Caskroom/miniconda/base/envs/jupyter_env
 <h3>设置默认环境存储路径</h3>
 <p>你可以通过 <code class="notranslate">conda config</code> 命令来设置默认的环境存储路径。例如，设置所有新环境存储在某个指定目录下：</p>
 <div class="highlight highlight-source-shell"><pre class="notranslate">conda config --add envs_dirs /my/custom/path</pre></div>
-<p>这将把 <code class="notranslate">/my/custom/path</code> 添加到环境路径的优先级列表中。</p></div>
+<p>这将把 <code class="notranslate">/my/custom/path</code> 添加到环境路径的优先级列表中。</p>
+<h1>鬼东西总会自动激活base环境怎么办</h1>
+<p>只需要在 <code class="notranslate">.zshrc的最后一行</code> 添加：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 阻止conda base 环境的自动激活</span>
+conda config --set auto_activate_base <span class="pl-c1">false</span></pre></div>
+<p>然后保存 <code class="notranslate">source ~/.zshrc</code> 即可</p></div>
 <div style="font-size:small;margin-top:8px;float:right;">要做一个有swag的人</div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>

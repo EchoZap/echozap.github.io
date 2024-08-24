@@ -119,3 +119,14 @@ conda config --add envs_dirs /my/custom/path
 ```
 
 这将把 `/my/custom/path` 添加到环境路径的优先级列表中。
+
+
+# 鬼东西总会自动激活base环境怎么办
+只需要在 `.zshrc的最后一行` 添加：
+
+```shell
+# 阻止conda base 环境的自动激活
+conda config --set auto_activate_base false
+``` 
+
+然后保存 `source ~/.zshrc` 即可
