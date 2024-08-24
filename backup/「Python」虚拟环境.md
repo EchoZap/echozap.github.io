@@ -7,7 +7,7 @@ python3 -m venv myenv
 > [!NOTE]
 > *此方法创建的虚拟环境基于系统自带的python版本，不能创建系统未安装的python版本的虚拟环境。假设系统的python3版本是3.12，那么通过 `-m venv` 创建的虚拟环境中的python也会是3.12版本的*   
 
-**如果要创建系统本身未安装的python版本虚拟环境，可以通过conda实现**
+**如果要创建系统本身未安装的python版本虚拟环境，可以通过 [conda](https://blog.ronan.us.kg/post/Conda-chang-yong-yong-fa.html) 实现**
 
 # 激活虚拟环境：
 
