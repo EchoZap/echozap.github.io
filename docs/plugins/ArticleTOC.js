@@ -176,6 +176,7 @@ document.addEventListener("DOMContentLoaded", function() {
         
         .active-toc {
             font-weight: bold;
+            border-radius: 8px;
             background-color: var(--toc-hover);  /* 根据你的设计，可以定制高亮颜色 */
             padding-left: 5px;  /* 可选：增加左边距以突出当前项目 */
         }
