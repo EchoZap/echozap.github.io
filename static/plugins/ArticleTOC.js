@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function() {
             max-height: 70vh;
             background-color: var(--toc-bg);
             border: 1px solid var(--toc-border);
-            border-radius: 6px;
+            border-radius: 8px;
             padding: 10px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             overflow-y: auto;
@@ -112,6 +112,7 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         .toc a {
             display: block;
+            border-radius: 8px;
             color: var(--toc-text);
             text-decoration: none;
             padding: 5px 0;
