@@ -122,7 +122,7 @@ conda config --add envs_dirs /my/custom/path
 
 
 # 鬼东西总会自动激活base环境怎么办
-只需要在 `.zshrc的最后一行` 添加：
+只需要在 `.zshrc的最后一行或者 conda 初始化的后面` 添加：
 
 ```shell
 # 阻止conda base 环境的自动激活

@@ -156,7 +156,7 @@ jupyter_env               /opt/homebrew/Caskroom/miniconda/base/envs/jupyter_env
 <div class="highlight highlight-source-shell"><pre class="notranslate">conda config --add envs_dirs /my/custom/path</pre></div>
 <p>这将把 <code class="notranslate">/my/custom/path</code> 添加到环境路径的优先级列表中。</p>
 <h1>鬼东西总会自动激活base环境怎么办</h1>
-<p>只需要在 <code class="notranslate">.zshrc的最后一行</code> 添加：</p>
+<p>只需要在 <code class="notranslate">.zshrc的最后一行或者 conda 初始化的后面</code> 添加：</p>
 <div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 阻止conda base 环境的自动激活</span>
 conda config --set auto_activate_base <span class="pl-c1">false</span></pre></div>
 <p>然后保存 <code class="notranslate">source ~/.zshrc</code> 即可</p></div>
