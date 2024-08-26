@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan's Blog</title><link>https://blog.ronan.us.kg</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.avg</url><title>avatar</title><link>https://blog.ronan.us.kg</link></image><lastBuildDate>Mon, 26 Aug 2024 04:31:48 +0000</lastBuildDate><managingEditor>Ronan's Blog</managingEditor><ttl>60</ttl><webMaster>Ronan's Blog</webMaster><item><title>npm常用用法</title><link>https://blog.ronan.us.kg/post/npm-chang-yong-yong-fa.html</link><description>你可以使用以下命令查看已经通过 `npm` 安装的包：
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan's Blog</title><link>https://blog.ronan.us.kg</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.avg</url><title>avatar</title><link>https://blog.ronan.us.kg</link></image><lastBuildDate>Mon, 26 Aug 2024 04:32:58 +0000</lastBuildDate><managingEditor>Ronan's Blog</managingEditor><ttl>60</ttl><webMaster>Ronan's Blog</webMaster><item><title>npm常用用法</title><link>https://blog.ronan.us.kg/post/npm-chang-yong-yong-fa.html</link><description>你可以使用以下命令查看已经通过 `npm` 安装的包：
 
 ### 1. **查看全局安装的包**
 
@@ -332,7 +332,7 @@ while true; do&#13;
     fi&#13;
     sleep 5&#13;
 done&#13;
-```。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/macOS-dian-chi-guan-li-jiao-ben.html</guid><pubDate>Fri, 02 Aug 2024 06:08:01 +0000</pubDate></item><item><title>「Python」虚拟环境</title><link>https://blog.ronan.us.kg/post/%E3%80%8CPython%E3%80%8D-xu-ni-huan-jing.html</link><description>*在虚拟环境中，pip 和 pip3 通常会指向同一个 Python 版本的包管理器。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/%E3%80%8CPython%E3%80%8D-xu-ni-huan-jing.html</guid><pubDate>Mon, 29 Jul 2024 12:48:40 +0000</pubDate></item><item><title>查看或切换当前python解释器</title><link>https://blog.ronan.us.kg/post/cha-kan-huo-qie-huan-dang-qian-python-jie-shi-qi.html</link><description># 查看系统中所有安装的 Python 解释器&#13;
+```。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/macOS-dian-chi-guan-li-jiao-ben.html</guid><pubDate>Fri, 02 Aug 2024 06:08:01 +0000</pubDate></item><item><title>「Python」虚拟环境</title><link>https://blog.ronan.us.kg/post/%E3%80%8CPython%E3%80%8D-xu-ni-huan-jing.html</link><description>*在虚拟环境中，pip 和 pip3 通常会指向同一个 Python 版本的包管理器。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/%E3%80%8CPython%E3%80%8D-xu-ni-huan-jing.html</guid><pubDate>Mon, 29 Jul 2024 12:48:40 +0000</pubDate></item><item><title>「python」查看或切换当前解释器</title><link>https://blog.ronan.us.kg/post/%E3%80%8Cpython%E3%80%8D-cha-kan-huo-qie-huan-dang-qian-jie-shi-qi.html</link><description># 查看系统中所有安装的 Python 解释器&#13;
 ```&#13;
 which -a python python3&#13;
 ```&#13;
@@ -344,7 +344,7 @@ python not found&#13;
 /usr/bin/python3&#13;
 /opt/homebrew/bin/python3&#13;
 ```&#13;
-`-a` 选项确保显示所有匹配的路径，而不仅仅是第一个。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/cha-kan-huo-qie-huan-dang-qian-python-jie-shi-qi.html</guid><pubDate>Mon, 29 Jul 2024 11:44:59 +0000</pubDate></item><item><title>「各种摸不着头脑」意外修改PATH(环境变量)</title><link>https://blog.ronan.us.kg/post/%E3%80%8C-ge-zhong-mo-bu-zhao-tou-nao-%E3%80%8D-yi-wai-xiu-gai-PATH%28-huan-jing-bian-liang-%29.html</link><description># 1. **检查sudo是否已经安装**&#13;
+`-a` 选项确保显示所有匹配的路径，而不仅仅是第一个。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/%E3%80%8Cpython%E3%80%8D-cha-kan-huo-qie-huan-dang-qian-jie-shi-qi.html</guid><pubDate>Mon, 29 Jul 2024 11:44:59 +0000</pubDate></item><item><title>「各种摸不着头脑」意外修改PATH(环境变量)</title><link>https://blog.ronan.us.kg/post/%E3%80%8C-ge-zhong-mo-bu-zhao-tou-nao-%E3%80%8D-yi-wai-xiu-gai-PATH%28-huan-jing-bian-liang-%29.html</link><description># 1. **检查sudo是否已经安装**&#13;
 &#13;
 确保 **sudo** 已经正确地安装在你的系统中。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/%E3%80%8C-ge-zhong-mo-bu-zhao-tou-nao-%E3%80%8D-yi-wai-xiu-gai-PATH%28-huan-jing-bian-liang-%29.html</guid><pubDate>Sun, 28 Jul 2024 09:55:30 +0000</pubDate></item><item><title>Linux查看或修改主机名</title><link>https://blog.ronan.us.kg/post/Linux-cha-kan-huo-xiu-gai-zhu-ji-ming.html</link><description># 1查看当前主机名&#13;
 &#13;
