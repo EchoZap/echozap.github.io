@@ -16,7 +16,16 @@
 
 ### 2.1配置脚本
 
+- 对于 sh 脚本
+在代码开始的前几行，找到以下几个值，在引号里填入自己的信息：
+
+1.`TOKEN`  为上面获取到的Token值  
+2.`OWNER` 为自己的github用户名  
+3.`REPO` 为自己的Gmeek博客仓库名，一般是 `xxx.github.io`
+
+- 对于 py 脚本  
 找到代码最后几行，在引号里面填入：
+
 1. `token` 为上面获取到的Token值  
 2. `owner` 为自己的github用户名  
 3. `repo` 为自己的Gmeek博客仓库名，一般是 `xxx.github.io`
@@ -28,16 +37,15 @@
 ```shell
 #!/usr/bin/env bash
 
+TOKEN=''
+OWNER=''
+REPO=''
+
 # 上传主程序
 main_upload_program() {
-    local file=$1
-    local labels=$2
-
-    # 使用 sed 命令从完整路径中提取文件名
-    title=$(echo "$file" | sed -e 's/.*\/\(.*\).md/\1/')
-
-    # 获取文章内容
-    content=$(sed "" "$file")
+    local title=$1
+    local content=$2
+    local labels=$3
 
     # 将标签转换成 JSON 数组格式
     labels_json=$(echo "$labels" | sed 's/,/","/g' | sed 's/^/["/' | sed 's/$/"]/')
@@ -51,28 +59,50 @@ main_upload_program() {
 
     # 发送 POST 请求
     curl -L \
+        --silent \
         -X POST \
         -H "Accept: application/vnd.github+json" \
-        -H "Authorization: Bearer <Token>" \
+        -H "Authorization: Bearer $TOKEN" \
         -H "X-GitHub-Api-Version: 2022-11-28" \
-        https://api.github.com/repos/<OWNER>/<REPO>/issues \
+        https://api.github.com/repos/$OWNER/$REPO/issues \
         -d "$json_data"
 }
 
 # 上传单篇文章
-upload_a_single_article() {
-    read -p "请输入文章完成路径：" file
+upload_single_post() {
+    read -p "请输入文章路径：" file_path
     read -p "请输入文章标签(多个标签请用,隔开)：" labels
 
-    main_upload_program "$file" "$labels"}
+    if echo "$file_path" | grep -E '\.(md|txt)$' > /dev/null; then
+        # 提取文件名并去掉扩展名
+        file_name=$(basename "$file_path")
+        title=$(echo "$file_name" | sed 's/\.[^.]*$//')
+
+        # 获取文章内容
+        content=$(sed "" "$file_path")
+
+        main_upload_program "$title" "$content" "$labels"
+    fi
+
+}
 
 # 批量上传
-batch_upload() {
+upload_batch_posts() {
     read -p "请输入要上传的文件目录(绝对、相对路径皆可)：" file_path
     read -p "请输入文章标签(多个标签请用,隔开)：" labels
-    for file in "${file_path}"/*.md
+    for file in "${file_path}"/*
     do
-        main_upload_program "$file" "$labels"
+        if echo "$file" | grep -E '\.(md|txt)$' > /dev/null; then
+            # 提取文件名并去掉扩展名
+            file_name=$(basename "$file")
+            title=$(echo "$file_name" | sed 's/\.[^.]*$//')
+
+            # 获取文章内容
+            content=$(sed "" "$file")
+
+            main_upload_program "$title" "$content" "$labels"
+        fi
+
     done
 }
 
@@ -86,13 +116,13 @@ while true;do
     echo " Q. 退出本程序"
     echo
     read -p "请选择一个选项: " status
-    case $status in  
+    case $status in
         1)
-            upload_a_single_article
+            upload_single_post
             break
         ;;
         2)
-            batch_upload
+            upload_batch_posts
             break
         ;;
         q | Q)

@@ -25,7 +25,16 @@
 
 ### 2.1配置脚本
 
+- 对于 sh 脚本
+在代码开始的前几行，找到以下几个值，在引号里填入自己的信息：
+
+1.`TOKEN`  为上面获取到的Token值  
+2.`OWNER` 为自己的github用户名  
+3.`REPO` 为自己的Gmeek博客仓库名，一般是 `xxx.github.io`
+
+- 对于 py 脚本  
 找到代码最后几行，在引号里面填入：
+
 1. `token` 为上面获取到的Token值  
 2. `owner` 为自己的github用户名  
 3. `repo` 为自己的Gmeek博客仓库名，一般是 `xxx.github.io`
@@ -37,16 +46,15 @@
 ```shell
 #!/usr/bin/env bash
 
+TOKEN=''
+OWNER=''
+REPO=''
+
 # 上传主程序
 main_upload_program() {
-    local file=$1
-    local labels=$2
-
-    # 使用 sed 命令从完整路径中提取文件名
-    title=$(echo '$file' | sed -e 's/.*\/\(.*\).md/\1/')
-
-    # 获取文章内容
-    content=$(sed '' '$file')
+    local title=$1
+    local content=$2
+    local labels=$3
 
     # 将标签转换成 JSON 数组格式
     labels_json=$(echo '$labels' | sed 's/,/','/g' | sed 's/^/['/' | sed 's/$/']/')
@@ -60,28 +68,50 @@ main_upload_program() {
 
     # 发送 POST 请求
     curl -L \
+        --silent \
         -X POST \
         -H 'Accept: application/vnd.github+json' \
-        -H 'Authorization: Bearer <Token>' \
+        -H 'Authorization: Bearer $TOKEN' \
         -H 'X-GitHub-Api-Version: 2022-11-28' \
-        https://api.github.com/repos/<OWNER>/<REPO>/issues \
+        https://api.github.com/repos/$OWNER/$REPO/issues \
         -d '$json_data'
 }
 
 # 上传单篇文章
-upload_a_single_article() {
-    read -p '请输入文章完成路径：' file
+upload_single_post() {
+    read -p '请输入文章路径：' file_path
     read -p '请输入文章标签(多个标签请用,隔开)：' labels
 
-    main_upload_program '$file' '$labels'}
+    if echo '$file_path' | grep -E '\.(md|txt)$' > /dev/null; then
+        # 提取文件名并去掉扩展名
+        file_name=$(basename '$file_path')
+        title=$(echo '$file_name' | sed 's/\.[^.]*$//')
+
+        # 获取文章内容
+        content=$(sed '' '$file_path')
+
+        main_upload_program '$title' '$content' '$labels'
+    fi
+
+}
 
 # 批量上传
-batch_upload() {
+upload_batch_posts() {
     read -p '请输入要上传的文件目录(绝对、相对路径皆可)：' file_path
     read -p '请输入文章标签(多个标签请用,隔开)：' labels
-    for file in '${file_path}'/*.md
+    for file in '${file_path}'/*
     do
-        main_upload_program '$file' '$labels'
+        if echo '$file' | grep -E '\.(md|txt)$' > /dev/null; then
+            # 提取文件名并去掉扩展名
+            file_name=$(basename '$file')
+            title=$(echo '$file_name' | sed 's/\.[^.]*$//')
+
+            # 获取文章内容
+            content=$(sed '' '$file')
+
+            main_upload_program '$title' '$content' '$labels'
+        fi
+
     done
 }
 
@@ -95,13 +125,13 @@ while true;do
     echo ' Q. 退出本程序'
     echo
     read -p '请选择一个选项: ' status
-    case $status in  
+    case $status in
         1)
-            upload_a_single_article
+            upload_single_post
             break
         ;;
         2)
-            batch_upload
+            upload_batch_posts
             break
         ;;
         q | Q)
@@ -129,7 +159,16 @@ while true;do
 
 ### 2.1配置脚本
 
+- 对于 sh 脚本
+在代码开始的前几行，找到以下几个值，在引号里填入自己的信息：
+
+1.`TOKEN`  为上面获取到的Token值  
+2.`OWNER` 为自己的github用户名  
+3.`REPO` 为自己的Gmeek博客仓库名，一般是 `xxx.github.io`
+
+- 对于 py 脚本  
 找到代码最后几行，在引号里面填入：
+
 1. `token` 为上面获取到的Token值  
 2. `owner` 为自己的github用户名  
 3. `repo` 为自己的Gmeek博客仓库名，一般是 `xxx.github.io`
@@ -141,16 +180,15 @@ while true;do
 ```shell
 #!/usr/bin/env bash
 
+TOKEN=''
+OWNER=''
+REPO=''
+
 # 上传主程序
 main_upload_program() {
-    local file=$1
-    local labels=$2
-
-    # 使用 sed 命令从完整路径中提取文件名
-    title=$(echo '$file' | sed -e 's/.*\/\(.*\).md/\1/')
-
-    # 获取文章内容
-    content=$(sed '' '$file')
+    local title=$1
+    local content=$2
+    local labels=$3
 
     # 将标签转换成 JSON 数组格式
     labels_json=$(echo '$labels' | sed 's/,/','/g' | sed 's/^/['/' | sed 's/$/']/')
@@ -164,28 +202,50 @@ main_upload_program() {
 
     # 发送 POST 请求
     curl -L \
+        --silent \
         -X POST \
         -H 'Accept: application/vnd.github+json' \
-        -H 'Authorization: Bearer <Token>' \
+        -H 'Authorization: Bearer $TOKEN' \
         -H 'X-GitHub-Api-Version: 2022-11-28' \
-        https://api.github.com/repos/<OWNER>/<REPO>/issues \
+        https://api.github.com/repos/$OWNER/$REPO/issues \
         -d '$json_data'
 }
 
 # 上传单篇文章
-upload_a_single_article() {
-    read -p '请输入文章完成路径：' file
+upload_single_post() {
+    read -p '请输入文章路径：' file_path
     read -p '请输入文章标签(多个标签请用,隔开)：' labels
 
-    main_upload_program '$file' '$labels'}
+    if echo '$file_path' | grep -E '\.(md|txt)$' > /dev/null; then
+        # 提取文件名并去掉扩展名
+        file_name=$(basename '$file_path')
+        title=$(echo '$file_name' | sed 's/\.[^.]*$//')
+
+        # 获取文章内容
+        content=$(sed '' '$file_path')
+
+        main_upload_program '$title' '$content' '$labels'
+    fi
+
+}
 
 # 批量上传
-batch_upload() {
+upload_batch_posts() {
     read -p '请输入要上传的文件目录(绝对、相对路径皆可)：' file_path
     read -p '请输入文章标签(多个标签请用,隔开)：' labels
-    for file in '${file_path}'/*.md
+    for file in '${file_path}'/*
     do
-        main_upload_program '$file' '$labels'
+        if echo '$file' | grep -E '\.(md|txt)$' > /dev/null; then
+            # 提取文件名并去掉扩展名
+            file_name=$(basename '$file')
+            title=$(echo '$file_name' | sed 's/\.[^.]*$//')
+
+            # 获取文章内容
+            content=$(sed '' '$file')
+
+            main_upload_program '$title' '$content' '$labels'
+        fi
+
     done
 }
 
@@ -199,13 +259,13 @@ while true;do
     echo ' Q. 退出本程序'
     echo
     read -p '请选择一个选项: ' status
-    case $status in  
+    case $status in
         1)
-            upload_a_single_article
+            upload_single_post
             break
         ;;
         2)
-            batch_upload
+            upload_batch_posts
             break
         ;;
         q | Q)
@@ -291,7 +351,17 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 以下有两个方法，分为bash环境和python环境，可根据实际情况自行采用</p>
 </div>
 <h3>2.1配置脚本</h3>
-<p>找到代码最后几行，在引号里面填入：</p>
+<ul>
+<li>对于 sh 脚本<br>
+在代码开始的前几行，找到以下几个值，在引号里填入自己的信息：</li>
+</ul>
+<p>1.<code class="notranslate">TOKEN</code>  为上面获取到的Token值<br>
+2.<code class="notranslate">OWNER</code> 为自己的github用户名<br>
+3.<code class="notranslate">REPO</code> 为自己的Gmeek博客仓库名，一般是 <code class="notranslate">xxx.github.io</code></p>
+<ul>
+<li>对于 py 脚本<br>
+找到代码最后几行，在引号里面填入：</li>
+</ul>
 <ol>
 <li><code class="notranslate">token</code> 为上面获取到的Token值</li>
 <li><code class="notranslate">owner</code> 为自己的github用户名</li>
@@ -302,16 +372,15 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
   <pre class="notranslate"><code class="notranslate">  
 <div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#!</span>/usr/bin/env bash</span>
 
+TOKEN=<span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>
+OWNER=<span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>
+REPO=<span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>
+
 <span class="pl-c"><span class="pl-c">#</span> 上传主程序</span>
 <span class="pl-en">main_upload_program</span>() {
-    <span class="pl-k">local</span> file=<span class="pl-smi">$1</span>
-    <span class="pl-k">local</span> labels=<span class="pl-smi">$2</span>
-
-    <span class="pl-c"><span class="pl-c">#</span> 使用 sed 命令从完整路径中提取文件名</span>
-    title=<span class="pl-s"><span class="pl-pds">$(</span>echo <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$file</span><span class="pl-pds">"</span></span> <span class="pl-k">|</span> sed -e <span class="pl-s"><span class="pl-pds">'</span>s/.*\/\(.*\).md/\1/<span class="pl-pds">'</span></span><span class="pl-pds">)</span></span>
-
-    <span class="pl-c"><span class="pl-c">#</span> 获取文章内容</span>
-    content=<span class="pl-s"><span class="pl-pds">$(</span>sed <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$file</span><span class="pl-pds">"</span></span><span class="pl-pds">)</span></span>
+    <span class="pl-k">local</span> title=<span class="pl-smi">$1</span>
+    <span class="pl-k">local</span> content=<span class="pl-smi">$2</span>
+    <span class="pl-k">local</span> labels=<span class="pl-smi">$3</span>
 
     <span class="pl-c"><span class="pl-c">#</span> 将标签转换成 JSON 数组格式</span>
     labels_json=<span class="pl-s"><span class="pl-pds">$(</span>echo <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$labels</span><span class="pl-pds">"</span></span> <span class="pl-k">|</span> sed <span class="pl-s"><span class="pl-pds">'</span>s/,/","/g<span class="pl-pds">'</span></span> <span class="pl-k">|</span> sed <span class="pl-s"><span class="pl-pds">'</span>s/^/["/<span class="pl-pds">'</span></span> <span class="pl-k">|</span> sed <span class="pl-s"><span class="pl-pds">'</span>s/$/"]/<span class="pl-pds">'</span></span><span class="pl-pds">)</span></span>
@@ -325,28 +394,50 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 
     <span class="pl-c"><span class="pl-c">#</span> 发送 POST 请求</span>
     curl -L \
+        --silent \
         -X POST \
         -H <span class="pl-s"><span class="pl-pds">"</span>Accept: application/vnd.github+json<span class="pl-pds">"</span></span> \
-        -H <span class="pl-s"><span class="pl-pds">"</span>Authorization: Bearer &lt;Token&gt;<span class="pl-pds">"</span></span> \
+        -H <span class="pl-s"><span class="pl-pds">"</span>Authorization: Bearer <span class="pl-smi">$TOKEN</span><span class="pl-pds">"</span></span> \
         -H <span class="pl-s"><span class="pl-pds">"</span>X-GitHub-Api-Version: 2022-11-28<span class="pl-pds">"</span></span> \
-        https://api.github.com/repos/<span class="pl-k">&lt;</span>OWNER<span class="pl-k">&gt;</span>/<span class="pl-k">&lt;</span>REPO<span class="pl-k">&gt;</span>/issues \
+        https://api.github.com/repos/<span class="pl-smi">$OWNER</span>/<span class="pl-smi">$REPO</span>/issues \
         -d <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$json_data</span><span class="pl-pds">"</span></span>
 }
 
 <span class="pl-c"><span class="pl-c">#</span> 上传单篇文章</span>
-<span class="pl-en">upload_a_single_article</span>() {
-    <span class="pl-c1">read</span> -p <span class="pl-s"><span class="pl-pds">"</span>请输入文章完成路径：<span class="pl-pds">"</span></span> file
+<span class="pl-en">upload_single_post</span>() {
+    <span class="pl-c1">read</span> -p <span class="pl-s"><span class="pl-pds">"</span>请输入文章路径：<span class="pl-pds">"</span></span> file_path
     <span class="pl-c1">read</span> -p <span class="pl-s"><span class="pl-pds">"</span>请输入文章标签(多个标签请用,隔开)：<span class="pl-pds">"</span></span> labels
 
-    main_upload_program <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$file</span><span class="pl-pds">"</span></span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$labels</span><span class="pl-pds">"</span></span>}
+    <span class="pl-k">if</span> <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$file_path</span><span class="pl-pds">"</span></span> <span class="pl-k">|</span> grep -E <span class="pl-s"><span class="pl-pds">'</span>\.(md|txt)$<span class="pl-pds">'</span></span> <span class="pl-k">&gt;</span> /dev/null<span class="pl-k">;</span> <span class="pl-k">then</span>
+        <span class="pl-c"><span class="pl-c">#</span> 提取文件名并去掉扩展名</span>
+        file_name=<span class="pl-s"><span class="pl-pds">$(</span>basename <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$file_path</span><span class="pl-pds">"</span></span><span class="pl-pds">)</span></span>
+        title=<span class="pl-s"><span class="pl-pds">$(</span>echo <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$file_name</span><span class="pl-pds">"</span></span> <span class="pl-k">|</span> sed <span class="pl-s"><span class="pl-pds">'</span>s/\.[^.]*$//<span class="pl-pds">'</span></span><span class="pl-pds">)</span></span>
+
+        <span class="pl-c"><span class="pl-c">#</span> 获取文章内容</span>
+        content=<span class="pl-s"><span class="pl-pds">$(</span>sed <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$file_path</span><span class="pl-pds">"</span></span><span class="pl-pds">)</span></span>
+
+        main_upload_program <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$title</span><span class="pl-pds">"</span></span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$content</span><span class="pl-pds">"</span></span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$labels</span><span class="pl-pds">"</span></span>
+    <span class="pl-k">fi</span>
+
+}
 
 <span class="pl-c"><span class="pl-c">#</span> 批量上传</span>
-<span class="pl-en">batch_upload</span>() {
+<span class="pl-en">upload_batch_posts</span>() {
     <span class="pl-c1">read</span> -p <span class="pl-s"><span class="pl-pds">"</span>请输入要上传的文件目录(绝对、相对路径皆可)：<span class="pl-pds">"</span></span> file_path
     <span class="pl-c1">read</span> -p <span class="pl-s"><span class="pl-pds">"</span>请输入文章标签(多个标签请用,隔开)：<span class="pl-pds">"</span></span> labels
-    <span class="pl-k">for</span> <span class="pl-smi">file</span> <span class="pl-k">in</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">${file_path}</span><span class="pl-pds">"</span></span>/<span class="pl-k">*</span>.md
+    <span class="pl-k">for</span> <span class="pl-smi">file</span> <span class="pl-k">in</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">${file_path}</span><span class="pl-pds">"</span></span>/<span class="pl-k">*</span>
     <span class="pl-k">do</span>
-        main_upload_program <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$file</span><span class="pl-pds">"</span></span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$labels</span><span class="pl-pds">"</span></span>
+        <span class="pl-k">if</span> <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$file</span><span class="pl-pds">"</span></span> <span class="pl-k">|</span> grep -E <span class="pl-s"><span class="pl-pds">'</span>\.(md|txt)$<span class="pl-pds">'</span></span> <span class="pl-k">&gt;</span> /dev/null<span class="pl-k">;</span> <span class="pl-k">then</span>
+            <span class="pl-c"><span class="pl-c">#</span> 提取文件名并去掉扩展名</span>
+            file_name=<span class="pl-s"><span class="pl-pds">$(</span>basename <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$file</span><span class="pl-pds">"</span></span><span class="pl-pds">)</span></span>
+            title=<span class="pl-s"><span class="pl-pds">$(</span>echo <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$file_name</span><span class="pl-pds">"</span></span> <span class="pl-k">|</span> sed <span class="pl-s"><span class="pl-pds">'</span>s/\.[^.]*$//<span class="pl-pds">'</span></span><span class="pl-pds">)</span></span>
+
+            <span class="pl-c"><span class="pl-c">#</span> 获取文章内容</span>
+            content=<span class="pl-s"><span class="pl-pds">$(</span>sed <span class="pl-s"><span class="pl-pds">"</span><span class="pl-pds">"</span></span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$file</span><span class="pl-pds">"</span></span><span class="pl-pds">)</span></span>
+
+            main_upload_program <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$title</span><span class="pl-pds">"</span></span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$content</span><span class="pl-pds">"</span></span> <span class="pl-s"><span class="pl-pds">"</span><span class="pl-smi">$labels</span><span class="pl-pds">"</span></span>
+        <span class="pl-k">fi</span>
+
     <span class="pl-k">done</span>
 }
 
@@ -360,13 +451,13 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
     <span class="pl-c1">echo</span> <span class="pl-s"><span class="pl-pds">"</span> Q. 退出本程序<span class="pl-pds">"</span></span>
     <span class="pl-c1">echo</span>
     <span class="pl-c1">read</span> -p <span class="pl-s"><span class="pl-pds">"</span>请选择一个选项: <span class="pl-pds">"</span></span> status
-    <span class="pl-k">case</span> <span class="pl-smi">$status</span> <span class="pl-k">in</span>  
+    <span class="pl-k">case</span> <span class="pl-smi">$status</span> <span class="pl-k">in</span>
         1)
-            upload_a_single_article
+            upload_single_post
             <span class="pl-c1">break</span>
         ;;
         2)
-            batch_upload
+            upload_batch_posts
             <span class="pl-c1">break</span>
         ;;
         q | Q)
