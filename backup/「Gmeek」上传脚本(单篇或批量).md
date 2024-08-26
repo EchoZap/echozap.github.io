@@ -58,14 +58,55 @@ main_upload_program() {
     '{title: $title, body: $body, labels: $labels}')
 
     # 发送 POST 请求
-    curl -L \
+    status_code=$(    curl -L \
         --silent \
+        --output /dev/null \
+        --write-out "%{http_code}" \
         -X POST \
         -H "Accept: application/vnd.github+json" \
         -H "Authorization: Bearer $TOKEN" \
         -H "X-GitHub-Api-Version: 2022-11-28" \
         https://api.github.com/repos/$OWNER/$REPO/issues \
-        -d "$json_data"
+        -d "$json_data" )
+
+    case $status_code in
+        201)
+            echo
+            echo "返回码：$status_code"
+            echo "上传成功"
+        ;;
+        400)
+            echo
+            echo "返回码：$status_code"
+            echo "Bad Request, 错误请求"
+        ;;
+        403)
+            echo
+            echo "返回码：$status_code"
+            echo "Forbidden"
+        ;;
+        404)
+            echo
+            echo "返回码：$status_code"
+            echo "Resource not found"
+        ;;
+        410)
+            echo
+            echo "返回码：$status_code"
+            echo "Gone"
+        ;;
+        422)
+            echo
+            echo "返回码：$status_code"
+            echo "Validation failed, or the endpoint has been spammed. \n 验证失败，或终结点已收到垃圾邮件。"
+        ;;
+        502)
+            echo
+            echo "返回码：$status_code"
+            echo "Service unavailable, 服务不可用"
+        ;;
+    esac
+
 }
 
 # 上传单篇文章
