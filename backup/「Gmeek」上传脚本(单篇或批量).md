@@ -242,7 +242,7 @@ class GitHubIssueUploader:
 
     def upload_batch_posts(self, directory, labels):
         for filename in os.listdir(directory):
-            if filename.endswith('.md'):
+            if filename.endswith('.md') or filename.endswith('.txt'):
                 file_path = os.path.join(directory, filename)
                 self.upload_single_post(file_path, labels)
 

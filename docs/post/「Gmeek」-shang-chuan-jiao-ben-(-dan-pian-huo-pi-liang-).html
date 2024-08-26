@@ -511,7 +511,7 @@ REPO=<span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</spa
 
     <span class="pl-k">def</span> <span class="pl-en">upload_batch_posts</span>(<span class="pl-s1">self</span>, <span class="pl-s1">directory</span>, <span class="pl-s1">labels</span>):
         <span class="pl-k">for</span> <span class="pl-s1">filename</span> <span class="pl-c1">in</span> <span class="pl-s1">os</span>.<span class="pl-en">listdir</span>(<span class="pl-s1">directory</span>):
-            <span class="pl-k">if</span> <span class="pl-s1">filename</span>.<span class="pl-en">endswith</span>(<span class="pl-s">'.md'</span>):
+            <span class="pl-k">if</span> <span class="pl-s1">filename</span>.<span class="pl-en">endswith</span>(<span class="pl-s">'.md'</span>) <span class="pl-c1">or</span> <span class="pl-s1">filename</span>.<span class="pl-en">endswith</span>(<span class="pl-s">'.txt'</span>):
                 <span class="pl-s1">file_path</span> <span class="pl-c1">=</span> <span class="pl-s1">os</span>.<span class="pl-s1">path</span>.<span class="pl-en">join</span>(<span class="pl-s1">directory</span>, <span class="pl-s1">filename</span>)
                 <span class="pl-s1">self</span>.<span class="pl-en">upload_single_post</span>(<span class="pl-s1">file_path</span>, <span class="pl-s1">labels</span>)
 
