@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan's Blog</title><link>https://blog.ronan.us.kg</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.avg</url><title>avatar</title><link>https://blog.ronan.us.kg</link></image><lastBuildDate>Mon, 26 Aug 2024 04:32:58 +0000</lastBuildDate><managingEditor>Ronan's Blog</managingEditor><ttl>60</ttl><webMaster>Ronan's Blog</webMaster><item><title>npm常用用法</title><link>https://blog.ronan.us.kg/post/npm-chang-yong-yong-fa.html</link><description>你可以使用以下命令查看已经通过 `npm` 安装的包：
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan's Blog</title><link>https://blog.ronan.us.kg</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.avg</url><title>avatar</title><link>https://blog.ronan.us.kg</link></image><lastBuildDate>Mon, 26 Aug 2024 04:42:34 +0000</lastBuildDate><managingEditor>Ronan's Blog</managingEditor><ttl>60</ttl><webMaster>Ronan's Blog</webMaster><item><title>npm常用用法</title><link>https://blog.ronan.us.kg/post/npm-chang-yong-yong-fa.html</link><description>你可以使用以下命令查看已经通过 `npm` 安装的包：
 
 ### 1. **查看全局安装的包**
 
@@ -199,9 +199,10 @@ ffmpeg -i input.mp4 -ss 15:25 -to 01:15:25 -c copy output.mp4&#13;
 &#13;
 ### 2.1配置脚本&#13;
 &#13;
-1.将代码里(sh脚本在第28行，py脚本在第7行)的 `&lt;Token&gt;` 替换为上面获取到的Token值  &#13;
-2.将代码里(sh脚本在第30行，py脚本在第7行)的 `&lt;OWNER&gt;` 替换为自己的github用户名  &#13;
-3.将代码里(sh脚本在第30行，py脚本在第11行)的 `&lt;REPO&gt;` 替换为自己的Gmeek博客仓库名，一般是 `xxx.github.io`&#13;
+找到代码最后几行，在引号里面填入：&#13;
+1. `token` 为上面获取到的Token值  &#13;
+2. `owner` 为自己的github用户名  &#13;
+3. `repo` 为自己的Gmeek博客仓库名，一般是 `xxx.github.io`&#13;
 &#13;
 &lt;details&gt;&#13;
   &lt;summary&gt; 点我展开看sh脚本代码================================= &lt;/summary&gt;&#13;

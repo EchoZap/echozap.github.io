@@ -16,9 +16,10 @@
 
 ### 2.1配置脚本
 
-1.将代码里(sh脚本在第28行，py脚本在第7行)的 `<Token>` 替换为上面获取到的Token值  
-2.将代码里(sh脚本在第30行，py脚本在第7行)的 `<OWNER>` 替换为自己的github用户名  
-3.将代码里(sh脚本在第30行，py脚本在第11行)的 `<REPO>` 替换为自己的Gmeek博客仓库名，一般是 `xxx.github.io`
+找到代码最后几行，在引号里面填入：
+1. `token` 为上面获取到的Token值  
+2. `owner` 为自己的github用户名  
+3. `repo` 为自己的Gmeek博客仓库名，一般是 `xxx.github.io`
 
 <details>
   <summary> 点我展开看sh脚本代码================================= </summary>
@@ -116,88 +117,86 @@ import json
 import os
 import requests
 
-def upload_data(title, content, labels):
+class GitHubIssueUploader:
+    def __init__(self, owner=None, repo=None, token=None):
+        self.owner = owner
+        self.repo = repo
+        self.token = token
 
-    url = "https://api.github.com/repos/<OWNER>/<REPO>/issues"
+        # 检查是否提供了必要的参数
+        if not self.owner or not self.repo or not self.token:
+            raise ValueError("必须指定 owner, repo 和 token")
+        else:
+            self.start_upload()
 
-    header = {
-        "Accept": "application/vnd.github+json" ,
-        "Authorization": "Bearer <Token>" ,
-        "X-GitHub-Api-Version": "2022-11-28"
-    }
+    def create_issue(self, title, content, labels):
 
-    data = {
-        "title":title,
-        "body":content,
-        "labels":labels
-    }
+        url = f"https://api.github.com/repos/{self.owner}/{self.repo}/issues"
 
-    json_str = json.dumps(data)
+        headers = {
+            "Accept": "application/vnd.github+json",
+            "Authorization": f"Bearer {self.token}",
+            "X-GitHub-Api-Version": "2022-11-28"
+        }
 
-    status_code = requests.post(url=url, headers=header, data=json_str).status_code
+        data = {
+            "title": title,
+            "body": content,
+            "labels": labels
+        }
 
-    match status_code:
-        case 201:
-            print("Created, 上传成功")
-        case 400:
-            print("Bad Request, 错误请求")
-        case 403:
-            print("Forbidden")
-        case 404:
-            print("Resource not found")
-        case 410:
-            print("Gone")
-        case 422:
-            print("Validation failed, or the endpoint has been spammed. \n 验证失败，或终结点已收到垃圾邮件。")
-        case 502:
-            print("Service unavailable, 服务不可用")
-  
+        response = requests.post(url=url, headers=headers, json=data)
 
-def get_post():
+        match response.status_code:
+            case 201:
+                print("Created, 上传成功")
+            case 400:
+                print("Bad Request, 错误请求")
+            case 403:
+                print("Forbidden")
+            case 404:
+                print("Resource not found")
+            case 410:
+                print("Gone")
+            case 422:
+                print("Validation failed, or the endpoint has been spammed. \n 验证失败，或终结点已收到垃圾邮件。")
+            case 502:
+                print("Service unavailable, 服务不可用")
 
-    status = input("\n 1.上传单篇文章 \n 2.批量上传 \n 按下对应数字并回车可选择相应功能：")
-
-    # 获取标签输入并用,分隔
-    labels = input("请输入标签，用,隔开：")
-
-    # 将输入的字符串拆分为列表，并去除每个单词前后的空白字符
-    labels = [word.strip() for word in labels.split(',')]
-
-    # 上传单篇文章
-    if status == "1" :
-        file_path = input("请输入文件路径：")
-
-        # 提取文件名并去除扩展名
+    def upload_single_post(self, file_path, labels):
         title = os.path.splitext(os.path.basename(file_path))[0]
-
-        # 打开并读取文件内容
         with open(file_path, 'r', encoding='utf-8') as file:
             content = file.read()
-            upload_data(title, content, labels)
+            self.create_issue(title, content, labels)
 
-    # 批量上传
-    elif status == "2" :
-        directory = input("请输入目录路径：")
-
-        # 遍历指定目录下的所有文件
+    def upload_batch_posts(self, directory, labels):
         for filename in os.listdir(directory):
-            # 检查文件是否以.md结尾
             if filename.endswith('.md'):
-                # 获取title ，去掉文件名中的.md扩展名
-                title = os.path.splitext(filename)[0]
-    
-                # 获取content
                 file_path = os.path.join(directory, filename)
-                # 打开并读取文件内容
-                with open(file_path, 'r', encoding='utf-8') as file:
-                    content = file.read()
-                    upload_data(title, content, labels)
-    else:
-        print("已退出程序...")
-        exit
+                self.upload_single_post(file_path, labels)
+
+    def start_upload(self):
+        status = input("\n 1.上传单篇文章 \n 2.批量上传 \n 按下对应数字并回车可选择相应功能：")
+        labels = input("请输入标签，用,隔开：")
+        labels = [word.strip() for word in labels.split(',')]
+
+        if status == "1":
+            file_path = input("请输入文件路径：")
+            self.upload_single_post(file_path, labels)
+        elif status == "2":
+            directory = input("请输入目录路径：")
+            self.upload_batch_posts(directory, labels)
+        else:
+            print("已退出程序...")
+            exit()
+
 
 if __name__ == "__main__":
-    get_post()
+    uploader = GitHubIssueUploader(
+        owner = "xxxx",
+        repo = "xxxx.github.io",
+        token = "xxxx"
+    )
 ```
   </code></pre>
 </details>

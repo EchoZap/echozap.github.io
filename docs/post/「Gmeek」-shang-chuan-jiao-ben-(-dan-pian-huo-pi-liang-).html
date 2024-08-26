@@ -25,9 +25,10 @@
 
 ### 2.1配置脚本
 
-1.将代码里(sh脚本在第28行，py脚本在第7行)的 `<Token>` 替换为上面获取到的Token值  
-2.将代码里(sh脚本在第30行，py脚本在第7行)的 `<OWNER>` 替换为自己的github用户名  
-3.将代码里(sh脚本在第30行，py脚本在第11行)的 `<REPO>` 替换为自己的Gmeek博客仓库名，一般是 `xxx.github.io`
+找到代码最后几行，在引号里面填入：
+1. `token` 为上面获取到的Token值  
+2. `owner` 为自己的github用户名  
+3. `repo` 为自己的Gmeek博客仓库名，一般是 `xxx.github.io`
 
 <details>
   <summary> 点我展开看sh脚本代码================================= </summary>
@@ -128,9 +129,10 @@ while true;do
 
 ### 2.1配置脚本
 
-1.将代码里(sh脚本在第28行，py脚本在第7行)的 `<Token>` 替换为上面获取到的Token值  
-2.将代码里(sh脚本在第30行，py脚本在第7行)的 `<OWNER>` 替换为自己的github用户名  
-3.将代码里(sh脚本在第30行，py脚本在第11行)的 `<REPO>` 替换为自己的Gmeek博客仓库名，一般是 `xxx.github.io`
+找到代码最后几行，在引号里面填入：
+1. `token` 为上面获取到的Token值  
+2. `owner` 为自己的github用户名  
+3. `repo` 为自己的Gmeek博客仓库名，一般是 `xxx.github.io`
 
 <details>
   <summary> 点我展开看sh脚本代码================================= </summary>
@@ -289,9 +291,12 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 以下有两个方法，分为bash环境和python环境，可根据实际情况自行采用</p>
 </div>
 <h3>2.1配置脚本</h3>
-<p>1.将代码里(sh脚本在第28行，py脚本在第7行)的 <code class="notranslate">&lt;Token&gt;</code> 替换为上面获取到的Token值<br>
-2.将代码里(sh脚本在第30行，py脚本在第7行)的 <code class="notranslate">&lt;OWNER&gt;</code> 替换为自己的github用户名<br>
-3.将代码里(sh脚本在第30行，py脚本在第11行)的 <code class="notranslate">&lt;REPO&gt;</code> 替换为自己的Gmeek博客仓库名，一般是 <code class="notranslate">xxx.github.io</code></p>
+<p>找到代码最后几行，在引号里面填入：</p>
+<ol>
+<li><code class="notranslate">token</code> 为上面获取到的Token值</li>
+<li><code class="notranslate">owner</code> 为自己的github用户名</li>
+<li><code class="notranslate">repo</code> 为自己的Gmeek博客仓库名，一般是 <code class="notranslate">xxx.github.io</code></li>
+</ol>
 <details>
   <summary> 点我展开看sh脚本代码================================= </summary>
   <pre class="notranslate"><code class="notranslate">  
@@ -382,88 +387,86 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <span class="pl-k">import</span> <span class="pl-s1">os</span>
 <span class="pl-k">import</span> <span class="pl-s1">requests</span>
 
-<span class="pl-k">def</span> <span class="pl-en">upload_data</span>(<span class="pl-s1">title</span>, <span class="pl-s1">content</span>, <span class="pl-s1">labels</span>):
+<span class="pl-k">class</span> <span class="pl-v">GitHubIssueUploader</span>:
+    <span class="pl-k">def</span> <span class="pl-en">__init__</span>(<span class="pl-s1">self</span>, <span class="pl-s1">owner</span><span class="pl-c1">=</span><span class="pl-c1">None</span>, <span class="pl-s1">repo</span><span class="pl-c1">=</span><span class="pl-c1">None</span>, <span class="pl-s1">token</span><span class="pl-c1">=</span><span class="pl-c1">None</span>):
+        <span class="pl-s1">self</span>.<span class="pl-s1">owner</span> <span class="pl-c1">=</span> <span class="pl-s1">owner</span>
+        <span class="pl-s1">self</span>.<span class="pl-s1">repo</span> <span class="pl-c1">=</span> <span class="pl-s1">repo</span>
+        <span class="pl-s1">self</span>.<span class="pl-s1">token</span> <span class="pl-c1">=</span> <span class="pl-s1">token</span>
 
-    <span class="pl-s1">url</span> <span class="pl-c1">=</span> <span class="pl-s">"https://api.github.com/repos/&lt;OWNER&gt;/&lt;REPO&gt;/issues"</span>
+        <span class="pl-c"># 检查是否提供了必要的参数</span>
+        <span class="pl-k">if</span> <span class="pl-c1">not</span> <span class="pl-s1">self</span>.<span class="pl-s1">owner</span> <span class="pl-c1">or</span> <span class="pl-c1">not</span> <span class="pl-s1">self</span>.<span class="pl-s1">repo</span> <span class="pl-c1">or</span> <span class="pl-c1">not</span> <span class="pl-s1">self</span>.<span class="pl-s1">token</span>:
+            <span class="pl-k">raise</span> <span class="pl-v">ValueError</span>(<span class="pl-s">"必须指定 owner, repo 和 token"</span>)
+        <span class="pl-k">else</span>:
+            <span class="pl-s1">self</span>.<span class="pl-en">start_upload</span>()
 
-    <span class="pl-s1">header</span> <span class="pl-c1">=</span> {
-        <span class="pl-s">"Accept"</span>: <span class="pl-s">"application/vnd.github+json"</span> ,
-        <span class="pl-s">"Authorization"</span>: <span class="pl-s">"Bearer &lt;Token&gt;"</span> ,
-        <span class="pl-s">"X-GitHub-Api-Version"</span>: <span class="pl-s">"2022-11-28"</span>
-    }
+    <span class="pl-k">def</span> <span class="pl-en">create_issue</span>(<span class="pl-s1">self</span>, <span class="pl-s1">title</span>, <span class="pl-s1">content</span>, <span class="pl-s1">labels</span>):
 
-    <span class="pl-s1">data</span> <span class="pl-c1">=</span> {
-        <span class="pl-s">"title"</span>:<span class="pl-s1">title</span>,
-        <span class="pl-s">"body"</span>:<span class="pl-s1">content</span>,
-        <span class="pl-s">"labels"</span>:<span class="pl-s1">labels</span>
-    }
+        <span class="pl-s1">url</span> <span class="pl-c1">=</span> <span class="pl-s">f"https://api.github.com/repos/<span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">self</span>.<span class="pl-s1">owner</span><span class="pl-kos">}</span></span>/<span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">self</span>.<span class="pl-s1">repo</span><span class="pl-kos">}</span></span>/issues"</span>
 
-    <span class="pl-s1">json_str</span> <span class="pl-c1">=</span> <span class="pl-s1">json</span>.<span class="pl-en">dumps</span>(<span class="pl-s1">data</span>)
+        <span class="pl-s1">headers</span> <span class="pl-c1">=</span> {
+            <span class="pl-s">"Accept"</span>: <span class="pl-s">"application/vnd.github+json"</span>,
+            <span class="pl-s">"Authorization"</span>: <span class="pl-s">f"Bearer <span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">self</span>.<span class="pl-s1">token</span><span class="pl-kos">}</span></span>"</span>,
+            <span class="pl-s">"X-GitHub-Api-Version"</span>: <span class="pl-s">"2022-11-28"</span>
+        }
 
-    <span class="pl-s1">status_code</span> <span class="pl-c1">=</span> <span class="pl-s1">requests</span>.<span class="pl-en">post</span>(<span class="pl-s1">url</span><span class="pl-c1">=</span><span class="pl-s1">url</span>, <span class="pl-s1">headers</span><span class="pl-c1">=</span><span class="pl-s1">header</span>, <span class="pl-s1">data</span><span class="pl-c1">=</span><span class="pl-s1">json_str</span>).<span class="pl-s1">status_code</span>
+        <span class="pl-s1">data</span> <span class="pl-c1">=</span> {
+            <span class="pl-s">"title"</span>: <span class="pl-s1">title</span>,
+            <span class="pl-s">"body"</span>: <span class="pl-s1">content</span>,
+            <span class="pl-s">"labels"</span>: <span class="pl-s1">labels</span>
+        }
 
-    <span class="pl-k">match</span> <span class="pl-s1">status_code</span>:
-        <span class="pl-k">case</span> <span class="pl-c1">201</span>:
-            <span class="pl-en">print</span>(<span class="pl-s">"Created, 上传成功"</span>)
-        <span class="pl-k">case</span> <span class="pl-c1">400</span>:
-            <span class="pl-en">print</span>(<span class="pl-s">"Bad Request, 错误请求"</span>)
-        <span class="pl-k">case</span> <span class="pl-c1">403</span>:
-            <span class="pl-en">print</span>(<span class="pl-s">"Forbidden"</span>)
-        <span class="pl-k">case</span> <span class="pl-c1">404</span>:
-            <span class="pl-en">print</span>(<span class="pl-s">"Resource not found"</span>)
-        <span class="pl-k">case</span> <span class="pl-c1">410</span>:
-            <span class="pl-en">print</span>(<span class="pl-s">"Gone"</span>)
-        <span class="pl-k">case</span> <span class="pl-c1">422</span>:
-            <span class="pl-en">print</span>(<span class="pl-s">"Validation failed, or the endpoint has been spammed. <span class="pl-cce">\n</span> 验证失败，或终结点已收到垃圾邮件。"</span>)
-        <span class="pl-k">case</span> <span class="pl-c1">502</span>:
-            <span class="pl-en">print</span>(<span class="pl-s">"Service unavailable, 服务不可用"</span>)
-  
+        <span class="pl-s1">response</span> <span class="pl-c1">=</span> <span class="pl-s1">requests</span>.<span class="pl-en">post</span>(<span class="pl-s1">url</span><span class="pl-c1">=</span><span class="pl-s1">url</span>, <span class="pl-s1">headers</span><span class="pl-c1">=</span><span class="pl-s1">headers</span>, <span class="pl-s1">json</span><span class="pl-c1">=</span><span class="pl-s1">data</span>)
 
-<span class="pl-k">def</span> <span class="pl-en">get_post</span>():
+        <span class="pl-k">match</span> <span class="pl-s1">response</span>.<span class="pl-s1">status_code</span>:
+            <span class="pl-k">case</span> <span class="pl-c1">201</span>:
+                <span class="pl-en">print</span>(<span class="pl-s">"Created, 上传成功"</span>)
+            <span class="pl-k">case</span> <span class="pl-c1">400</span>:
+                <span class="pl-en">print</span>(<span class="pl-s">"Bad Request, 错误请求"</span>)
+            <span class="pl-k">case</span> <span class="pl-c1">403</span>:
+                <span class="pl-en">print</span>(<span class="pl-s">"Forbidden"</span>)
+            <span class="pl-k">case</span> <span class="pl-c1">404</span>:
+                <span class="pl-en">print</span>(<span class="pl-s">"Resource not found"</span>)
+            <span class="pl-k">case</span> <span class="pl-c1">410</span>:
+                <span class="pl-en">print</span>(<span class="pl-s">"Gone"</span>)
+            <span class="pl-k">case</span> <span class="pl-c1">422</span>:
+                <span class="pl-en">print</span>(<span class="pl-s">"Validation failed, or the endpoint has been spammed. <span class="pl-cce">\n</span> 验证失败，或终结点已收到垃圾邮件。"</span>)
+            <span class="pl-k">case</span> <span class="pl-c1">502</span>:
+                <span class="pl-en">print</span>(<span class="pl-s">"Service unavailable, 服务不可用"</span>)
 
-    <span class="pl-s1">status</span> <span class="pl-c1">=</span> <span class="pl-en">input</span>(<span class="pl-s">"<span class="pl-cce">\n</span> 1.上传单篇文章 <span class="pl-cce">\n</span> 2.批量上传 <span class="pl-cce">\n</span> 按下对应数字并回车可选择相应功能："</span>)
-
-    <span class="pl-c"># 获取标签输入并用,分隔</span>
-    <span class="pl-s1">labels</span> <span class="pl-c1">=</span> <span class="pl-en">input</span>(<span class="pl-s">"请输入标签，用,隔开："</span>)
-
-    <span class="pl-c"># 将输入的字符串拆分为列表，并去除每个单词前后的空白字符</span>
-    <span class="pl-s1">labels</span> <span class="pl-c1">=</span> [<span class="pl-s1">word</span>.<span class="pl-en">strip</span>() <span class="pl-k">for</span> <span class="pl-s1">word</span> <span class="pl-c1">in</span> <span class="pl-s1">labels</span>.<span class="pl-en">split</span>(<span class="pl-s">','</span>)]
-
-    <span class="pl-c"># 上传单篇文章</span>
-    <span class="pl-k">if</span> <span class="pl-s1">status</span> <span class="pl-c1">==</span> <span class="pl-s">"1"</span> :
-        <span class="pl-s1">file_path</span> <span class="pl-c1">=</span> <span class="pl-en">input</span>(<span class="pl-s">"请输入文件路径："</span>)
-
-        <span class="pl-c"># 提取文件名并去除扩展名</span>
+    <span class="pl-k">def</span> <span class="pl-en">upload_single_post</span>(<span class="pl-s1">self</span>, <span class="pl-s1">file_path</span>, <span class="pl-s1">labels</span>):
         <span class="pl-s1">title</span> <span class="pl-c1">=</span> <span class="pl-s1">os</span>.<span class="pl-s1">path</span>.<span class="pl-en">splitext</span>(<span class="pl-s1">os</span>.<span class="pl-s1">path</span>.<span class="pl-en">basename</span>(<span class="pl-s1">file_path</span>))[<span class="pl-c1">0</span>]
-
-        <span class="pl-c"># 打开并读取文件内容</span>
         <span class="pl-k">with</span> <span class="pl-en">open</span>(<span class="pl-s1">file_path</span>, <span class="pl-s">'r'</span>, <span class="pl-s1">encoding</span><span class="pl-c1">=</span><span class="pl-s">'utf-8'</span>) <span class="pl-k">as</span> <span class="pl-s1">file</span>:
             <span class="pl-s1">content</span> <span class="pl-c1">=</span> <span class="pl-s1">file</span>.<span class="pl-en">read</span>()
-            <span class="pl-en">upload_data</span>(<span class="pl-s1">title</span>, <span class="pl-s1">content</span>, <span class="pl-s1">labels</span>)
+            <span class="pl-s1">self</span>.<span class="pl-en">create_issue</span>(<span class="pl-s1">title</span>, <span class="pl-s1">content</span>, <span class="pl-s1">labels</span>)
 
-    <span class="pl-c"># 批量上传</span>
-    <span class="pl-k">elif</span> <span class="pl-s1">status</span> <span class="pl-c1">==</span> <span class="pl-s">"2"</span> :
-        <span class="pl-s1">directory</span> <span class="pl-c1">=</span> <span class="pl-en">input</span>(<span class="pl-s">"请输入目录路径："</span>)
-
-        <span class="pl-c"># 遍历指定目录下的所有文件</span>
+    <span class="pl-k">def</span> <span class="pl-en">upload_batch_posts</span>(<span class="pl-s1">self</span>, <span class="pl-s1">directory</span>, <span class="pl-s1">labels</span>):
         <span class="pl-k">for</span> <span class="pl-s1">filename</span> <span class="pl-c1">in</span> <span class="pl-s1">os</span>.<span class="pl-en">listdir</span>(<span class="pl-s1">directory</span>):
-            <span class="pl-c"># 检查文件是否以.md结尾</span>
             <span class="pl-k">if</span> <span class="pl-s1">filename</span>.<span class="pl-en">endswith</span>(<span class="pl-s">'.md'</span>):
-                <span class="pl-c"># 获取title ，去掉文件名中的.md扩展名</span>
-                <span class="pl-s1">title</span> <span class="pl-c1">=</span> <span class="pl-s1">os</span>.<span class="pl-s1">path</span>.<span class="pl-en">splitext</span>(<span class="pl-s1">filename</span>)[<span class="pl-c1">0</span>]
-    
-                <span class="pl-c"># 获取content</span>
                 <span class="pl-s1">file_path</span> <span class="pl-c1">=</span> <span class="pl-s1">os</span>.<span class="pl-s1">path</span>.<span class="pl-en">join</span>(<span class="pl-s1">directory</span>, <span class="pl-s1">filename</span>)
-                <span class="pl-c"># 打开并读取文件内容</span>
-                <span class="pl-k">with</span> <span class="pl-en">open</span>(<span class="pl-s1">file_path</span>, <span class="pl-s">'r'</span>, <span class="pl-s1">encoding</span><span class="pl-c1">=</span><span class="pl-s">'utf-8'</span>) <span class="pl-k">as</span> <span class="pl-s1">file</span>:
-                    <span class="pl-s1">content</span> <span class="pl-c1">=</span> <span class="pl-s1">file</span>.<span class="pl-en">read</span>()
-                    <span class="pl-en">upload_data</span>(<span class="pl-s1">title</span>, <span class="pl-s1">content</span>, <span class="pl-s1">labels</span>)
-    <span class="pl-k">else</span>:
-        <span class="pl-en">print</span>(<span class="pl-s">"已退出程序..."</span>)
-        <span class="pl-s1">exit</span>
+                <span class="pl-s1">self</span>.<span class="pl-en">upload_single_post</span>(<span class="pl-s1">file_path</span>, <span class="pl-s1">labels</span>)
+
+    <span class="pl-k">def</span> <span class="pl-en">start_upload</span>(<span class="pl-s1">self</span>):
+        <span class="pl-s1">status</span> <span class="pl-c1">=</span> <span class="pl-en">input</span>(<span class="pl-s">"<span class="pl-cce">\n</span> 1.上传单篇文章 <span class="pl-cce">\n</span> 2.批量上传 <span class="pl-cce">\n</span> 按下对应数字并回车可选择相应功能："</span>)
+        <span class="pl-s1">labels</span> <span class="pl-c1">=</span> <span class="pl-en">input</span>(<span class="pl-s">"请输入标签，用,隔开："</span>)
+        <span class="pl-s1">labels</span> <span class="pl-c1">=</span> [<span class="pl-s1">word</span>.<span class="pl-en">strip</span>() <span class="pl-k">for</span> <span class="pl-s1">word</span> <span class="pl-c1">in</span> <span class="pl-s1">labels</span>.<span class="pl-en">split</span>(<span class="pl-s">','</span>)]
+
+        <span class="pl-k">if</span> <span class="pl-s1">status</span> <span class="pl-c1">==</span> <span class="pl-s">"1"</span>:
+            <span class="pl-s1">file_path</span> <span class="pl-c1">=</span> <span class="pl-en">input</span>(<span class="pl-s">"请输入文件路径："</span>)
+            <span class="pl-s1">self</span>.<span class="pl-en">upload_single_post</span>(<span class="pl-s1">file_path</span>, <span class="pl-s1">labels</span>)
+        <span class="pl-k">elif</span> <span class="pl-s1">status</span> <span class="pl-c1">==</span> <span class="pl-s">"2"</span>:
+            <span class="pl-s1">directory</span> <span class="pl-c1">=</span> <span class="pl-en">input</span>(<span class="pl-s">"请输入目录路径："</span>)
+            <span class="pl-s1">self</span>.<span class="pl-en">upload_batch_posts</span>(<span class="pl-s1">directory</span>, <span class="pl-s1">labels</span>)
+        <span class="pl-k">else</span>:
+            <span class="pl-en">print</span>(<span class="pl-s">"已退出程序..."</span>)
+            <span class="pl-en">exit</span>()
+
 
 <span class="pl-k">if</span> <span class="pl-s1">__name__</span> <span class="pl-c1">==</span> <span class="pl-s">"__main__"</span>:
-    <span class="pl-en">get_post</span>()</pre></div>
+    <span class="pl-s1">uploader</span> <span class="pl-c1">=</span> <span class="pl-v">GitHubIssueUploader</span>(
+        <span class="pl-s1">owner</span> <span class="pl-c1">=</span> <span class="pl-s">"xxxx"</span>,
+        <span class="pl-s1">repo</span> <span class="pl-c1">=</span> <span class="pl-s">"xxxx.github.io"</span>,
+        <span class="pl-s1">token</span> <span class="pl-c1">=</span> <span class="pl-s">"xxxx"</span>
+    )</pre></div>
 </code><p><code class="notranslate"></code></p></pre><p></p>
 </details>
 <h3>2.2运行脚本</h3>
