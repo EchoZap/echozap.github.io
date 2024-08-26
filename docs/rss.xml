@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan's Blog</title><link>https://blog.ronan.us.kg</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.avg</url><title>avatar</title><link>https://blog.ronan.us.kg</link></image><lastBuildDate>Sun, 25 Aug 2024 05:07:53 +0000</lastBuildDate><managingEditor>Ronan's Blog</managingEditor><ttl>60</ttl><webMaster>Ronan's Blog</webMaster><item><title>JavasSript常用方法</title><link>https://blog.ronan.us.kg/post/JavasSript-chang-yong-fang-fa.html</link><description># 获取 DOM 节点
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan's Blog</title><link>https://blog.ronan.us.kg</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.avg</url><title>avatar</title><link>https://blog.ronan.us.kg</link></image><lastBuildDate>Mon, 26 Aug 2024 03:50:12 +0000</lastBuildDate><managingEditor>Ronan's Blog</managingEditor><ttl>60</ttl><webMaster>Ronan's Blog</webMaster><item><title>JavasSript常用方法</title><link>https://blog.ronan.us.kg/post/JavasSript-chang-yong-fang-fa.html</link><description># 获取 DOM 节点
 
 ### 1.选择匹配到的第一个元素
 
@@ -19,7 +19,7 @@ document.querySelector('css选择器')
 
 1. **`/etc/profile`**：
 
-- 这是系统范围的 shell 配置文件，适用于所有用户。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/macOS-qu-chu-zhong-fu-PATH-huan-jing-bian-liang.html</guid><pubDate>Sat, 24 Aug 2024 03:57:57 +0000</pubDate></item><item><title>Conda常用用法</title><link>https://blog.ronan.us.kg/post/Conda-chang-yong-yong-fa.html</link><description># 创建一个新的虚拟环境&#13;
+- 这是系统范围的 shell 配置文件，适用于所有用户。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/macOS-qu-chu-zhong-fu-PATH-huan-jing-bian-liang.html</guid><pubDate>Sat, 24 Aug 2024 03:57:57 +0000</pubDate></item><item><title>「python」Conda虚拟环境</title><link>https://blog.ronan.us.kg/post/%E3%80%8Cpython%E3%80%8DConda-xu-ni-huan-jing.html</link><description># 创建一个新的虚拟环境&#13;
 &#13;
 可以使用以下命令创建一个名为 `jupyter_env` 的新环境，并指定 Python 版本（例如 Python 3.11）&#13;
 &#13;
@@ -31,7 +31,7 @@ conda create -n jupyter_env python=3.11&#13;
 &gt;&#13;
 &gt; 通过上面命令创建的虚拟环境通常会保存在主环境目录，如果想指定虚拟环境的位置，可以使用下面的命令&#13;
 &#13;
-**指定路径**：如果你在创建环境时使用了 `-p` 或 `--prefix` 选项指定路径，环境会存储在你指定的位置。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/Conda-chang-yong-yong-fa.html</guid><pubDate>Fri, 23 Aug 2024 11:02:51 +0000</pubDate></item><item><title>JavaScript</title><link>https://blog.ronan.us.kg/post/JavaScript.html</link><description># 对象概述
+**指定路径**：如果你在创建环境时使用了 `-p` 或 `--prefix` 选项指定路径，环境会存储在你指定的位置。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/%E3%80%8Cpython%E3%80%8DConda-xu-ni-huan-jing.html</guid><pubDate>Fri, 23 Aug 2024 11:02:51 +0000</pubDate></item><item><title>JavaScript</title><link>https://blog.ronan.us.kg/post/JavaScript.html</link><description># 对象概述
 
 什么是对象？对象（object）是 JavaScript 语言的核心概念，也是最重要的数据类型
 
