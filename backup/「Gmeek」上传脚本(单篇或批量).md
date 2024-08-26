@@ -1,38 +1,73 @@
-> [!important]
+> [!caution]
 >
-> **注意：** 该脚本仅适用于通过Gmeek项目搭建的博客网站  
+> **注意：** 该脚本仅适用于通过Gmeek项目搭建的博客网站
+> 在开始使用之前，需要创建 github 的个人 Token
 
-# 1.获取github个人Token
 
-- github的个人Token具体获取方法如下：
+# 1.创建github个人Token
 
-![img](https://wowpb.pages.dev/file/349f3d72c80b48ba5a3f1.png)
+1.在 GitHub 上任何页面的**右上角**，单击您的`个人资料照片`，然后单击 `Settings`。
+
+2.在左侧边栏中，单击 `Developer settings（开发人员设置）`。
+
+3.在左侧边栏中的 **Personal access tokens （个人访问令牌）** 下，单击 `Tokens （classic）`。
+
+4.选择 `Generate new token（生成新令牌）`，然后单击 `Generate new token （classic）`。
+
+5.在 **Note** 字段中，为您的令牌指定一个描述性名称。
+
+6.要为您的令牌指定过期时间，请选择 **Expiration（过期）**，然后选择默认选项或单击 Custom（自定义）以输入日期。
+
+7.选择要授予此令牌的范围。要使用令牌从命令行访问存储库，请选择 `repo` ( **这里一定要打上勾！！！** ) 。没有分配范围的令牌只能访问公共信息。
+
+8.滑动到底部，单击 `Generate token`
+
+9.**将新令牌复制到剪贴板并且保管好，令牌只出现一次，一定要保管好！一定要保管好！一定要保管好！**。
+
 
 # 2.使用方法
+以下有两个方法，分为sh脚本和python脚本：
 
-> [!caution]
-> 由于类Linux系统的目录路径格式与Windows等系统不一致，所以，当前sh脚本仅适用于Linux与mac系统并且sh脚本仅可以上传md文件，Windows可以使用py脚本
-> 以下有两个方法，分为bash环境和python环境，可根据实际情况自行采用
+> [!tip]
+> **建议：**
+> Linux与mac系统使用 sh 脚本，Windows使用py脚本体验更佳
+> 也可根据喜好自行采用
 
 ### 2.1配置脚本
 
-- 对于 sh 脚本
+##### 对于 sh 脚本
+> [!important]
+>
+> 使用前需确认以下：
+> - 系统已安装curl
+> - 系统已安装jq
+> - 系统可使用bash
+
+curl、jq 安装方法由于系统不同，方法多样，所以具体安装方法可以自行查找...
+
 在代码开始的前几行，找到以下几个值，在引号里填入自己的信息：
 
-1. `TOKEN`  为上面获取到的Token值  
-2. `OWNER` 为自己的github用户名  
-3. `REPO` 为自己的Gmeek博客仓库名，一般是 `xxx.github.io`
+- `TOKEN`  为自己创建的Token值
+- `OWNER` 为自己的github用户名
+- `REPO` 为自己的Gmeek博客仓库名，一般是 `xxx.github.io`
 
-- 对于 py 脚本  
-找到代码最后几行，在引号里面填入：
 
-1. `token` 为上面获取到的Token值  
-2. `owner` 为自己的github用户名  
-3. `repo` 为自己的Gmeek博客仓库名，一般是 `xxx.github.io`
+##### 对于 py 脚本
+1.在开始使用之前，需要安装 `requests` 模块
+
+```shell
+pip3 install requests
+```
+
+2.找到代码最后几行，在引号里面填入：
+
+- `token` 为自己创建的Token值
+- `owner` 为自己的github用户名
+- `repo` 为自己的Gmeek博客仓库名，一般是 `xxx.github.io`
 
 <details>
   <summary> 点我展开看sh脚本代码================================= </summary>
-  <pre><code>  
+  <pre><code>
 
 ```shell
 #!/usr/bin/env bash
@@ -175,13 +210,13 @@ while true;do
         ;;
     esac
 done
-```  
+```
   </code></pre>
 </details>
 
 <details>
   <summary> 点我展开看py脚本代码================================= </summary>
-  <pre><code>  
+  <pre><code>
 
 ```python
 import json
@@ -275,20 +310,12 @@ if __name__ == "__main__":
 
 ### 2.2运行脚本
 
-- 对于sh脚本  
-> [!important]
-> 
-> 使用前需确认以下：
-> - 系统已安装curl
-> - 系统已安装jq
-> - 系统可使用bash
+- 对于sh脚本
 
 将以上脚本代码保存为 `blog_upload.sh` ，在终端里进入到改脚本所在位置，键入 `chmod 777 blog_upload.sh` ，然后通过 `./blog_upload.sh` 运行，之后根据提示进行即可。
 
-- 对于py脚本  
-> [!important]
->
-> 请确保python已经安装requests模块，可以通过 `pip3 install requests` 安装
+
+- 对于py脚本
 
 将脚本代码保存为 `blog_upload.py` ，在终端里进入到改脚本所在位置，然后通过以下命令运行，之后根据提示进行即可。
 
@@ -296,5 +323,6 @@ if __name__ == "__main__":
 python3 blog_upload.py
 ```
 
+你问我配置完了脚本怎么用？你运行起来有步骤引导你的～～～
 
 <!-- ##{"timestamp":1722611382}## -->
