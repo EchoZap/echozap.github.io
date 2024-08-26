@@ -19,9 +19,9 @@
 - 对于 sh 脚本
 在代码开始的前几行，找到以下几个值，在引号里填入自己的信息：
 
-1.`TOKEN`  为上面获取到的Token值  
-2.`OWNER` 为自己的github用户名  
-3.`REPO` 为自己的Gmeek博客仓库名，一般是 `xxx.github.io`
+1. `TOKEN`  为上面获取到的Token值  
+2. `OWNER` 为自己的github用户名  
+3. `REPO` 为自己的Gmeek博客仓库名，一般是 `xxx.github.io`
 
 - 对于 py 脚本  
 找到代码最后几行，在引号里面填入：
