@@ -1,5 +1,15 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan's Blog</title><link>https://blog.ronan.us.kg</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.avg</url><title>avatar</title><link>https://blog.ronan.us.kg</link></image><lastBuildDate>Mon, 26 Aug 2024 03:50:12 +0000</lastBuildDate><managingEditor>Ronan's Blog</managingEditor><ttl>60</ttl><webMaster>Ronan's Blog</webMaster><item><title>JavasSript常用方法</title><link>https://blog.ronan.us.kg/post/JavasSript-chang-yong-fang-fa.html</link><description># 获取 DOM 节点
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan's Blog</title><link>https://blog.ronan.us.kg</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.avg</url><title>avatar</title><link>https://blog.ronan.us.kg</link></image><lastBuildDate>Mon, 26 Aug 2024 04:31:48 +0000</lastBuildDate><managingEditor>Ronan's Blog</managingEditor><ttl>60</ttl><webMaster>Ronan's Blog</webMaster><item><title>npm常用用法</title><link>https://blog.ronan.us.kg/post/npm-chang-yong-yong-fa.html</link><description>你可以使用以下命令查看已经通过 `npm` 安装的包：
+
+### 1. **查看全局安装的包**
+
+要查看全局安装的所有包，可以运行以下命令：
+
+```bash
+npm list -g --depth=0
+```
+
+这个命令会列出所有全局安装的包，并且使用 `--depth=0` 选项只显示顶级包，不显示它们的依赖项。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/npm-chang-yong-yong-fa.html</guid><pubDate>Mon, 26 Aug 2024 04:31:13 +0000</pubDate></item><item><title>JavasSript常用方法</title><link>https://blog.ronan.us.kg/post/JavasSript-chang-yong-fang-fa.html</link><description># 获取 DOM 节点
 
 ### 1.选择匹配到的第一个元素
 
