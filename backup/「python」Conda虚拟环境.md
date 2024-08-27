@@ -155,7 +155,7 @@ conda config --set auto_activate_base false
 conda config --set auto_activate_base false
 ```
 
-2.修改 ~/.zshrc 或 ~/.bash_profile 文件： 在终端中打开 ~/.zshrc（如果你使用 Zsh）或 ~/.bash_profile（如果你使用 Bash），然后在 `Conda 初始化代码块之后` 添加以下内容：
+2.修改 ~/.zshrc 或 ~/.bash_profile 文件： 在终端中打开 ~/.zshrc（如果你使用 Zsh）或 ~/.bash_profile（如果你使用 Bash），然后在 `Conda 初始化代码块之后` 添加以下内容， `/Users/iaa/bin/myenv` 根据实际情况更换为指定环境 ：
 
 ```
 # 自动激活 myenv 环境
