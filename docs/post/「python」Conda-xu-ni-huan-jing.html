@@ -138,7 +138,7 @@ base                  <span class="pl-k">*</span>  /opt/homebrew/Caskroom/minico
 jupyter_env               /opt/homebrew/Caskroom/miniconda/base/envs/jupyter_env</pre></div>
 <p>在上面的示例中，<code class="notranslate">base</code> 环境被标记为当前激活的环境。</p>
 <p>你还可以检查当前使用的 Python 解释器的路径，确保它位于 Conda 环境的路径下。</p>
-<h1>设置虚拟环境优先级</h1>
+<h1>虚拟环境默认安装位置</h1>
 <h3>查看 Conda 所有的虚拟环境路径</h3>
 <p>运行以下命令来检查 Conda 的环境路径配置：</p>
 <div class="highlight highlight-source-shell"><pre class="notranslate">conda config --show envs_dirs</pre></div>
@@ -152,14 +152,36 @@ jupyter_env               /opt/homebrew/Caskroom/miniconda/base/envs/jupyter_env
 <li>在某些情况下，例如用户没有写入权限或主环境目录已满，Conda 可能会选择将环境存储在用户主目录下的 <code class="notranslate">.conda/envs</code> 目录中。</li>
 </ul>
 <h3>设置默认环境存储路径</h3>
-<p>你可以通过 <code class="notranslate">conda config</code> 命令来设置默认的环境存储路径。例如，设置所有新环境存储在某个指定目录下：</p>
+<p>你可以通过 <code class="notranslate">conda config</code> 命令来设置默认的环境存储路径，这样以后所有不通过 -p 指定路径的虚拟环境都会安装到以下目录。例如，设置所有新环境安装在某个指定目录下：</p>
 <div class="highlight highlight-source-shell"><pre class="notranslate">conda config --add envs_dirs /my/custom/path</pre></div>
 <p>这将把 <code class="notranslate">/my/custom/path</code> 添加到环境路径的优先级列表中。</p>
+<h3>删除环境存储路径</h3>
+<p>要删除 Conda 中的某个环境路径（envs_dirs），找到并打开 Conda 配置文件， Conda 的配置文件通常位于 ~/.condarc 路径。你可以使用任意文本编辑器来编辑它，例如：</p>
+<p>编辑 envs_dirs 配置： 在 .condarc 文件中找到类似以下的部分：</p>
+<pre class="notranslate"><code class="notranslate">envs_dirs:
+  - /opt/homebrew/Caskroom/miniconda/base/envs
+  - /Users/iaa/bin/myenv
+  - /Users/iaa/.conda/envs
+</code></pre>
+<p>删除你不需要的路径，例如，如果你想删除 /Users/iaa/bin/myenv，就把这一行删掉，然后保存退出即可。</p>
 <h1>鬼东西总会自动激活base环境怎么办</h1>
 <p>只需要在 <code class="notranslate">.zshrc的最后一行或者 conda 初始化的后面</code> 添加：</p>
 <div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 阻止conda base 环境的自动激活</span>
 conda config --set auto_activate_base <span class="pl-c1">false</span></pre></div>
-<p>然后保存 <code class="notranslate">source ~/.zshrc</code> 即可</p></div>
+<p>然后保存 <code class="notranslate">source ~/.zshrc</code> 即可</p>
+<h1>自动激活特定虚拟环境</h1>
+<p>假设我现在有一个有一个 myenv 的虚拟环境，要让 Conda 自动激活 myenv 环境（就像自动激活 base 环境一样）：</p>
+<p>1.禁用 base 环境的自动激活（如果尚未禁用）：</p>
+<pre class="notranslate"><code class="notranslate">conda config --set auto_activate_base false
+</code></pre>
+<p>2.修改 ~/.zshrc 或 ~/.bash_profile 文件： 在终端中打开 ~/.zshrc（如果你使用 Zsh）或 ~/.bash_profile（如果你使用 Bash），然后在 <code class="notranslate">Conda 初始化代码块之后</code> 添加以下内容：</p>
+<pre class="notranslate"><code class="notranslate"># 自动激活 myenv 环境
+if [[ -z "$CONDA_DEFAULT_ENV" ]]; then
+    conda activate /Users/iaa/bin/myenv
+fi
+</code></pre>
+<p>这样，每次你打开一个新的终端时，如果没有激活的环境，它会自动激活 myenv 环境，而不是 base 环境。<br>
+完成这些步骤后，你的终端应该会自动激活 myenv 环境。</p></div>
 <div style="font-size:small;margin-top:8px;float:right;">要做一个有swag的人</div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
