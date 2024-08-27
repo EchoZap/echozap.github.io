@@ -101,26 +101,17 @@ document.addEventListener('DOMContentLoaded', function() {
             border-radius: 8px;
         }
 
-        /* 行内代码 */
-        .markdown-body code, .markdown-body tt {
-            background-color: #c9daf8;
-        }
-        
         /* 标题橙色包裹 */
         .markdown-body h1{
-            display: inline-block;
-            font-size: 1.3rem;
-            font-weight: bold;
-            background: rgb(239, 112, 96);
-            color: #ffffff;
-            padding: 3px 10px 1px;
-            border-top-right-radius: 8px;
-            border-top-left-radius: 8px;
-            border-bottom-left-radius: 8px;
-            border-bottom-right-radius: 8px;
-            margin-right: 2px;
-            margin-top: 1.8rem; 
-        }   
+          display: inline-block;
+          font-size: 1.3rem;
+          font-weight: bold;
+          background: rgb(239, 112, 96);
+          color: #ffffff;
+          padding: 3px 10px ;
+          border-radius: 8px;
+          margin-right: 2px;
+        } 
         `;
         document.head.appendChild(style);
     } 
