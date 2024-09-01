@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
         /* 主体布局 */
         body {
             min-width: 200px;
-            max-width: 885px;
+            max-width: 920px;
             margin: 30px auto;   /*设置所有外边距离 */
             font-size: 16px;
             font-family: sans-serif;

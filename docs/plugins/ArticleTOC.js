@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function() {
             position: fixed;
             bottom: 60px;
             right: 20px;
-            width: 245px;
+            width: 230px;
             max-height: 70vh;
             background-color: var(--toc-bg);
             border: 1px solid var(--toc-border);
