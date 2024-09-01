@@ -3,7 +3,7 @@
 新建一个txt文件并将以下代码复制到`xxx.txt`，之后将`xxx.txt（例如sdccpj.txt）`后缀名修改为`.sh（例如sdccpj.sh）`或者直接去掉后缀名只保留文件名（这在类linux系统中就是可执行程序）`sdccpj`。
 
 ```shell
-#!/bin/zsh
+#!/usr/bin/env bash
 
 # 检查是否提供了工程名参数
 if [ -z "$1" ]; then
