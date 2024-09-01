@@ -78,8 +78,7 @@ all: \$(OUTPUT_FILE) post_build_cleanup
 .PHONY: post_build_cleanup
 post_build_cleanup:
 	-rm -f \$(BUILD_DIR)/*.asm \$(BUILD_DIR)/*.lst \$(BUILD_DIR)/*.rst \$(BUILD_DIR)/*.sym \$(BUILD_DIR)/*.lk \\
-	\$(BUILD_DIR)/*.map \$(BUILD_DIR)/*.mem
-    -cp /opt/homebrew/Cellar/sdcc/4.4.0/share/sdcc/include/mcs51/8051.h $(INCLUDE_DIR)
+	\$(BUILD_DIR)/*.map \$(BUILD_DIR)/*.mem 
     @echo "构建成功，泰裤辣！可烧录文件out.hex已存放到build目录下"
 
 # 定义一个clean目标，用于手动清理所有生成的文件

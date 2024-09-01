@@ -155,8 +155,7 @@ project_name=<span class="pl-smi">$1</span>
 <span class="pl-s">.PHONY: post_build_cleanup</span>
 <span class="pl-s">post_build_cleanup:</span>
 <span class="pl-s">	-rm -f <span class="pl-cce">\$</span>(BUILD_DIR)/*.asm <span class="pl-cce">\$</span>(BUILD_DIR)/*.lst <span class="pl-cce">\$</span>(BUILD_DIR)/*.rst <span class="pl-cce">\$</span>(BUILD_DIR)/*.sym <span class="pl-cce">\$</span>(BUILD_DIR)/*.lk <span class="pl-cce">\\</span></span>
-<span class="pl-s">	<span class="pl-cce">\$</span>(BUILD_DIR)/*.map <span class="pl-cce">\$</span>(BUILD_DIR)/*.mem</span>
-<span class="pl-s">    -cp /opt/homebrew/Cellar/sdcc/4.4.0/share/sdcc/include/mcs51/8051.h <span class="pl-s"><span class="pl-pds">$(</span>INCLUDE_DIR<span class="pl-pds">)</span></span></span>
+<span class="pl-s">	<span class="pl-cce">\$</span>(BUILD_DIR)/*.map <span class="pl-cce">\$</span>(BUILD_DIR)/*.mem </span>
 <span class="pl-s">    @echo "构建成功，泰裤辣！可烧录文件out.hex已存放到build目录下"</span>
 <span class="pl-s"></span>
 <span class="pl-s"># 定义一个clean目标，用于手动清理所有生成的文件</span>
