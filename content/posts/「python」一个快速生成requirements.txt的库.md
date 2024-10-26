@@ -1,6 +1,6 @@
 ---
 title: "「python」一个快速生成requirements.txt的库"
-date: 2024-10-22T13:29:15+08:00
+date: 2024-09-02T13:29:15+08:00
 categories: ['Docs']
 author: "Ronan"
 ---

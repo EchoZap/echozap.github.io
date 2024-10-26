@@ -1,6 +1,6 @@
 ---
 title: "「各种摸不着头脑」意外修改PATH(环境变量)"
-date: 2024-10-22T13:26:22+08:00
+date: 2024-09-03T13:26:22+08:00
 categories: ['Linux']
 author: "Ronan"
 ---

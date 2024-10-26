@@ -1,6 +1,6 @@
 ---
 title: "stm32程序烧录方式"
-date: 2024-10-22T13:29:02+08:00
+date: 2024-08-15T13:29:02+08:00
 categories: ['Docs']
 author: "Ronan"
 ---
@@ -37,7 +37,6 @@ STM32_Programmer_CLI -c port=/dev/tty.usbmodem11403 -w /path/project/build.bin 0
 ```
 
 同样的，烧录.bin 文件需要指定 flash 起始地址。
-
 
 注意：
 

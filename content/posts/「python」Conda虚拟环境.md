@@ -1,6 +1,6 @@
 ---
 title: "「python」Conda虚拟环境"
-date: 2024-10-22T13:29:17+08:00
+date: 2024-09-02T13:29:17+08:00
 categories: ['Docs']
 author: "Ronan"
 ---

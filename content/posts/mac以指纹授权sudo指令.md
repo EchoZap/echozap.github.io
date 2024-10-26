@@ -1,6 +1,6 @@
 ---
 title: "mac以指纹授权sudo指令"
-date: 2024-10-22T13:24:16+08:00
+date: 2024-09-02T13:24:16+08:00
 categories: ['Macos']
 author: "Ronan"
 ---

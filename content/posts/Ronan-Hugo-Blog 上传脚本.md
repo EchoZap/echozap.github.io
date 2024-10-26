@@ -1,6 +1,6 @@
 ---
 title: "Ronan-Hugo-Blog 上传脚本"
-date: 2024-10-22T13:17:38+08:00
+date: 2024-09-02T13:17:38+08:00
 categories: ['Tools']
 author: "Ronan"
 ---
@@ -48,7 +48,7 @@ class HugoBlog:
         # 获取不带前缀路径和后缀名的文件名
         title = os.path.splitext(os.path.basename(post_path))[0]
 
-        # 获取当前实时时间，格式化为指定格式 date: 2024-02-02T04:14:54-08:00
+        # 获取当前实时时间，格式化为指定格式 date: 2024-09-02T04:14:54-08:00
         # 获取当前时间并设置北京时间
         timezone = pytz.timezone('Asia/Shanghai')
         now = datetime.now(timezone)

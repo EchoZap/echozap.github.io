@@ -1,6 +1,6 @@
 ---
 title: "「Python」异常处理"
-date: 2024-10-22T13:28:48+08:00
+date: 2024-09-02T13:28:48+08:00
 categories: ['Docs']
 author: "Ronan"
 ---

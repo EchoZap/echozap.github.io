@@ -1,6 +1,6 @@
 ---
 title: "vscode搭建用于8051单片机的sdcc环境"
-date: 2024-10-22T13:21:32+08:00
+date: 2024-09-02T13:21:32+08:00
 categories: ['Vscode']
 author: "Ronan"
 ---

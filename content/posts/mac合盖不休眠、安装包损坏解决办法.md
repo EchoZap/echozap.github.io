@@ -1,6 +1,6 @@
 ---
 title: "mac合盖不休眠、安装包损坏解决办法"
-date: 2024-10-22T13:24:17+08:00
+date: 2024-09-02T13:24:17+08:00
 categories: ['Macos']
 author: "Ronan"
 ---

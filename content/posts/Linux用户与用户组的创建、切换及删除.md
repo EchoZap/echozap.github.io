@@ -1,6 +1,6 @@
 ---
 title: "Linux用户与用户组的创建、切换及删除"
-date: 2024-10-22T13:26:13+08:00
+date: 2024-09-02T13:26:13+08:00
 categories: ['Linux']
 author: "Ronan"
 ---

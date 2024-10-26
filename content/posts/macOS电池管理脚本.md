@@ -1,6 +1,6 @@
 ---
 title: "macOS电池管理脚本"
-date: 2024-10-22T13:24:23+08:00
+date: 2024-09-02T13:24:23+08:00
 categories: ['Macos']
 author: "Ronan"
 ---

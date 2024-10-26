@@ -1,6 +1,6 @@
 ---
 title: "Linux查看或修改主机名"
-date: 2024-10-22T13:26:21+08:00
+date: 2024-09-02T13:26:21+08:00
 categories: ['Linux']
 author: "Ronan"
 ---

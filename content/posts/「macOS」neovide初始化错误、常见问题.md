@@ -1,6 +1,6 @@
 ---
 title: "「macOS」neovide初始化错误、常见问题"
-date: 2024-10-22T13:28:44+08:00
+date: 2024-09-02T13:28:44+08:00
 categories: ['Docs']
 author: "Ronan"
 ---

@@ -1,6 +1,6 @@
 ---
 title: "「国内解决方法」linux安装docker"
-date: 2024-10-22T13:26:11+08:00
+date: 2024-09-02T13:26:11+08:00
 categories: ['Linux']
 author: "Ronan"
 ---

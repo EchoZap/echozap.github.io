@@ -1,6 +1,6 @@
 ---
 title: "macOS去除重复PATH环境变量"
-date: 2024-10-22T13:24:21+08:00
+date: 2024-09-02T13:24:21+08:00
 categories: ['Macos']
 author: "Ronan"
 ---

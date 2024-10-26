@@ -1,6 +1,6 @@
 ---
 title: "mac使用主机名代替IP地址进行ssh连接"
-date: 2024-10-22T13:24:19+08:00
+date: 2024-09-02T13:24:19+08:00
 categories: ['Macos']
 author: "Ronan"
 ---
