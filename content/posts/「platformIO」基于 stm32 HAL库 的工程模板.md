@@ -135,8 +135,7 @@ shutdown command invoked
   这是因为 stm32f1x.cfg 文件期望的 stm32f1x 芯片 ID 应该是 0x1ba01477 ，但是实际扫描到的设备 id 是 0x2ba01477。
 
 - 问题解决  
-  platformIO 使用的 openocd 是其自行打包下载而不是用户自行下载的第三方包，所以，首先要找到 **/Users/<your_username>/.platformio/packages/tool-openocd/openocd/scripts/  
-  target/stm32f1x.cfg** 并打开，在其中找到以下
+  platformIO 使用的 openocd 是其自行打包下载而不是用户自行下载的第三方包，所以，首先要找到 /Users/<your_username>/.platformio/packages/tool-openocd/openocd/scripts/target/stm32f1x.cfg 并打开，在其中找到以下
 
 ```shell
 #jtag scan chain
