@@ -116,7 +116,7 @@ int main (void)
 
 - 在第一次使用 stlink-v2 烧录时遇到以下问题：
 
-```
+```shell
 stlink-xPack Open On-Chip Debugger 0.12.0-01004-g9ea7f3d64-dirty (2023-01-30-17:03)
 Licensed under GNU GPL v2
 For bug reports, read
@@ -137,7 +137,7 @@ shutdown command invoked
 - 问题解决  
   platformIO 使用的 openocd 是其自行打包下载而不是用户自行下载的第三方包，所以，首先要找到 `/Users/<your_username>/.platformio/packages/tool-openocd/openocd/scripts/target/stm32f1x.cfg` 并打开，在其中找到以下
 
-```
+```shell
 #jtag scan chain
 if { [info exists CPUTAPID] } {
    set _CPUTAPID $CPUTAPID
@@ -154,7 +154,7 @@ if { [info exists CPUTAPID] } {
 
 我们可以看到罪魁祸首就在这里： 
 
-```
+```shell
 # this is the SW-DP tap id not the jtag tap id
 set _CPUTAPID 0x1ba01477
 ```
