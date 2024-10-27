@@ -45,6 +45,26 @@ jobs:
         with:
           submodules: recursive
           fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.12
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+      - name: Run backup script
+        run: |
+          python backup.py content/posts backup
+      - name: Commit and push backup files
+        run: |
+          git config --local user.email "laidbackronan@foxmail.com"
+          git config --local user.name "Ronan"
+          git add .
+          git commit -m "Updates backup files" || echo "No changes to commit"
+          git push
+
+
       - name: Build Hugo
         run: |
           cd ${{ github.workspace }}
@@ -57,6 +77,8 @@ jobs:
         run: |
           cd ${{ github.workspace }}/algolia
           npm run data-upload -- -c -f ../public/index.json -a GT5UPRMBE6 -k ${{ secrets.ALGOLIA_ADMIN_KEY }} -n hugo
+
+
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
