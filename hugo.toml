@@ -26,6 +26,9 @@ disqusShortname = ""
   css_modules = []
   js_modules = []
 
+  # 启用浅色和深色主题模式之间的切换
+  enableLightDarkTheme = true
+
   # Description and metadata for the search engines
   author = "Ronan"
   description = "Bilberry Premium Theme for Hugo."
