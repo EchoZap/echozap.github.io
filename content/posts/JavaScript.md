@@ -1,6 +1,8 @@
 ---
 title: "JavaScript"
 date: 2024-09-02T13:28:50+08:00
+
+toc: true
 categories: ['Docs']
 author: "Ronan"
 ---
