@@ -1,5 +1,6 @@
 # 博文置顶
 只需在博文前言添加 `weight: 1`
+> weight 的值越小，排序越靠前。
 
 # 文章目录
 要自动创建目录 (TOC)，请在文章前言（front Matter）中添加 `toc: true` 。如果文章的 markdown 包含适当的标题，Hugo 将在文章开头生成一个目录。
