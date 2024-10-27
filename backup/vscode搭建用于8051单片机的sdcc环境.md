@@ -1,3 +1,10 @@
+# 安装sdcc
+
+macOS 通过下面命令安装 sdcc 编译器：
+```shell
+brew install sdcc
+```
+
 # 查找sdcc以及8051头文件位置
 
 ```shell
@@ -65,7 +72,6 @@ packihx (your_main.ihx) > (your_main.hex)
 
 # 烧录程序
 
-> [!note]
 > 烧录程序使用的是stcgal  
 可以通过 `pip install stcgal` 来安装
 
