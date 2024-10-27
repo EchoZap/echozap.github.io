@@ -73,6 +73,15 @@ Host github_new
 
 在这个例子中，`github_new` 是自定义的别名，用于指定不同的 SSH 密钥。当你使用该别名连接 GitHub 时，会使用 `~/.ssh/id_rsa_new` 这个密钥。
 
+### 3.1遭遇git clone问题
+使用以下命令清除之前缓存再次 `git clone`；
+
+```shell
+ssh-keygen -R <github.com>
+```
+
+`-R` 后面的 hostname 根据实际情况填写
+
 # 4.ssh-agent
 
 `ssh-agent` 是一个用于管理 SSH 密钥的后台进程，它的主要作用是保存私钥的解密密钥，以便你在需要使用 SSH 进行身份验证时，不必每次都输入密码。它通过在用户会话中保持这些密钥的有效性，简化了 SSH 的使用。
