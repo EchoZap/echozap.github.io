@@ -58,11 +58,10 @@ Host github.com
 	IdentityFile ~/.ssh/id_ed25519
 
 # 为另一个服务或项目的 SSH 配置
-Host github_new
-	HostName ssh.github.com
+Host gitee.com
+	HostName gitee.com
 	User git
-	Port 443
-	IdentityFile ~/.ssh/id_ed25519_new_name
+	IdentityFile ~/.ssh/id_ed25519_gitee
 ```
 
 在这个例子中，`github_new` 是自定义的别名，用于指定不同的 SSH 密钥。当你使用该别名连接 GitHub 时，会使用 `~/.ssh/id_rsa_new` 这个密钥。
