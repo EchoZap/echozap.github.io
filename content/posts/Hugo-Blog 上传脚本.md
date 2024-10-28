@@ -1,5 +1,5 @@
 ---
-title: "Ronan-Hugo-Blog 上传脚本"
+title: "Hugo-Blog 上传脚本"
 date: 2024-09-02T13:17:38+08:00
 categories: ['Tools']
 author: "Ronan"
