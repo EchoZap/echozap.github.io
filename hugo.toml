@@ -82,7 +82,7 @@ disqusShortname = ""
 
   # Header configuration
     # your subtitle if you want to use any
-    subtitle = "罗华东的博客 | 「向前每多走一步，热爱和勇气就会多一分。」"
+    subtitle = "罗华东的博客 | 向前每多走一步，热爱和勇气就会多一分。"
 
     # if you want to use libravatar or gravatar for the header image
     avatarEmail = "code@lednerb.de"
