@@ -1,6 +1,6 @@
 ---
 title: "stm32程序烧录方式"
-date: 2024-08-15T13:29:02+08:00
+date: 2024-10-22T08:29:02+08:00
 categories: ['Docs']
 author: "Ronan"
 ---
