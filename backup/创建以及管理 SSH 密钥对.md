@@ -55,7 +55,7 @@ Host github.com
 	HostName ssh.github.com
 	User git
 	Port 443
-	IdentityFile ~/.ssh/id_ed25519
+	IdentityFile ~/.ssh/id_ed25519_github
 
 # 为另一个服务或项目的 SSH 配置
 Host gitee.com
@@ -64,7 +64,7 @@ Host gitee.com
 	IdentityFile ~/.ssh/id_ed25519_gitee
 ```
 
-在这个例子中，`github_new` 是自定义的别名，用于指定不同的 SSH 密钥。当你使用该别名连接 GitHub 时，会使用 `~/.ssh/id_rsa_new` 这个密钥。
+在这个例子中，`Host` 是自定义的别名，用于指定不同的 SSH 密钥。当你使用该别名连接 GitHub 时，会使用 `~/.ssh/id_ed25519_github` 这个密钥。
 
 ### 3.1遭遇git clone问题
 使用以下命令清除之前缓存再次 `git clone`；
