@@ -93,17 +93,17 @@ ssh-keygen -R <github.com>
 
 ### 4.1 启动和停止 ssh-agent
 
-通常在终端中，你可以通过以下命令启动 ssh-agent：
+- 通常在终端中，你可以通过以下命令启动 ssh-agent：
 ```shell
 eval $(ssh-agent)
 ```
 
-停止 ssh-agent 并清除相应的环境变量：
+- 停止 ssh-agent 并清除相应的环境变量：
 ```shell
 eval $(ssh-agent -k)
 ```
 
-这条命令会启动 ssh-agent 进程，并设置环境变量，使得当前终端会话可以使用它。
+> **注意：** 该缓存只在当前会话有效，也就是说，如果你关闭了终端再重新打开，就得重复该步骤。
 
 ### 4.2 添加 SSH 密钥
 
@@ -112,8 +112,6 @@ eval $(ssh-agent -k)
 ssh-add ~/.ssh/id_ed25519
 ```
 如果你的密钥有密码，系统会提示你输入。输入后，ssh-agent 将缓存该密钥。之后连接你无需再次输入密码。
-
-> **注意：** 该缓存只在当前会话有效，也就是说，如果你关闭了终端再重新打开，就得重复 `4.1` 步骤。
 
 ### 4.3 查看已添加到 ssh-agent 的密钥对
 
@@ -129,7 +127,6 @@ ssh-add -D
 
 ### 4.5 删除已添加到 ssh-agent 的特定密钥对
 
-要删除特定的 SSH 密钥，可以使用以下命令：
 ```shell
 ssh-add -d /path/to/your/private_key
 ```
