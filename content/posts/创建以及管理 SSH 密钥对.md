@@ -51,7 +51,7 @@ Enter same passphrase again:
 
 如果你忘记了 SSH 密钥的密码，将无法使用该密钥进行身份验证，因为 SSH 并没有提供恢复密码的功能。最简单的解决方案是生成一个新的 SSH 密钥对。
 
-# 3. 配置 `~/.ssh/config` 文件（以 GitHub 为例）
+# 3. 配置 `~/.ssh/config` 文件（以 GitHub、Gitee 为例）
 
 为了方便管理不同的 SSH 密钥，可以在 `~/.ssh/config` 文件中为每个密钥配置别名。打开并编辑 `~/.ssh/config` 文件，添加如下内容：
 
@@ -72,7 +72,7 @@ Host gitee.com
 
 在这个例子中，`Host` 是自定义的别名，用于指定不同的 SSH 密钥。当你使用该别名连接 GitHub 时，会使用 `~/.ssh/id_ed25519_github` 这个密钥。
 
-### 3.1遭遇git clone问题
+### 3.1遭遇git clone失败问题
 使用以下命令清除之前缓存再次 `git clone`；
 
 ```shell
@@ -83,7 +83,7 @@ ssh-keygen -R <github.com>
 
 # 4.ssh-agent
 
-`ssh-agent` 是一个用于管理 SSH 密钥的后台进程，它的主要作用是保存私钥的解密密钥，以便你在需要使用 SSH 进行身份验证时，不必每次都输入密码。它通过在用户会话中保持这些密钥的有效性，简化了 SSH 的使用。
+如果你在创建密钥对的时候设置了密码，那么及时你讲公钥发送给别人，但是每次 ssh 连接你都需要输入密码，这时候 `ssh-agent` 就可以派上用场了， `ssh-agent` 是一个用于管理 SSH 密钥的后台进程，它的主要作用是保存私钥的解密密钥，以便你在需要使用 SSH 进行身份验证时， **不必每次都输入密码**。
 
 `ssh-agent` 的作用：
 
@@ -91,12 +91,16 @@ ssh-keygen -R <github.com>
 - 避免重复输入密码：在会话期间，用户只需输入一次私钥的密码，之后的 SSH 连接将不需要再次输入，直到 ssh-agent 进程终止或密钥被移除。
 - 安全性：私钥在本地存储，不会在网络中传输，ssh-agent 仅处理密钥的解密和身份验证。
 
-### 4.1 启动 ssh-agent
+### 4.1 启动和停止 ssh-agent
 
 通常在终端中，你可以通过以下命令启动 ssh-agent：
-
 ```shell
 eval $(ssh-agent)
+```
+
+停止 ssh-agent 并清除相应的环境变量：
+```shell
+eval $(ssh-agent -k)
 ```
 
 这条命令会启动 ssh-agent 进程，并设置环境变量，使得当前终端会话可以使用它。
@@ -104,31 +108,28 @@ eval $(ssh-agent)
 ### 4.2 添加 SSH 密钥
 
 接下来，可以使用 ssh-add 命令将你的 SSH 密钥添加到 ssh-agent 中：
-
 ```shell
 ssh-add ~/.ssh/id_ed25519
 ```
+如果你的密钥有密码，系统会提示你输入。输入后，ssh-agent 将缓存该密钥。之后连接你无需再次输入密码。
 
-如果你的密钥有密码，系统会提示你输入。输入后，ssh-agent 将缓存该密钥。
+> **注意：** 该缓存只在当前会话有效，也就是说，如果你关闭了终端再重新打开，就得重复 `4.1` 步骤。
 
-### 4.3 进行 SSH 连接
-
-之后，当你使用 SSH 连接到远程服务器时，比如：
-
-```shell
-ssh user@hostname
-```
-
-ssh-agent 会自动使用缓存的密钥进行身份验证，而你无需再次输入密码。
-
-### 4.4 查看已添加到 ssh-agent 的密钥对
+### 4.3 查看已添加到 ssh-agent 的密钥对
 
 ```shell
 ssh-add -l
 ```
 
-### 4.5 删除所有已添加到 ssh-agent 的密钥对
+### 4.4 删除所有已添加到 ssh-agent 的密钥对
 
 ```shell
 ssh-add -D
+```
+
+### 4.5 删除已添加到 ssh-agent 的特定密钥对
+
+要删除特定的 SSH 密钥，可以使用以下命令：
+```shell
+ssh-add -d /path/to/your/private_key
 ```
