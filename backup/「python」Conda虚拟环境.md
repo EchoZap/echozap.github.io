@@ -6,8 +6,6 @@
 conda create -n jupyter_env python=3.11
 ```
 
-> [!tip]
->
 > 通过上面命令创建的虚拟环境通常会保存在主环境目录，如果想指定虚拟环境的位置，可以使用下面的命令
 
 **指定路径**：如果你在创建环境时使用了 `-p` 或 `--prefix` 选项指定路径，环境会存储在你指定的位置。
@@ -16,7 +14,7 @@ conda create -n jupyter_env python=3.11
 conda create -p /my/custom/path/env_name python=3.11
 ```
 
-
+---
 
 # 激活环境与退出环境
 
@@ -32,6 +30,8 @@ conda activate jupyter_env
 conda deactivate
 ```
 
+---
+
 # 列出所有虚拟环境
 
 首先，你可以列出所有已创建的虚拟环境(以下命令二选一)：
@@ -46,6 +46,7 @@ conda info --envs
 
 这会显示所有环境的名称和路径。
 
+---
 
 # 删除虚拟环境
 
@@ -67,6 +68,7 @@ conda remove -p /path/to/your/env --all
 
 在执行删除命令后，Conda 会提示你确认是否要删除该环境。输入 `y` 并回车以确认删除操作。
 
+---
 
 # 查看当前处于哪一个虚拟环境
 
@@ -89,6 +91,7 @@ jupyter_env               /opt/homebrew/Caskroom/miniconda/base/envs/jupyter_env
 
 你还可以检查当前使用的 Python 解释器的路径，确保它位于 Conda 环境的路径下。
 
+---
 
 # 虚拟环境默认安装位置
 
@@ -126,7 +129,7 @@ conda config --add envs_dirs /my/custom/path
 
 编辑 envs_dirs 配置： 在 .condarc 文件中找到类似以下的部分：
 
-```
+```shell
 envs_dirs:
   - /opt/homebrew/Caskroom/miniconda/base/envs
   - /Users/iaa/bin/myenv
@@ -135,6 +138,7 @@ envs_dirs:
 
 删除你不需要的路径，例如，如果你想删除 /Users/iaa/bin/myenv，就把这一行删掉，然后保存退出即可。
 
+----
 
 # 鬼东西总会自动激活base环境怎么办
 只需要在 `.zshrc的最后一行或者 conda 初始化的后面` 添加：
@@ -146,18 +150,20 @@ conda config --set auto_activate_base false
 
 然后保存 `source ~/.zshrc` 即可
 
+---
+
 # 自动激活特定虚拟环境
 假设我现在有一个有一个 myenv 的虚拟环境，要让 Conda 自动激活 myenv 环境（就像自动激活 base 环境一样）：
 
 1.禁用 base 环境的自动激活（如果尚未禁用）：
 
-```
+```shell
 conda config --set auto_activate_base false
 ```
 
 2.修改 ~/.zshrc 或 ~/.bash_profile 文件： 在终端中打开 ~/.zshrc（如果你使用 Zsh）或 ~/.bash_profile（如果你使用 Bash），然后在 `Conda 初始化代码块之后` 添加以下内容， `/Users/iaa/bin/myenv` 根据实际情况更换为指定环境 ：
 
-```
+```shell
 # 自动激活 myenv 环境
 if [[ -z "$CONDA_DEFAULT_ENV" ]]; then
     conda activate /Users/iaa/bin/myenv
