@@ -1,3 +1,11 @@
+# 安装conda
+```shell
+# macOS 安装 miniconda ，在终端输入以下命令
+brew install miniconda
+```
+
+---
+
 # 创建一个新的虚拟环境
 
 可以使用以下命令创建一个名为 `jupyter_env` 的新环境，并指定 Python 版本（例如 Python 3.11）
