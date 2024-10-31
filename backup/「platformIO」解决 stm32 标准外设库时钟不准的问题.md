@@ -42,3 +42,10 @@ Device/ST/STM32F4xx/Include/stm32f4xx.h**，在其中搜索`HSE_VALUE`，找到
 ```
 
 将`((uint32_t)25000000)`修改为`((uint32_t)8000000)`并强制保存。
+
+5.最后，还需要根据工程需要在 `main函数` 里对时钟进行分频，比如我使用的8分频：
+```c
+//系统定时器初始化，时钟源来自HCLK，且进行8分频，
+//系统定时器时钟频率=168MHz/8=21MHz
+SysTick_CLKSourceConfig(SysTick_CLKSource_HCLK_Div8);
+```
