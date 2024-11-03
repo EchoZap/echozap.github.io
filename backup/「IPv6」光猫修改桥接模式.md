@@ -34,7 +34,7 @@ http:/192.168.1.1/cgi-bin/telnetenable.cgi?telnetenable=1&key=AFJB267348C2
 
 > 如果使用 windows ，可能需要提前开启 telnet 功能：
 > 打开开始菜单，搜索“启用或关闭”，在结果中找到“启用或关闭 Windows 功能”并打开，勾选“Telnet客户端”后确定，等待Windows完成Telnet功能的开启。
-> ![windows_telnet](https://imgs.ronan.us.kg/windows_telnet.png)
+![windows_telnet](https://imgs.ronan.us.kg/windows_telnet.png)
 
 在终端输入并回车以下内容并回车：
 ```shell
