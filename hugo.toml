@@ -68,6 +68,7 @@ disqusShortname = ""
   # Enable / Disable Utterances comments
   utterances            = false
   utterancesJsUrl       = "https://utteranc.es/client.js"
+ 
   utterancesRepository  = "[ENTER REPO HERE]"
   utterancesIssueTerm   = "pathname"
   utterancesLabel       = "Comment"
@@ -78,11 +79,12 @@ disqusShortname = ""
     # let hugo automatically resize and crop your images to the correct sizes
     # NB: When enabled the image files get renamed by adding additional information,
     #     even if the image has the correct sizes.
+ 
     resizeImages = true
 
   # Header configuration
     # your subtitle if you want to use any
-    subtitle = "罗华东的博客 | 向前每多走一步，热爱和勇气就会多一分。"
+    subtitle = "罗华东的博客 | 永远相信美好的事情即将发生"
 
     # if you want to use libravatar or gravatar for the header image
     avatarEmail = "code@lednerb.de"
