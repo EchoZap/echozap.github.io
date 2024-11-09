@@ -26,7 +26,7 @@ ffmpeg -i input.mp4 -ss 15:25 -to 01:15:25 -c copy output.mp4
 #### 1. 创建一个文件列表
 创建一个文本文件 `filelist.txt`，内容如下：
 
-```
+```shell
 file 'video1.mp4'
 file 'video2.mp4'
 ```
