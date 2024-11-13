@@ -1,7 +1,9 @@
 ---
 title: "IPv6的使用"
-date: 2024-11-02T15:52:43+08:00
+date: 2024-11-12T15:52:43+08:00
+ 
 categories: ['Docs']
+ 
 author: "Ronan"
 ---
 # 查看是否有 IPv6 地址
