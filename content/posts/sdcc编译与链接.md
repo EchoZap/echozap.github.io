@@ -80,7 +80,7 @@ sdcc -o out.hex main.rel library.rel
 
 假设你的项目结构如下：
 
-```
+```shell
 project/
 │
 ├── include/
@@ -97,7 +97,7 @@ project/
 
 你可以通过以下命令编译和链接整个项目：
 
-```sh
+```shell
 cd project/src
 sdcc -I../include -c main.c
 sdcc -I../include -c ../lib/library.c
