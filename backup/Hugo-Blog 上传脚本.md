@@ -1,7 +1,6 @@
 使用方法：
 
-在83-85行填入相应信息即可  
-**注意80行的上传路径**
+在83-85行填入相应信息即可
 
 ```python
 import os
@@ -14,11 +13,9 @@ class HugoBlog:
         self.owner = owner
         self.repo = repo
         self.token = token
- 
 
         g = Github(self.token)
         self.repo = g.get_repo(f"{self.owner}/{self.repo}")
- 
 
         # 检查是否提供了必要的参数
         if not self.owner or not self.repo or not self.token:
@@ -35,7 +32,6 @@ class HugoBlog:
 
         for filename in os.listdir(directory):
             if filename.endswith('.md') or filename.endswith('.txt'):
- 
                 # 包含前缀路径的文件路径
                 file_path = os.path.join(directory, filename)
                 file_paths.append(file_path)
@@ -57,7 +53,6 @@ class HugoBlog:
 
         # 处理用户输入的 categories
         categories = [cat.strip().capitalize() for cat in categories_input.split(",")]
- 
 
         # 生成 MD 头部内容
         front_matter = f"""---
@@ -71,17 +66,12 @@ author: "{author}"
         return front_matter
 
     def append_front_matter_to_md_file(self, front_matter, post_path:str):
- 
         # file.md 所在的目录 “/root/path”
         dir_name, base_name = os.path.split(post_path)
- 
- 
         # 无后缀名的 file
         file_name, file_ext = os.path.splitext(base_name)
 
-        final_path = f"content/article/{base_name}"
- 
- 
+        final_path = f"content/posts/{base_name}"
 
         # 读取源文件内容
         with open(post_path, "r", encoding='utf-8') as f:
