@@ -55,7 +55,7 @@ jobs:
           pip install --upgrade pip
       - name: Run backup script
         run: |
-          python backup.py content/posts backup
+          python backup.py content/article backup
       - name: Commit and push backup files
         run: |
           git config --local user.email "laidbackronan@foxmail.com"
