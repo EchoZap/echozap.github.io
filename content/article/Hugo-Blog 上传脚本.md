@@ -8,6 +8,12 @@ author: "Ronan"
 
 在83-85行填入相应信息即可
 
+这是 iframe
+<iframe width="100%" height="300" src="https://gist.github.com/EchoZap/07c04ba1df4c41a875b1f27ccf29c1c3.js"></iframe>
+
+这是 script
+<script src="https://gist.github.com/EchoZap/07c04ba1df4c41a875b1f27ccf29c1c3.js"></script>
+
 ```python
 import os
 from datetime import datetime
