@@ -1,26 +1,37 @@
 # 用法
 
-- 在代码的最后几行空白引号里填入相应信息
 - **注意** `create_new_file_in_the_repo` 函数里的 `branch="main"` 参数，根据自身仓库分支修改
 
 
 ```python
+# 首先要安装第三方库PyGithub
+# 通过 pip install PyGithub进行安装
+# 填写下面的 “关键信息”
+
 import os
 from datetime import datetime
 from github import Github
 
+############################## 需要填写的关键信息 ############################
+OWNER = ""  # 仓库拥有者，例如 "username"
+REPO = ""   # 仓库名称，一般是 "username.github.io"
+TOKEN = ""  # GitHub 的个人访问令牌
+REPO_PATH = "" #  _posts需要将文章上传到仓库的具体哪个目录，例如上传到仓库根目录'content'下的'article'中，则输入"content/article"
+###########################################################################
+
 class HuxBlog:
-    def __init__(self, owner=None, repo=None, token=None):
+    def __init__(self, owner=None, repo=None, token=None, REPO_PATH-None):
         self.owner = owner
         self.repo = repo
         self.token = token
+		self.repo_path = REPO_PATH
 
         g = Github(self.token)
         self.repo = g.get_repo(f"{self.owner}/{self.repo}")
 
         # 检查是否提供了必要的参数
-        if not self.owner or not self.repo or not self.token:
-            raise ValueError("必须指定 owner, repo 和 token")
+		if not OWNER or not REPO or not TOKEN or not REPO_PATH:
+			raise ValueError("请在文件顶部填写 OWNER、REPO、TOKEN 和 REPO_PATH 的值。")
         else:
             self.start_upload()
 
@@ -32,12 +43,12 @@ class HuxBlog:
         match status:
             case "1":
                 post_path = input("请输入文章路径：")
-                including_time_file_name, content = self.prepare_post_file(post_path)
+                including_time_file_name, content = self.prepare_post_file(post_path, self.repo_path)
                 self.create_new_file_in_the_repo(including_time_file_name, content)
             case "2":
                 post_paths = self.get_post_paths()
                 for post_path in post_paths:
-                    including_time_file_name, content = self.prepare_post_file(post_path)
+                    including_time_file_name, content = self.prepare_post_file(post_path, self.repo_path)
                     self.create_new_file_in_the_repo(including_time_file_name, content)
 
 
@@ -59,7 +70,7 @@ class HuxBlog:
         return file_paths
 
 
-    def prepare_post_file(self, post_path:str) -> tuple[_posts/YYYY-MM-DD-file.md:str, front_matter + source_body:str]:
+    def prepare_post_file(self, post_path:str, REPO_PATH) -> tuple[_posts/YYYY-MM-DD-file.md:str, front_matter + source_body:str]:
 
         # 获取当前日期并格式化为“YYYY-MM-DD-”
         current_date = datetime.now().strftime('%Y-%m-%d')
@@ -76,7 +87,7 @@ class HuxBlog:
             file_name, file_ext = os.path.splitext(base_name)
 
             # 构建 YYYY-MM-DD-file.md ,没有前置路径
-            over_time_name = f"_posts/{current_date}-{file_name}{file_ext}"
+            over_time_name = f"{REPO_PATH}/{current_date}-{file_name}{file_ext}"
             # 构建/root/path/YYYY-MM-DD-file.md
             absolute_path_file = os.path.join(dir_name, over_time_name)
 
@@ -107,11 +118,11 @@ tags:
 
 if __name__ == "__main__":
     blog = HuxBlog(
-        owner = "",
-        repo = "",
-        token = ""
+        owner = OWNER,
+        repo = REPO,
+        token = TOKEN,
+	repo_path = REPO_PATH
     )
-
 ```
 
 
