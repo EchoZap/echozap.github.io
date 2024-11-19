@@ -58,6 +58,7 @@ test
 
 下载安装好编译链之后，将其放入到环境变量 `PATH` 中(至于具体步骤，百度一下，你就知道)
 
+---
 
 # 2.创建工程并去掉警告(红色波浪线)
 
@@ -110,6 +111,16 @@ test
 > 以后每新增加一个工程都可用一样的方法，区别是替换的 `-D` 的工程名要修改为你希望添加的工程名，如果红色警告仍然存在，可能是重复包含，所以你可以在`c_cpp_properties.json` 中的 `"includePath"` 将之前添加的所有 include 路径注释掉，然后只保留你当前聚焦的工程 include 路径即可
 
 ![c_cpp_properties.json](https://imgs.ronan.us.kg/vscode_stm32_makefile_config8.1.png)
+
+在 `makefile` 的末尾加上：
+
+```makefile
+flash:
+	openocd -f interface/stlink-v2.cfg -f target/stm32f1x.cfg -c "program $(BUILD_DIR)/$(TARGET).bin verify reset exit 0x08000000"
+```
+之后即可在命令行通过 `make flash` 命令下载程序
+
+---
 
 # 3.工程调试
 ### 3.1使用 openocd + stlink 调试
