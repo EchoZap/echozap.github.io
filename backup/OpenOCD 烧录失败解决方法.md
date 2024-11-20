@@ -25,7 +25,7 @@ make: *** [flash] Error 1
 ---
 
 # 解决方法
-在 /opt/homebrew/Cellar/open-ocd/0.12.0_1/share/openocd/scripts/target找到符合自己单片机型号的 cfg 文件，例如 stm32f1x.cfg 。在其中找到关于jtag scan chain 的设置，也就是类似下面：
+在  `/opt/homebrew/Cellar/open-ocd/0.12.0_1/share/openocd/scripts/target（根据自己安装 OpenOCD 的位置查找，通过 brew 安装的就在这个位置）` 找到符合自己单片机型号的 cfg 文件，例如 stm32f1x.cfg 。在其中找到关于 `jtag scan chain` 的设置，也就是类似下面：
 
 ```shell
 #jtag scan chain
