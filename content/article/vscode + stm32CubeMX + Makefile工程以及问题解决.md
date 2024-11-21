@@ -118,7 +118,12 @@ test
 
 ![c_cpp_properties.json](https://imgs.ronan.us.kg/vscode_stm32_makefile_config8.1.png)
 
-在 `makefile` 的末尾加上：
+在 `makefile` 的末尾加上（以下二选一）：
+
+```shell
+flash:
+	st-flash write $(BUILD_DIR)/$(TARGET).bin 0x08000000
+```
 
 ```makefile
 flash:
