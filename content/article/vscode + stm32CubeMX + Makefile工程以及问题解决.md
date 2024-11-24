@@ -172,69 +172,67 @@ Remote debugging using : 3333
 
 实现方法：
 
-在工作区根目录的`.vscode`目录（如果没有该目录可自行创建）中新建 `launch.json` 和 `tasks.json`。
+在工作区根目录的 `.vscode` 目录中新建 `launch.json` 和 `tasks.json`。  
+
+如果根目录没有 `.vscode` 目录，可以:
+
+- 点击顶部栏 `运行` -> `添加配置` -> 在弹出的 “选择调试器” 选项里随便选一个点击，这时候 `.vscode` 目录和 `launch.json` 就会创建好了。
+- 点击顶部栏 `终端` -> `配置生成默认任务` -> `使用模板创建 tasks.json 文件` -> `Others` , `tasks.json` 就创建好了。
+ 
+打开刚刚创建的 `launch.json` ，可以看到一些默认配置，把其中 `version` 这一行到 `结尾花括号（不包括结尾花括号）` 的所有内容删除，然后把下面的内容复制并粘贴到 `version` 这一行到 `结尾花括号` 之间。
 
 launch.json:
 
 ```json
-{
-    "version": "0.2.0",
+"configurations": [
+	{
+		"name": "Cortex Debug",
+		"cwd": "${workspaceRoot}",
+		"executable": "${workspaceFolder}/${input:projectName}/build/${input:projectName}.elf",//根据自己工程实际生成最终.elf 路径修改
+		"request": "launch",
+		"type": "cortex-debug",
+		"servertype": "openocd",
+		"configFiles": [  //根据自己开发版以及调试器修改
+			"interface/stlink-v2.cfg",
+			"target/stm32f1x.cfg"
+		],
+		"armToolchainPath": "/opt/arm-none-eabi/bin",
+		"preLaunchTask": "stm32 debug",
+	}
+],
 
-    "configurations": [
-        {
-            "name": "Cortex Debug",
-            "cwd": "${workspaceRoot}",
-            "executable": "${workspaceFolder}/${input:projectName}/build/${input:projectName}.elf",//根据自己工程实际生成最终.elf 路径修改
-            "request": "launch",
-            "type": "cortex-debug",
-            "servertype": "openocd",
-            "configFiles": [  //根据自己开发版以及调试器修改
-                "interface/stlink-v2.cfg",
-                "target/stm32f1x.cfg"
-            ],
-            "armToolchainPath": "/opt/arm-none-eabi/bin",
-            "preLaunchTask": "stm32 debug",
-        }
-    ],
-
-    "inputs": [
-        {
-            "id": "projectName",
-            "type": "promptString",
-            "description": "请输入你要调试的工程名",
-        }
-    ]
-}
+"inputs": [
+	{
+		"id": "projectName",
+		"type": "promptString",
+		"description": "请输入你要调试的工程名",
+	}
+]
 ```
 
-
-- 在 .vscode 目录中创建 tasks.json 文件  
-- 点击 `终端` -> `配置生成默认任务`
+打开刚刚创建的 `tasks.json` ，可以看到一些默认配置，把其中 `version` 这一行到 `结尾花括号（不包括结尾花括号）` 的所有内容删除，然后把下面的内容复制并粘贴到 `version` 这一行到 `结尾花括号` 之间。
 
 tasks.json:
 
 ```json
-{
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "stm32 debug",
-            "type": "shell",
-            "options": {
-                "cwd": "${workspaceFolder}/${input:projectName}"
-            },
-            "command": "make",
-            "detail": "任务用于构建 STM32 项目"
-        }
-    ],
-    "inputs": [
-        {
-            "id": "projectName",
-            "type": "promptString",
-            "description": "请输入构建的工程名(应与调试的工程名一致)",
-        }
-    ]
-}
+"tasks": [
+	{
+	    "label": "stm32 debug",
+	    "type": "shell",
+	    "options": {
+		"cwd": "${workspaceFolder}/${input:projectName}"
+	    },
+	    "command": "make",
+	    "detail": "任务用于构建 STM32 项目"
+	}
+],
+"inputs": [
+	{
+	    "id": "projectName",
+	    "type": "promptString",
+	    "description": "请输入构建的工程名(应与调试的工程名一致)",
+	}
+]
 ```
 
 然后运行一次 `make clean` 再重新 `make` 或者 `make DEBUG=1` ，再按下`f5`或者在 vscode 顶栏依次点击`运行`->`启用调试` 即可。
