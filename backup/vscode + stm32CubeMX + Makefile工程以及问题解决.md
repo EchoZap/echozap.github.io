@@ -186,7 +186,7 @@ launch.json:
                 "target/stm32f1x.cfg"
             ],
             "armToolchainPath": "/opt/arm-none-eabi/bin",
-            "preLaunchTask": "stm32 build",
+            "preLaunchTask": "stm32 debug",
         }
     ],
 
@@ -200,6 +200,10 @@ launch.json:
 }
 ```
 
+
+- 在 .vscode 目录中创建 tasks.json 文件  
+- 点击 `终端` -> `配置生成默认任务`
+
 tasks.json:
 
 ```json
@@ -207,7 +211,7 @@ tasks.json:
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "stm32 build",
+            "label": "stm32 debug",
             "type": "shell",
             "options": {
                 "cwd": "${workspaceFolder}/${input:projectName}"
