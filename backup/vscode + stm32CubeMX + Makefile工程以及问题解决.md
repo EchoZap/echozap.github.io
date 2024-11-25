@@ -138,7 +138,7 @@ flash:
 openocd -f interface/stlink-v2.cfg -f target/stm32f1x.cfg
 ```
 
-2.**保持上面的终端不要退出，然后开启一个新的终端窗口**，输入以下命令 `arm-none-eabi-gdb -q path/build/<your_project>.elf` 就可以进入 gdb 调试：
+2.**保持上面的终端不要退出，然后开启一个新的终端窗口**，输入命令「arm-none-eabi-gdb -q path/build/<your_project>.elf」 就可以进入 gdb 调试：
 
 ```shell
 ❯ arm-none-eabi-gdb -q path/build/<your_project>.elf
@@ -242,7 +242,7 @@ tasks.json:
 
 解决方法
 
-1.打开`.../<Your_Project>/Core/Src/stm32f1xx_hal_msp.c`，在其中找到`HAL_MspInit`函数，默认情况下，函数内部是这样的：
+1.打开「.../<Your_Project>/Core/Src/stm32f1xx_hal_msp.c」，在其中找到`HAL_MspInit`函数，默认情况下，函数内部是这样的：
 
 ```c
 void HAL_MspInit(void)
