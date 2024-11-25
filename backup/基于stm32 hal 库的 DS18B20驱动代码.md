@@ -55,6 +55,7 @@ float Temp = 0;
   }
 ```
 
+---
 
 DS18B20.c
 ```c
@@ -309,6 +310,8 @@ uint8_t DS18B20_Init(void)
     return DS18B20_Presence(); // 返回响应情况
 }
 ```
+
+---
 
 DS18B20.h
 
