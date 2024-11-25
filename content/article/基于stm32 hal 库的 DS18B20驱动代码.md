@@ -1,7 +1,7 @@
 ---
 title: "基于stm32 hal 库的 DS18B20驱动代码"
 date: 2024-11-25T16:04:06+08:00
-categories: ['Docs']
+categories: ['Tools']
 author: "Ronan"
 ---
 使用方法：   
