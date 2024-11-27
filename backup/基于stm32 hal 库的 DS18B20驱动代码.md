@@ -4,7 +4,7 @@
 2.将 DS18B20.h 放入 ../Core/Inc 目录中  
 3.在 Cube 中将要使用的引脚设置标签别名为 `DS18b20`  
 
-[点我获取DS18B20.c、DS18B20.h代码](https://gist.github.com/EchoZap/82ed2fcdea7508d8e135ae30d052f609)
+[「点我获取DS18B20.c、DS18B20.h代码」](https://gist.github.com/EchoZap/82ed2fcdea7508d8e135ae30d052f609)
 
 调用DS18b20驱动函数：  
 在main.c中合适的位置处添加 #include "ds18b20.h":
