@@ -25,7 +25,7 @@ openocd -f interface/stlink-v2.cfg -f target/stm32f1x.cfg -c "program /path/proj
 ## 使用STM32_Programmer_CLI（串口烧录）
 
 使用该方法之前需要安装 `STM32_Programmer_CLI`：
-> 可以到[ST 官网](https://www.st.com.cn/)搜索「STM32CubeProgrammer (STM32CubeProg) 」，下载软件并安装，但此时可以使用的是 GUI 界面。若想使用使用STM32_Programmer_CLI（也就是该软件的命令行版本），则需要将其添加到环境变量，例如，mac 的 STM32_Programmer_CLI 的路径一般在 /Applications/STMicroelectronics/STM32Cube/STM32CubeProgrammer/STM32CubeProgrammer.app/Contents/MacOs/bin，所以将其添加到 PATH。
+> 可以到[ST 官网](https://www.st.com.cn/)搜索「STM32CubeProgrammer (STM32CubeProg) 」，下载软件并安装，但此时可以使用的是 GUI 界面。若想使用使用STM32_Programmer_CLI（也就是该软件的命令行版本），则需要将其添加到环境变量，例如，mac版本的 STM32_Programmer_CLI 的路径一般在安应用安装目录的 app 包内容中STM32CubeProgrammer.app/Contents/MacOs/bin，所以将其添加到 PATH。
 
 之后将串口线正确接到板子上的引脚，通过以下命令将程序文件烧录到单片机中。
 
