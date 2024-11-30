@@ -123,7 +123,7 @@ disqusShortname = ""
     showReadingTime = false
 
     # Minimum word count to display the Table of Contents
-    tocMinWordCount = 400
+    tocMinWordCount = 280
 
   # Footer configuration
     showFooter = true
