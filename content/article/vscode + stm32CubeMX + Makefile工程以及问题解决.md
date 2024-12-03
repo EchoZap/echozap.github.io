@@ -2,6 +2,7 @@
 title: "vscode + stm32CubeMX + Makefile工程以及问题解决"
 date: 2024-09-02T13:28:37+08:00
 toc: true
+tags: ['stm32', 'hal', 'STM32CubeMX', 'Makefile', 'vscode']
 categories: ['Docs']
 author: "Ronan"
 ---
