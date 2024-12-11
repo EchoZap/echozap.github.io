@@ -31,7 +31,7 @@ disqusShortname = ""
 
   # Description and metadata for the search engines
   author = "Ronan"
-  description = "Bilberry Premium Theme for Hugo."
+  description = "罗华东的博客 | 永远相信美好的事情即将发生"
   keywords = "blog,personal,responsive,search,font awesome,pages,posts,multilingual,syntax highlighting,premium,shortcuts"
 
   # How many articles should be displayed at once?
