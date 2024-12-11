@@ -1,6 +1,7 @@
 ---
-title: "GCC"
+title: "GCC使用及编译流程"
 date: 2024-09-02T13:26:15+08:00
+tags: ['编译流程','GCC','C/C++']
 categories: ['Linux']
 author: "Ronan"
 ---
