@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="github-light" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    <script src='https://pub-43c06573bc27485093cd50efd04e9e7b.r2.dev/GmeekRonanTheme.js'></script><script src='https://pub-43c06573bc27485093cd50efd04e9e7b.r2.dev/GmeekVercount.js'></script>
+    <link rel="icon" href="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg">
+<meta name="description" content="## 1.规则
+
+> Makefile的框架是由规则构成的。">
+<meta property="og:title" content="Makefile">
+<meta property="og:description" content="## 1.规则
+
+> Makefile的框架是由规则构成的。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://echozap.github.io/post/Makefile.html">
+<meta property="og:image" content="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg">
+<title>Makefile</title>
+<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+.copy-feedback {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    color: var(--color-fg-on-emphasis);
+    background-color: var(--color-fg-muted);
+    border-radius: 3px;
+    padding: 5px 8px;
+    font-size: 12px;
+}
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">Makefile</h1>
+<div class="title-right">
+    <a href="https://echozap.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题"style="display:none;">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><h2>1.规则</h2>
+<blockquote>
+<p>Makefile的框架是由规则构成的。make命令执行时先在Makefile文件中查找各种规则，对各种规则进行解析后运行规则。规则的基本格式为：</p>
+</blockquote>
+<div class="highlight highlight-source-shell"><pre class="notranslate">每条规则的语法格式:
+target1,target2...: depend1, depend2, ...
+	<span class="pl-c1">command</span>
+	......
+	......</pre></div>
+<p>每条规则由三个部分组成分别是<code class="notranslate">目标(target)</code>, <code class="notranslate">依赖(depend)</code>和<code class="notranslate">命令(command)</code>。</p>
+<ul>
+<li><code class="notranslate">命令(command)</code>: 当前这条规则的动作，一般情况下这个动作就是一个 shell 命令<br>
+例如：通过某个命令编译文件、生成库文件、进入目录等。<br>
+动作可以是多个，每个命令前必须有一个Tab缩进并且独占占一行。</li>
+<li><code class="notranslate">依赖(depend)</code>: 规则所必需的依赖条件，在规则的命令中可以使用这些依赖。<br>
+例如：生成可执行文件的目标文件（*.o）可以作为依赖使用<br>
+如果规则的命令中不需要任何依赖，那么规则的依赖可以为空<br>
+当前规则中的依赖可以是其他规则中的某个目标，这样就形成了规则之间的嵌套<br>
+依赖可以根据要执行的命令的实际需求, 指定很多个</li>
+<li><code class="notranslate">目标(target)</code>： 规则中的目标，这个目标和规则中的命令是对应的<br>
+通过执行规则中的命令，可以生成一个和目标同名的文件<br>
+规则中可以有多个命令, 因此可以通过这多条命令来生成多个目标, 所有目标也可以有很多个<br>
+通过执行规则中的命令，可以只执行一个动作，不生成任何文件，这样的目标被称为<code class="notranslate">伪目标</code></li>
+</ul>
+<p>这里看着脑疼，举个例子</p>
+<div class="highlight highlight-source-makefile"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span>################ 例1 #################</span>
+<span class="pl-en">app</span>:a.c b.c c.c
+	gcc a.c b.c c.c -o app
+
+<span class="pl-c"><span class="pl-c">#</span>################ 例2 #################</span>
+<span class="pl-c"><span class="pl-c">#</span> 有多个目标, 多个依赖, 多个命令</span>
+<span class="pl-en">app,app1</span>:a.c b.c c.c d.c
+	gcc a.c b.c -o app
+	gcc c.c d.c -o app1
+	
+<span class="pl-c"><span class="pl-c">#</span>################ 例3 #################	</span>
+<span class="pl-c"><span class="pl-c">#</span> 规则之间的嵌套</span>
+<span class="pl-en">app</span>:a.o b.o c.o
+	gcc a.o b.o c.o -o app
+<span class="pl-c"><span class="pl-c">#</span> a.o 是第一条规则中的依赖</span>
+<span class="pl-en">a.o</span>:a.c
+	gcc -c a.c
+<span class="pl-c"><span class="pl-c">#</span> b.o 是第一条规则中的依赖</span>
+<span class="pl-en">b.o</span>:b.c
+	gcc -c b.c
+<span class="pl-c"><span class="pl-c">#</span> c.o 是第一条规则中的依赖</span>
+<span class="pl-en">c.o</span>:c.c
+	gcc -c c.c</pre></div>
+<hr>
+<h2>2.规则的执行</h2>
+<p><code class="notranslate">在调用 make 命令编译程序的时候，make 会首先找到 Makefile 文件中的第 1 个规则，分析并执行相关的动作。</code>但是需要注意的是，好多时候要执行的动作（命令）中使用的依赖是不存在的，如果使用的依赖不存在，这个动作也就不会被执行。</p>
+<p>对应的解决方案是先将需要的依赖生成出来，我们就可以在makefile中添加新的规则，将不存在的依赖作为这个新的规则中的目标，当这条新的规则对应的命令执行完毕，对应的目标就被生成了，同时另一条规则中需要的依赖也就存在了。</p>
+<p>这样，makefile中的某一条规则在需要的时候，就会被其他的规则调用，直到makefile中的第一条规则中的所有的依赖全部被生成，第一条规则中的命令就可以基于这些依赖生成对应的目标，make 的任务也就完成了。</p>
+<div class="highlight highlight-source-makefile"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> makefile</span>
+<span class="pl-c"><span class="pl-c">#</span> 规则之间的嵌套</span>
+<span class="pl-c"><span class="pl-c">#</span> 规则1</span>
+<span class="pl-en">app</span>:a.o b.o c.o
+	gcc a.o b.o c.o -o app
+<span class="pl-c"><span class="pl-c">#</span> 规则2</span>
+<span class="pl-en">a.o</span>:a.c
+	gcc -c a.c
+<span class="pl-c"><span class="pl-c">#</span> 规则3</span>
+<span class="pl-en">b.o</span>:b.c
+	gcc -c b.c
+<span class="pl-c"><span class="pl-c">#</span> 规则4</span>
+<span class="pl-en">c.o</span>:c.c
+	gcc -c c.c</pre></div>
+<hr>
+<h2>3.变量</h2>
+<h3>3.1自定义变量</h3>
+<ul>
+<li>定义变量</li>
+</ul>
+<div class="highlight highlight-source-makefile"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 错误, 只创建了变量名, 没有赋值</span>
+变量名 
+<span class="pl-c"><span class="pl-c">#</span> 正确, 创建一个变量名并且给其赋值</span>
+<span class="pl-smi">变量名</span>=变量值</pre></div>
+<ul>
+<li>取出变量里的值</li>
+</ul>
+<div class="highlight highlight-source-makefile"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 如果将变量的值取出?</span>
+$(变量的名字)
+
+<span class="pl-c"><span class="pl-c">#</span> 举例 add.o  div.o  main.o  mult.o  sub.o</span>
+<span class="pl-c"><span class="pl-c">#</span> 定义变量并赋值</span>
+<span class="pl-smi">obj</span>=add.o  div.o  main.o  mult.o  sub.o
+<span class="pl-c"><span class="pl-c">#</span> 取变量的值</span>
+$(obj)</pre></div>
+<h3>3.2预定义变量</h3>
+<blockquote>
+<p>在 Makefile 中有一些已经定义的变量，用户可以直接使用这些变量，不用进行定义。在进行编译的时候，某些条件下 Makefile 会使用这些预定义变量的值进行编译。这些预定义变量的名字一般都是大写的，经常采用的预定义变量如下表所示：</p>
+</blockquote>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th align="center">变 量 名</th>
+<th align="center">含 义</th>
+<th align="center">默 认 值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">AR</td>
+<td align="center">生成静态库库文件的程序名称</td>
+<td align="center">ar</td>
+</tr>
+<tr>
+<td align="center">AS</td>
+<td align="center">汇编编译器的名称</td>
+<td align="center">as</td>
+</tr>
+<tr>
+<td align="center">CC</td>
+<td align="center">C 语言编译器的名称</td>
+<td align="center">cc</td>
+</tr>
+<tr>
+<td align="center">CPP</td>
+<td align="center">C 语言预编译器的名称</td>
+<td align="center">$(CC) -E</td>
+</tr>
+<tr>
+<td align="center">CXX</td>
+<td align="center">C++语言编译器的名称</td>
+<td align="center">g++</td>
+</tr>
+<tr>
+<td align="center">FC</td>
+<td align="center">FORTRAN 语言编译器的名称</td>
+<td align="center">f77</td>
+</tr>
+<tr>
+<td align="center">RM</td>
+<td align="center">删除文件程序的名称</td>
+<td align="center">rm -f</td>
+</tr>
+<tr>
+<td align="center">ARFLAGS</td>
+<td align="center">生成静态库库文件程序的选项</td>
+<td align="center">无默认值</td>
+</tr>
+<tr>
+<td align="center">ASFLAGS</td>
+<td align="center">汇编语言编译器的编译选项</td>
+<td align="center">无默认值</td>
+</tr>
+<tr>
+<td align="center">CFLAGS</td>
+<td align="center">C 语言编译器的编译选项</td>
+<td align="center">无默认值</td>
+</tr>
+<tr>
+<td align="center">CPPFLAGS</td>
+<td align="center">C 语言预编译的编译选项</td>
+<td align="center">无默认值</td>
+</tr>
+<tr>
+<td align="center">CXXFLAGS</td>
+<td align="center">C++语言编译器的编译选项</td>
+<td align="center">无默认值</td>
+</tr>
+<tr>
+<td align="center">FFLAGS</td>
+<td align="center">FORTRAN 语言编译器的编译选项</td>
+<td align="center">无默认值</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p>举例</p>
+<div class="highlight highlight-source-makefile"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 这是一个规则，普通写法</span>
+<span class="pl-en">calc</span>:add.o  div.o  main.o  mult.o  sub.o
+        gcc  add.o  div.o  main.o  mult.o  sub.o -o calc
+        
+<span class="pl-c"><span class="pl-c">#</span> 这是一个规则，里边使用了自定义变量和预定义变量</span>
+<span class="pl-smi">obj</span>=add.o  div.o  main.o  mult.o  sub.o
+<span class="pl-smi">target</span>=calc
+<span class="pl-smi">CFLAGS</span>=-O3 <span class="pl-c"><span class="pl-c">#</span> 代码优化</span>
+<span class="pl-s">$(<span class="pl-smi">target</span>)</span>:<span class="pl-s">$(<span class="pl-smi">obj</span>)</span>
+        $(CC)  $(obj) -o $(target) $(CFLAGS)</pre></div>
+<h3>3.3自动变量</h3>
+<blockquote>
+<p>Makefile 中的变量除了用户自定义变量和预定义变量外，还有一类自动变量。Makefile 中的规则语句中经常会出现目标文件和依赖文件，<code class="notranslate">自动变量用来代表这些规则中的目标文件和依赖文件，并且它们只能在规则的命令中使用。</code></p>
+<p>下表中是一些常见的自动变量。</p>
+</blockquote>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th align="center">变 量</th>
+<th align="center">含 义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">$*</td>
+<td align="center">表示目标文件的名称，不包含目标文件的扩展名</td>
+</tr>
+<tr>
+<td align="center">$+</td>
+<td align="center">表示所有的依赖文件，这些依赖文件之间以空格分开，按照出现的先后为顺序，其中可能 包含重复的依赖文件</td>
+</tr>
+<tr>
+<td align="center">$&lt;</td>
+<td align="center">表示依赖项中第一个依赖文件的名称</td>
+</tr>
+<tr>
+<td align="center">$?</td>
+<td align="center">依赖项中，所有比目标文件时间戳晚的依赖文件，依赖文件之间以空格分开</td>
+</tr>
+<tr>
+<td align="center">$@</td>
+<td align="center">表示目标文件的名称，包含文件扩展名</td>
+</tr>
+<tr>
+<td align="center">$^</td>
+<td align="center">依赖项中，所有不重复的依赖文件，这些文件之间以空格分开</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p>举个例子</p>
+<div class="highlight highlight-source-makefile"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 这是一个规则，普通写法</span>
+<span class="pl-en">calc</span>:add.o  div.o  main.o  mult.o  sub.o
+        gcc  add.o  div.o  main.o  mult.o  sub.o -o calc
+        
+<span class="pl-c"><span class="pl-c">#</span> 这是一个规则，里边使用了自定义变量</span>
+<span class="pl-c"><span class="pl-c">#</span> 使用自动变量, 替换相关的内容</span>
+<span class="pl-en">calc</span>:add.o  div.o  main.o  mult.o  sub.o
+	gcc <span class="pl-c1">$^</span> -o <span class="pl-c1">$@</span> 			<span class="pl-c"><span class="pl-c">#</span> 自动变量只能在规则的命令中使用</span></pre></div>
+<hr>
+<h2>4.模式匹配</h2>
+<div class="highlight highlight-source-makefile"><pre class="notranslate"><span class="pl-en">calc</span>:add.o  div.o  main.o  mult.o  sub.o
+        gcc  add.o  div.o  main.o  mult.o  sub.o -o calc
+<span class="pl-c"><span class="pl-c">#</span> 语法格式重复的规则, 将 .c -&gt; .o, 使用的命令都是一样的 gcc *.c -c</span>
+<span class="pl-en">add.o</span>:add.c
+        gcc add.c -c
+
+<span class="pl-en">div.o</span>:div.c
+        gcc div.c -c
+
+<span class="pl-en">main.o</span>:main.c
+        gcc main.c -c
+
+<span class="pl-en">sub.o</span>:sub.c
+        gcc sub.c -c
+
+<span class="pl-en">mult.o</span>:mult.c
+        gcc mult.c -c</pre></div>
+<p>在阅读过程中能够发现从第二个规则开始到第六个规则做的是相同的事情, 但是由于文件名不同不得不在文件中写出多个规则，这就让 makefile 文件看起来非常的冗余，我们可以将这一系列的相同操作整理成一个模板，所有类似的操作都通过模板去匹配 makefile 会因此而精简不少，只是可读性会有所下降。</p>
+<p>这个规则模板可以写成下边的样子，这种操作就称之为模式匹配.</p>
+<div class="highlight highlight-source-makefile"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 模式匹配 -&gt; 通过一个公式, 代表若干个满足条件的规则</span>
+<span class="pl-c"><span class="pl-c">#</span> 依赖有一个, 后缀为.c, 生成的目标是一个 .o 的文件, % 是一个通配符, 匹配的是文件名</span>
+<span class="pl-en"><span class="pl-c1">%</span>.o</span>:<span class="pl-c1">%</span>.c
+	gcc <span class="pl-c1">$&lt;</span> -c</pre></div>
+<hr>
+<h2>5.函数</h2>
+<blockquote>
+<p>makefile中有很多函数并且<code class="notranslate">所有的函数都是有返回值的</code>。makefile中函数的格式和C/C++中函数也不同，其写法是这样的： <code class="notranslate">$(函数名 参数1, 参数2, 参数3, ...)</code>，主要目的是让我们能够快速方便的得到函数的返回值。</p>
+</blockquote>
+<p>主要说两个使用频率很高的函数<code class="notranslate">wildcard</code>和<code class="notranslate">patsubst</code>。</p>
+<h3>5.1 wildcard</h3>
+<div class="highlight highlight-source-makefile"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 该函数的参数只有一个, 但是这个参数可以分成若干个部分, 通过空格间隔</span>
+$(wildcard PATTERN...)
+	参数:	指定某个目录, 搜索这个路径下指定类型的文件，比如： *.c</pre></div>
+<ul>
+<li>参数功能:<br>
+PATTERN 指的是某个或多个目录下的对应的某种类型的文件, 比如当前目录下的.c文件可以写成 *.c<br>
+可以指定多个目录，每个路径之间使用空格间隔</li>
+<li>返回值：<br>
+得到的若干个文件的文件列表， 文件名之间使用空格间隔<br>
+示例：<code class="notranslate">$(wildcard *.c ./sub/*.c)</code><br>
+返回值格式: a.c b.c c.c d.c e.c f.c ./sub/aa.c ./sub/bb.c</li>
+</ul>
+<p>​</p>
+<p>举个例子</p>
+<div class="highlight highlight-source-makefile"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 使用举例: 分别搜索三个不同目录下的 .c 格式的源文件</span>
+<span class="pl-smi">src</span> = <span class="pl-s">$(<span class="pl-c1">wildcard</span> /home/robin/a/<span class="pl-c1">*</span>.c /home/robin/b/<span class="pl-c1">*</span>.c <span class="pl-c1">*</span>.c)</span>  <span class="pl-c"><span class="pl-c">#</span> *.c == ./*.c</span>
+<span class="pl-c"><span class="pl-c">#</span> 返回值: 得到一个大的字符串, 里边有若干个满足条件的文件名, 文件名之间使用空格间隔</span>
+/home/robin/a/a.c /home/robin/a/b.c /home/robin/b/c.c /home/robin/b/d.c e.c f.c</pre></div>
+<h3>5.2 patsubet</h3>
+<div class="highlight highlight-source-makefile"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 有三个参数, 参数之间使用 逗号间隔</span>
+$(patsubst &lt;pattern&gt;,&lt;replacement&gt;,&lt;text&gt;)</pre></div>
+<ul>
+<li>pattern: 这是一个模式字符串, 需要指定出要被替换的文件名中的后缀是什么<br>
+文件名和路径不需要关心, 因此使用 % 表示即可 <code class="notranslate">[通配符是 %]</code><br>
+在通配符后边指定出要被替换的后缀, 比如: %.c, 意味着 .c的后缀要被替换掉</li>
+<li>replacement: 这是一个模式字符串, 指定参数pattern中的后缀最终要被替换为什么<br>
+还是使用 % 来表示参数pattern 中文件的路径和名字<br>
+在通配符 % 后边指定出新的后缀名, 比如: %.o 这表示原来的后缀被替换为 .o</li>
+<li>text: 该参数中存储这要被替换的原始数据</li>
+<li>返回值:<br>
+函数返回被替换过后的字符串。</li>
+</ul>
+<p>举个例子</p>
+<div class="highlight highlight-source-makefile"><pre class="notranslate"><span class="pl-smi">src</span> = a.cpp b.cpp c.cpp e.cpp
+<span class="pl-c"><span class="pl-c">#</span> 把变量 src 中的所有文件名的后缀从 .cpp 替换为 .o</span>
+<span class="pl-smi">obj</span> = <span class="pl-s">$(<span class="pl-c1">patsubst</span> <span class="pl-c1">%</span>.cpp, <span class="pl-c1">%</span>.o, <span class="pl-s">$(<span class="pl-smi">src</span>)</span>)</span> 
+<span class="pl-c"><span class="pl-c">#</span> obj 的值为: a.o b.o c.o e.o</span></pre></div>
+<p>​</p></div>
+<div style="font-size:small;margin-top:8px;float:right;">要做一个有swag的人</div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://echozap.github.io">Ronan's Blog</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z', 'copy': 'M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z', 'check': 'M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z'};
+var utterancesLoad=0;
+
+console.log("\n %c Gmeek  https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const createClipboardHTML = (codeContent, additionalClasses = '') => `
+        <pre class="notranslate"><code class="notranslate">${codeContent}</code></pre>
+        <div class="clipboard-container position-absolute right-0 top-0 ${additionalClasses}">
+            <clipboard-copy class="ClipboardButton btn m-2 p-0" role="button" style="display: inherit;">
+                <svg height="16" width="16" class="octicon octicon-copy m-2"><path d="${IconList["copy"]}"></path></svg>
+                <svg height="16" width="16" class="octicon octicon-check color-fg-success m-2 d-none"><path d="${IconList["check"]}"></path></svg>
+            </clipboard-copy>
+            <div class="copy-feedback">Copied!</div>
+        </div>
+    `;
+
+    const handleCodeElements = (selector = '') => {
+        document.querySelectorAll(selector).forEach(codeElement => {
+            const codeContent = codeElement.innerHTML;
+            const newStructure = document.createElement('div');
+            newStructure.className = 'snippet-clipboard-content position-relative overflow-auto';
+            newStructure.innerHTML = createClipboardHTML(codeContent);
+
+            const parentElement = codeElement.parentElement;
+            if (selector.includes('highlight')) {
+                parentElement.insertBefore(newStructure, codeElement.nextSibling);
+                parentElement.removeChild(codeElement);
+            } else {
+                parentElement.parentElement.replaceChild(newStructure, parentElement);
+            }
+        });
+    };
+
+    handleCodeElements('pre.notranslate > code.notranslate');
+    handleCodeElements('div.highlight > pre.notranslate');
+
+    let currentFeedback = null;
+    document.querySelectorAll('clipboard-copy').forEach(copyButton => {
+        copyButton.addEventListener('click', () => {
+            const codeContent = copyButton.closest('.snippet-clipboard-content').innerText;
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = codeContent;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextArea);
+
+            const copyIcon = copyButton.querySelector('.octicon-copy');
+            const checkIcon = copyButton.querySelector('.octicon-check');
+            const copyFeedback = copyButton.nextElementSibling;
+
+            if (currentFeedback && currentFeedback !== copyFeedback) {currentFeedback.style.display = 'none';}
+            currentFeedback = copyFeedback;
+
+            copyIcon.classList.add('d-none');
+            checkIcon.classList.remove('d-none');
+            copyFeedback.style.display = 'block';
+            copyButton.style.borderColor = 'var(--color-success-fg)';
+
+            setTimeout(() => {
+                copyIcon.classList.remove('d-none');
+                checkIcon.classList.add('d-none');
+                copyFeedback.style.display = 'none';
+                copyButton.style.borderColor = '';
+            }, 2000);
+        });
+    });
+});
+
+</script>
+<script src='https://pub-43c06573bc27485093cd50efd04e9e7b.r2.dev/GmeekArticleTOC.js'></script><script src='https://pub-43c06573bc27485093cd50efd04e9e7b.r2.dev/Gmeeklightbox.js'></script><script>document.querySelectorAll('a').forEach(anchor => {const img = anchor.querySelector('img');if (img && img.hasAttribute('data-canonical-src')) {const canonicalSrc = img.getAttribute('data-canonical-src');anchor.setAttribute('href', canonicalSrc);img.setAttribute('src', canonicalSrc);img.removeAttribute('data-canonical-src');}});</script>
+
+</html>
