@@ -1,5 +1,22 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan's Blog</title><link>https://echozap.github.io</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg</url><title>avatar</title><link>https://echozap.github.io</link></image><lastBuildDate>Sat, 22 Mar 2025 10:33:26 +0000</lastBuildDate><managingEditor>Ronan's Blog</managingEditor><ttl>60</ttl><webMaster>Ronan's Blog</webMaster><item><title>IPv6的使用</title><link>https://echozap.github.io/post/IPv6-de-shi-yong.html</link><description># 查看是否有 IPv6 地址
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan's Blog</title><link>https://echozap.github.io</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg</url><title>avatar</title><link>https://echozap.github.io</link></image><lastBuildDate>Sat, 22 Mar 2025 10:34:13 +0000</lastBuildDate><managingEditor>Ronan's Blog</managingEditor><ttl>60</ttl><webMaster>Ronan's Blog</webMaster><item><title>JavaScript</title><link>https://echozap.github.io/post/JavaScript.html</link><description># 对象概述
+
+什么是对象？对象（object）是 JavaScript 语言的核心概念，也是最重要的数据类型
+
+简单说，对象就是一组“键值对”（key-value）的集合，是一种无序的复合数据集合
+
+![img](https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/js1.png)
+
+```js
+var user = {
+  name: 'itbaizhan',
+  age: '13'
+};
+```
+
+对象的每一个键名又称为“属性”（property），它的“键
+
+值”可以是任何数据类型。</description><guid isPermaLink="true">https://echozap.github.io/post/JavaScript.html</guid><pubDate>Sat, 22 Mar 2025 10:33:45 +0000</pubDate></item><item><title>IPv6的使用</title><link>https://echozap.github.io/post/IPv6-de-shi-yong.html</link><description># 查看是否有 IPv6 地址
 
 在终端中输入：
 
