@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="github-light" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    <script src='https://pub-43c06573bc27485093cd50efd04e9e7b.r2.dev/GmeekRonanTheme.js'></script><script src='https://pub-43c06573bc27485093cd50efd04e9e7b.r2.dev/GmeekVercount.js'></script>
+    <link rel="icon" href="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg">
+<meta name="description" content="gdb 是由 GNU 软件系统社区提供的调试器，同 gcc 配套组成了一套完整的开发环境，可移植性很好，支持非常多的体系结构并被移植到各种系统中（包括各种类 Unix 系统与 Windows 系统里的 MinGW 和 Cygwin ）。">
+<meta property="og:title" content="GDB 调试">
+<meta property="og:description" content="gdb 是由 GNU 软件系统社区提供的调试器，同 gcc 配套组成了一套完整的开发环境，可移植性很好，支持非常多的体系结构并被移植到各种系统中（包括各种类 Unix 系统与 Windows 系统里的 MinGW 和 Cygwin ）。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://echozap.github.io/post/GDB%20-diao-shi.html">
+<meta property="og:image" content="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg">
+<title>GDB 调试</title>
+<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+.copy-feedback {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    color: var(--color-fg-on-emphasis);
+    background-color: var(--color-fg-muted);
+    border-radius: 3px;
+    padding: 5px 8px;
+    font-size: 12px;
+}
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">GDB 调试</h1>
+<div class="title-right">
+    <a href="https://echozap.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题"style="display:none;">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><p>gdb 是由 GNU 软件系统社区提供的调试器，同 gcc 配套组成了一套完整的开发环境，可移植性很好，支持非常多的体系结构并被移植到各种系统中（包括各种类 Unix 系统与 Windows 系统里的 MinGW 和 Cygwin ）。此外，除了 C 语言之外，gcc/gdb 还支持包括 C++、Objective-C、Ada 和 Pascal 等各种语言后端的编译和调试。 gcc/gdb 是 Linux 和许多类 Unix 系统中的标准开发环境，Linux 内核也是专门针对 gcc 进行编码的。</p>
+<p>gdb 的吉祥物是专门捕杀 bug 的射手鱼，官方有这样一段描述:</p>
+<blockquote>
+<p>For a fish, the archer fish is known to shoot down bugs from low hanging plants by spitting water at them.</p>
+<p>作为一种鱼，射手鱼以喷水射下低垂的植物上的虫子而闻名。</p>
+</blockquote>
+<p>GDB 是一套字符界面的程序集，可以使用命令 gdb 加载要调试的程序。 下面为大家介绍一些常用的GDB调试命令。</p>
+<h1>1.调试准备</h1>
+<p>项目程序如果是为了进行调试而编译时， 必须要打开调试选项(<code class="notranslate">-g</code>)。另外还有一些可选项，比如: 在尽量不影响程序行为的情况下关掉编译器的优化选项(<code class="notranslate">-O0</code>)，<code class="notranslate">-Wall</code>选项打开所有 warning，也可以发现许多问题，避免一些不必要的 bug。</p>
+<p><code class="notranslate">-g</code>选项的作用是在可执行文件中加入源代码的信息，比如可执行文件中第几条机器指令对应源代码的第几行，但并不是把整个源文件嵌入到可执行文件中，所以在调试时必须保证gdb能找到源文件。</p>
+<p>习惯上如果是c程序就使用gcc编译, 如果是 c++程序就使用g++编译, 编译命令中添加上边提到的参数即可。</p>
+<blockquote>
+<p>假设有一个文件 args.c, 要对其进行gdb调试，编译的时候必须要添加参数 -g，加入了源代码信息的可执行文件比不加之前要大一些。</p>
+</blockquote>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> -g 将调试信息写入到可执行程序中</span>
+$ gcc -g args.c -o app
+
+<span class="pl-c"><span class="pl-c">#</span> 编译不添加 -g 参数</span>
+$ gcc args.c -o app1
+
+<span class="pl-c"><span class="pl-c">#</span> 查看生成的两个可执行程序的大小</span>
+$ ll
+
+-rwxrwxr-x  1 robin robin 9816 Apr 19 09:25 app<span class="pl-k">*</span>	<span class="pl-c"><span class="pl-c">#</span> 可以用于gdb调试</span>
+-rwxrwxr-x  1 robin robin 8608 Apr 19 09:25 app1<span class="pl-k">*</span>	<span class="pl-c"><span class="pl-c">#</span> 不能用于gdb调试</span></pre></div>
+<h1>2.启动和退出gdb</h1>
+<h2>2.1 启动gdb</h2>
+<blockquote>
+<p>gdb是一个用于应用程序调试的进程, 需要先将其打开, 一定要注意 gdb进程启动之后, 需要的被调试的应用程序是没有执行的。打开Linux终端，切换到要调试的可执行程序所在路径，执行如下命令就可以启动 gdb了。</p>
+</blockquote>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 在终端中执行如下命令</span>
+<span class="pl-c"><span class="pl-c">#</span> gdb程序启动了, 但是可执行程序并没有执行</span>
+$ gdb 可执行程序的名字
+
+<span class="pl-c"><span class="pl-c">#</span> 使用举例：</span>
+$ gdb app
+(gdb) 		<span class="pl-c"><span class="pl-c">#</span> gdb等待输入调试的相关命令</span></pre></div>
+<h2>2.2 命令行传参</h2>
+<p>有些程序在启动的时候需要传递命令行参数，如果要调试这类程序，这些命令行参数必须要在应用程序启动之前通过调试程序的gdb进程传递进去。下面是一段带命令行参数的程序：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">// args.c
+<span class="pl-c"><span class="pl-c">#</span>include &lt;stdio.h&gt;</span>
+<span class="pl-c"><span class="pl-c">#</span>include &lt;stdlib.h&gt;</span>
+<span class="pl-c"><span class="pl-c">#</span>include &lt;unistd.h&gt;</span>
+<span class="pl-c"><span class="pl-c">#</span>include &lt;string.h&gt;</span>
+
+<span class="pl-c"><span class="pl-c">#</span>define NUM 10</span>
+
+// argc, argv 是命令行参数
+// 启动应用程序的时候
+int main(int argc, char<span class="pl-k">*</span> argv[])
+{
+    printf(<span class="pl-s"><span class="pl-pds">"</span>参数个数: %d\n<span class="pl-pds">"</span></span>, argc)<span class="pl-k">;</span>
+    for(int i=0<span class="pl-k">;</span> i<span class="pl-k">&lt;</span>argc<span class="pl-k">;</span> ++i)
+    {
+        printf(<span class="pl-s"><span class="pl-pds">"</span>%d\n<span class="pl-pds">"</span></span>, NUM)<span class="pl-k">;</span>
+        printf(<span class="pl-s"><span class="pl-pds">"</span>参数 %d: %s\n<span class="pl-pds">"</span></span>, i, argv[i])<span class="pl-k">;</span>
+    }
+    <span class="pl-k">return</span> 0<span class="pl-k">;</span>
+}</pre></div>
+<p>第一步: 编译出带条信息的可执行程序</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">$ gcc args.c -o app -g</pre></div>
+<p>第二步: 启动gdb进程, 指定需要gdb调试的应用程序名称</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">$ gdb app
+(gdb)</pre></div>
+<p>第三步: 在启动应用程序 app之前设置命令行参数。gdb中设置参数的命令叫做set args ...，查看设置的命令行参数命令是 show args。 语法格式如下：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 设置的时机: 启动gdb之后, 在应用程序启动之前</span>
+(gdb) <span class="pl-c1">set</span> args 参数1 参数2 .... ...
+<span class="pl-c"><span class="pl-c">#</span> 查看设置的命令行参数</span>
+(gdb) show args</pre></div>
+<p>使用举例：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 非gdb调试命令行传参</span>
+<span class="pl-c"><span class="pl-c">#</span> argc 参数总个数，argv[0] == ./app， argv[1] == "11"  argv[2] == "22"  ...  argv[5] == "55"</span>
+$ ./app 11 22 33 44 55		<span class="pl-c"><span class="pl-c">#</span> 这是数据传递给main函数</span>
+
+<span class="pl-c"><span class="pl-c">#</span> 使用 gdb 调试</span>
+$ gdb app
+GNU gdb (Ubuntu 7.11.1-0ubuntu1~16.5) 7.11.1
+Copyright (C) 2016 Free Software Foundation, Inc.
+<span class="pl-c"><span class="pl-c">#</span> 通过gdb给应用程序设置命令行参数</span>
+(gdb) <span class="pl-c1">set</span> args 11 22 33 44 55
+<span class="pl-c"><span class="pl-c">#</span> 查看设置的命令行参数</span>
+(gdb) show args
+Argument list to give program being debugged when it is started is <span class="pl-s"><span class="pl-pds">"</span>11 22 33 44 55<span class="pl-pds">"</span></span>.</pre></div>
+<h2>2.3 gdb中启动程序</h2>
+<p>在gdb中启动要调试的应用程序有两种方式, 一种是使用<code class="notranslate">run</code>命令, 另一种是使用<code class="notranslate">start</code>命令启动。在整个 gdb 调试过程中, 启动应用程序的命令只能使用一次。</p>
+<ul>
+<li><code class="notranslate">run</code>: 可以缩写为 r, 如果程序中设置了断点会停在第一个断点的位置, 如果没有设置断点, 程序就执行完了</li>
+<li><code class="notranslate">start</code>: 启动程序, 最终会阻塞在main函数的第一行，等待输入后续其它 gdb 指令</li>
+</ul>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 两种方式</span>
+<span class="pl-c"><span class="pl-c">#</span> 方式1: run == r</span>
+(gdb) run
+
+<span class="pl-c"><span class="pl-c">#</span> 方式2: start</span>
+(gdb) start</pre></div>
+<p>如果想让程序start之后继续运行, 或者在断点处继续运行，可以使用 continue命令, 可以简写为 c</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> continue == c</span>
+(gdb) <span class="pl-k">continue</span></pre></div>
+<h2>2.4 退出gdb</h2>
+<p>退出gdb调试, 就是终止 gdb 进程, 需要使用 quit命令, 可以缩写为 q</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> quit == q</span>
+(gdb) quit</pre></div>
+<h1>3.查看代码</h1>
+<p>因为gdb调试没有IDE那样的完善的可视化窗口界面，给调试的程序打断点又是调试之前必须做的一项工作。因此gdb提供了查看代码的命令，这样就可以轻松定位要调试的代码行的位置了。</p>
+<p>查看代码的命令叫做list可以缩写为 l, 通过这个命令我们可以查看项目中任意一个文件中的内容，并且还可以通过文件行号，函数名等方式查看。</p>
+<h2>3.1 当前文件</h2>
+<p>一个项目中一般是有很多源文件的, 默认情况下通过list查看到代码信息位于程序入口函数main对应的的那个文件中。因此如果不进行文件切换main函数所在的文件就是当前文件, 如果进行了文件切换, 切换到哪个文件哪个文件就是当前文件。查看文件内容的方式如下：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 使用 list 和使用 l 都可以</span>
+<span class="pl-c"><span class="pl-c">#</span> 从第一行开始显示</span>
+(gdb) list
+
+<span class="pl-c"><span class="pl-c">#</span> 列值这行号对应的上下文代码, 默认情况下只显示10行内容</span>
+(gdb) list 行号
+
+<span class="pl-c"><span class="pl-c">#</span> 显示这个函数的上下文内容, 默认显示10行</span>
+(gdb) list 函数名</pre></div>
+<p>通过list去查看文件代码, 默认只显示10行, 如果还想继续查看后边的内容, 可以继续执行list命令, 也可以直接回车（再次执行上一次执行的那个gdb命令）。</p>
+<h2>3.2 切换文件</h2>
+<p>在查看文件内容的时候，很多情况下需要进行文件切换，我们只需要在list命令后边将要查看的文件名指定出来就可以了，切换命令执行完毕之后，这个文件就变成了当前文件。文件切换方式如下：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 切换到指定的文件，并列出这行号对应的上下文代码, 默认情况下只显示10行内容</span>
+(gdb) l 文件名:行号
+
+<span class="pl-c"><span class="pl-c">#</span> 切换到指定的文件，并显示这个函数的上下文内容, 默认显示10行</span>
+(gdb) l 文件名:函数名</pre></div>
+<h2>3.3 设置显示的行数</h2>
+<p>默认通过list只能一次查看10行代码, 如果想显示更多, 可以通过set listsize设置, 同样如果想查看当前显示的行数可以通过 show listsize查看, 这里的listsize可以简写为 list。具体语法格式如下:</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 以下两个命令中的 listsize 都可以写成 list</span>
+(gdb) <span class="pl-c1">set</span> listsize 行数
+
+<span class="pl-c"><span class="pl-c">#</span> 查看当前list一次显示的行数</span>
+(gdb) show listsize</pre></div>
+<h1>4.断点操作</h1>
+<p>想要通过gdb调试某一行或者得到某个变量在运行状态下的实际值，就需要在在这一行设置断点，程序指定到断点的位置就会阻塞，我们就可以通过gdb的调试命令得到我们想要的信息了。</p>
+<p>设置断点的命令叫做break可以缩写为b。</p>
+<h2>4.1 设置断点</h2>
+<p>断点的设置有两种方式一种是常规断点，程序只要运行到这个位置就会被阻塞，还有一种叫条件断点，只有指定的条件被满足了程序才会在断点处阻塞。</p>
+<p>调试程序的断点可以设置到某个具体的行, 也可以设置到某个函数上，具体的设置方式如下：</p>
+<ul>
+<li>
+<p>设置普通断点到当前文件</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 在当前文件的某一行上设置断点</span>
+<span class="pl-c"><span class="pl-c">#</span> break == b</span>
+(gdb) b 行号
+(gdb) b 函数名		<span class="pl-c"><span class="pl-c">#</span> 停止在函数的第一行</span></pre></div>
+</li>
+<li>
+<p>设置普通断点到某个非当前文件上</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 在非当前文件的某一行上设置断点</span>
+(gdb) b 文件名:行号
+(gdb) b 文件名:函数名		<span class="pl-c"><span class="pl-c">#</span> 停止在函数的第一行</span></pre></div>
+</li>
+<li>
+<p>设置条件断点</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 必须要满足某个条件, 程序才会停在这个断点的位置上</span>
+<span class="pl-c"><span class="pl-c">#</span> 通常情况下, 在循环中条件断点用的比较多</span>
+(gdb) b 行数 <span class="pl-k">if</span> 变量名==某个值</pre></div>
+</li>
+</ul>
+<h2>4.2 查看断点</h2>
+<p>断点设置完毕之后, 可以通过 info break命令查看设置的断点信息，其中info可以缩写为i</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> info == i</span>
+<span class="pl-c"><span class="pl-c">#</span> 查看设置的断点信息</span>
+(gdb) i b   <span class="pl-c"><span class="pl-c">#</span>info break</span>
+
+<span class="pl-c"><span class="pl-c">#</span> 举例</span>
+(gdb) i b
+Num     Type           Disp Enb Address            What
+1       breakpoint     keep y   0x0000000000400cb5 <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:12
+2       breakpoint     keep y   0x0000000000400cbd <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:13
+3       breakpoint     keep y   0x0000000000400cec <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:18
+4       breakpoint     keep y   0x00000000004009a5 <span class="pl-k">in</span> insertionSort(int<span class="pl-k">*</span>, int)
+                                                   at insert.cpp:8
+5       breakpoint     keep y   0x0000000000400cdd <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:16
+6       breakpoint     keep y   0x00000000004009e5 <span class="pl-k">in</span> insertionSort(int<span class="pl-k">*</span>, int)
+                                                   at insert.cpp:16</pre></div>
+<p>在显示的断点信息中有一些属性需要在其他操作中被使用, 下面介绍一下:</p>
+<ul>
+<li>Num: 断点的编号, 删除断点或者设置断点状态的时候都需要使用</li>
+<li>Enb: 当前断点的状态, y表示断点可用, n表示断点不可用</li>
+<li>What: 描述断点被设置在了哪个文件的哪一行或者哪个函数上</li>
+</ul>
+<h2>4.3 删除断点</h2>
+<p>如果确定设置的某个断点不再被使用了, 可用将其删除, 删除命令是 delete 断点编号, 这个delete可以简写为del也可以再简写为d。</p>
+<p>删除断点的方式有两种: 删除(一个或者多个)指定断点或者删除一个连续的断点区间，具体操作如下：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> delete == del == d</span>
+<span class="pl-c"><span class="pl-c">#</span> 需要 info b 查看断点的信息, 第一列就是编号</span>
+(gdb) d 断点的编号1 [断点编号2 ...]
+<span class="pl-c"><span class="pl-c">#</span> 举例:</span>
+(gdb) d 1          <span class="pl-c"><span class="pl-c">#</span> 删除第1个断点</span>
+(gdb) d 2 4 6      <span class="pl-c"><span class="pl-c">#</span> 删除第2,4,6个断点</span>
+
+<span class="pl-c"><span class="pl-c">#</span> 删除一个范围, 断点编号 num1 - numN 是一个连续区间</span>
+(gdb) d num1-numN
+<span class="pl-c"><span class="pl-c">#</span> 举例, 删除第1到第5个断点</span>
+(gdb) d 1-5</pre></div>
+<h2>4.4 设置断点状态</h2>
+<p>如果某个断点只是临时不需要了，我们可以将其设置为不可用状态, 设置命令为disable 断点编号，当需要的时候再将其设置回可用状态，设置命令为 enable 断点编号。</p>
+<ul>
+<li>
+<p>设置断点无效</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 让断点失效之后, gdb调试过程中程序是不会停在这个位置的</span>
+<span class="pl-c"><span class="pl-c">#</span> disable == dis</span>
+<span class="pl-c"><span class="pl-c">#</span> 设置某一个或者某几个断点无效</span>
+(gdb) dis 断点1的编号 [断点2的编号 ...]
+
+<span class="pl-c"><span class="pl-c">#</span> 设置某个区间断点无效</span>
+(gdb) dis 断点1编号-断点n编号</pre></div>
+</li>
+<li>
+<p>演示设置断点为无效状态:</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 查看断点信息</span>
+(gdb) i b
+Num     Type           Disp Enb Address            What
+2       breakpoint     keep y   0x0000000000400cce <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:14
+4       breakpoint     keep y   0x0000000000400cdd <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:16
+5       breakpoint     keep y   0x0000000000400d46 <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:23
+6       breakpoint     keep y   0x0000000000400d4e <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:25
+7       breakpoint     keep y   0x0000000000400d6e <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:28
+8       breakpoint     keep y   0x0000000000400d7d <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:30
+
+<span class="pl-c"><span class="pl-c">#</span> 设置第2, 第4 个断点无效</span>
+(gdb) dis 2 4
+
+<span class="pl-c"><span class="pl-c">#</span> 查看断点信息</span>
+(gdb) i b
+Num     Type           Disp Enb Address            What
+2       breakpoint     keep n   0x0000000000400cce <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:14
+4       breakpoint     keep n   0x0000000000400cdd <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:16
+5       breakpoint     keep y   0x0000000000400d46 <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:23
+6       breakpoint     keep y   0x0000000000400d4e <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:25
+7       breakpoint     keep y   0x0000000000400d6e <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:28
+8       breakpoint     keep y   0x0000000000400d7d <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:30
+
+<span class="pl-c"><span class="pl-c">#</span> 设置 第5,6,7,8个 断点无效</span>
+(gdb) dis 5-8
+
+<span class="pl-c"><span class="pl-c">#</span> 查看断点信息</span>
+(gdb) i b
+Num     Type           Disp Enb Address            What
+2       breakpoint     keep n   0x0000000000400cce <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:14
+4       breakpoint     keep n   0x0000000000400cdd <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:16
+5       breakpoint     keep n   0x0000000000400d46 <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:23
+6       breakpoint     keep n   0x0000000000400d4e <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:25
+7       breakpoint     keep n   0x0000000000400d6e <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:28
+8       breakpoint     keep n   0x0000000000400d7d <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:30</pre></div>
+</li>
+<li>
+<p>让无效的断点生效</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> enable == ena</span>
+<span class="pl-c"><span class="pl-c">#</span> 设置某一个或者某几个断点有效</span>
+(gdb) ena 断点1的编号 [断点2的编号 ...]
+
+<span class="pl-c"><span class="pl-c">#</span> 设置某个区间断点有效</span>
+(gdb) ena 断点1编号-断点n编号</pre></div>
+</li>
+<li>
+<p>演示设置断点为有效状态:</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 查看断点信息</span>
+(gdb) i b
+Num     Type           Disp Enb Address            What
+2       breakpoint     keep n   0x0000000000400cce <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:14
+4       breakpoint     keep n   0x0000000000400cdd <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:16
+5       breakpoint     keep n   0x0000000000400d46 <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:23
+6       breakpoint     keep n   0x0000000000400d4e <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:25
+7       breakpoint     keep n   0x0000000000400d6e <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:28
+8       breakpoint     keep n   0x0000000000400d7d <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:30
+
+<span class="pl-c"><span class="pl-c">#</span> 设置第2, 第4个断点有效</span>
+(gdb) ena 2 4
+
+<span class="pl-c"><span class="pl-c">#</span> 查看断点信息</span>
+(gdb) i b
+Num     Type           Disp Enb Address            What
+2       breakpoint     keep y   0x0000000000400cce <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:14
+4       breakpoint     keep y   0x0000000000400cdd <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:16
+5       breakpoint     keep n   0x0000000000400d46 <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:23
+6       breakpoint     keep n   0x0000000000400d4e <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:25
+7       breakpoint     keep n   0x0000000000400d6e <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:28
+8       breakpoint     keep n   0x0000000000400d7d <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:30
+
+<span class="pl-c"><span class="pl-c">#</span> 设置第5,6,7个断点有效</span>
+(gdb) ena 5-7
+
+<span class="pl-c"><span class="pl-c">#</span> 查看断点信息</span>
+(gdb) i b
+Num     Type           Disp Enb Address            What
+2       breakpoint     keep y   0x0000000000400cce <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:14
+4       breakpoint     keep y   0x0000000000400cdd <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:16
+5       breakpoint     keep y   0x0000000000400d46 <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:23
+6       breakpoint     keep y   0x0000000000400d4e <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:25
+7       breakpoint     keep y   0x0000000000400d6e <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:28
+8       breakpoint     keep n   0x0000000000400d7d <span class="pl-k">in</span> <span class="pl-en">main</span>() at test.cpp:30</pre></div>
+</li>
+</ul>
+<h1>5.调试命令</h1>
+<h2>5.1 继续运行gdb</h2>
+<p>如果调试的程序被断点阻塞了又想让程序继续执行，这时候就可以使用continue命令。程序会继续运行, 直到遇到下一个有效的断点。continue可以缩写为 c。</p>
+<pre class="notranslate"><code class="notranslate"># continue == c
+(gdb) continue
+</code></pre>
+<h2>5.2 手动打印信息</h2>
+<p>当程序被某个断点阻塞之后, 可以通过一些命令打印变量的名字或者变量的类型，并且还可以跟踪打印某个变量的值。</p>
+<h3>5.2.1 打印变量值</h3>
+<p>在gdb调试的时候如果需要打印变量的值， 使用的命令是 print, 可缩写为 p。如果打印的变量是整数还可以指定输出的整数的格式, 格式化输出的整数对应的字符表如下：</p>
+<markdown-accessiblity-table><table role="table">
+<thead>
+<tr>
+<th align="center">格式化字符 (/fmt)</th>
+<th align="center">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">/x</td>
+<td align="center">以十六进制的形式打印出整数。</td>
+</tr>
+<tr>
+<td align="center">/d</td>
+<td align="center">以有符号、十进制的形式打印出整数。</td>
+</tr>
+<tr>
+<td align="center">/u</td>
+<td align="center">以无符号、十进制的形式打印出整数。</td>
+</tr>
+<tr>
+<td align="center">/o</td>
+<td align="center">以八进制的形式打印出整数。</td>
+</tr>
+<tr>
+<td align="center">/t</td>
+<td align="center">以二进制的形式打印出整数。</td>
+</tr>
+<tr>
+<td align="center">/f</td>
+<td align="center">以浮点数的形式打印变量或表达式的值。</td>
+</tr>
+<tr>
+<td align="center">/c</td>
+<td align="center">以字符形式打印变量或表达式的值。</td>
+</tr>
+</tbody>
+</table></markdown-accessiblity-table>
+<p>print命令的语法格式如下:</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> print == p</span>
+(gdb) p 变量名
+
+<span class="pl-c"><span class="pl-c">#</span> 如果变量是一个整形, 默认对应的值是以10进制格式输出, 其他格式请参考上表</span>
+(gdb) p/fmt 变量名</pre></div>
+<p>举例:</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 举例</span>
+(gdb) p i       <span class="pl-c"><span class="pl-c">#</span> 10进制</span>
+<span class="pl-smi">$5</span> = 3
+(gdb) p/x i     <span class="pl-c"><span class="pl-c">#</span> 16进制</span>
+<span class="pl-smi">$6</span> = 0x3
+(gdb) p/o i     <span class="pl-c"><span class="pl-c">#</span> 8进制</span>
+<span class="pl-smi">$7</span> = 03</pre></div>
+<h3>5.2.2 打印变量类型</h3>
+<p>如果在调试过程中需要查看某个变量的类型, 可以使用命令ptype, 语法格式如下:</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 语法格式</span>
+(gdb) ptype 变量名</pre></div>
+<p>举例:</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 打印变量类型</span>
+(gdb) ptype i
+<span class="pl-c1">type</span> = int
+(gdb) ptype array[i]
+<span class="pl-c1">type</span> = int
+(gdb) ptype array
+<span class="pl-c1">type</span> = int [12]</pre></div>
+<h2>5.3 自动打印信息</h2>
+<h3>5.3.1 设置变量名自动显示</h3>
+<p>和 print 命令一样，display 命令也用于调试阶段查看某个变量或表达式的值，它们的区别是，使用 display 命令查看变量或表达式的值，每当程序暂停执行（例如单步执行）时，GDB 调试器都会自动帮我们打印出来，而 print 命令则不会。因此，当我们想频繁查看某个变量或表达式的值从而观察它的变化情况时，使用 display 命令可以一劳永逸。display 命令没有缩写形式，常用的语法格式如下 2 种：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 在变量的有效取值范围内, 自动打印变量的值(设置一次, 以后就会自动显示)</span>
+(gdb) display 变量名
+
+<span class="pl-c"><span class="pl-c">#</span> 以指定的整形格式打印变量的值, 关于 fmt 的取值, 请参考 print 命令</span>
+(gdb) display/fmt 变量名</pre></div>
+<h3>5.3.2 查看自动显示列表</h3>
+<p>对于使用 display 命令查看的目标变量或表达式，都会被记录在一张列表（称为自动显示列表）中。通过执行info dispaly命令，可以打印出这张表：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> info == i</span>
+(gdb) info display
+Auto-display expressions now <span class="pl-k">in</span> effect:
+Num Enb Expression
+1:   y  i
+2:   y  array[i]
+3:   y  /x array[i]</pre></div>
+<p>在展示出的信息中, 每个列的含义如下:</p>
+<ul>
+<li>Num : 变量或表达式的编号，GDB 调试器为每个变量或表达式都分配有唯一的编号</li>
+<li>Enb : 表示当前变量（表达式）是处于激活状态还是禁用状态，如果处于激活状态（用 y 表示），则每次程序停止执行，该变量的值都会被打印出来；反之，如果处于禁用状态（用 n 表示），则该变量（表达式）的值不会被打印。</li>
+<li>Expression ：被自动打印值的变量或表达式的名字。</li>
+</ul>
+<h3>5.3.3 取消自动显示</h3>
+<p>对于不需要再打印值的变量或表达式，可以将其删除或者禁用。</p>
+<ul>
+<li>
+<p>删除自动显示列表中的变量或表达式</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 命令中的 num 是通过 info display 得到的编号, 编号可以是一个或者多个</span>
+(gdb) undisplay num [num1 ...]
+<span class="pl-c"><span class="pl-c">#</span> num1 - numN 表示一个范围</span>
+(gdb) undisplay num1-numN
+
+(gdb) delete display num [num1 ...]
+(gdb) delete display num1-numN</pre></div>
+</li>
+<li>
+<p>举例说明:</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 查看显示列表</span>
+(gdb) info display
+Auto-display expressions now <span class="pl-k">in</span> effect:
+Num Enb Expression
+1:   y  i
+2:   y  array[i]
+3:   y  /x array[i]
+
+<span class="pl-c"><span class="pl-c">#</span> 删除变量显示, 需要使用 info display 得到的变量/表达式编号</span>
+(gdb) undisplay 1 2
+
+<span class="pl-c"><span class="pl-c">#</span> 查看显示列表, 只剩下一个了</span>
+(gdb) i display
+Auto-display expressions now <span class="pl-k">in</span> effect:
+Num Enb Expression
+3:   y  /x array[i]</pre></div>
+</li>
+<li>
+<p>如果不想删除自动显示的变量, 也可以禁用自动显示列表中处于激活状态下的变量或表达式</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 命令中的 num 是通过 info display 得到的编号, 编号可以是一个或者多个</span>
+(gdb) disable display num [num1 ...]
+<span class="pl-c"><span class="pl-c">#</span> num1 - numN 表示一个范围</span>
+(gdb) disable display num1-numN</pre></div>
+</li>
+<li>
+<p>当需要启用自动显示列表中被禁用的变量或表达式时, 可以使用下边的命令</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 命令中的 num 是通过 info display 得到的编号, 编号可以是一个或者多个</span>
+(gdb) <span class="pl-c1">enable</span>  display num [num1 ...]
+<span class="pl-c"><span class="pl-c">#</span> num1 - numN 表示一个范围</span>
+(gdb) disable display num1-numN</pre></div>
+</li>
+</ul>
+<h2>5.3 单步调试</h2>
+<p>当程序阻塞到某个断点上之后, 可以通过以下命令对程序进行单步调试:</p>
+<h3>5.3.1 step</h3>
+<p>step命令可以缩写为s, 命令被执行一次代码被向下执行一行，如果这一行是一个函数调用，那么程序会进入到函数体内部。</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 从当前代码行位置, 一次调试当前行下的每一行代码</span>
+<span class="pl-c"><span class="pl-c">#</span> step == s</span>
+<span class="pl-c"><span class="pl-c">#</span> 如果这一行是函数调用, 执行这个命令, 就可以进入到函数体的内部</span>
+(gdb) step</pre></div>
+<h3>5.3.2 finish</h3>
+<p>如果通过 s 单步调试进入到函数内部, 想要跳出这个函数体， 可以执行finish命令。如果想要跳出函数体必须要保证函数体内不能有有效断点，否则无法跳出。</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 如果通过 s 单步调试进入到函数内部, 想要跳出这个函数体</span>
+(gdb) finish</pre></div>
+<h3>5.3.3 next</h3>
+<p>next命令和step命令功能是相似的，只是在使用next调试程序的时候不会进入到函数体内部，next可以缩写为 n</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> next == n</span>
+<span class="pl-c"><span class="pl-c">#</span> 如果这一行是函数调用, 执行这个命令, 不会进入到函数体的内部</span>
+(gdb) next</pre></div>
+<h3>5.3.4 until</h3>
+<p>通过 until 命令可以直接跳出某个循环体，这样就能提高调试效率了。如果想直接从循环体中跳出, 必须要满足以下的条件，否则命令不会生效：</p>
+<ul>
+<li>
+<p>要跳出的循环体内部不能有有效的断点</p>
+</li>
+<li>
+<p>必须要在循环体的开始/结束行执行该命令</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">(gdb) <span class="pl-k">until</span></pre></div>
+</li>
+</ul>
+<h2>5.4 设置变量值</h2>
+<p>在调试程序的时候, 我们需要在某个变量等于某个特殊值的时候查看程序的运行状态, 但是通过程序运行让变量等于这个值又非常困难, 这种情况下就可以在 gdb 中直接对这个变量进行值的设置, 或者是在单步调试的时候通过设置循环因子的值直接跳出某个循环, 值设置的命令格式为: <code class="notranslate">set var 变量名=值</code></p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 可以在循环中使用, 直接设置循环因子的值</span>
+<span class="pl-c"><span class="pl-c">#</span> 假设某个变量的值在程序中==90的概率是5%, 这时候可以直接通过命令将这个变量值设置为90</span>
+(gdb) <span class="pl-c1">set</span> var 变量名=值</pre></div></div>
+<div style="font-size:small;margin-top:8px;float:right;">要做一个有swag的人</div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://echozap.github.io">Ronan's Blog</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z', 'copy': 'M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z', 'check': 'M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z'};
+var utterancesLoad=0;
+
+console.log("\n %c Gmeek  https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const createClipboardHTML = (codeContent, additionalClasses = '') => `
+        <pre class="notranslate"><code class="notranslate">${codeContent}</code></pre>
+        <div class="clipboard-container position-absolute right-0 top-0 ${additionalClasses}">
+            <clipboard-copy class="ClipboardButton btn m-2 p-0" role="button" style="display: inherit;">
+                <svg height="16" width="16" class="octicon octicon-copy m-2"><path d="${IconList["copy"]}"></path></svg>
+                <svg height="16" width="16" class="octicon octicon-check color-fg-success m-2 d-none"><path d="${IconList["check"]}"></path></svg>
+            </clipboard-copy>
+            <div class="copy-feedback">Copied!</div>
+        </div>
+    `;
+
+    const handleCodeElements = (selector = '') => {
+        document.querySelectorAll(selector).forEach(codeElement => {
+            const codeContent = codeElement.innerHTML;
+            const newStructure = document.createElement('div');
+            newStructure.className = 'snippet-clipboard-content position-relative overflow-auto';
+            newStructure.innerHTML = createClipboardHTML(codeContent);
+
+            const parentElement = codeElement.parentElement;
+            if (selector.includes('highlight')) {
+                parentElement.insertBefore(newStructure, codeElement.nextSibling);
+                parentElement.removeChild(codeElement);
+            } else {
+                parentElement.parentElement.replaceChild(newStructure, parentElement);
+            }
+        });
+    };
+
+    handleCodeElements('pre.notranslate > code.notranslate');
+    handleCodeElements('div.highlight > pre.notranslate');
+
+    let currentFeedback = null;
+    document.querySelectorAll('clipboard-copy').forEach(copyButton => {
+        copyButton.addEventListener('click', () => {
+            const codeContent = copyButton.closest('.snippet-clipboard-content').innerText;
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = codeContent;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextArea);
+
+            const copyIcon = copyButton.querySelector('.octicon-copy');
+            const checkIcon = copyButton.querySelector('.octicon-check');
+            const copyFeedback = copyButton.nextElementSibling;
+
+            if (currentFeedback && currentFeedback !== copyFeedback) {currentFeedback.style.display = 'none';}
+            currentFeedback = copyFeedback;
+
+            copyIcon.classList.add('d-none');
+            checkIcon.classList.remove('d-none');
+            copyFeedback.style.display = 'block';
+            copyButton.style.borderColor = 'var(--color-success-fg)';
+
+            setTimeout(() => {
+                copyIcon.classList.remove('d-none');
+                checkIcon.classList.add('d-none');
+                copyFeedback.style.display = 'none';
+                copyButton.style.borderColor = '';
+            }, 2000);
+        });
+    });
+});
+
+</script>
+<script src='https://pub-43c06573bc27485093cd50efd04e9e7b.r2.dev/GmeekArticleTOC.js'></script><script src='https://pub-43c06573bc27485093cd50efd04e9e7b.r2.dev/Gmeeklightbox.js'></script><script>document.querySelectorAll('a').forEach(anchor => {const img = anchor.querySelector('img');if (img && img.hasAttribute('data-canonical-src')) {const canonicalSrc = img.getAttribute('data-canonical-src');anchor.setAttribute('href', canonicalSrc);img.setAttribute('src', canonicalSrc);img.removeAttribute('data-canonical-src');}});</script>
+
+</html>
