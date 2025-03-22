@@ -123,23 +123,14 @@ Linux与mac系统使用 sh 脚本，Windows使用py脚本体验更佳<br>
 <p>curl、jq 安装方法由于系统不同，方法多样，所以具体安装方法可以自行查找...</p>
 <p>在代码开始的前几行，找到以下几个值，在引号里填入自己的信息：</p>
 <ul>
-<li><code class="notranslate">TOKEN</code>  为自己创建的Token值</li>
-<li><code class="notranslate">OWNER</code> 为自己的github用户名</li>
-<li><code class="notranslate">REPO</code> 为自己的Gmeek博客仓库名，一般是 <code class="notranslate">xxx.github.io</code></li>
-</ul>
-<h3>对于 py 脚本</h3>
-<p>1.在开始使用之前，需要安装 <code class="notranslate">requests</code> 模块</p>
-<div class="highlight highlight-source-shell"><pre class="notranslate">pip3 install requests</pre></div>
-<p>2.找到代码最后几行，在引号里面填入：</p>
-<ul>
 <li>
-<p><code class="notranslate">token</code> 为自己创建的Token值</p>
+<p><code class="notranslate">TOKEN</code>  为自己创建的Token值</p>
 </li>
 <li>
-<p><code class="notranslate">owner</code> 为自己的github用户名</p>
+<p><code class="notranslate">OWNER</code> 为自己的github用户名</p>
 </li>
 <li>
-<p><code class="notranslate">repo</code> 为自己的Gmeek博客仓库名，一般是 <code class="notranslate">xxx.github.io</code></p>
+<p><code class="notranslate">REPO</code> 为自己的Gmeek博客仓库名，一般是 <code class="notranslate">xxx.github.io</code></p>
 </li>
 <li>
 <p>sh 脚本代码</p>
@@ -285,8 +276,23 @@ REPO=<span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</spa
         ;;
     <span class="pl-k">esac</span>
 <span class="pl-k">done</span></pre></div>
+<h3>对于 py 脚本</h3>
+<p>1.在开始使用之前，需要安装 <code class="notranslate">requests</code> 模块</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">pip3 install requests</pre></div>
+<p>2.找到代码最后几行，在引号里面填入：</p>
 <ul>
-<li>py 脚本代码</li>
+<li>
+<p><code class="notranslate">token</code> 为自己创建的Token值</p>
+</li>
+<li>
+<p><code class="notranslate">owner</code> 为自己的github用户名</p>
+</li>
+<li>
+<p><code class="notranslate">repo</code> 为自己的Gmeek博客仓库名，一般是 <code class="notranslate">xxx.github.io</code></p>
+</li>
+<li>
+<p>py 脚本代码</p>
+</li>
 </ul>
 <div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">json</span>
 <span class="pl-k">import</span> <span class="pl-s1">os</span>

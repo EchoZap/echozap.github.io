@@ -42,21 +42,6 @@ curl、jq 安装方法由于系统不同，方法多样，所以具体安装方�
 - `TOKEN`  为自己创建的Token值
 - `OWNER` 为自己的github用户名
 - `REPO` 为自己的Gmeek博客仓库名，一般是 `xxx.github.io`
-  
-  
-### 对于 py 脚本
-
-1.在开始使用之前，需要安装 `requests` 模块
-
-```shell
-pip3 install requests
-```
-
-2.找到代码最后几行，在引号里面填入：
-
-- `token` 为自己创建的Token值
-- `owner` 为自己的github用户名
-- `repo` 为自己的Gmeek博客仓库名，一般是 `xxx.github.io`
 
 - sh 脚本代码
 
@@ -202,6 +187,21 @@ while true;do
     esac
 done
 ```
+
+  
+### 对于 py 脚本
+
+1.在开始使用之前，需要安装 `requests` 模块
+
+```shell
+pip3 install requests
+```
+
+2.找到代码最后几行，在引号里面填入：
+
+- `token` 为自己创建的Token值
+- `owner` 为自己的github用户名
+- `repo` 为自己的Gmeek博客仓库名，一般是 `xxx.github.io`
 
 - py 脚本代码
 
