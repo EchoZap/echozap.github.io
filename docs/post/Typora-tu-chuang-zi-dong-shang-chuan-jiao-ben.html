@@ -219,18 +219,18 @@ base_url = ''
             <span class="pl-s">'file'</span>: <span class="pl-s1">file</span>  
         }
         <span class="pl-k">try</span>:
-            <span class="pl-s1">repo</span> <span class="pl-c1">=</span> <span class="pl-s1">requests</span>.<span class="pl-en">post</span>(<span class="pl-s1">url</span><span class="pl-c1">=</span><span class="pl-s1">upload_url</span>, <span class="pl-s1">headers</span><span class="pl-c1">=</span><span class="pl-s1">header</span>, <span class="pl-s1">files</span><span class="pl-c1">=</span><span class="pl-s1">files</span>)
+            <span class="pl-s1">repo</span> <span class="pl-c1">=</span> <span class="pl-s1">requests</span>.<span class="pl-c1">post</span>(<span class="pl-s1">url</span><span class="pl-c1">=</span><span class="pl-s1">upload_url</span>, <span class="pl-s1">headers</span><span class="pl-c1">=</span><span class="pl-s1">header</span>, <span class="pl-s1">files</span><span class="pl-c1">=</span><span class="pl-s1">files</span>)
         <span class="pl-k">except</span> <span class="pl-v">Exception</span> <span class="pl-k">as</span> <span class="pl-s1">e</span>:
-            <span class="pl-en">print</span>(<span class="pl-s">f"Failed to upload file: <span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">repo</span>.<span class="pl-s1">status_code</span><span class="pl-kos">}</span></span>"</span>)
+            <span class="pl-en">print</span>(<span class="pl-s">f"Failed to upload file: <span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">repo</span>.<span class="pl-c1">status_code</span><span class="pl-kos">}</span></span>"</span>)
         <span class="pl-k">else</span>:
-            <span class="pl-s1">img_url</span> <span class="pl-c1">=</span> <span class="pl-s">f'<span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">base_url</span><span class="pl-kos">}</span></span><span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">repo</span>.<span class="pl-en">json</span>()[<span class="pl-c1">0</span>][<span class="pl-s">"src"</span>]<span class="pl-kos">}</span></span>'</span>
+            <span class="pl-s1">img_url</span> <span class="pl-c1">=</span> <span class="pl-s">f'<span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">base_url</span><span class="pl-kos">}</span></span><span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">repo</span>.<span class="pl-c1">json</span>()[<span class="pl-c1">0</span>][<span class="pl-s">"src"</span>]<span class="pl-kos">}</span></span>'</span>
             <span class="pl-k">return</span> <span class="pl-s1">img_url</span>
 
 <span class="pl-k">def</span> <span class="pl-en">main</span>(<span class="pl-c1">*</span><span class="pl-s1">img_paths</span>):
     <span class="pl-c"># 如果没有参数</span>
-    <span class="pl-k">if</span> <span class="pl-en">len</span>(<span class="pl-s1">sys</span>.<span class="pl-s1">argv</span>) <span class="pl-c1">==</span> <span class="pl-c1">1</span> :
+    <span class="pl-k">if</span> <span class="pl-en">len</span>(<span class="pl-s1">sys</span>.<span class="pl-c1">argv</span>) <span class="pl-c1">==</span> <span class="pl-c1">1</span> :
         <span class="pl-en">display_help</span>()
-        <span class="pl-s1">sys</span>.<span class="pl-en">exit</span>(<span class="pl-c1">0</span>)
+        <span class="pl-s1">sys</span>.<span class="pl-c1">exit</span>(<span class="pl-c1">0</span>)
 
     <span class="pl-c"># 在这里输入个人图床地址</span>
     <span class="pl-s1">base_url</span> <span class="pl-c1">=</span> <span class="pl-s">''</span>
@@ -241,12 +241,12 @@ base_url = ''
             <span class="pl-en">print</span>(<span class="pl-s">f"Image URL: <span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">img_url</span><span class="pl-kos">}</span></span>"</span>)
 
 <span class="pl-k">if</span> <span class="pl-s1">__name__</span> <span class="pl-c1">==</span> <span class="pl-s">"__main__"</span>:
-    <span class="pl-s1">fire</span>.<span class="pl-v">Fire</span>(<span class="pl-s1">main</span>)</pre></div>
+    <span class="pl-s1">fire</span>.<span class="pl-c1">Fire</span>(<span class="pl-s1">main</span>)</pre></div>
 </code><p><code class="notranslate"></code></p></pre><p></p>
 </details>
 <h2>Typroa配置</h2>
 <p>在配置typora之前，还需要对py脚本进行以下处理:</p>
-<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">pyinstaller</span> <span class="pl-c1">-</span><span class="pl-c1">-</span><span class="pl-s1">onefile</span> <span class="pl-s1">ui</span>.<span class="pl-s1">py</span></pre></div>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">pyinstaller</span> <span class="pl-c1">-</span><span class="pl-c1">-</span><span class="pl-s1">onefile</span> <span class="pl-s1">ui</span>.<span class="pl-c1">py</span></pre></div>
 <p>将 ui.py 替换为你要打包的脚本文件名(在本例中使用的是ui), 打包完成后，PyInstaller 会在当前目录下生成一个 dist 文件夹，其中包含你的可执行文件。你可以将这个文件复制到其他没有 Python 环境的系统上运行。<br>
 如果 pyinstall 未安装，具体用法以及安装请查看 <a href="https://blog.ronan.us.kg/post/%E3%80%8Cpython%E3%80%8D-da-bao-cheng-xu.html" rel="nofollow">pyinstaller</a></p>
 <p>如果以上步骤顺利进行，那么应该可以在dist目录中找到名为ui的可执行程序，然后复制该程序的路径。假设在以下路径，将其按教程填入typora设置中即可配置完成:</p>

@@ -290,23 +290,23 @@ REPO=<span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</spa
 
 <span class="pl-k">class</span> <span class="pl-v">GitHubIssueUploader</span>:
     <span class="pl-k">def</span> <span class="pl-en">__init__</span>(<span class="pl-s1">self</span>, <span class="pl-s1">owner</span><span class="pl-c1">=</span><span class="pl-c1">None</span>, <span class="pl-s1">repo</span><span class="pl-c1">=</span><span class="pl-c1">None</span>, <span class="pl-s1">token</span><span class="pl-c1">=</span><span class="pl-c1">None</span>):
-        <span class="pl-s1">self</span>.<span class="pl-s1">owner</span> <span class="pl-c1">=</span> <span class="pl-s1">owner</span>
-        <span class="pl-s1">self</span>.<span class="pl-s1">repo</span> <span class="pl-c1">=</span> <span class="pl-s1">repo</span>
-        <span class="pl-s1">self</span>.<span class="pl-s1">token</span> <span class="pl-c1">=</span> <span class="pl-s1">token</span>
+        <span class="pl-s1">self</span>.<span class="pl-c1">owner</span> <span class="pl-c1">=</span> <span class="pl-s1">owner</span>
+        <span class="pl-s1">self</span>.<span class="pl-c1">repo</span> <span class="pl-c1">=</span> <span class="pl-s1">repo</span>
+        <span class="pl-s1">self</span>.<span class="pl-c1">token</span> <span class="pl-c1">=</span> <span class="pl-s1">token</span>
 
         <span class="pl-c"># 检查是否提供了必要的参数</span>
-        <span class="pl-k">if</span> <span class="pl-c1">not</span> <span class="pl-s1">self</span>.<span class="pl-s1">owner</span> <span class="pl-c1">or</span> <span class="pl-c1">not</span> <span class="pl-s1">self</span>.<span class="pl-s1">repo</span> <span class="pl-c1">or</span> <span class="pl-c1">not</span> <span class="pl-s1">self</span>.<span class="pl-s1">token</span>:
-            <span class="pl-k">raise</span> <span class="pl-v">ValueError</span>(<span class="pl-s">"必须指定 owner, repo 和 token"</span>)
+        <span class="pl-k">if</span> <span class="pl-c1">not</span> <span class="pl-s1">self</span>.<span class="pl-c1">owner</span> <span class="pl-c1">or</span> <span class="pl-c1">not</span> <span class="pl-s1">self</span>.<span class="pl-c1">repo</span> <span class="pl-c1">or</span> <span class="pl-c1">not</span> <span class="pl-s1">self</span>.<span class="pl-c1">token</span>:
+            <span class="pl-k">raise</span> <span class="pl-en">ValueError</span>(<span class="pl-s">"必须指定 owner, repo 和 token"</span>)
         <span class="pl-k">else</span>:
-            <span class="pl-s1">self</span>.<span class="pl-en">start_upload</span>()
+            <span class="pl-s1">self</span>.<span class="pl-c1">start_upload</span>()
 
     <span class="pl-k">def</span> <span class="pl-en">create_issue</span>(<span class="pl-s1">self</span>, <span class="pl-s1">title</span>, <span class="pl-s1">content</span>, <span class="pl-s1">labels</span>):
 
-        <span class="pl-s1">url</span> <span class="pl-c1">=</span> <span class="pl-s">f"https://api.github.com/repos/<span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">self</span>.<span class="pl-s1">owner</span><span class="pl-kos">}</span></span>/<span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">self</span>.<span class="pl-s1">repo</span><span class="pl-kos">}</span></span>/issues"</span>
+        <span class="pl-s1">url</span> <span class="pl-c1">=</span> <span class="pl-s">f"https://api.github.com/repos/<span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">self</span>.<span class="pl-c1">owner</span><span class="pl-kos">}</span></span>/<span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">self</span>.<span class="pl-c1">repo</span><span class="pl-kos">}</span></span>/issues"</span>
 
         <span class="pl-s1">headers</span> <span class="pl-c1">=</span> {
             <span class="pl-s">"Accept"</span>: <span class="pl-s">"application/vnd.github+json"</span>,
-            <span class="pl-s">"Authorization"</span>: <span class="pl-s">f"Bearer <span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">self</span>.<span class="pl-s1">token</span><span class="pl-kos">}</span></span>"</span>,
+            <span class="pl-s">"Authorization"</span>: <span class="pl-s">f"Bearer <span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">self</span>.<span class="pl-c1">token</span><span class="pl-kos">}</span></span>"</span>,
             <span class="pl-s">"X-GitHub-Api-Version"</span>: <span class="pl-s">"2022-11-28"</span>
         }
 
@@ -316,9 +316,9 @@ REPO=<span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</spa
             <span class="pl-s">"labels"</span>: <span class="pl-s1">labels</span>
         }
 
-        <span class="pl-s1">response</span> <span class="pl-c1">=</span> <span class="pl-s1">requests</span>.<span class="pl-en">post</span>(<span class="pl-s1">url</span><span class="pl-c1">=</span><span class="pl-s1">url</span>, <span class="pl-s1">headers</span><span class="pl-c1">=</span><span class="pl-s1">headers</span>, <span class="pl-s1">json</span><span class="pl-c1">=</span><span class="pl-s1">data</span>)
+        <span class="pl-s1">response</span> <span class="pl-c1">=</span> <span class="pl-s1">requests</span>.<span class="pl-c1">post</span>(<span class="pl-s1">url</span><span class="pl-c1">=</span><span class="pl-s1">url</span>, <span class="pl-s1">headers</span><span class="pl-c1">=</span><span class="pl-s1">headers</span>, <span class="pl-s1">json</span><span class="pl-c1">=</span><span class="pl-s1">data</span>)
 
-        <span class="pl-k">match</span> <span class="pl-s1">response</span>.<span class="pl-s1">status_code</span>:
+        <span class="pl-k">match</span> <span class="pl-s1">response</span>.<span class="pl-c1">status_code</span>:
             <span class="pl-k">case</span> <span class="pl-c1">201</span>:
                 <span class="pl-en">print</span>(<span class="pl-s">"Created, 上传成功"</span>)
             <span class="pl-k">case</span> <span class="pl-c1">400</span>:
@@ -335,35 +335,35 @@ REPO=<span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</spa
                 <span class="pl-en">print</span>(<span class="pl-s">"Service unavailable, 服务不可用"</span>)
 
     <span class="pl-k">def</span> <span class="pl-en">upload_single_post</span>(<span class="pl-s1">self</span>, <span class="pl-s1">file_path</span>, <span class="pl-s1">labels</span>):
-        <span class="pl-s1">title</span> <span class="pl-c1">=</span> <span class="pl-s1">os</span>.<span class="pl-s1">path</span>.<span class="pl-en">splitext</span>(<span class="pl-s1">os</span>.<span class="pl-s1">path</span>.<span class="pl-en">basename</span>(<span class="pl-s1">file_path</span>))[<span class="pl-c1">0</span>]
+        <span class="pl-s1">title</span> <span class="pl-c1">=</span> <span class="pl-s1">os</span>.<span class="pl-c1">path</span>.<span class="pl-c1">splitext</span>(<span class="pl-s1">os</span>.<span class="pl-c1">path</span>.<span class="pl-c1">basename</span>(<span class="pl-s1">file_path</span>))[<span class="pl-c1">0</span>]
         <span class="pl-k">with</span> <span class="pl-en">open</span>(<span class="pl-s1">file_path</span>, <span class="pl-s">'r'</span>, <span class="pl-s1">encoding</span><span class="pl-c1">=</span><span class="pl-s">'utf-8'</span>) <span class="pl-k">as</span> <span class="pl-s1">file</span>:
-            <span class="pl-s1">content</span> <span class="pl-c1">=</span> <span class="pl-s1">file</span>.<span class="pl-en">read</span>()
-            <span class="pl-s1">self</span>.<span class="pl-en">create_issue</span>(<span class="pl-s1">title</span>, <span class="pl-s1">content</span>, <span class="pl-s1">labels</span>)
+            <span class="pl-s1">content</span> <span class="pl-c1">=</span> <span class="pl-s1">file</span>.<span class="pl-c1">read</span>()
+            <span class="pl-s1">self</span>.<span class="pl-c1">create_issue</span>(<span class="pl-s1">title</span>, <span class="pl-s1">content</span>, <span class="pl-s1">labels</span>)
 
     <span class="pl-k">def</span> <span class="pl-en">upload_batch_posts</span>(<span class="pl-s1">self</span>, <span class="pl-s1">directory</span>, <span class="pl-s1">labels</span>):
-        <span class="pl-k">for</span> <span class="pl-s1">filename</span> <span class="pl-c1">in</span> <span class="pl-s1">os</span>.<span class="pl-en">listdir</span>(<span class="pl-s1">directory</span>):
-            <span class="pl-k">if</span> <span class="pl-s1">filename</span>.<span class="pl-en">endswith</span>(<span class="pl-s">'.md'</span>) <span class="pl-c1">or</span> <span class="pl-s1">filename</span>.<span class="pl-en">endswith</span>(<span class="pl-s">'.txt'</span>):
-                <span class="pl-s1">file_path</span> <span class="pl-c1">=</span> <span class="pl-s1">os</span>.<span class="pl-s1">path</span>.<span class="pl-en">join</span>(<span class="pl-s1">directory</span>, <span class="pl-s1">filename</span>)
-                <span class="pl-s1">self</span>.<span class="pl-en">upload_single_post</span>(<span class="pl-s1">file_path</span>, <span class="pl-s1">labels</span>)
+        <span class="pl-k">for</span> <span class="pl-s1">filename</span> <span class="pl-c1">in</span> <span class="pl-s1">os</span>.<span class="pl-c1">listdir</span>(<span class="pl-s1">directory</span>):
+            <span class="pl-k">if</span> <span class="pl-s1">filename</span>.<span class="pl-c1">endswith</span>(<span class="pl-s">'.md'</span>) <span class="pl-c1">or</span> <span class="pl-s1">filename</span>.<span class="pl-c1">endswith</span>(<span class="pl-s">'.txt'</span>):
+                <span class="pl-s1">file_path</span> <span class="pl-c1">=</span> <span class="pl-s1">os</span>.<span class="pl-c1">path</span>.<span class="pl-c1">join</span>(<span class="pl-s1">directory</span>, <span class="pl-s1">filename</span>)
+                <span class="pl-s1">self</span>.<span class="pl-c1">upload_single_post</span>(<span class="pl-s1">file_path</span>, <span class="pl-s1">labels</span>)
 
     <span class="pl-k">def</span> <span class="pl-en">start_upload</span>(<span class="pl-s1">self</span>):
         <span class="pl-s1">status</span> <span class="pl-c1">=</span> <span class="pl-en">input</span>(<span class="pl-s">"<span class="pl-cce">\n</span> 1.上传单篇文章 <span class="pl-cce">\n</span> 2.批量上传 <span class="pl-cce">\n</span> 按下对应数字并回车可选择相应功能："</span>)
         <span class="pl-s1">labels</span> <span class="pl-c1">=</span> <span class="pl-en">input</span>(<span class="pl-s">"请输入标签，用,隔开："</span>)
-        <span class="pl-s1">labels</span> <span class="pl-c1">=</span> [<span class="pl-s1">word</span>.<span class="pl-en">strip</span>() <span class="pl-k">for</span> <span class="pl-s1">word</span> <span class="pl-c1">in</span> <span class="pl-s1">labels</span>.<span class="pl-en">split</span>(<span class="pl-s">','</span>)]
+        <span class="pl-s1">labels</span> <span class="pl-c1">=</span> [<span class="pl-s1">word</span>.<span class="pl-c1">strip</span>() <span class="pl-k">for</span> <span class="pl-s1">word</span> <span class="pl-c1">in</span> <span class="pl-s1">labels</span>.<span class="pl-c1">split</span>(<span class="pl-s">','</span>)]
 
         <span class="pl-k">if</span> <span class="pl-s1">status</span> <span class="pl-c1">==</span> <span class="pl-s">"1"</span>:
             <span class="pl-s1">file_path</span> <span class="pl-c1">=</span> <span class="pl-en">input</span>(<span class="pl-s">"请输入文件路径："</span>)
-            <span class="pl-s1">self</span>.<span class="pl-en">upload_single_post</span>(<span class="pl-s1">file_path</span>, <span class="pl-s1">labels</span>)
+            <span class="pl-s1">self</span>.<span class="pl-c1">upload_single_post</span>(<span class="pl-s1">file_path</span>, <span class="pl-s1">labels</span>)
         <span class="pl-k">elif</span> <span class="pl-s1">status</span> <span class="pl-c1">==</span> <span class="pl-s">"2"</span>:
             <span class="pl-s1">directory</span> <span class="pl-c1">=</span> <span class="pl-en">input</span>(<span class="pl-s">"请输入目录路径："</span>)
-            <span class="pl-s1">self</span>.<span class="pl-en">upload_batch_posts</span>(<span class="pl-s1">directory</span>, <span class="pl-s1">labels</span>)
+            <span class="pl-s1">self</span>.<span class="pl-c1">upload_batch_posts</span>(<span class="pl-s1">directory</span>, <span class="pl-s1">labels</span>)
         <span class="pl-k">else</span>:
             <span class="pl-en">print</span>(<span class="pl-s">"已退出程序..."</span>)
             <span class="pl-en">exit</span>()
 
 
 <span class="pl-k">if</span> <span class="pl-s1">__name__</span> <span class="pl-c1">==</span> <span class="pl-s">"__main__"</span>:
-    <span class="pl-s1">uploader</span> <span class="pl-c1">=</span> <span class="pl-v">GitHubIssueUploader</span>(
+    <span class="pl-s1">uploader</span> <span class="pl-c1">=</span> <span class="pl-en">GitHubIssueUploader</span>(
         <span class="pl-s1">owner</span> <span class="pl-c1">=</span> <span class="pl-s">"xxxx"</span>,
         <span class="pl-s1">repo</span> <span class="pl-c1">=</span> <span class="pl-s">"xxxx.github.io"</span>,
         <span class="pl-s1">token</span> <span class="pl-c1">=</span> <span class="pl-s">"xxxx"</span>
@@ -379,7 +379,7 @@ REPO=<span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</spa
 <li>对于py脚本</li>
 </ul>
 <p>将脚本代码保存为 <code class="notranslate">blog_upload.py</code> ，在终端里进入到改脚本所在位置，然后通过以下命令运行，之后根据提示进行即可。</p>
-<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">python3</span> <span class="pl-s1">blog_upload</span>.<span class="pl-s1">py</span></pre></div>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">python3</span> <span class="pl-s1">blog_upload</span>.<span class="pl-c1">py</span></pre></div>
 <p>你问我配置完了脚本怎么用？你运行起来有步骤引导你的～～～</p>
 </div>
 <div style="font-size:small;margin-top:8px;float:right;">要做一个有swag的人</div>

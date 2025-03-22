@@ -88,13 +88,13 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">pip3</span> <span class="pl-s1">install</span> <span class="pl-s1">pyinstaller</span></pre></div>
 <h3>2. 打包 Python 脚本</h3>
 <p>在终端或命令提示符下，导航到包含你的 Python 脚本的目录，并运行以下命令：</p>
-<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">pyinstaller</span> <span class="pl-c1">-</span><span class="pl-c1">-</span><span class="pl-s1">onefile</span> <span class="pl-s1">script_name</span>.<span class="pl-s1">py</span></pre></div>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">pyinstaller</span> <span class="pl-c1">-</span><span class="pl-c1">-</span><span class="pl-s1">onefile</span> <span class="pl-s1">script_name</span>.<span class="pl-c1">py</span></pre></div>
 <p>将 <code class="notranslate">script_name.py</code> 替换为你要打包的脚本文件名。<code class="notranslate">--onefile</code> 参数将所有的依赖和脚本打包成一个单一的可执行文件。</p>
 <h3>3. 查找生成的可执行文件</h3>
 <p>打包完成后，PyInstaller 会在当前目录下生成一个 <code class="notranslate">dist</code> 文件夹，其中包含你的可执行文件。你可以将这个文件复制到其他没有 Python 环境的系统上运行。</p>
 <h3>4. 处理依赖项</h3>
 <p>如果你的脚本有特定的依赖项（如额外的Python库），PyInstaller 会自动检测并打包它们。但如果有某些依赖项没有正确处理，你可能需要使用 <code class="notranslate">--hidden-import</code> 参数手动指定。</p>
-<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">pyinstaller</span> <span class="pl-c1">-</span><span class="pl-c1">-</span><span class="pl-s1">onefile</span> <span class="pl-c1">-</span><span class="pl-c1">-</span><span class="pl-s1">hidden</span><span class="pl-c1">-</span><span class="pl-s1">import</span><span class="pl-c1">=</span><span class="pl-c1">&lt;</span><span class="pl-s1">module_name</span><span class="pl-c1">&gt;</span> <span class="pl-s1">script_name</span>.<span class="pl-s1">py</span></pre></div></div>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">pyinstaller</span> <span class="pl-c1">-</span><span class="pl-c1">-</span><span class="pl-s1">onefile</span> <span class="pl-c1">-</span><span class="pl-c1">-</span><span class="pl-s1">hidden</span><span class="pl-c1">-</span><span class="pl-s1">import</span><span class="pl-c1">=</span><span class="pl-c1">&lt;</span><span class="pl-s1">module_name</span><span class="pl-c1">&gt;</span> <span class="pl-s1">script_name</span>.<span class="pl-c1">py</span></pre></div></div>
 <div style="font-size:small;margin-top:8px;float:right;">要做一个有swag的人</div>
 
 </div>

@@ -96,16 +96,16 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <span class="pl-k">import</span> <span class="pl-s1">math</span>
 
 <span class="pl-c"># 使用 math 模块中的π的值，</span>
-<span class="pl-en">print</span>(<span class="pl-s1">math</span>.<span class="pl-s1">pi</span>)
+<span class="pl-en">print</span>(<span class="pl-s1">math</span>.<span class="pl-c1">pi</span>)
 <span class="pl-c"># 使用 math 函数中的 三角函数</span>
-<span class="pl-en">print</span>(<span class="pl-s1">math</span>.<span class="pl-en">sin</span>(<span class="pl-s1">math</span>.<span class="pl-s1">pi</span> <span class="pl-c1">/</span> <span class="pl-c1">2</span>))
+<span class="pl-en">print</span>(<span class="pl-s1">math</span>.<span class="pl-c1">sin</span>(<span class="pl-s1">math</span>.<span class="pl-c1">pi</span> <span class="pl-c1">/</span> <span class="pl-c1">2</span>))
 
 
 <span class="pl-c"># 使用 mport 模块名 as 别名,导入 math 模块</span>
 <span class="pl-k">import</span> <span class="pl-s1">math</span> <span class="pl-k">as</span> <span class="pl-s1">m</span>
 
-<span class="pl-en">print</span>(<span class="pl-s1">m</span>.<span class="pl-s1">pi</span>)
-<span class="pl-en">print</span>(<span class="pl-s1">m</span>.<span class="pl-en">sin</span>(<span class="pl-s1">m</span>.<span class="pl-s1">pi</span> <span class="pl-c1">/</span> <span class="pl-c1">2</span>))
+<span class="pl-en">print</span>(<span class="pl-s1">m</span>.<span class="pl-c1">pi</span>)
+<span class="pl-en">print</span>(<span class="pl-s1">m</span>.<span class="pl-c1">sin</span>(<span class="pl-s1">m</span>.<span class="pl-c1">pi</span> <span class="pl-c1">/</span> <span class="pl-c1">2</span>))
 
 
 <span class="pl-c"># 使用 from 模块名 import * 导入 math 模块</span>
@@ -142,8 +142,8 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <p>然后，在同一路径下的另一个文件中导入该模块</p>
 <div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">my_module</span>
 
-<span class="pl-en">print</span>(<span class="pl-s1">my_module</span>.<span class="pl-s1">test_name</span>)
-<span class="pl-s1">my_module</span>.<span class="pl-en">test_function</span>()</pre></div>
+<span class="pl-en">print</span>(<span class="pl-s1">my_module</span>.<span class="pl-c1">test_name</span>)
+<span class="pl-s1">my_module</span>.<span class="pl-c1">test_function</span>()</pre></div>
 <p>注意：当导入多个模块的时候，且模块内有同名功能，当调用这个同名功能的时候，调用到的是后面导入的模块的功能。</p>
 <p>示例：</p>
 <div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-c"># 模块1</span>
@@ -167,30 +167,30 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <p>用法：</p>
 <div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">sys</span>	<span class="pl-c"># 导入 sys 模块</span>
 
-<span class="pl-en">print</span>(<span class="pl-s1">sys</span>.<span class="pl-s1">path</span>)		<span class="pl-c"># 输出当前模块查找路径</span>
-<span class="pl-s1">sys</span>.<span class="pl-s1">path</span>.<span class="pl-en">append</span>(<span class="pl-s">'自定义模块路径'</span>)	<span class="pl-c"># 添加自定义模块路径为模块查找路径</span></pre></div>
+<span class="pl-en">print</span>(<span class="pl-s1">sys</span>.<span class="pl-c1">path</span>)		<span class="pl-c"># 输出当前模块查找路径</span>
+<span class="pl-s1">sys</span>.<span class="pl-c1">path</span>.<span class="pl-c1">append</span>(<span class="pl-s">'自定义模块路径'</span>)	<span class="pl-c"># 添加自定义模块路径为模块查找路径</span></pre></div>
 <p>示例：</p>
 <div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">sys</span>	<span class="pl-c"># 导入 sys 模块</span>
 
-<span class="pl-en">print</span>(<span class="pl-s1">sys</span>.<span class="pl-s1">path</span>)		<span class="pl-c"># 输出当前模块查找路径</span>
-<span class="pl-s1">sys</span>.<span class="pl-s1">path</span>.<span class="pl-en">append</span>(<span class="pl-s">r"D:\PythonBasisTutorial\module"</span>)
+<span class="pl-en">print</span>(<span class="pl-s1">sys</span>.<span class="pl-c1">path</span>)		<span class="pl-c"># 输出当前模块查找路径</span>
+<span class="pl-s1">sys</span>.<span class="pl-c1">path</span>.<span class="pl-c1">append</span>(<span class="pl-s">r"D:\PythonBasisTutorial\module"</span>)
 
 <span class="pl-k">import</span> <span class="pl-s1">my_module</span>
 
-<span class="pl-en">print</span>(<span class="pl-s1">my_module</span>.<span class="pl-s1">test_name</span>)
-<span class="pl-s1">my_module</span>.<span class="pl-en">test_function</span>()</pre></div>
+<span class="pl-en">print</span>(<span class="pl-s1">my_module</span>.<span class="pl-c1">test_name</span>)
+<span class="pl-s1">my_module</span>.<span class="pl-c1">test_function</span>()</pre></div>
 <p>实际上这种方法并不常用，因为不符合 Python 的代码规范，在 Python 代码规范中，import 语句要求放在程序开始，但是如果你不添加到 sys.path，你就无法引入 my_module 模块。而且，如果有多个文件需要引入时，你无法确定你是否已经将自定义模块添加到 sys.path 中。</p>
 <p>因此，还有一种更简单通用的写法，<code class="notranslate">同级目录名.模块名</code>：</p>
 <div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-k">from</span> <span class="pl-s1">module</span> <span class="pl-k">import</span> <span class="pl-s1">my_module</span>
 
-<span class="pl-en">print</span>(<span class="pl-s1">my_module</span>.<span class="pl-s1">test_name</span>)
-<span class="pl-s1">my_module</span>.<span class="pl-en">test_function</span>()
+<span class="pl-en">print</span>(<span class="pl-s1">my_module</span>.<span class="pl-c1">test_name</span>)
+<span class="pl-s1">my_module</span>.<span class="pl-c1">test_function</span>()
 
 <span class="pl-c"># 或者</span>
 <span class="pl-k">import</span> <span class="pl-s1">module</span>.<span class="pl-s1">my_module</span>
 
-<span class="pl-en">print</span>(<span class="pl-s1">module</span>.<span class="pl-s1">my_module</span>.<span class="pl-s1">test_name</span>)
-<span class="pl-s1">module</span>.<span class="pl-s1">my_module</span>.<span class="pl-en">test_function</span>()</pre></div>
+<span class="pl-en">print</span>(<span class="pl-s1">module</span>.<span class="pl-c1">my_module</span>.<span class="pl-c1">test_name</span>)
+<span class="pl-s1">module</span>.<span class="pl-c1">my_module</span>.<span class="pl-c1">test_function</span>()</pre></div>
 <p>此时的目录名，我们也称之为<strong>包</strong>。</p>
 <h3>2.2. <strong>all</strong></h3>
 <p>如果一个模块文件中有 <code class="notranslate">__all__</code> 变量时，导入时，只能导入这个列表中的元素。</p>
@@ -262,16 +262,16 @@ NameError: name 'test_b' is not defined
 <p>示例：</p>
 <div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-k">from</span> <span class="pl-s1">my_packages</span> <span class="pl-k">import</span> <span class="pl-s1">my_module_1</span>, <span class="pl-s1">my_module_2</span>
 
-<span class="pl-s1">my_module_1</span>.<span class="pl-en">print_info_1</span>()
-<span class="pl-s1">my_module_2</span>.<span class="pl-en">print_info_2</span>()</pre></div>
+<span class="pl-s1">my_module_1</span>.<span class="pl-c1">print_info_1</span>()
+<span class="pl-s1">my_module_2</span>.<span class="pl-c1">print_info_2</span>()</pre></div>
 <p>如果我们想要控制允许用户导入的模块列表，就需要在 <code class="notranslate">__init__.py</code> 文件中添加 <code class="notranslate">__all__ = []</code>。</p>
 <p>示例，如果我们在 my_packages 的 <code class="notranslate">__init__.py</code> 中添加</p>
 <div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">__all__</span> <span class="pl-c1">=</span> [<span class="pl-s">'my_module_1'</span>]</pre></div>
 <p>我们再调用</p>
 <div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-k">from</span> <span class="pl-s1">my_packages</span> <span class="pl-k">import</span> <span class="pl-c1">*</span>
 
-<span class="pl-s1">my_module_1</span>.<span class="pl-en">print_info_1</span>()
-<span class="pl-s1">my_module_2</span>.<span class="pl-en">print_info_2</span>()</pre></div>
+<span class="pl-s1">my_module_1</span>.<span class="pl-c1">print_info_1</span>()
+<span class="pl-s1">my_module_2</span>.<span class="pl-c1">print_info_2</span>()</pre></div>
 <p>运行结果：</p>
 <pre class="notranslate"><code class="notranslate">NameError: name 'my_module_2' is not define
 </code></pre>
