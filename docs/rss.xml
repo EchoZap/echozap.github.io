@@ -1,7 +1,136 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan's Blog</title><link>https://echozap.github.io</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg</url><title>avatar</title><link>https://echozap.github.io</link></image><lastBuildDate>Sat, 22 Mar 2025 11:02:46 +0000</lastBuildDate><managingEditor>Ronan's Blog</managingEditor><ttl>60</ttl><webMaster>Ronan's Blog</webMaster><item><title>「各种摸不着头脑」意外修改PATH(环境变量)</title><link>https://echozap.github.io/post/%E3%80%8C-ge-zhong-mo-bu-zhao-tou-nao-%E3%80%8D-yi-wai-xiu-gai-PATH%28-huan-jing-bian-liang-%29.html</link><description># 1. **检查sudo是否已经安装**
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan's Blog</title><link>https://echozap.github.io</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg</url><title>avatar</title><link>https://echozap.github.io</link></image><lastBuildDate>Sat, 22 Mar 2025 11:07:40 +0000</lastBuildDate><managingEditor>Ronan's Blog</managingEditor><ttl>60</ttl><webMaster>Ronan's Blog</webMaster><item><title>在短视频为王的时代，又见识到了文字带给我的冲击力</title><link>https://echozap.github.io/post/zai-duan-shi-pin-wei-wang-de-shi-dai-%EF%BC%8C-you-jian-shi-dao-le-wen-zi-dai-gei-wo-de-chong-ji-li.html</link><description>不知道从什么时候起，村里的人便开始相信，我能修好很多东西。</description><guid isPermaLink="true">https://echozap.github.io/post/zai-duan-shi-pin-wei-wang-de-shi-dai-%EF%BC%8C-you-jian-shi-dao-le-wen-zi-dai-gei-wo-de-chong-ji-li.html</guid><pubDate>Sat, 22 Mar 2025 11:02:32 +0000</pubDate></item><item><title>如何将脑海里的画面感写成小说</title><link>https://echozap.github.io/post/ru-he-jiang-nao-hai-li-de-hua-mian-gan-xie-cheng-xiao-shuo.html</link><description>多用动词，少用形容词+名词。</description><guid isPermaLink="true">https://echozap.github.io/post/ru-he-jiang-nao-hai-li-de-hua-mian-gan-xie-cheng-xiao-shuo.html</guid><pubDate>Sat, 22 Mar 2025 11:02:30 +0000</pubDate></item><item><title>「毛选」与植物大战僵尸的故事</title><link>https://echozap.github.io/post/%E3%80%8C-mao-xuan-%E3%80%8D-yu-zhi-wu-da-zhan-jiang-shi-de-gu-shi.html</link><description>本文解读的是毛选中让人困惑的6个概念：“左派”、“右派”、“左倾”、“右倾”、“左翼”、“右翼”。</description><guid isPermaLink="true">https://echozap.github.io/post/%E3%80%8C-mao-xuan-%E3%80%8D-yu-zhi-wu-da-zhan-jiang-shi-de-gu-shi.html</guid><pubDate>Sat, 22 Mar 2025 11:02:28 +0000</pubDate></item><item><title>「各种摸不着头脑」意外修改PATH(环境变量)</title><link>https://echozap.github.io/post/%E3%80%8C-ge-zhong-mo-bu-zhao-tou-nao-%E3%80%8D-yi-wai-xiu-gai-PATH%28-huan-jing-bian-liang-%29.html</link><description># 1. **检查sudo是否已经安装**
 
-确保 **sudo** 已经正确地安装在你的系统中。</description><guid isPermaLink="true">https://echozap.github.io/post/%E3%80%8C-ge-zhong-mo-bu-zhao-tou-nao-%E3%80%8D-yi-wai-xiu-gai-PATH%28-huan-jing-bian-liang-%29.html</guid><pubDate>Sat, 22 Mar 2025 11:02:27 +0000</pubDate></item><item><title>个人自用 stm32 工程模板程序</title><link>https://echozap.github.io/post/ge-ren-zi-yong-%20stm32%20-gong-cheng-mo-ban-cheng-xu.html</link><description>注意文件位置：`/Users/iaa/bin/STM32F4xx_DSP_StdPeriph_Lib_V1.9.0`
+确保 **sudo** 已经正确地安装在你的系统中。</description><guid isPermaLink="true">https://echozap.github.io/post/%E3%80%8C-ge-zhong-mo-bu-zhao-tou-nao-%E3%80%8D-yi-wai-xiu-gai-PATH%28-huan-jing-bian-liang-%29.html</guid><pubDate>Sat, 22 Mar 2025 11:02:27 +0000</pubDate></item><item><title>那天，他决定偷走一架飞机</title><link>https://echozap.github.io/post/na-tian-%EF%BC%8C-ta-jue-ding-tou-zou-yi-jia-fei-ji.html</link><description>2018年8月10日，地平线航空一架庞巴迪Dash 8 Q400在美国西雅图的塔科马国际机场（Sea-Tac）被盗。</description><guid isPermaLink="true">https://echozap.github.io/post/na-tian-%EF%BC%8C-ta-jue-ding-tou-zou-yi-jia-fei-ji.html</guid><pubDate>Sat, 22 Mar 2025 11:02:25 +0000</pubDate></item><item><title>「图床」上传脚本，基于 cloudflare R2 对象存储</title><link>https://echozap.github.io/post/%E3%80%8C-tu-chuang-%E3%80%8D-shang-chuan-jiao-ben-%EF%BC%8C-ji-yu-%20cloudflare%20R2%20-dui-xiang-cun-chu.html</link><description>使用之前需要通过 `pip install boto3` 安装 boto3 库。</description><guid isPermaLink="true">https://echozap.github.io/post/%E3%80%8C-tu-chuang-%E3%80%8D-shang-chuan-jiao-ben-%EF%BC%8C-ji-yu-%20cloudflare%20R2%20-dui-xiang-cun-chu.html</guid><pubDate>Sat, 22 Mar 2025 11:02:24 +0000</pubDate></item><item><title>「图床」上传脚本，基于 GitHub 仓库</title><link>https://echozap.github.io/post/%E3%80%8C-tu-chuang-%E3%80%8D-shang-chuan-jiao-ben-%EF%BC%8C-ji-yu-%20GitHub%20-cang-ku.html</link><description>使用之前需要通过 `pip install PyGithub` 安装 github 库
+
+在 `35-37` 行填入相应信息并将代码保存为 imgs.py：
+- `owner`:github 用户名
+- `repo`:仓库名(如 imgs)
+- `token`:github 私人访问令牌(要给予仓库读写权限)
+
+可以通过以下方法直接运行脚本或者将脚本[打包为应用程序](https://blog.ronan.us.kg/2024/09/02/python-%E6%89%93%E5%8C%85%E7%A8%8B%E5%BA%8F/)
+
+使用方法：`usage: python imgs.py [-h] input_file [input_file ...]`
+
+```python
+from github import Github
+import os
+import argparse
+import base64
+
+class Imgs:
+    def __init__(self, owner=None, repo=None, token=None):
+        self.owner = owner
+        self.repo = repo
+        self.token = token
+
+        g = Github(self.token)
+        self.repo = g.get_repo(f'{self.owner}/{self.repo}')
+
+    def create_new_file(self, img, content):
+        # 第一个参数：要上传到仓库的哪个路径; 第二个参数：commit 信息; 第三个参数：上传文档正文; 第四个参数：上传的分支
+        self.repo.create_file(f'blog_imgs/{img}', f'Newfiles: {img} ', content, branch='main')
+
+    def get_img_content(self, img_path):
+        with open(img_path, 'rb') as image_file:
+            img_content = image_file.read()
+
+        return img_content
+
+
+def main():
+    parser = argparse.ArgumentParser(description='基于 echozap/imgs 的图床上传')
+
+    # 传递的图片数量不确定
+    parser.add_argument('input_file', type=str, nargs='+', help='输入图片的路径')
+
+    args = parser.parse_args()
+
+    img = Imgs(
+        owner = '',
+        repo = '',
+        token = ''
+    )
+
+    for img_path in args.input_file:
+        try:
+            img_content = img.get_img_content(img_path)
+            img_name = os.path.basename(img_path) # 获取带扩展名的文件名
+
+            img.create_new_file(img_name, img_content)
+
+            print(f'{img_name}上传成功')
+            print(f'https://img.ronan.us.kg/blog_imgs/{img_name}')
+        except Exception as e:
+            if ''status': '422'' in str(e):
+                print(f'上传 {img_path} 时发生错误: {e}')
+                print('图片已存在')
+                print(f'https://img.ronan.us.kg/blog_imgs/{img_name}')
+
+if __name__ == '__main__':
+    main()
+```。</description><guid isPermaLink="true">https://echozap.github.io/post/%E3%80%8C-tu-chuang-%E3%80%8D-shang-chuan-jiao-ben-%EF%BC%8C-ji-yu-%20GitHub%20-cang-ku.html</guid><pubDate>Sat, 22 Mar 2025 11:02:22 +0000</pubDate></item><item><title>工信部查看汽车申报图</title><link>https://echozap.github.io/post/gong-xin-bu-cha-kan-qi-che-shen-bao-tu.html</link><description>1.进入[工信部官网](https://www.miit.gov.cn/)。</description><guid isPermaLink="true">https://echozap.github.io/post/gong-xin-bu-cha-kan-qi-che-shen-bao-tu.html</guid><pubDate>Sat, 22 Mar 2025 11:02:21 +0000</pubDate></item><item><title>继电器模块使用方式</title><link>https://echozap.github.io/post/ji-dian-qi-mo-kuai-shi-yong-fang-shi.html</link><description>## 继电器模块接线图 
+![继电器接线](https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/继电器模块接线图.png)
+
+---
+
+## 使用方法
+各个引脚功能：
+
+- VCC(+)： 供电正极。</description><guid isPermaLink="true">https://echozap.github.io/post/ji-dian-qi-mo-kuai-shi-yong-fang-shi.html</guid><pubDate>Sat, 22 Mar 2025 11:02:19 +0000</pubDate></item><item><title>「国内解决方法」linux安装docker</title><link>https://echozap.github.io/post/%E3%80%8C-guo-nei-jie-jue-fang-fa-%E3%80%8Dlinux-an-zhuang-docker.html</link><description># 1.安装Docker
+
+一键安装命令
+
+```zsh
+sudo curl -fsSL https://github.com/tech-shrimp/docker_installer/releases/download/latest/linux.sh| bash -s docker --mirror Aliyun
+```
+
+&gt; 备用（如果Github访问不了，可以使用以下命令）
+
+```zsh
+sudo curl -fsSL https://gitee.com/tech-shrimp/docker_installer/releases/download/latest/linux.sh| bash -s docker --mirror Aliyun
+```
+
+```zsh
+sudo curl -fsSL https://app.ronan.us.kg/linux_install_docker.sh| bash -s docker --mirror Aliyun
+```
+
+# 2.镜像拉取
+以下命令二选一，拉取失败则切换命令：
+
+```zsh
+bash -c '$(curl -sSLf https://xy.ggbond.org/xy/docker_pull.sh)' -s 完整镜像名
+```
+
+```zsh
+bash -c '$(curl -sSLf https://app.ronan.us.kg/docker_pull.sh)' -s 完整镜像名
+```。</description><guid isPermaLink="true">https://echozap.github.io/post/%E3%80%8C-guo-nei-jie-jue-fang-fa-%E3%80%8Dlinux-an-zhuang-docker.html</guid><pubDate>Sat, 22 Mar 2025 11:02:18 +0000</pubDate></item><item><title>软链接的使用，以 python 举例</title><link>https://echozap.github.io/post/ruan-lian-jie-de-shi-yong-%EF%BC%8C-yi-%20python%20-ju-li.html</link><description>在 macOS 上创建和使用软链接（symbolic link）的操作非常实用，特别是在管理不同版本的 Python 时。</description><guid isPermaLink="true">https://echozap.github.io/post/ruan-lian-jie-de-shi-yong-%EF%BC%8C-yi-%20python%20-ju-li.html</guid><pubDate>Sat, 22 Mar 2025 11:02:16 +0000</pubDate></item><item><title>静态库与动态库</title><link>https://echozap.github.io/post/jing-tai-ku-yu-dong-tai-ku.html</link><description>不管是Linux还是Windows中的库文件其本质和工作模式都是相同的, 只不过在不同的平台上库对应的文件格式和文件后缀不同。</description><guid isPermaLink="true">https://echozap.github.io/post/jing-tai-ku-yu-dong-tai-ku.html</guid><pubDate>Sat, 22 Mar 2025 11:02:15 +0000</pubDate></item><item><title>光猫改桥接模式</title><link>https://echozap.github.io/post/guang-mao-gai-qiao-jie-mo-shi.html</link><description>_该例使用 HG6145D 移动光猫（北京烽火终端）_
+
+# 1.获取超级账户和密码
+## 1.1 获取光猫 MAC 地址
+在终端输入：
+```shell
+arp -a
+```
+
+或者查看光猫背后名牌。</description><guid isPermaLink="true">https://echozap.github.io/post/guang-mao-gai-qiao-jie-mo-shi.html</guid><pubDate>Sat, 22 Mar 2025 11:02:13 +0000</pubDate></item><item><title>什么是价值观？</title><link>https://echozap.github.io/post/shen-me-shi-jia-zhi-guan-%EF%BC%9F.html</link><description>&gt; 注意：价值观指的是人们认为较有价值的观念（常常不曾言明）。</description><guid isPermaLink="true">https://echozap.github.io/post/shen-me-shi-jia-zhi-guan-%EF%BC%9F.html</guid><pubDate>Sat, 22 Mar 2025 11:02:12 +0000</pubDate></item><item><title>光猫与路由器</title><link>https://echozap.github.io/post/guang-mao-yu-lu-you-qi.html</link><description>很多人分不清光猫与路由器的区别是什么？有的用户家里只有一个光猫，电视机、电脑、手机都能上网，他们以为那就是路由器，现在的光猫也集成了无线网络功能，有的还有双频WiFi网络功能，就是2.4G跟5G无线WiFi信号，目前光猫只支持WiFi5，对于家里面积小的用户光猫自带的无线wifi网络已经够用了。</description><guid isPermaLink="true">https://echozap.github.io/post/guang-mao-yu-lu-you-qi.html</guid><pubDate>Sat, 22 Mar 2025 11:02:10 +0000</pubDate></item><item><title>创建以及管理 SSH 密钥对</title><link>https://echozap.github.io/post/chuang-jian-yi-ji-guan-li-%20SSH%20-mi-yao-dui.html</link><description># 1.创建密钥对（此方法适用于从未创建过密钥对的本地主机）
+
+在终端输入以下命令:
+
+```shell
+ssh-keygen
+```
+
+之后一路回车，不出意外的话，看到以下画面，密钥（包含私钥和公钥，公钥以 .pub 结尾）就创建成功了
+![ssh-kegen](https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/ssh-keygen.png)
+
+对于 linux 和类 linux 系统，该密钥存放于 `~/.ssh/` ，可以通过 `ls ～/.ssh` 查看。</description><guid isPermaLink="true">https://echozap.github.io/post/chuang-jian-yi-ji-guan-li-%20SSH%20-mi-yao-dui.html</guid><pubDate>Sat, 22 Mar 2025 11:02:09 +0000</pubDate></item><item><title>个人自用vim配置文件</title><link>https://echozap.github.io/post/ge-ren-zi-yong-vim-pei-zhi-wen-jian.html</link><description>将以下内容写入 `～/.vimrc` 中
+
+[点击查看vim配置](https://gist.github.com/EchoZap/21f5ca99025356b458ada0773aa7783c)
+ 
+ 
+ 
+ 。</description><guid isPermaLink="true">https://echozap.github.io/post/ge-ren-zi-yong-vim-pei-zhi-wen-jian.html</guid><pubDate>Sat, 22 Mar 2025 11:02:07 +0000</pubDate></item><item><title>「图床」md 图片链接替换</title><link>https://echozap.github.io/post/%E3%80%8C-tu-chuang-%E3%80%8Dmd%20-tu-pian-lian-jie-ti-huan.html</link><description>在 main 函数的 old_domain 为旧的图片链接，new_domain 是新的图片链接，根据自身情况填写。</description><guid isPermaLink="true">https://echozap.github.io/post/%E3%80%8C-tu-chuang-%E3%80%8Dmd%20-tu-pian-lian-jie-ti-huan.html</guid><pubDate>Sat, 22 Mar 2025 11:02:06 +0000</pubDate></item><item><title>守护进程</title><link>https://echozap.github.io/post/shou-hu-jin-cheng.html</link><description>守护进程（Daemon Process），也就是通常说的 Daemon 进程（精灵进程），是 Linux 中的后台服务进程。</description><guid isPermaLink="true">https://echozap.github.io/post/shou-hu-jin-cheng.html</guid><pubDate>Sat, 22 Mar 2025 11:02:04 +0000</pubDate></item><item><title>个人自用 stm32 工程模板程序</title><link>https://echozap.github.io/post/ge-ren-zi-yong-%20stm32%20-gong-cheng-mo-ban-cheng-xu.html</link><description>注意文件位置：`/Users/iaa/bin/STM32F4xx_DSP_StdPeriph_Lib_V1.9.0`
 
 ```shell
 #!/usr/bin/env bash
@@ -69,7 +198,130 @@ SRC = \$(wildcard \${LIBDIR}/*.c) \\
 # 将以该名称生成二进制文件 (.elf, .bin, .hex)
 PROJECT_NAME=out
 
-# 编译器设置。</description><guid isPermaLink="true">https://echozap.github.io/post/ge-ren-zi-yong-%20stm32%20-gong-cheng-mo-ban-cheng-xu.html</guid><pubDate>Sat, 22 Mar 2025 11:02:03 +0000</pubDate></item><item><title>「OrbStack」Mac 系统中一个更快的 Docker 可视化工具，可完全替代 Docker Desktop</title><link>https://echozap.github.io/post/%E3%80%8COrbStack%E3%80%8DMac%20-xi-tong-zhong-yi-ge-geng-kuai-de-%20Docker%20-ke-shi-hua-gong-ju-%EF%BC%8C-ke-wan-quan-ti-dai-%20Docker%20Desktop.html</link><description>我之前用的是 Docker Desktop，每次准备启动容器的时候，我都会把能关的应用都关闭，省的电脑卡， Docker Desktop 确实有点儿耗性能。</description><guid isPermaLink="true">https://echozap.github.io/post/%E3%80%8COrbStack%E3%80%8DMac%20-xi-tong-zhong-yi-ge-geng-kuai-de-%20Docker%20-ke-shi-hua-gong-ju-%EF%BC%8C-ke-wan-quan-ti-dai-%20Docker%20Desktop.html</guid><pubDate>Sat, 22 Mar 2025 11:01:40 +0000</pubDate></item><item><title>「Gmeek」上传脚本(单篇或批量)</title><link>https://echozap.github.io/post/%E3%80%8CGmeek%E3%80%8D-shang-chuan-jiao-ben-%28-dan-pian-huo-pi-liang-%29.html</link><description>&gt; [!caution]
+# 编译器设置。</description><guid isPermaLink="true">https://echozap.github.io/post/ge-ren-zi-yong-%20stm32%20-gong-cheng-mo-ban-cheng-xu.html</guid><pubDate>Sat, 22 Mar 2025 11:02:03 +0000</pubDate></item><item><title>手动搭建 stm32 标准外设库+Makefile工程</title><link>https://echozap.github.io/post/shou-dong-da-jian-%20stm32%20-biao-zhun-wai-she-ku-%2BMakefile-gong-cheng.html</link><description>&gt; 本教程以 **stm32f407** 为例，其他 stm32 芯片配置方式大同小异。</description><guid isPermaLink="true">https://echozap.github.io/post/shou-dong-da-jian-%20stm32%20-biao-zhun-wai-she-ku-%2BMakefile-gong-cheng.html</guid><pubDate>Sat, 22 Mar 2025 11:02:01 +0000</pubDate></item><item><title>基于stm32 hal 库的 DS18B20驱动代码</title><link>https://echozap.github.io/post/ji-yu-stm32%20hal%20-ku-de-%20DS18B20-qu-dong-dai-ma.html</link><description>使用方法：   
+
+1.将下面的  DS18B20.c 放入你从 CubeMX 导出的工程的 ../Core/Src 目录中       
+2.将 DS18B20.h 放入 ../Core/Inc 目录中  
+3.在 Cube 中将要使用的引脚设置标签别名为 `DS18b20`  
+
+[「点我获取DS18B20.c、DS18B20.h代码」](https://gist.github.com/EchoZap/82ed2fcdea7508d8e135ae30d052f609)
+
+调用DS18b20驱动函数：  
+在main.c中合适的位置处添加 #include 'ds18b20.h':
+
+```c
+/* Private includes ----------------------------------------------------------*/
+/* USER CODE BEGIN Includes */
+ 
+#include 'ds18b20.h'
+ 
+/* USER CODE END Includes */
+```
+
+定义一个浮点型的变量，用于存放温度数据
+
+```c
+/* Private define ------------------------------------------------------------*/
+/* USER CODE BEGIN PD */
+ 
+float Temp = 0;
+ 
+/* USER CODE END PD */
+```
+
+在main函数中初始化ds18b20
+
+```c
+/* Initialize all configured peripherals */
+   MX_GPIO_Init();
+   MX_USART1_UART_Init();
+/* USER CODE BEGIN 2 */
+ 
+   DS18B20_Init();
+ 
+/* USER CODE END 2 */
+```
+
+ 在while(1)中调用温度读取函数
+
+```c
+  /* Infinite loop */
+  /* USER CODE BEGIN WHILE */
+  while (1)
+  {
+		Temp = DS18B20_GetTemp_SkipRom();
+		HAL_Delay(1000);
+    /* USER CODE END WHILE */
+ 
+    /* USER CODE BEGIN 3 */
+  }
+```。</description><guid isPermaLink="true">https://echozap.github.io/post/ji-yu-stm32%20hal%20-ku-de-%20DS18B20-qu-dong-dai-ma.html</guid><pubDate>Sat, 22 Mar 2025 11:02:00 +0000</pubDate></item><item><title>「python」查看或切换当前解释器</title><link>https://echozap.github.io/post/%E3%80%8Cpython%E3%80%8D-cha-kan-huo-qie-huan-dang-qian-jie-shi-qi.html</link><description># 查看系统中所有安装的 Python 解释器
+```shell
+which -a python python3
+```
+这会列出系统路径中找到的 python 和 python3 解释器的位置:
+```shell
+❯ which -a python python3
+
+python not found
+/usr/bin/python3
+/opt/homebrew/bin/python3
+```
+`-a` 选项确保显示所有匹配的路径，而不仅仅是第一个。</description><guid isPermaLink="true">https://echozap.github.io/post/%E3%80%8Cpython%E3%80%8D-cha-kan-huo-qie-huan-dang-qian-jie-shi-qi.html</guid><pubDate>Sat, 22 Mar 2025 11:01:58 +0000</pubDate></item><item><title>「python」一个快速生成requirements.txt的库</title><link>https://echozap.github.io/post/%E3%80%8Cpython%E3%80%8D-yi-ge-kuai-su-sheng-cheng-requirements.txt-de-ku.html</link><description>&gt; 为什么选择 `pipreqs` ？
+
+虽然 Python 提供了 `pip freeze &gt; requirements.txt` 这样的命令生成 `requirements.txt`，但它有一个致命缺陷：它会把你当前环境中安装的所有库都写进去，而不仅仅是你项目实际用到的库。</description><guid isPermaLink="true">https://echozap.github.io/post/%E3%80%8Cpython%E3%80%8D-yi-ge-kuai-su-sheng-cheng-requirements.txt-de-ku.html</guid><pubDate>Sat, 22 Mar 2025 11:01:57 +0000</pubDate></item><item><title>「python」打包程序</title><link>https://echozap.github.io/post/%E3%80%8Cpython%E3%80%8D-da-bao-cheng-xu.html</link><description># 通过pyinstaller打包
+
+要将Python脚本打包成一个独立运行的应用程序，可以使用工具PyInstaller，其可以将Python脚本打包成一个可执行文件 (.exe) 。</description><guid isPermaLink="true">https://echozap.github.io/post/%E3%80%8Cpython%E3%80%8D-da-bao-cheng-xu.html</guid><pubDate>Sat, 22 Mar 2025 11:01:55 +0000</pubDate></item><item><title>「python」Conda虚拟环境</title><link>https://echozap.github.io/post/%E3%80%8Cpython%E3%80%8DConda-xu-ni-huan-jing.html</link><description># 安装conda
+```shell
+# macOS 安装 miniconda ，在终端输入以下命令
+brew install miniconda
+```
+
+---
+
+# 创建一个新的虚拟环境
+
+可以使用以下命令创建一个名为 `jupyter_env` 的新环境，并指定 Python 版本（例如 Python 3.11）
+
+```shell
+conda create -n jupyter_env python=3.11
+```
+
+&gt; 通过上面命令创建的虚拟环境通常会保存在主环境目录，如果想指定虚拟环境的位置，可以使用下面的命令
+
+**指定路径**：如果你在创建环境时使用了 `-p` 或 `--prefix` 选项指定路径，环境会存储在你指定的位置。</description><guid isPermaLink="true">https://echozap.github.io/post/%E3%80%8Cpython%E3%80%8DConda-xu-ni-huan-jing.html</guid><pubDate>Sat, 22 Mar 2025 11:01:54 +0000</pubDate></item><item><title>「platformIO」解决 stm32 标准外设库时钟不准的问题</title><link>https://echozap.github.io/post/%E3%80%8CplatformIO%E3%80%8D-jie-jue-%20stm32%20-biao-zhun-wai-she-ku-shi-zhong-bu-zhun-de-wen-ti.html</link><description>&gt; 以下以stm32f407系列举例
+
+### 1.遭遇问题：
+
+在使用[ platformIO 搭建标准外设库](https://blog.ronan.us.kg/2024/09/08/platformIO-%E5%9F%BA%E4%BA%8E-stm32-%E6%A0%87%E5%87%86%E5%A4%96%E8%AE%BE%E5%BA%93%E7%9A%84%E5%B7%A5%E7%A8%8B%E6%A8%A1%E6%9D%BF/)进行实际开发时遇到了外部时钟不准的问题。</description><guid isPermaLink="true">https://echozap.github.io/post/%E3%80%8CplatformIO%E3%80%8D-jie-jue-%20stm32%20-biao-zhun-wai-she-ku-shi-zhong-bu-zhun-de-wen-ti.html</guid><pubDate>Sat, 22 Mar 2025 11:01:52 +0000</pubDate></item><item><title>「platformIO」基于 stm32 标准外设库的工程模板</title><link>https://echozap.github.io/post/%E3%80%8CplatformIO%E3%80%8D-ji-yu-%20stm32%20-biao-zhun-wai-she-ku-de-gong-cheng-mo-ban.html</link><description>&gt; 本教程默认用户已经安装好 vscode 和 platformIO ！！！
+
+# 1.下载官方标准外设库
+
+进入 [ST 官网的嵌入式软件板块](https://www.st.com.cn/zh/embedded-software/stm32-standard-peripheral-libraries.html) ，根据自身板子型号选择，有F0-F4多种型号。</description><guid isPermaLink="true">https://echozap.github.io/post/%E3%80%8CplatformIO%E3%80%8D-ji-yu-%20stm32%20-biao-zhun-wai-she-ku-de-gong-cheng-mo-ban.html</guid><pubDate>Sat, 22 Mar 2025 11:01:51 +0000</pubDate></item><item><title>「platformIO」基于 stm32 HAL库 的工程模板</title><link>https://echozap.github.io/post/%E3%80%8CplatformIO%E3%80%8D-ji-yu-%20stm32%20HAL-ku-%20-de-gong-cheng-mo-ban.html</link><description># 1.建立 Makefile 工程
+
+通过 STM32CubeMX 建立适于自己开发版的 Makefile 工程（步骤不赘述，百度一下，你就知道），并且记住「**工程名**」和「**工程存放路径**」。</description><guid isPermaLink="true">https://echozap.github.io/post/%E3%80%8CplatformIO%E3%80%8D-ji-yu-%20stm32%20HAL-ku-%20-de-gong-cheng-mo-ban.html</guid><pubDate>Sat, 22 Mar 2025 11:01:49 +0000</pubDate></item><item><title>「platformIO」printf 重映像、串口打印数据</title><link>https://echozap.github.io/post/%E3%80%8CplatformIO%E3%80%8Dprintf%20-zhong-ying-xiang-%E3%80%81-chuan-kou-da-yin-shu-ju.html</link><description>在 `keil` 环境中使用 printf 通过串口打印数据：
+
+- 在 main.c 引入`stdio.h`
+- 重写`fputc`函数
+
+  ```c
+  // keil arm环境，如果你要用printf函数，就必须重写fputc函数，并且在魔术棒里面勾选使用Micro LIB
+  int fputc(int ch, FILE *f)
+  {
+  	USART_SendData(USART1, ch);
+  	while (USART_GetFlagStatus(USART1, USART_FLAG_TC) == RESET);//循环的判断串口是否发送完数据
+
+  	return ch;
+  }
+  ```
+
+  完成以上配置即可在 main 函数中使用 printf 函数通过串口打印数据。</description><guid isPermaLink="true">https://echozap.github.io/post/%E3%80%8CplatformIO%E3%80%8Dprintf%20-zhong-ying-xiang-%E3%80%81-chuan-kou-da-yin-shu-ju.html</guid><pubDate>Sat, 22 Mar 2025 11:01:47 +0000</pubDate></item><item><title>「macOS」neovide初始化错误、常见问题</title><link>https://echozap.github.io/post/%E3%80%8CmacOS%E3%80%8Dneovide-chu-shi-hua-cuo-wu-%E3%80%81-chang-jian-wen-ti.html</link><description>在 M1 macOS 中下载 neovide 之后打开遇到：
+
+![error](https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/neovide_error.png)
+
+#### 原因分析
+
+由于现在所有的 macOS 版本内置终端都是默认使用 zsh ，但是 Neovide 不会在交互式 shell 中启动嵌入式 neovim 实例，因此 shell 不会读取其启动文件的一部分（ `~/.bashrc` `~/.zshrc` 无论你的 shell 的等效项是什么）。</description><guid isPermaLink="true">https://echozap.github.io/post/%E3%80%8CmacOS%E3%80%8Dneovide-chu-shi-hua-cuo-wu-%E3%80%81-chang-jian-wen-ti.html</guid><pubDate>Sat, 22 Mar 2025 11:01:46 +0000</pubDate></item><item><title>「Python」虚拟环境</title><link>https://echozap.github.io/post/%E3%80%8CPython%E3%80%8D-xu-ni-huan-jing.html</link><description>*在虚拟环境中，pip 和 pip3 通常会指向同一个 Python 版本的包管理器。</description><guid isPermaLink="true">https://echozap.github.io/post/%E3%80%8CPython%E3%80%8D-xu-ni-huan-jing.html</guid><pubDate>Sat, 22 Mar 2025 11:01:44 +0000</pubDate></item><item><title>「Python」模块和包</title><link>https://echozap.github.io/post/%E3%80%8CPython%E3%80%8D-mo-kuai-he-bao.html</link><description>Python 提供了强大的模块支持，主要体现在，不仅 Python 标准库中包含了大量的模块（称为标准模块），还有大量的第三方模块，开发者自己也可以开发自定义模块。</description><guid isPermaLink="true">https://echozap.github.io/post/%E3%80%8CPython%E3%80%8D-mo-kuai-he-bao.html</guid><pubDate>Sat, 22 Mar 2025 11:01:43 +0000</pubDate></item><item><title>「Python」异常处理</title><link>https://echozap.github.io/post/%E3%80%8CPython%E3%80%8D-yi-chang-chu-li.html</link><description>在 Python 中，常见的基本错误有两类，即语法错误和异常。</description><guid isPermaLink="true">https://echozap.github.io/post/%E3%80%8CPython%E3%80%8D-yi-chang-chu-li.html</guid><pubDate>Sat, 22 Mar 2025 11:01:41 +0000</pubDate></item><item><title>「OrbStack」Mac 系统中一个更快的 Docker 可视化工具，可完全替代 Docker Desktop</title><link>https://echozap.github.io/post/%E3%80%8COrbStack%E3%80%8DMac%20-xi-tong-zhong-yi-ge-geng-kuai-de-%20Docker%20-ke-shi-hua-gong-ju-%EF%BC%8C-ke-wan-quan-ti-dai-%20Docker%20Desktop.html</link><description>我之前用的是 Docker Desktop，每次准备启动容器的时候，我都会把能关的应用都关闭，省的电脑卡， Docker Desktop 确实有点儿耗性能。</description><guid isPermaLink="true">https://echozap.github.io/post/%E3%80%8COrbStack%E3%80%8DMac%20-xi-tong-zhong-yi-ge-geng-kuai-de-%20Docker%20-ke-shi-hua-gong-ju-%EF%BC%8C-ke-wan-quan-ti-dai-%20Docker%20Desktop.html</guid><pubDate>Sat, 22 Mar 2025 11:01:40 +0000</pubDate></item><item><title>「Gmeek」上传脚本(单篇或批量)</title><link>https://echozap.github.io/post/%E3%80%8CGmeek%E3%80%8D-shang-chuan-jiao-ben-%28-dan-pian-huo-pi-liang-%29.html</link><description>&gt; [!caution]
 &gt;
 &gt; **注意：** 该脚本仅适用于通过Gmeek项目搭建的博客网站
 &gt; 在开始使用之前，需要创建 github 的个人 Token
@@ -188,7 +440,47 @@ st-flash write /path/project/build.bin 0x08000000
 ssh username@hostname
 ```
 
-其中，`username`是用户名，`hostname` 是主机名或IP 地址。</description><guid isPermaLink="true">https://echozap.github.io/post/SSH%20-yuan-cheng-deng-lu-yi-ji-%20SFTP%20-wen-jian-chuan-shu.html</guid><pubDate>Sat, 22 Mar 2025 10:44:46 +0000</pubDate></item><item><title>shell 编程</title><link>https://echozap.github.io/post/shell%20-bian-cheng.html</link><description># 一、运算符
+其中，`username`是用户名，`hostname` 是主机名或IP 地址。</description><guid isPermaLink="true">https://echozap.github.io/post/SSH%20-yuan-cheng-deng-lu-yi-ji-%20SFTP%20-wen-jian-chuan-shu.html</guid><pubDate>Sat, 22 Mar 2025 10:44:46 +0000</pubDate></item><item><title>ssh 免密登录</title><link>https://echozap.github.io/post/ssh%20-mian-mi-deng-lu.html</link><description># 1创建密钥
+
+在本地主机终端输入
+
+```shell
+ssh-keygen
+```
+
+之后一路回车，不出意外的话，你将看到以下内容
+
+![img](https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/ssh-keygen.png)
+
+恭喜，你已经完成第一步！
+
+---
+
+# 2检查密钥是否创建成功
+
+在终端输入
+
+```shell
+ls .ssh
+```
+
+看到以下内容
+
+![img](https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/ls_.ssh.png)
+
+看到其中有`id_ed25519`(私钥))**其中的ed25519在不同设备可能会有不同，有的可能是id_rsa**、`id_ed25519.pub`(公钥)两个文件，恭喜，你已经完成第二步了，离成功更近了！
+
+---
+
+# 3将公钥复制到远程主机
+
+在终端键入
+
+```shell
+ssh-copy-id -i &lt;~/.ssh/id_ed25519.pub&gt; &lt;username&gt;@&lt;remote_ip&gt;
+```
+
+其中的`&lt;~/.ssh/id_ed25519.pub&gt;` 是公钥所处的路径，`&lt;username&gt;`是用户名，`&lt;remote_ip&gt;`是主机名或IP 地址。</description><guid isPermaLink="true">https://echozap.github.io/post/ssh%20-mian-mi-deng-lu.html</guid><pubDate>Sat, 22 Mar 2025 10:44:10 +0000</pubDate></item><item><title>shell 编程</title><link>https://echozap.github.io/post/shell%20-bian-cheng.html</link><description># 一、运算符
 
 ## 1、算术运算符
 
@@ -486,7 +778,20 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 ```
-。</description><guid isPermaLink="true">https://echozap.github.io/post/HuxproBlog%20-bei-fen-zi-dong-hua.html</guid><pubDate>Sat, 22 Mar 2025 10:42:04 +0000</pubDate></item><item><title>PyInstaller将Python应用打包为Android应用程序</title><link>https://echozap.github.io/post/PyInstaller-jiang-Python-ying-yong-da-bao-wei-Android-ying-yong-cheng-xu.html</link><description>在移动应用开发中，Python虽然不如Java或Kotlin那样广泛使用，但仍有一部分开发者偏爱使用Python进行开发。</description><guid isPermaLink="true">https://echozap.github.io/post/PyInstaller-jiang-Python-ying-yong-da-bao-wei-Android-ying-yong-cheng-xu.html</guid><pubDate>Sat, 22 Mar 2025 10:41:23 +0000</pubDate></item><item><title>OpenOCD 烧录失败解决方法</title><link>https://echozap.github.io/post/OpenOCD%20-shao-lu-shi-bai-jie-jue-fang-fa.html</link><description># 在烧录时遇到如下问题：
+。</description><guid isPermaLink="true">https://echozap.github.io/post/HuxproBlog%20-bei-fen-zi-dong-hua.html</guid><pubDate>Sat, 22 Mar 2025 10:42:04 +0000</pubDate></item><item><title>PyInstaller将Python应用打包为Android应用程序</title><link>https://echozap.github.io/post/PyInstaller-jiang-Python-ying-yong-da-bao-wei-Android-ying-yong-cheng-xu.html</link><description>在移动应用开发中，Python虽然不如Java或Kotlin那样广泛使用，但仍有一部分开发者偏爱使用Python进行开发。</description><guid isPermaLink="true">https://echozap.github.io/post/PyInstaller-jiang-Python-ying-yong-da-bao-wei-Android-ying-yong-cheng-xu.html</guid><pubDate>Sat, 22 Mar 2025 10:41:23 +0000</pubDate></item><item><title>PlatformIO烧录失败(51系列)解决方法</title><link>https://echozap.github.io/post/PlatformIO-shao-lu-shi-bai-%2851-xi-lie-%29-jie-jue-fang-fa.html</link><description>## 遭遇问题
+
+***platformIO一直卡在烧录程序中，导致开发版一直处于断电状态***
+![问题](https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/PIO1.png)
+
+## 解决方法
+
+将main.py里的这一行注释即可
+![解决1](https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/PIO2.png)
+
+该文件在以下路径
+`~/.platformio/platforms/intel_mcs51/builder/main.py`
+![解决2](https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/PIO3.png)
+。</description><guid isPermaLink="true">https://echozap.github.io/post/PlatformIO-shao-lu-shi-bai-%2851-xi-lie-%29-jie-jue-fang-fa.html</guid><pubDate>Sat, 22 Mar 2025 10:40:55 +0000</pubDate></item><item><title>OpenOCD 烧录失败解决方法</title><link>https://echozap.github.io/post/OpenOCD%20-shao-lu-shi-bai-jie-jue-fang-fa.html</link><description># 在烧录时遇到如下问题：
 
 ```shell
 ❯ openocd -f interface/stlink-v2.cfg -f target/stm32f1x.cfg -c 'program /path/project/build.bin verify reset exit 0x08000000' 
@@ -513,7 +818,17 @@ make: *** [flash] Error 1
 ---
 
 # 解决方法
-在  /opt/homebrew/Cellar/open-ocd/0.12.0_1/share/openocd/scripts/target（根据自己安装 OpenOCD 的位置查找，通过 brew 安装的就在这个位置）找到符合自己单片机型号的 cfg 文件，例如 stm32f1x.cfg 。</description><guid isPermaLink="true">https://echozap.github.io/post/OpenOCD%20-shao-lu-shi-bai-jie-jue-fang-fa.html</guid><pubDate>Sat, 22 Mar 2025 10:40:31 +0000</pubDate></item><item><title>Makefile</title><link>https://echozap.github.io/post/Makefile.html</link><description>## 1.规则
+在  /opt/homebrew/Cellar/open-ocd/0.12.0_1/share/openocd/scripts/target（根据自己安装 OpenOCD 的位置查找，通过 brew 安装的就在这个位置）找到符合自己单片机型号的 cfg 文件，例如 stm32f1x.cfg 。</description><guid isPermaLink="true">https://echozap.github.io/post/OpenOCD%20-shao-lu-shi-bai-jie-jue-fang-fa.html</guid><pubDate>Sat, 22 Mar 2025 10:40:31 +0000</pubDate></item><item><title>npm 常用用法</title><link>https://echozap.github.io/post/npm%20-chang-yong-yong-fa.html</link><description>你可以使用以下命令查看已经通过 `npm` 安装的包：
+
+### 1. **查看全局安装的包**
+
+要查看全局安装的所有包，可以运行以下命令：
+
+```bash
+npm list -g --depth=0
+```
+
+这个命令会列出所有全局安装的包，并且使用 `--depth=0` 选项只显示顶级包，不显示它们的依赖项。</description><guid isPermaLink="true">https://echozap.github.io/post/npm%20-chang-yong-yong-fa.html</guid><pubDate>Sat, 22 Mar 2025 10:40:08 +0000</pubDate></item><item><title>Makefile</title><link>https://echozap.github.io/post/Makefile.html</link><description>## 1.规则
 
 &gt; Makefile的框架是由规则构成的。</description><guid isPermaLink="true">https://echozap.github.io/post/Makefile.html</guid><pubDate>Sat, 22 Mar 2025 10:39:46 +0000</pubDate></item><item><title>mac合盖不休眠、安装包损坏解决办法</title><link>https://echozap.github.io/post/mac-he-gai-bu-xiu-mian-%E3%80%81-an-zhuang-bao-sun-huai-jie-jue-ban-fa.html</link><description># 'app已损坏，无法打开'问题解决方法
 

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="github-light" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    <script src='https://pub-43c06573bc27485093cd50efd04e9e7b.r2.dev/GmeekRonanTheme.js'></script><script src='https://pub-43c06573bc27485093cd50efd04e9e7b.r2.dev/GmeekVercount.js'></script>
+    <link rel="icon" href="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg">
+<meta name="description" content="> 本教程以 **stm32f407** 为例，其他 stm32 芯片配置方式大同小异。">
+<meta property="og:title" content="手动搭建 stm32 标准外设库+Makefile工程">
+<meta property="og:description" content="> 本教程以 **stm32f407** 为例，其他 stm32 芯片配置方式大同小异。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://echozap.github.io/post/shou-dong-da-jian-%20stm32%20-biao-zhun-wai-she-ku-%2BMakefile-gong-cheng.html">
+<meta property="og:image" content="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg">
+<title>手动搭建 stm32 标准外设库+Makefile工程</title>
+<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+.copy-feedback {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    color: var(--color-fg-on-emphasis);
+    background-color: var(--color-fg-muted);
+    border-radius: 3px;
+    padding: 5px 8px;
+    font-size: 12px;
+}
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">手动搭建 stm32 标准外设库+Makefile工程</h1>
+<div class="title-right">
+    <a href="https://echozap.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题"style="display:none;">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><blockquote>
+<p>本教程以 <strong>stm32f407</strong> 为例，其他 stm32 芯片配置方式大同小异。</p>
+</blockquote>
+<h1>1.下载官方标准外设库</h1>
+<p>进入 <a href="https://www.st.com.cn/zh/embedded-software/stm32-standard-peripheral-libraries.html" rel="nofollow">ST 官网的嵌入式软件板块</a> ，根据自身板子型号选择，有F0-F4多种型号。</p>
+<p>之后根据提示选择下载即可，如果没有意外的话，应该会获得一个类似 <strong>en.stsw-stm32065_v1-9-0.zip(这是 F4 的标准库)</strong> 的压缩包。</p>
+<h1>2.创建工程</h1>
+<h2>2.1建立工程结构</h2>
+<p>1.解压从官网下载的标准外设库 <strong>en.stsw-stm32065_v1-9-0.zip</strong> ，获得一个 <strong>STM32F4xx_DSP_StdPeriph_Lib_V1.9.0</strong> 目录</p>
+<p>2.新建一个<code class="notranslate">my_project</code>目录，并在该目录下创建四个子目录：<code class="notranslate">driver</code>、<code class="notranslate">include</code>、<code class="notranslate">lib</code>、<code class="notranslate">src</code></p>
+<p>3.将标准固件库目录<code class="notranslate">.../STM32F4xx_DSP_StdPeriph_Lib_V1.9.0/Libraries/CMSIS/Include</code>文件夹，以及固件库文件目录<code class="notranslate">.../STM32F4xx_DSP_StdPeriph_Lib_V1.9.0/Libraries/CMSIS/Device/ST/STM32F4xx/Source/Templates/TrueSTUDIO</code>文件夹，全部拷贝到<code class="notranslate">my_project/cmsis</code>文件夹下</p>
+<p>4.将标准固件库文件目录<code class="notranslate">.../STM32F4xx_DSP_StdPeriph_Lib_V1.9.0/Libraries/STM32F4xx_StdPeriph_Driver</code>文件夹下的<code class="notranslate">inc</code>和<code class="notranslate">src</code>文件夹全部拷贝移植到<code class="notranslate">lib</code>文件夹下</p>
+<p>5.将标准固件库文件目录<code class="notranslate">.../STM32F4xx_DSP_StdPeriph_Lib_V1.9.0/Libraries/CMSIS/Device/ST/STM32F4xx/Include</code>文件夹目录下的<code class="notranslate">stm32f4xx.h</code>、<code class="notranslate">system_stm32f4xx.h</code>文件拷贝到<code class="notranslate">include</code>文件夹下</p>
+<p>6.将标准固件文件目录<code class="notranslate">.../STM32F4xx_DSP_StdPeriph_Lib_V1.9.0/Project/STM32F4xx_StdPeriph_Templates</code>目录下的<code class="notranslate">main.c</code>、<code class="notranslate">stm32f4xx_it.c</code>、<code class="notranslate">system_stm32f4xx.c</code>拷贝移植到<code class="notranslate">src</code>文件夹下，<code class="notranslate">stm32f4xx_conf.h</code>、<code class="notranslate">stm32f4xx_it.h</code>拷贝到<code class="notranslate">include</code>文件夹中，其中main.c文件是STM32工程文件的主函数程序,(main.c 也可以不拷贝，自行创建即可)</p>
+<p>7.将标准固件库文件目录<code class="notranslate">.../STM32F4xx_DSP_StdPeriph_Lib_V1.9.0/Project/STM32F4xx_StdPeriph_Templates/TrueSTUDIO/STM32F40_41xxx</code>文件夹下的<code class="notranslate">STM32F417IG_FLASH.ld</code>拷贝到<code class="notranslate">my_project</code>的工程根目录下，并重命名为<strong>stm32_flash.ld</strong>。</p>
+<h2>2.2编写 Makefile</h2>
+<p>到这里我们需要自行手动编写一个 Makefile...</p>
+<p>逗你玩呢，我已经写好了，请慢用：</p>
+<div class="highlight highlight-source-makefile"><pre class="notranslate"><span class="pl-smi">CROSS_COMPILE</span> = arm-none-eabi-
+
+<span class="pl-c"><span class="pl-c">#</span> 将源文件放在这里 (*.c)</span>
+<span class="pl-smi">SRCDIR</span>=./src
+<span class="pl-smi">LIBDIR</span>=./lib/src
+
+<span class="pl-smi">SRC</span> = ${wildcard ${LIBDIR}/*.c} <span class="pl-cce">\</span>
+	  ${wildcard ${SRCDIR}/*.c}
+
+<span class="pl-c"><span class="pl-c">#</span> 将以该名称生成二进制文件 (.elf, .bin, .hex)</span>
+<span class="pl-smi">PROJECT_NAME</span>=out
+
+<span class="pl-c"><span class="pl-c">#</span> 编译器设置。仅编辑 CFLAGS 以包含其他头文件。</span>
+<span class="pl-smi">CC</span> = <span class="pl-s">$(<span class="pl-smi">CROSS_COMPILE</span>)</span>gcc
+<span class="pl-smi">AS</span> = <span class="pl-s">$(<span class="pl-smi">CROSS_COMPILE</span>)</span>as
+<span class="pl-smi">LD</span> = <span class="pl-s">$(<span class="pl-smi">CROSS_COMPILE</span>)</span>gcc
+<span class="pl-smi">OBJCOPY</span> = ${CROSS_COMPILE}objcopy
+
+<span class="pl-c"><span class="pl-c">#</span> compiler flags 编译器标志</span>
+<span class="pl-smi">CFLAGS</span> = -g -O2 -Wall -Tstm32_flash.ld
+<span class="pl-smi">CFLAGS</span> += -DUSE_STDPERIPH_DRIVER
+<span class="pl-smi">CFLAGS</span> += -D STM32F40_41xxx
+<span class="pl-smi">CFLAGS</span> += -mlittle-endian -mthumb -mcpu=cortex-m4 -mthumb-interwork
+<span class="pl-smi">CFLAGS</span> += -mfloat-abi=hard -mfpu=fpv4-sp-d16
+<span class="pl-smi">CFLAGS</span> += -I .
+<span class="pl-smi">CFLAGS</span> += -specs=nosys.specs
+
+<span class="pl-c"><span class="pl-c">#</span> 包含 STM 库中的文件</span>
+<span class="pl-smi">CFLAGS</span> += -I./cmsis/Include
+<span class="pl-smi">CFLAGS</span> += -I./include
+<span class="pl-smi">CFLAGS</span> += -I./lib/inc
+
+<span class="pl-smi">SRC</span> += ./cmsis/TrueSTUDIO/startup_stm32f40_41xxx.s
+
+<span class="pl-c"><span class="pl-c">#</span> 将 SRC 中每个 .c 文件的扩展名替换为 .o，生成对应的目标文件。例如，如果 SRC 中有一个文件 main.c，它会生成 main.o，以便后续编译和链接时使用这些目标文件。</span>
+<span class="pl-smi">OBJS</span> = <span class="pl-s">$(<span class="pl-smi">SRC:.c=.o</span>)</span>
+
+<span class="pl-k">vpath</span> <span class="pl-c1">%</span>.c ./lib/src \
+<span class="pl-k">vpath</span> <span class="pl-c1">%</span>.c ./src \
+
+<span class="pl-c1">.PHONY</span>: proj
+
+<span class="pl-en">all</span>:proj
+
+<span class="pl-en">proj</span>:<span class="pl-s">$(<span class="pl-smi">PROJECT_NAME</span>)</span>.elf
+
+<span class="pl-en"><span class="pl-s">$(<span class="pl-smi">PROJECT_NAME</span>)</span>.elf</span>: <span class="pl-s">$(<span class="pl-smi">SRC</span>)</span>
+	<span class="pl-s">$(<span class="pl-smi">CC</span>)</span> <span class="pl-s">$(<span class="pl-smi">CFLAGS</span>)</span> <span class="pl-c1">$^</span> -o <span class="pl-c1">$@</span>
+	<span class="pl-s">$(<span class="pl-smi">OBJCOPY</span>)</span> -O ihex <span class="pl-s">$(<span class="pl-smi">PROJECT_NAME</span>)</span>.elf <span class="pl-s">$(<span class="pl-smi">PROJECT_NAME</span>)</span>.hex
+	<span class="pl-s">$(<span class="pl-smi">OBJCOPY</span>)</span> -O binary <span class="pl-s">$(<span class="pl-smi">PROJECT_NAME</span>)</span>.elf <span class="pl-s">$(<span class="pl-smi">PROJECT_NAME</span>)</span>.bin
+
+<span class="pl-en">clean</span>:
+	rm -f <span class="pl-k">*</span>.o <span class="pl-s">$(<span class="pl-smi">PROJECT_NAME</span>)</span>.elf <span class="pl-s">$(<span class="pl-smi">PROJECT_NAME</span>)</span>.hex <span class="pl-s">$(<span class="pl-smi">PROJECT_NAME</span>)</span>.bin
+
+<span class="pl-en">flash</span>:proj
+	st-flash write <span class="pl-s">$(<span class="pl-smi">PROJECT_NAME</span>)</span>.bin Ox8000000
+	STM32_Programmer_CLI -c port=SWD -w <span class="pl-s">$(<span class="pl-smi">PROJECT_NAME</span>)</span>.hex 
+</pre></div>
+<p>将以上内容复制并保存为<code class="notranslate">Makefile</code>，将其放到<code class="notranslate">my_project</code>工程根目录下</p>
+<h1>3.编译前准备（重要！！！）</h1>
+<p>完成上面的步骤，恭喜你！已经成功了3/4...</p>
+<p>但在正式编译之前，你需要进行以下配置：</p>
+<p>1.将<code class="notranslate">my_project/lib/src</code>目录下的<code class="notranslate">stm32f4xx\_fmc.c</code>文件删除</p>
+<p>2.将<code class="notranslate">my_project/src</code>目录下的<code class="notranslate">stm32f4xx\_it.c</code>文件<strong>第25行</strong>的<strong>main.h头文件引用（#include "main.h"）注释(或删除)</strong>，<strong>137行的延时函数调用（TimingDelay_Decrement();）注释(或删除)</strong></p>
+<p>到这里你就可以通过<code class="notranslate">make</code>来成功编译构建项目啦～～～</p>
+<h3>也许有时候遭遇问题</h3>
+<p>也可能你完成了上面所有的设置，但是在进行<code class="notranslate">make</code>时依然遇到了错误，这时候你就可以通过下面的方法解决：</p>
+<ul>
+<li>将<code class="notranslate">my_project</code>目录下的<code class="notranslate">stm32\_flash.ld</code>链接文件的75行（也就是<code class="notranslate">} &gt;FLASH</code>这一行的上方）添加<code class="notranslate">_exit = .;</code>，否则编译会报错（<strong>注意：这是由于交叉编译器版本的问题</strong>）</li>
+</ul>
+<h1>4.去除警告（可选）</h1>
+<p>直到你兴致勃勃且成功地运行了<code class="notranslate">make</code>命令，可惜结果对于稍有洁癖的你来说简直不能容忍，因为出现了一堆警告信息：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">/Applications/ArmGNUToolchain/13.3.rel1/arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld: /Applications/ArmGNUToolchain/13.3.rel1/arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(libc_a-closer.o): <span class="pl-k">in</span> <span class="pl-k">function</span> <span class="pl-en">`_close_r':</span>
+closer.c:(.text._close_r+0xc): warning: _close is not implemented and will always fail
+/Applications/ArmGNUToolchain/13.3.rel1/arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld: /Applications/ArmGNUToolchain/13.3.rel1/arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(libc_a-lseekr.o): <span class="pl-k">in</span> <span class="pl-k">function</span> <span class="pl-en">`_lseek_r':</span>
+lseekr.c:(.text._lseek_r+0x14): warning: _lseek is not implemented and will always fail
+/Applications/ArmGNUToolchain/13.3.rel1/arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld: /Applications/ArmGNUToolchain/13.3.rel1/arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(libc_a-readr.o): <span class="pl-k">in</span> <span class="pl-k">function</span> <span class="pl-en">`_read_r':</span>
+readr.c:(.text._read_r+0x14): warning: _read is not implemented and will always fail
+/Applications/ArmGNUToolchain/13.3.rel1/arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld: /Applications/ArmGNUToolchain/13.3.rel1/arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/lib/thumb/v7e-m+fp/hard/libg.a(libc_a-writer.o): <span class="pl-k">in</span> <span class="pl-k">function</span> <span class="pl-en">`_write_r':</span>
+writer.c:(.text._write_r+0x14): warning: _write is not implemented and will always fail
+/Applications/ArmGNUToolchain/13.3.rel1/arm-none-eabi/bin/../lib/gcc/arm-none-eabi/13.3.1/../../../../arm-none-eabi/bin/ld: warning: out.elf has a LOAD segment with RWX permissions
+arm-none-eabi-objcopy -O ihex out.elf out.hex
+arm-none-eabi-objcopy -O binary out.elf out.bin</pre></div>
+<p>所以，有没有解决办法呢？当然有：</p>
+<p>在<code class="notranslate">my_project/src</code>目录下新建一个<code class="notranslate">syscalls.c</code>文件：</p>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">#include</span> <span class="pl-s">&lt;sys/types.h&gt;</span>  <span class="pl-c">// 包含必要的类型定义</span>
+
+<span class="pl-smi">int</span> <span class="pl-en">_close</span>(<span class="pl-smi">int</span> <span class="pl-s1">file</span>) {
+    <span class="pl-k">return</span> <span class="pl-c1">-1</span>;
+}
+
+<span class="pl-smi">int</span> <span class="pl-en">_lseek</span>(<span class="pl-smi">int</span> <span class="pl-s1">file</span>, <span class="pl-smi">int</span> <span class="pl-s1">ptr</span>, <span class="pl-smi">int</span> <span class="pl-s1">dir</span>) {
+    <span class="pl-k">return</span> <span class="pl-c1">-1</span>;
+}
+
+<span class="pl-smi">int</span> <span class="pl-en">_read</span>(<span class="pl-smi">int</span> <span class="pl-s1">file</span>, <span class="pl-smi">char</span> <span class="pl-c1">*</span><span class="pl-s1">ptr</span>, <span class="pl-smi">int</span> <span class="pl-s1">len</span>) {
+    <span class="pl-k">return</span> <span class="pl-c1">0</span>;
+}
+
+<span class="pl-smi">int</span> <span class="pl-en">_write</span>(<span class="pl-smi">int</span> <span class="pl-s1">file</span>, <span class="pl-smi">char</span> <span class="pl-c1">*</span><span class="pl-s1">ptr</span>, <span class="pl-smi">int</span> <span class="pl-s1">len</span>) {
+    <span class="pl-k">return</span> <span class="pl-s1">len</span>;
+}
+
+<span class="pl-smi">caddr_t</span> <span class="pl-en">_sbrk</span>(<span class="pl-smi">int</span> <span class="pl-s1">incr</span>) {
+    <span class="pl-k">extern</span> <span class="pl-smi">char</span> <span class="pl-s1">_end</span>;  <span class="pl-c">// 链接器脚本中定义的堆的起始位置</span>
+    <span class="pl-k">static</span> <span class="pl-smi">char</span> <span class="pl-c1">*</span><span class="pl-s1">heap_end</span>;
+    <span class="pl-smi">char</span> <span class="pl-c1">*</span><span class="pl-s1">prev_heap_end</span>;
+
+    <span class="pl-k">if</span> (<span class="pl-s1">heap_end</span> <span class="pl-c1">==</span> <span class="pl-c1">0</span>) {
+        <span class="pl-s1">heap_end</span> <span class="pl-c1">=</span> <span class="pl-c1">&amp;</span><span class="pl-s1">_end</span>;
+    }
+
+    <span class="pl-s1">prev_heap_end</span> <span class="pl-c1">=</span> <span class="pl-s1">heap_end</span>;
+    <span class="pl-s1">heap_end</span> <span class="pl-c1">+=</span> <span class="pl-s1">incr</span>;
+
+    <span class="pl-k">return</span> (<span class="pl-smi">caddr_t</span>)<span class="pl-s1">prev_heap_end</span>;
+}</pre></div>
+<p>再次执行 <code class="notranslate">make</code> 即可。</p></div>
+<div style="font-size:small;margin-top:8px;float:right;">要做一个有swag的人</div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://echozap.github.io">Ronan's Blog</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z', 'copy': 'M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z', 'check': 'M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z'};
+var utterancesLoad=0;
+
+console.log("\n %c Gmeek  https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const createClipboardHTML = (codeContent, additionalClasses = '') => `
+        <pre class="notranslate"><code class="notranslate">${codeContent}</code></pre>
+        <div class="clipboard-container position-absolute right-0 top-0 ${additionalClasses}">
+            <clipboard-copy class="ClipboardButton btn m-2 p-0" role="button" style="display: inherit;">
+                <svg height="16" width="16" class="octicon octicon-copy m-2"><path d="${IconList["copy"]}"></path></svg>
+                <svg height="16" width="16" class="octicon octicon-check color-fg-success m-2 d-none"><path d="${IconList["check"]}"></path></svg>
+            </clipboard-copy>
+            <div class="copy-feedback">Copied!</div>
+        </div>
+    `;
+
+    const handleCodeElements = (selector = '') => {
+        document.querySelectorAll(selector).forEach(codeElement => {
+            const codeContent = codeElement.innerHTML;
+            const newStructure = document.createElement('div');
+            newStructure.className = 'snippet-clipboard-content position-relative overflow-auto';
+            newStructure.innerHTML = createClipboardHTML(codeContent);
+
+            const parentElement = codeElement.parentElement;
+            if (selector.includes('highlight')) {
+                parentElement.insertBefore(newStructure, codeElement.nextSibling);
+                parentElement.removeChild(codeElement);
+            } else {
+                parentElement.parentElement.replaceChild(newStructure, parentElement);
+            }
+        });
+    };
+
+    handleCodeElements('pre.notranslate > code.notranslate');
+    handleCodeElements('div.highlight > pre.notranslate');
+
+    let currentFeedback = null;
+    document.querySelectorAll('clipboard-copy').forEach(copyButton => {
+        copyButton.addEventListener('click', () => {
+            const codeContent = copyButton.closest('.snippet-clipboard-content').innerText;
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = codeContent;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextArea);
+
+            const copyIcon = copyButton.querySelector('.octicon-copy');
+            const checkIcon = copyButton.querySelector('.octicon-check');
+            const copyFeedback = copyButton.nextElementSibling;
+
+            if (currentFeedback && currentFeedback !== copyFeedback) {currentFeedback.style.display = 'none';}
+            currentFeedback = copyFeedback;
+
+            copyIcon.classList.add('d-none');
+            checkIcon.classList.remove('d-none');
+            copyFeedback.style.display = 'block';
+            copyButton.style.borderColor = 'var(--color-success-fg)';
+
+            setTimeout(() => {
+                copyIcon.classList.remove('d-none');
+                checkIcon.classList.add('d-none');
+                copyFeedback.style.display = 'none';
+                copyButton.style.borderColor = '';
+            }, 2000);
+        });
+    });
+});
+
+</script>
+<script src='https://pub-43c06573bc27485093cd50efd04e9e7b.r2.dev/GmeekArticleTOC.js'></script><script src='https://pub-43c06573bc27485093cd50efd04e9e7b.r2.dev/Gmeeklightbox.js'></script><script>document.querySelectorAll('a').forEach(anchor => {const img = anchor.querySelector('img');if (img && img.hasAttribute('data-canonical-src')) {const canonicalSrc = img.getAttribute('data-canonical-src');anchor.setAttribute('href', canonicalSrc);img.setAttribute('src', canonicalSrc);img.removeAttribute('data-canonical-src');}});</script>
+
+</html>

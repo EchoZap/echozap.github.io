@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="github-light" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    <script src='https://pub-43c06573bc27485093cd50efd04e9e7b.r2.dev/GmeekRonanTheme.js'></script><script src='https://pub-43c06573bc27485093cd50efd04e9e7b.r2.dev/GmeekVercount.js'></script>
+    <link rel="icon" href="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg">
+<meta name="description" content="_该例使用 HG6145D 移动光猫（北京烽火终端）_
+
+# 1.获取超级账户和密码
+## 1.1 获取光猫 MAC 地址
+在终端输入：
+```shell
+arp -a
+```
+
+或者查看光猫背后名牌。">
+<meta property="og:title" content="光猫改桥接模式">
+<meta property="og:description" content="_该例使用 HG6145D 移动光猫（北京烽火终端）_
+
+# 1.获取超级账户和密码
+## 1.1 获取光猫 MAC 地址
+在终端输入：
+```shell
+arp -a
+```
+
+或者查看光猫背后名牌。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://echozap.github.io/post/guang-mao-gai-qiao-jie-mo-shi.html">
+<meta property="og:image" content="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg">
+<title>光猫改桥接模式</title>
+<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+.copy-feedback {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    color: var(--color-fg-on-emphasis);
+    background-color: var(--color-fg-muted);
+    border-radius: 3px;
+    padding: 5px 8px;
+    font-size: 12px;
+}
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">光猫改桥接模式</h1>
+<div class="title-right">
+    <a href="https://echozap.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题"style="display:none;">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><p><em>该例使用 HG6145D 移动光猫（北京烽火终端）</em></p>
+<h1>1.获取超级账户和密码</h1>
+<h2>1.1 获取光猫 MAC 地址</h2>
+<p>在终端输入：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">arp -a</pre></div>
+<p>或者查看光猫背后名牌。</p>
+<p>1.在输出结果中找到192.168.1.1对应的那一行的“物理地址”，这就是MAC地址，形如“ad-jb-26-73-48-c2”。选中后直接按Ctrl+C复制，再粘贴到记事本等文本工具中。<br>
+2.把记录的MAC地址全部全部转换为大写字母，并删除所有横杠（“-”），最终得到12位字符（大写字母和数字）的结果，形如“AFJB267348C2”。</p>
+<p><strong>注意：</strong><br>
+非Windows操作系统用类似方法查询到的MAC地址中的分隔符可能是冒号而不是横杠，且分隔符之间可能只有1位字符，如“C8:6J:12:3:48:C”，这时需要在所有的1位字符前手动补上一个数字0。总之，最终的结果是一串12位的大写字母和数字。</p>
+<h2>1.2 开启光猫Telnet</h2>
+<p>在浏览器地址栏输入如下URL，记得在末尾添加刚才得到的经过转换的12位MAC地址（无需引号）。</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">http:/192.168.1.1/cgi-bin/telnetenable.cgi<span class="pl-k">?</span>telnetenable=1<span class="pl-k">&amp;</span>key=“12位大写字母和数字”</pre></div>
+<p>输入的最终URL形如：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">http:/192.168.1.1/cgi-bin/telnetenable.cgi<span class="pl-k">?</span>telnetenable=1<span class="pl-k">&amp;</span>key=AFJB267348C2</pre></div>
+<p>输入完成后按下回车访问该URL，应该看到“Telenet开启”的提示。若提示错误，请检查输入的url和转换后的MAC地址是否正确。</p>
+<blockquote>
+<p>如遭遇错误， mac 地址如果尾数是0，要加1。</p>
+</blockquote>
+<hr>
+<h1>2.通过Telnet获取超级账户名和密码</h1>
+<blockquote>
+<p>如果使用 windows ，可能需要提前开启 telnet 功能：<br>
+打开开始菜单，搜索“启用或关闭”，在结果中找到“启用或关闭 Windows 功能”并打开，勾选“Telnet客户端”后确定，等待Windows完成Telnet功能的开启。<br>
+<a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/dac89e6873f63ff593505d6d41d8406b636c2c7e0fb8684dbecb276af7da6965/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f77696e646f77735f74656c6e65742e706e67"><img src="https://camo.githubusercontent.com/dac89e6873f63ff593505d6d41d8406b636c2c7e0fb8684dbecb276af7da6965/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f77696e646f77735f74656c6e65742e706e67" alt="windows_telnet" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/windows_telnet.png" style="max-width: 100%;"></a></p>
+</blockquote>
+<p>在终端输入并回车以下内容并回车：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">telnet 192.168.1.1</pre></div>
+<p>界面会显示“login:”字样。在其后面输入以下内容并回车：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">admin</pre></div>
+<p>1.界面会显示“password:”。在其后输入密码，密码为“Fh@”加上刚才转换的MAC地址的后6位，形如“Fh@7348C2”。注意MAC地址的字母在这里同样要大写，且密码输入界面不会显示输入的情况，需要盲打。密码输入完成后回车。<br>
+2.界面会显示一个“#”或“$”符号。这时输入如下内容（每输入一行就回车）：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">load_cli factory
+show admin_name
+show admin_pwd</pre></div>
+<p>得到的结果如下图所示，其中“admin_name=”后面接上的就是超级账户，“admin_pwd=”后面接上的就是超级密码，注意账户名和密码都区分大小写。<br>
+<a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/9c50a074113b3f7c4845d2fcd1e47179ec4cd4377149f4c9f5691232147c45f4/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f254537254137254242254535253841254138254535253835253839254537253843254142484736313435442545382542362538352545372542412541372545372539342541382545362538382542372545382542342541362545352538462542372e706e67"><img src="https://camo.githubusercontent.com/9c50a074113b3f7c4845d2fcd1e47179ec4cd4377149f4c9f5691232147c45f4/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f254537254137254242254535253841254138254535253835253839254537253843254142484736313435442545382542362538352545372542412541372545372539342541382545362538382542372545382542342541362545352538462542372e706e67" alt="su" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/%E7%A7%BB%E5%8A%A8%E5%85%89%E7%8C%ABHG6145D%E8%B6%85%E7%BA%A7%E7%94%A8%E6%88%B7%E8%B4%A6%E5%8F%B7.png" style="max-width: 100%;"></a></p>
+<hr>
+<h1>3.获取宽带账户名和密码</h1>
+<blockquote>
+<p><g-emoji class="g-emoji" alias="warning">⚠️</g-emoji>在没有明确获取宽带账号和密码前，请别急着把光猫改桥接，因为没有宽带账号和密码就无法在路由器拨号上网。后续要找回宽带账号密码比较麻烦。</p>
+</blockquote>
+<p>在安装宽带时，师傅可能只会提供宽带账户名而不告诉宽带密码（理由可能是“现在都是自动下发的”、“我们也不知道”等等）。而更改光猫为桥接后需要在路由器手动拨号上网，这就需要知道宽带密码。可以尝试询问中国移动的宽带客服获取密码，但在拥有光猫的超级账户之后，不用联系客服也能找到记录在光猫中的宽带密码。</p>
+<p>1.在浏览器地址栏输入 <code class="notranslate">192.168.1.1</code> （不同光猫可能地址不同，具体请查看其背后铭牌）并回车，然后用刚才获取到的超级账户登录光猫管理后台。</p>
+<p>2.切换到“网络-宽带设置“页面。首先查看 “连接模式” 的模式和 “业务类型” 的类型，如果是 <code class="notranslate">路由</code>、 <code class="notranslate">管理</code>且处于不能编辑状态，则在 “连接名称” 一个一个切换，直到看到 “连接模式” 中的路由可以编辑以及 “业务类型” 中的类型是 <code class="notranslate">上网</code> ，此时的 “封装类型” 应该是 <code class="notranslate">PPPoE</code> ，宽带用户名和密码输入框会显示在当前界面。<br>
+<a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/64426f6473360e83afa05fb46036db2e8f074fe9ddf3fa66f27cc43173eef867/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f2545352538352538392545372538432541422545362541312541352545362538452541352545362541382541312545352542432538462545382541452542452545372542442541452e706e67"><img src="https://camo.githubusercontent.com/64426f6473360e83afa05fb46036db2e8f074fe9ddf3fa66f27cc43173eef867/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f2545352538352538392545372538432541422545362541312541352545362538452541352545362541382541312545352542432538462545382541452542452545372542442541452e706e67" alt="img" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/%E5%85%89%E7%8C%AB%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E8%AE%BE%E7%BD%AE.png" style="max-width: 100%;"></a></p>
+<p>3.在宽带设置页面，打开浏览器的开发者工具-检查。右键网页然后选择“检查”。总之，确保检查功能为启用状态。把鼠标指向密码输入框，“元素”窗口会出现形如的内容。</p>
+<p>4.在 “检查-元素” 窗口中双击这段内容的type=“password”部分，进入编辑状态，将password改为text。这时，宽带密码将明文显示出来。务必在此时记下宽带账户和密码，否则后续光猫改为桥接后会丢失这些信息。</p>
+<hr>
+<h1>4.更改光猫为桥接模式</h1>
+<p>记下宽带账号密码后，同样在”网络-宽带设置“页面，就可以把”连接模式“从”路由“改为”桥接”了。随后，滚动到页面底部保存修改并退出光猫管理后台。最后，重启光猫即可让桥接模式生效。</p>
+<blockquote>
+<p>若要使光猫在桥接模式下正常工作，有的地区还需要删除”连接名称”里包含”vlan69“或”TR069“的项目，具体方法看下一节。</p>
+</blockquote>
+<hr>
+<h1>5.删除TR069-摆脱运营商对你的光猫控制</h1>
+<h2>5.1 什么是TR069？</h2>
+<p>TR069是 CPE 和 ACS之间沟通的通讯协定。CPE 可以借着这个协定完成服务开通、功能设定、档案上传下载、系统检测 等等初始化及营运管理的必须动作。简单来说你的运营商通过这个东西远程控制你的光猫进行修改，业务下发。</p>
+<h2>5.2 如何删除？</h2>
+<p>通过 <code class="notranslate">超级用户</code> 登录你的光猫后台（一般地址是192.168.1.1）<br>
+打开 “网络-宽带设置-Internet连接“”<br>
+找到 “连接名称” 是 <code class="notranslate">tr069</code> 的项（如果删除按钮可以直接点）<br>
+右键网页然后选择“检查”<br>
+再点击那个不能按的删除键<br>
+找到有阴影选中的那一项<br>
+右键-编辑为HTML，将 <code class="notranslate">disabled</code> 删除<br>
+现在你就发现删除按钮可以点了。那么将其删除。</p>
+<p>至此，你已经摆脱了运营商对你的光猫控制。</p></div>
+<div style="font-size:small;margin-top:8px;float:right;">要做一个有swag的人</div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://echozap.github.io">Ronan's Blog</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z', 'copy': 'M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z', 'check': 'M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z'};
+var utterancesLoad=0;
+
+console.log("\n %c Gmeek  https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const createClipboardHTML = (codeContent, additionalClasses = '') => `
+        <pre class="notranslate"><code class="notranslate">${codeContent}</code></pre>
+        <div class="clipboard-container position-absolute right-0 top-0 ${additionalClasses}">
+            <clipboard-copy class="ClipboardButton btn m-2 p-0" role="button" style="display: inherit;">
+                <svg height="16" width="16" class="octicon octicon-copy m-2"><path d="${IconList["copy"]}"></path></svg>
+                <svg height="16" width="16" class="octicon octicon-check color-fg-success m-2 d-none"><path d="${IconList["check"]}"></path></svg>
+            </clipboard-copy>
+            <div class="copy-feedback">Copied!</div>
+        </div>
+    `;
+
+    const handleCodeElements = (selector = '') => {
+        document.querySelectorAll(selector).forEach(codeElement => {
+            const codeContent = codeElement.innerHTML;
+            const newStructure = document.createElement('div');
+            newStructure.className = 'snippet-clipboard-content position-relative overflow-auto';
+            newStructure.innerHTML = createClipboardHTML(codeContent);
+
+            const parentElement = codeElement.parentElement;
+            if (selector.includes('highlight')) {
+                parentElement.insertBefore(newStructure, codeElement.nextSibling);
+                parentElement.removeChild(codeElement);
+            } else {
+                parentElement.parentElement.replaceChild(newStructure, parentElement);
+            }
+        });
+    };
+
+    handleCodeElements('pre.notranslate > code.notranslate');
+    handleCodeElements('div.highlight > pre.notranslate');
+
+    let currentFeedback = null;
+    document.querySelectorAll('clipboard-copy').forEach(copyButton => {
+        copyButton.addEventListener('click', () => {
+            const codeContent = copyButton.closest('.snippet-clipboard-content').innerText;
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = codeContent;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextArea);
+
+            const copyIcon = copyButton.querySelector('.octicon-copy');
+            const checkIcon = copyButton.querySelector('.octicon-check');
+            const copyFeedback = copyButton.nextElementSibling;
+
+            if (currentFeedback && currentFeedback !== copyFeedback) {currentFeedback.style.display = 'none';}
+            currentFeedback = copyFeedback;
+
+            copyIcon.classList.add('d-none');
+            checkIcon.classList.remove('d-none');
+            copyFeedback.style.display = 'block';
+            copyButton.style.borderColor = 'var(--color-success-fg)';
+
+            setTimeout(() => {
+                copyIcon.classList.remove('d-none');
+                checkIcon.classList.add('d-none');
+                copyFeedback.style.display = 'none';
+                copyButton.style.borderColor = '';
+            }, 2000);
+        });
+    });
+});
+
+</script>
+<script src='https://pub-43c06573bc27485093cd50efd04e9e7b.r2.dev/GmeekArticleTOC.js'></script><script src='https://pub-43c06573bc27485093cd50efd04e9e7b.r2.dev/Gmeeklightbox.js'></script><script>document.querySelectorAll('a').forEach(anchor => {const img = anchor.querySelector('img');if (img && img.hasAttribute('data-canonical-src')) {const canonicalSrc = img.getAttribute('data-canonical-src');anchor.setAttribute('href', canonicalSrc);img.setAttribute('src', canonicalSrc);img.removeAttribute('data-canonical-src');}});</script>
+
+</html>

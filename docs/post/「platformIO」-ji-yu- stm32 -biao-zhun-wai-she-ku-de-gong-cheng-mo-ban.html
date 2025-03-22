@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="github-light" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    <script src='https://pub-43c06573bc27485093cd50efd04e9e7b.r2.dev/GmeekRonanTheme.js'></script><script src='https://pub-43c06573bc27485093cd50efd04e9e7b.r2.dev/GmeekVercount.js'></script>
+    <link rel="icon" href="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg">
+<meta name="description" content="> 本教程默认用户已经安装好 vscode 和 platformIO ！！！
+
+# 1.下载官方标准外设库
+
+进入 [ST 官网的嵌入式软件板块](https://www.st.com.cn/zh/embedded-software/stm32-standard-peripheral-libraries.html) ，根据自身板子型号选择，有F0-F4多种型号。">
+<meta property="og:title" content="「platformIO」基于 stm32 标准外设库的工程模板">
+<meta property="og:description" content="> 本教程默认用户已经安装好 vscode 和 platformIO ！！！
+
+# 1.下载官方标准外设库
+
+进入 [ST 官网的嵌入式软件板块](https://www.st.com.cn/zh/embedded-software/stm32-standard-peripheral-libraries.html) ，根据自身板子型号选择，有F0-F4多种型号。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://echozap.github.io/post/%E3%80%8CplatformIO%E3%80%8D-ji-yu-%20stm32%20-biao-zhun-wai-she-ku-de-gong-cheng-mo-ban.html">
+<meta property="og:image" content="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg">
+<title>「platformIO」基于 stm32 标准外设库的工程模板</title>
+<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+.copy-feedback {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    color: var(--color-fg-on-emphasis);
+    background-color: var(--color-fg-muted);
+    border-radius: 3px;
+    padding: 5px 8px;
+    font-size: 12px;
+}
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">「platformIO」基于 stm32 标准外设库的工程模板</h1>
+<div class="title-right">
+    <a href="https://echozap.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题"style="display:none;">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><blockquote>
+<p>本教程默认用户已经安装好 vscode 和 platformIO ！！！</p>
+</blockquote>
+<h1>1.下载官方标准外设库</h1>
+<p>进入 <a href="https://www.st.com.cn/zh/embedded-software/stm32-standard-peripheral-libraries.html" rel="nofollow">ST 官网的嵌入式软件板块</a> ，根据自身板子型号选择，有F0-F4多种型号。</p>
+<p>之后根据提示选择下载即可，如果没有意外的话，应该会获得一个类似 <strong>en.stsw-stm32065_v1-9-0.zip(这是 F4 的标准库)</strong> 的压缩包。</p>
+<h1>2.在 platformIO 新建一个 CMSIS 工程</h1>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/6c6a9946956cd0142f58c77ffc04c95e76edeee7461c1fb53f6c4bc150568339/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f50494f70726f6a656374312e706e67"><img src="https://camo.githubusercontent.com/6c6a9946956cd0142f58c77ffc04c95e76edeee7461c1fb53f6c4bc150568339/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f50494f70726f6a656374312e706e67" alt="NO1" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/PIOproject1.png" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/14eeae05fa8f510aeb2c7ab6323d019121c60fe47b2742d8a2d8d25d4f1a3566/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f50494f70726f6a656374322e706e67"><img src="https://camo.githubusercontent.com/14eeae05fa8f510aeb2c7ab6323d019121c60fe47b2742d8a2d8d25d4f1a3566/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f50494f70726f6a656374322e706e67" alt="NO2" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/PIOproject2.png" style="max-width: 100%;"></a></p>
+<p>工程建立成功之后，应该是下面这样：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">TT
+├── include
+│   └── README
+├── lib
+│   └── README
+├── platformio.ini
+├── src
+└── <span class="pl-c1">test</span>
+    └── README</pre></div>
+<h1>3.导入标准库文件并配置工程</h1>
+<h3>3.1导入标准库文件</h3>
+<p>1.解压从官网下载的标准外设库 <strong>en.stsw-stm32065_v1-9-0.zip</strong> ，获得一个 <strong>STM32F4xx_DSP_StdPeriph_Lib_V1.9.0</strong> 目录</p>
+<p>2.在 platformIO 工程的 include 目录中新建一个 main.h：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span>include "stm32f4xx.h"</span></pre></div>
+<p>包含头文件根据开发板型号而定。</p>
+<p>3.打开 <strong>.../STM32F4xx_DSP_StdPeriph_Lib_V1.9.0/Libraries/CMSIS/Device/ST/STM32F4xx<br>
+/Include</strong> ，将其中的 <code class="notranslate">stm32f4xx.h</code> 、<code class="notranslate">system_stm32f4xx.h</code>复制到 platform 工程的 include 目录下。</p>
+<p>4.打开 <strong>.../STM32F4xx_DSP_StdPeriph_Lib_V1.9.0/Project/<br>
+STM32F4xx_StdPeriph_Templates</strong>，将其中的<code class="notranslate">stm32f4xx_it.h</code>、<code class="notranslate">stm32f4xx_conf.h</code>复制到 platform 工程的 include 目录下；将<code class="notranslate">stm32f4xx_it.c</code>复制到 platform 工程的 src 目录中。</p>
+<p>5.将 <strong>.../STM32F4xx_DSP_StdPeriph_Lib_V1.9.0/Libraries/<br>
+STM32F4xx_StdPeriph_Driver</strong> 整个目录复制到 platform 工程的 src 目录中。</p>
+<p>最后，不出意外你会获得以下工程：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">├── include
+│   ├── README
+│   ├── main.h
+│   ├── stm32f4xx.h
+│   ├── stm32f4xx_conf.h
+│   ├── stm32f4xx_it.h
+│   └── system_stm32f4xx.h
+├── lib
+│   └── README
+├── platformio.ini
+├── src
+│   ├── STM32F4xx_StdPeriph_Driver
+│   │   ├── inc
+│   │   │   ├── .......
+│   │   └── src
+│   │       ├── .......
+│   ├── main.c
+│   └── stm32f4xx_it.c
+└── <span class="pl-c1">test</span>
+    └── README</pre></div>
+<h3>3.2配置 platform.ini</h3>
+<p>打开工程根目录下的 platform.ini 文件，初始版本应该是：</p>
+<div class="highlight highlight-source-ini"><pre class="notranslate"><span class="pl-en">[env:black_f407ze]</span>
+<span class="pl-k">platform</span> = ststm32
+<span class="pl-k">board</span> = black_f407ze
+<span class="pl-k">framework</span> = cmsis</pre></div>
+<p>我们需要添加几项设置（有能力的可自行配置，小白照抄即可），所以最终版 ini 文件是：</p>
+<div class="highlight highlight-source-ini"><pre class="notranslate"><span class="pl-c"><span class="pl-c">;</span> PlatformIO Project Configuration File</span>
+<span class="pl-c"><span class="pl-c">;</span></span>
+<span class="pl-c"><span class="pl-c">;</span>   Build options: build flags, source filter</span>
+<span class="pl-c"><span class="pl-c">;</span>   Upload options: custom upload port, speed and extra flags</span>
+<span class="pl-c"><span class="pl-c">;</span>   Library options: dependencies, extra library storages</span>
+<span class="pl-c"><span class="pl-c">;</span>   Advanced options: extra scripting</span>
+<span class="pl-c"><span class="pl-c">;</span></span>
+<span class="pl-c"><span class="pl-c">;</span> Please visit documentation for the other options and examples</span>
+<span class="pl-c"><span class="pl-c">;</span> https://docs.platformio.org/page/projectconf.html</span>
+
+<span class="pl-en">[env:black_f407ze]</span>
+<span class="pl-k">platform</span> = ststm32
+<span class="pl-k">board</span> = black_f407ze
+<span class="pl-k">framework</span> = cmsis
+
+<span class="pl-c"><span class="pl-c">;</span> 这里配置调试方式是 jlink</span>
+<span class="pl-k">upload_protocol</span> = jlink
+
+<span class="pl-c"><span class="pl-c">;</span> 这里配置头文件搜索路径，后面的 —D 则是全局定义一些配置，具体可以在 stm32f4xx.h 查询，这里照抄即可，有能力的可以自行配置</span>
+<span class="pl-k">build_flags</span> =
+    -Iinclude
+    -Isrc/STM32F4xx_StdPeriph_Driver/inc
+    -D USE_STDPERIPH_DRIVER
+    -D STM32F40XX</pre></div>
+<h1>4.问题解决</h1>
+<h3>4.1常见问题</h3>
+<p>然后我们兴致勃勃地点击 <strong>编译 build</strong> ，不出意外，你会收到以下错误：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">compiling stm32f4xx_fmc.c...
+..<span class="pl-cce">\.</span>.<span class="pl-cce">\C</span>odeFile<span class="pl-cce">\B</span>sp<span class="pl-cce">\s</span>tm32f4xx_fmc.c(144): error:  <span class="pl-c"><span class="pl-c">#</span>20: identifier "FMC_Bank1" is undefined</span>
+      FMC_Bank1-<span class="pl-k">&gt;</span>BTCR[FMC_Bank] = 0x000030DB<span class="pl-k">;</span>
+..<span class="pl-cce">\.</span>.<span class="pl-cce">\C</span>odeFile<span class="pl-cce">\B</span>sp<span class="pl-cce">\s</span>tm32f4xx_fmc.c(149): error:  <span class="pl-c"><span class="pl-c">#</span>20: identifier "FMC_Bank1" is undefined</span>
+      FMC_Bank1-<span class="pl-k">&gt;</span>BTCR[FMC_Bank] = 0x000030D2<span class="pl-k">;</span>
+      tmpbwr = FMC_Bank1E-<span class="pl-k">&gt;</span>BWTR[FMC_NORSRAMInitStruct-<span class="pl-k">&gt;</span>FMC_Bank]<span class="pl-k">;</span>
+..<span class="pl-cce">\.</span>.<span class="pl-cce">\C</span>odeFile<span class="pl-cce">\B</span>sp<span class="pl-cce">\s</span>tm32f4xx_fmc.c(256): error:  <span class="pl-c"><span class="pl-c">#</span>20: identifier "FMC_BWTR1_ADDSET" is undefined</span>
+                             FMC_BWTR1_BUSTURN <span class="pl-k">|</span> FMC_BWTR1_ACCMOD))<span class="pl-k">;</span>
+..<span class="pl-cce">\.</span>.<span class="pl-cce">\C</span>odeFile<span class="pl-cce">\B</span>sp<span class="pl-cce">\s</span>tm32f4xx_fmc.c(269): error:  <span class="pl-c"><span class="pl-c">#</span>20: identifier "FMC_Bank1E" is undefined</span>
+      FMC_Bank1E-<span class="pl-k">&gt;</span>BWTR[FMC_NORSRAMInitStruct-<span class="pl-k">&gt;</span>FMC_Bank] = 0x0FFFFFFF<span class="pl-k">;</span>
+..<span class="pl-cce">\.</span>.<span class="pl-cce">\C</span>odeFile<span class="pl-cce">\B</span>sp<span class="pl-cce">\s</span>tm32f4xx_fmc.c(326): error:  <span class="pl-c"><span class="pl-c">#</span>20: identifier "FMC_Bank1" is undefined</span>
+      FMC_Bank1-<span class="pl-k">&gt;</span>BTCR[FMC_Bank] <span class="pl-k">&amp;</span>= BCR_MBKEN_RESET<span class="pl-k">;</span>
+..<span class="pl-cce">\.</span>.<span class="pl-cce">\C</span>odeFile<span class="pl-cce">\B</span>sp<span class="pl-cce">\s</span>tm32f4xx_fmc.c(394): error:  <span class="pl-c"><span class="pl-c">#</span>20: identifier "FMC_Bank2" is undefined</span>
+      FMC_Bank2-<span class="pl-k">&gt;</span>PCR2 = 0x00000018<span class="pl-k">;</span>
+..<span class="pl-cce">\.</span>.<span class="pl-cce">\C</span>odeFile<span class="pl-cce">\B</span>sp<span class="pl-cce">\s</span>tm32f4xx_fmc.c: 0 warnings, 30 errors
+compiling stm32f4xx_fsmc.c...
+</pre></div>
+<ul>
+<li>原因：<br>
+stm32f4xx_fmc.c是固件库中的一个外设，仅作用于STM32F429_439xx、STM32F446xx、STM32F469_479xx、STM32F427_437xx系列的芯片，（本例中是使用的是 STM32F407ZE，不在该范围内，所以不需要引用这个文件）如果不是这些芯片的话将不会引用stm32f4xx_fmc.h这个头文件，也就产生了宏没有定义的问题。</li>
+<li>解决方法：<br>
+将 <code class="notranslate">TT/src/STM32F4xx_StdPeriph_Driver/src/stm32f4xx_fmc.c</code> 文件删除，然后依次点击 clean -&gt; build</li>
+</ul>
+<h3>4.2不怎么常见的问题（未按本教程操作）</h3>
+<p>有些网络教程会让你把 system_stm32f4xx.c 也放到工程的 src 目录中，然后你就会遇到：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">Verbose mode can be enabled via <span class="pl-s"><span class="pl-pds">`</span>-v, --verbose<span class="pl-pds">`</span></span> option
+CONFIGURATION: https://docs.platformio.org/page/boards/ststm32/genericSTM32F103ZE.html
+PLATFORM: ST STM32 (8.1.0) <span class="pl-k">&gt;</span> STM32F103ZE (64k RAM. 512k Flash)
+HARDWARE: STM32F103ZET6 72MHz, 64KB RAM, 512KB Flash
+DEBUG: Current (jlink) External (blackmagic, jlink, stlink)
+PACKAGES:
+ - framework-cmsis 2.50501.200527 (5.5.1)
+ - framework-cmsis-stm32f1 4.3.1
+ - tool-ldscripts-ststm32 0.1.0
+ - toolchain-gccarmnoneeabi 1.70201.0 (7.2.1)
+LDF: Library Dependency Finder -<span class="pl-k">&gt;</span> http://bit.ly/configure-pio-ldf
+LDF Modes: Finder <span class="pl-k">~</span> chain, Compatibility <span class="pl-k">~</span> soft
+Found 0 compatible libraries
+Scanning dependencies...
+No dependencies
+Building <span class="pl-k">in</span> debug mode
+...
+Compiling .pio/build/genericSTM32F103ZE/FrameworkCMSIS/gcc/startup_stm32f103xe.o
+Compiling .pio/build/genericSTM32F103ZE/src/STM32F10x_FWLib/src/stm32f10x_usart.o
+Compiling .pio/build/genericSTM32F103ZE/src/STM32F10x_FWLib/src/stm32f10x_wwdg.o
+Compiling .pio/build/genericSTM32F103ZE/src/SYSTEM/delay/delay.o
+Compiling .pio/build/genericSTM32F103ZE/src/SYSTEM/sys/sys.o
+Compiling .pio/build/genericSTM32F103ZE/src/SYSTEM/usart/usart.o
+Compiling .pio/build/genericSTM32F103ZE/src/main.o
+Compiling .pio/build/genericSTM32F103ZE/src/stm32f10x_it.o
+Compiling .pio/build/genericSTM32F103ZE/src/system_stm32f10x.o
+...
+src/SYSTEM/usart/usart.c:38:0: warning: ignoring <span class="pl-c"><span class="pl-c">#</span>pragma import  [-Wunknown-pragmas]</span>
+ <span class="pl-c"><span class="pl-c">#</span>pragma import(__use_no_semihosting)</span>
+
+Linking .pio/build/genericSTM32F103ZE/firmware.elf
+.pio/build/genericSTM32F103ZE/src/system_stm32f10x.o: In <span class="pl-k">function</span> <span class="pl-en">`SystemInit':</span>
+/media/XXX/LINUX2/CLionProjects/untitled2/src/system_stm32f10x.c:213: multiple definition of <span class="pl-s"><span class="pl-pds">`</span>SystemInit<span class="pl-s"><span class="pl-pds">'</span></span></span>
+<span class="pl-s"><span class="pl-s">.pio/build/genericSTM32F103ZE/FrameworkCMSIS/system_stm32f1xx.o:/home/XXX/.platformio/packages/framework-cmsis-stm32f1/Source/Templates/system_stm32f1xx.c:161: first defined here</span></span>
+<span class="pl-s"><span class="pl-s">.pio/build/genericSTM32F103ZE/src/system_stm32f10x.o: In function `SystemCoreClockUpdate<span class="pl-pds">'</span></span>:</span>
+<span class="pl-s">/media/XXX/LINUX2/CLionProjects/untitled2/src/system_stm32f10x.c:319: multiple definition of <span class="pl-pds">`</span></span>SystemCoreClockUpdate<span class="pl-s"><span class="pl-pds">'</span></span>
+<span class="pl-s">.pio/build/genericSTM32F103ZE/FrameworkCMSIS/system_stm32f1xx.o:/home/XXX/.platformio/packages/framework-cmsis-stm32f1/Source/Templates/system_stm32f1xx.c:260: first defined here</span>
+<span class="pl-s">.pio/build/genericSTM32F103ZE/src/system_stm32f10x.o:/media/XXX/LINUX2/CLionProjects/untitled2/src/system_stm32f10x.c:167: multiple definition of `AHBPrescTable<span class="pl-pds">'</span></span>
+.pio/build/genericSTM32F103ZE/FrameworkCMSIS/system_stm32f1xx.o:(.rodata.AHBPrescTable+0x0): first defined here
+.pio/build/genericSTM32F103ZE/src/system_stm32f10x.o:(.data.SystemCoreClock+0x0): multiple definition of <span class="pl-s"><span class="pl-pds">`</span>SystemCoreClock<span class="pl-s"><span class="pl-pds">'</span></span></span>
+<span class="pl-s"><span class="pl-s">.pio/build/genericSTM32F103ZE/FrameworkCMSIS/system_stm32f1xx.o:(.data.SystemCoreClock+0x0): first defined here</span></span>
+<span class="pl-s"><span class="pl-s"></span></span>
+<span class="pl-s"><span class="pl-s"></span></span>
+<span class="pl-s"><span class="pl-s"># 不知道错了什么</span></span>
+<span class="pl-s"><span class="pl-s">collect2: error: ld returned 1 exit status</span></span>
+<span class="pl-s"><span class="pl-s">*** [.pio/build/genericSTM32F103ZE/firmware.elf] Error 1</span></span>
+<span class="pl-s"><span class="pl-s"> [FAILED] Took 2.61 seconds</span></span>
+<span class="pl-s"><span class="pl-s">make[3]: *** [CMakeFiles/Debug.dir/build.make:77：CMakeFiles/Debug] 错误 1</span></span>
+<span class="pl-s"><span class="pl-s">make[2]: *** [CMakeFiles/Makefile2:127：CMakeFiles/Debug.dir/all] 错误 2</span></span>
+<span class="pl-s"><span class="pl-s">make[1]: *** [CMakeFiles/Makefile2:134：CMakeFiles/Debug.dir/rule] 错误 2</span></span>
+<span class="pl-s"><span class="pl-s">make: *** [Makefile:151：Debug] 错误 2</span></span>
+<span class="pl-s"><span class="pl-s"></span></span></pre></div>
+<ul>
+<li>解决方法：<br>
+把该文件删除，之后 clean -&gt; bulid</li>
+</ul>
+<h1>5.程序烧录</h1>
+<p>以STM32芯片程序烧写为例，最基础的方法是通过串口烧写，目前大部分烧写工具都是通过串口连接后使用.hex文件烧写，由于PlatformIO编译默认生成的是.bin和.elf文件，如果我们需要用hex文件通过其他烧写工具烧写的话需要使用一个python脚本将.elf文件转换为.hex文件。</p>
+<p>当然PlatformIO本身也支持串口烧写，所以我们一个一个来讲。</p>
+<h3>5.1生成 hex 文件</h3>
+<p>我们在项目的根目录下（和<code class="notranslate">platformio.ini</code>文件同级）新建一个<code class="notranslate">export_hex.py</code>，内容如下：</p>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-en">Import</span>(<span class="pl-s">"env"</span>)
+ 
+<span class="pl-c"># # Custom HEX from ELF</span>
+ 
+<span class="pl-s1">env</span>.<span class="pl-c1">AddPostAction</span>(
+ 
+    <span class="pl-s">"$BUILD_DIR/${PROGNAME}.elf"</span>,
+ 
+    <span class="pl-s1">env</span>.<span class="pl-c1">VerboseAction</span>(<span class="pl-s">" "</span>.<span class="pl-c1">join</span>([
+ 
+        <span class="pl-s">"$OBJCOPY"</span>, <span class="pl-s">"-O"</span>, <span class="pl-s">"ihex"</span>, <span class="pl-s">"-R"</span>, <span class="pl-s">".eeprom"</span>,
+ 
+        <span class="pl-s">'"$BUILD_DIR/${PROGNAME}.elf"'</span>, <span class="pl-s">'"$BUILD_DIR/${PROGNAME}.hex"'</span>  <span class="pl-c"># 加个单引号</span>
+ 
+    ]), <span class="pl-s">"Building $BUILD_DIR/${PROGNAME}.hex"</span>)
+ 
+)</pre></div>
+<p>然后在platformio.ini文件里添加一行<code class="notranslate">extra_scripts = export_hex.py</code>，使其在每次编译后运行一遍这个脚本。</p>
+<p>至此，重新编译后，就会在<code class="notranslate">.pio/build/&lt;你的嵌入式芯片型号&gt;/</code>目录下多生成一个<code class="notranslate">firmware.hex</code>程序，然后打开其他烧写程序工具，选择这个程序就可以成功烧写了。</p>
+<h3>5.2 PlatformIO程序烧写</h3>
+<p>platformIO在有串口接入的情况下默认使用的是串口烧写程序，但是出于严谨和方便维护的情况下，严格的配置方式是在<code class="notranslate">platformio.ini</code>文件中配置烧写方式为串口(<code class="notranslate">upload_protocol = serial</code>)。</p>
+<p>点击编译按钮隔壁的”Upload”按钮，platformIO就会开始自动寻找对应的COM口，并自动烧写。</p>
+<p>以STM32为例，platformIO使用的是它下载下来的stm32flash工具烧写的，如果需要自定义的话，可以将upload_protocol设为custom，并自定义烧写命令。</p>
+<p>至此，实现串口烧写程序。</p></div>
+<div style="font-size:small;margin-top:8px;float:right;">要做一个有swag的人</div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://echozap.github.io">Ronan's Blog</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z', 'copy': 'M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z', 'check': 'M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z'};
+var utterancesLoad=0;
+
+console.log("\n %c Gmeek  https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const createClipboardHTML = (codeContent, additionalClasses = '') => `
+        <pre class="notranslate"><code class="notranslate">${codeContent}</code></pre>
+        <div class="clipboard-container position-absolute right-0 top-0 ${additionalClasses}">
+            <clipboard-copy class="ClipboardButton btn m-2 p-0" role="button" style="display: inherit;">
+                <svg height="16" width="16" class="octicon octicon-copy m-2"><path d="${IconList["copy"]}"></path></svg>
+                <svg height="16" width="16" class="octicon octicon-check color-fg-success m-2 d-none"><path d="${IconList["check"]}"></path></svg>
+            </clipboard-copy>
+            <div class="copy-feedback">Copied!</div>
+        </div>
+    `;
+
+    const handleCodeElements = (selector = '') => {
+        document.querySelectorAll(selector).forEach(codeElement => {
+            const codeContent = codeElement.innerHTML;
+            const newStructure = document.createElement('div');
+            newStructure.className = 'snippet-clipboard-content position-relative overflow-auto';
+            newStructure.innerHTML = createClipboardHTML(codeContent);
+
+            const parentElement = codeElement.parentElement;
+            if (selector.includes('highlight')) {
+                parentElement.insertBefore(newStructure, codeElement.nextSibling);
+                parentElement.removeChild(codeElement);
+            } else {
+                parentElement.parentElement.replaceChild(newStructure, parentElement);
+            }
+        });
+    };
+
+    handleCodeElements('pre.notranslate > code.notranslate');
+    handleCodeElements('div.highlight > pre.notranslate');
+
+    let currentFeedback = null;
+    document.querySelectorAll('clipboard-copy').forEach(copyButton => {
+        copyButton.addEventListener('click', () => {
+            const codeContent = copyButton.closest('.snippet-clipboard-content').innerText;
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = codeContent;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextArea);
+
+            const copyIcon = copyButton.querySelector('.octicon-copy');
+            const checkIcon = copyButton.querySelector('.octicon-check');
+            const copyFeedback = copyButton.nextElementSibling;
+
+            if (currentFeedback && currentFeedback !== copyFeedback) {currentFeedback.style.display = 'none';}
+            currentFeedback = copyFeedback;
+
+            copyIcon.classList.add('d-none');
+            checkIcon.classList.remove('d-none');
+            copyFeedback.style.display = 'block';
+            copyButton.style.borderColor = 'var(--color-success-fg)';
+
+            setTimeout(() => {
+                copyIcon.classList.remove('d-none');
+                checkIcon.classList.add('d-none');
+                copyFeedback.style.display = 'none';
+                copyButton.style.borderColor = '';
+            }, 2000);
+        });
+    });
+});
+
+</script>
+<script src='https://pub-43c06573bc27485093cd50efd04e9e7b.r2.dev/GmeekArticleTOC.js'></script><script src='https://pub-43c06573bc27485093cd50efd04e9e7b.r2.dev/Gmeeklightbox.js'></script><script>document.querySelectorAll('a').forEach(anchor => {const img = anchor.querySelector('img');if (img && img.hasAttribute('data-canonical-src')) {const canonicalSrc = img.getAttribute('data-canonical-src');anchor.setAttribute('href', canonicalSrc);img.setAttribute('src', canonicalSrc);img.removeAttribute('data-canonical-src');}});</script>
+
+</html>
