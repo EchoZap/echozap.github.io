@@ -78,9 +78,9 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <h1>创建虚拟环境：</h1>
 <div class="highlight highlight-source-shell"><pre class="notranslate">python3 -m venv myenv</pre></div>
 <blockquote>
-<p><em>此方法创建的虚拟环境基于系统自带的python版本，不能创建系统未安装的python版本的虚拟环境。假设系统的python3版本是3.12，那么通过 <code class="notranslate">-m venv</code> 创建的虚拟环境中的python也会是3.12版本的</em></p>
+<p><em>此方法创建的虚拟环境基于当前使用的python版本，不能创建未安装的python版本的虚拟环境。假设当前使用的python3版本是3.12，那么通过 <code class="notranslate">-m venv</code> 创建的虚拟环境中的python也会是3.12版本的</em></p>
 </blockquote>
-<p><strong>如果要创建系统本身未安装的python版本虚拟环境，可以通过 <a href="https://blog.ronan.us.kg/post/Conda-chang-yong-yong-fa.html" rel="nofollow">conda</a> 实现</strong></p>
+<p><strong>如果要创建系统本身未安装的python版本虚拟环境，可以通过 <a href="https://echozap.github.io/post/%E3%80%8Cpython%E3%80%8DConda-xu-ni-huan-jing.html" rel="nofollow">conda</a> 实现</strong></p>
 <h1>激活虚拟环境：</h1>
 <p>1.对于 Bash 或 Zsh：</p>
 <div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c1">source</span> myenv/bin/activate</pre></div>
