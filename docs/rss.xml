@@ -1,5 +1,37 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan's Blog</title><link>https://echozap.github.io</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg</url><title>avatar</title><link>https://echozap.github.io</link></image><lastBuildDate>Sat, 22 Mar 2025 10:37:50 +0000</lastBuildDate><managingEditor>Ronan's Blog</managingEditor><ttl>60</ttl><webMaster>Ronan's Blog</webMaster><item><title>macOS 电池管理脚本</title><link>https://echozap.github.io/post/macOS%20-dian-chi-guan-li-jiao-ben.html</link><description>将以下内容保存为 `power_manager.sh` 并放入系统环境变量的路径中，接下来可通过 `nohup /path/power_manager.sh &amp;` 来实现后台运行
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan's Blog</title><link>https://echozap.github.io</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg</url><title>avatar</title><link>https://echozap.github.io</link></image><lastBuildDate>Sat, 22 Mar 2025 10:38:51 +0000</lastBuildDate><managingEditor>Ronan's Blog</managingEditor><ttl>60</ttl><webMaster>Ronan's Blog</webMaster><item><title>mac以指纹授权sudo指令</title><link>https://echozap.github.io/post/mac-yi-zhi-wen-shou-quan-sudo-zhi-ling.html</link><description>使用以下命令打开；
+
+```zsh
+sudo vim /etc/pam.d/sudo
+```
+
+出现以下内容：
+
+```zsh
+  1 # sudo: auth account password session
+  2 auth       include        sudo_local
+  3 auth       sufficient     pam_smartcard.so
+  4 auth       required       pam_opendirectory.so
+  5 account    required       pam_permit.so
+  6 password   required       pam_deny.so
+  7 session    required       pam_permit.so
+```
+
+
+将下面这一行
+
+```plain
+auth sufficient pam_smartcard.so
+```
+
+修改为
+
+```plain
+auth sufficient pam_tid.so
+```
+
+保存并退出即可
+。</description><guid isPermaLink="true">https://echozap.github.io/post/mac-yi-zhi-wen-shou-quan-sudo-zhi-ling.html</guid><pubDate>Sat, 22 Mar 2025 10:38:28 +0000</pubDate></item><item><title>macOS 电池管理脚本</title><link>https://echozap.github.io/post/macOS%20-dian-chi-guan-li-jiao-ben.html</link><description>将以下内容保存为 `power_manager.sh` 并放入系统环境变量的路径中，接下来可通过 `nohup /path/power_manager.sh &amp;` 来实现后台运行
 
 ```shell
 #!/bin/zsh
