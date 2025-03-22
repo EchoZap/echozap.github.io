@@ -1,5 +1,32 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan's Blog</title><link>https://echozap.github.io</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg</url><title>avatar</title><link>https://echozap.github.io</link></image><lastBuildDate>Sat, 22 Mar 2025 10:40:12 +0000</lastBuildDate><managingEditor>Ronan's Blog</managingEditor><ttl>60</ttl><webMaster>Ronan's Blog</webMaster><item><title>Makefile</title><link>https://echozap.github.io/post/Makefile.html</link><description>## 1.规则
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan's Blog</title><link>https://echozap.github.io</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg</url><title>avatar</title><link>https://echozap.github.io</link></image><lastBuildDate>Sat, 22 Mar 2025 10:40:58 +0000</lastBuildDate><managingEditor>Ronan's Blog</managingEditor><ttl>60</ttl><webMaster>Ronan's Blog</webMaster><item><title>OpenOCD 烧录失败解决方法</title><link>https://echozap.github.io/post/OpenOCD%20-shao-lu-shi-bai-jie-jue-fang-fa.html</link><description># 在烧录时遇到如下问题：
+
+```shell
+❯ openocd -f interface/stlink-v2.cfg -f target/stm32f1x.cfg -c 'program /path/project/build.bin verify reset exit 0x08000000' 
+                                                                                                             
+openocd -f interface/stlink-v2.cfg -f target/stm32f1x.cfg -c 'program build/final.bin verify reset exit 0x08000000'
+Open On-Chip Debugger 0.12.0
+Licensed under GNU GPL v2
+For bug reports, read
+       http://openocd.org/doc/doxygen/bugs.html
+WARNING: interface/stlink-v2.cfg is deprecated, please switch to interface/stlink.cfg
+Info : auto-selecting first available session transport 'hla_swd'. To override use 'transport select &lt;transport&gt;'.
+Info : The selected transport took over low-level target control. The results might differ compared to plain JTAG/SWD
+Info : clock speed 1000 kHz
+Info : STLINK V2J45M30 (API v2) VID:PID 0483:374B
+Info : Target voltage: 3.269241
+Warn : UNEXPECTED idcode: 0x1ba01477
+Error: expected 1 of 1: 0x2ba01477
+in procedure 'program'
+** OpenOCD init failed **
+shutdown command invoked
+make: *** [flash] Error 1
+```
+
+---
+
+# 解决方法
+在  /opt/homebrew/Cellar/open-ocd/0.12.0_1/share/openocd/scripts/target（根据自己安装 OpenOCD 的位置查找，通过 brew 安装的就在这个位置）找到符合自己单片机型号的 cfg 文件，例如 stm32f1x.cfg 。</description><guid isPermaLink="true">https://echozap.github.io/post/OpenOCD%20-shao-lu-shi-bai-jie-jue-fang-fa.html</guid><pubDate>Sat, 22 Mar 2025 10:40:31 +0000</pubDate></item><item><title>Makefile</title><link>https://echozap.github.io/post/Makefile.html</link><description>## 1.规则
 
 &gt; Makefile的框架是由规则构成的。</description><guid isPermaLink="true">https://echozap.github.io/post/Makefile.html</guid><pubDate>Sat, 22 Mar 2025 10:39:46 +0000</pubDate></item><item><title>mac合盖不休眠、安装包损坏解决办法</title><link>https://echozap.github.io/post/mac-he-gai-bu-xiu-mian-%E3%80%81-an-zhuang-bao-sun-huai-jie-jue-ban-fa.html</link><description># 'app已损坏，无法打开'问题解决方法
 
