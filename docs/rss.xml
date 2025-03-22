@@ -1,5 +1,26 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan's Blog</title><link>https://echozap.github.io</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg</url><title>avatar</title><link>https://echozap.github.io</link></image><lastBuildDate>Sat, 22 Mar 2025 10:34:53 +0000</lastBuildDate><managingEditor>Ronan's Blog</managingEditor><ttl>60</ttl><webMaster>Ronan's Blog</webMaster><item><title>JavaScript 常用用法</title><link>https://echozap.github.io/post/JavaScript%20-chang-yong-yong-fa.html</link><description># 获取 DOM 节点
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan's Blog</title><link>https://echozap.github.io</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg</url><title>avatar</title><link>https://echozap.github.io</link></image><lastBuildDate>Sat, 22 Mar 2025 10:35:32 +0000</lastBuildDate><managingEditor>Ronan's Blog</managingEditor><ttl>60</ttl><webMaster>Ronan's Blog</webMaster><item><title>linux 查看或修改主机名</title><link>https://echozap.github.io/post/linux%20-cha-kan-huo-xiu-gai-zhu-ji-ming.html</link><description># 1查看当前主机名
+
+```plain
+hostname
+```
+
+这将会显示当前的主机名，或者
+
+```zsh
+cat /etc/hostname
+```
+  
+
+# 2修改主机名
+
+使用以下命令设置新主机名
+
+```zsh
+sudo hostnamectl set-hostname &lt;new_hostname&gt;
+```
+
+之后在文件中找到包含旧主机名的行，并将其替换为新主机名。</description><guid isPermaLink="true">https://echozap.github.io/post/linux%20-cha-kan-huo-xiu-gai-zhu-ji-ming.html</guid><pubDate>Sat, 22 Mar 2025 10:35:08 +0000</pubDate></item><item><title>JavaScript 常用用法</title><link>https://echozap.github.io/post/JavaScript%20-chang-yong-yong-fa.html</link><description># 获取 DOM 节点
 
 ### 1.选择匹配到的第一个元素
 
