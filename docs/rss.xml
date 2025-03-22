@@ -1,5 +1,18 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan's Blog</title><link>https://echozap.github.io</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg</url><title>avatar</title><link>https://echozap.github.io</link></image><lastBuildDate>Sat, 22 Mar 2025 10:32:56 +0000</lastBuildDate><managingEditor>Ronan's Blog</managingEditor><ttl>60</ttl><webMaster>Ronan's Blog</webMaster><item><title>Huxpro-Blog上传脚本</title><link>https://echozap.github.io/post/Huxpro-Blog-shang-chuan-jiao-ben.html</link><description># 用法
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan's Blog</title><link>https://echozap.github.io</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg</url><title>avatar</title><link>https://echozap.github.io</link></image><lastBuildDate>Sat, 22 Mar 2025 10:33:26 +0000</lastBuildDate><managingEditor>Ronan's Blog</managingEditor><ttl>60</ttl><webMaster>Ronan's Blog</webMaster><item><title>IPv6的使用</title><link>https://echozap.github.io/post/IPv6-de-shi-yong.html</link><description># 查看是否有 IPv6 地址
+
+在终端中输入：
+
+```shell
+# macos
+ifconfig | grep 'inet6'
+```
+
+如果返回的是类似下方（这里的演示运营商是移动），那说明你是有 IPv6 公网地址的：
+
+![ipv6](https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/IPv6_ifconfig.png)
+
+这些地址分为两类： `本地链路地址` 和 `全局地址`，它们的前缀和作用不同。</description><guid isPermaLink="true">https://echozap.github.io/post/IPv6-de-shi-yong.html</guid><pubDate>Sat, 22 Mar 2025 10:33:00 +0000</pubDate></item><item><title>Huxpro-Blog上传脚本</title><link>https://echozap.github.io/post/Huxpro-Blog-shang-chuan-jiao-ben.html</link><description># 用法
 
 - **注意** `create_new_file_in_the_repo` 函数里的 `branch='main'` 参数，根据自身仓库分支修改
 
