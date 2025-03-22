@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan's Blog</title><link>https://blog.ronan.us.kg</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.avg</url><title>avatar</title><link>https://blog.ronan.us.kg</link></image><lastBuildDate>Tue, 27 Aug 2024 04:56:37 +0000</lastBuildDate><managingEditor>Ronan's Blog</managingEditor><ttl>60</ttl><webMaster>Ronan's Blog</webMaster><item><title>软链接的使用，以 python 举例</title><link>https://blog.ronan.us.kg/post/ruan-lian-jie-de-shi-yong-%EF%BC%8C-yi-%20python%20-ju-li.html</link><description>在 macOS 上创建和使用软链接（symbolic link）的操作非常实用，特别是在管理不同版本的 Python 时。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/ruan-lian-jie-de-shi-yong-%EF%BC%8C-yi-%20python%20-ju-li.html</guid><pubDate>Tue, 27 Aug 2024 04:55:09 +0000</pubDate></item><item><title>npm常用用法</title><link>https://blog.ronan.us.kg/post/npm-chang-yong-yong-fa.html</link><description>你可以使用以下命令查看已经通过 `npm` 安装的包：
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan's Blog</title><link>https://echozap.github.io</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://cdn.jsdelivr.net/gh/EchoZap/echozap.github.io@main/static/avatar.avg</url><title>avatar</title><link>https://echozap.github.io</link></image><lastBuildDate>Sat, 22 Mar 2025 09:24:21 +0000</lastBuildDate><managingEditor>Ronan's Blog</managingEditor><ttl>60</ttl><webMaster>Ronan's Blog</webMaster><item><title>软链接的使用，以 python 举例</title><link>https://echozap.github.io/post/ruan-lian-jie-de-shi-yong-%EF%BC%8C-yi-%20python%20-ju-li.html</link><description>在 macOS 上创建和使用软链接（symbolic link）的操作非常实用，特别是在管理不同版本的 Python 时。</description><guid isPermaLink="true">https://echozap.github.io/post/ruan-lian-jie-de-shi-yong-%EF%BC%8C-yi-%20python%20-ju-li.html</guid><pubDate>Tue, 27 Aug 2024 04:55:09 +0000</pubDate></item><item><title>npm常用用法</title><link>https://echozap.github.io/post/npm-chang-yong-yong-fa.html</link><description>你可以使用以下命令查看已经通过 `npm` 安装的包：
 
 ### 1. **查看全局安装的包**
 
@@ -9,7 +9,7 @@
 npm list -g --depth=0
 ```
 
-这个命令会列出所有全局安装的包，并且使用 `--depth=0` 选项只显示顶级包，不显示它们的依赖项。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/npm-chang-yong-yong-fa.html</guid><pubDate>Mon, 26 Aug 2024 04:31:13 +0000</pubDate></item><item><title>JavasSript常用方法</title><link>https://blog.ronan.us.kg/post/JavasSript-chang-yong-fang-fa.html</link><description># 获取 DOM 节点
+这个命令会列出所有全局安装的包，并且使用 `--depth=0` 选项只显示顶级包，不显示它们的依赖项。</description><guid isPermaLink="true">https://echozap.github.io/post/npm-chang-yong-yong-fa.html</guid><pubDate>Mon, 26 Aug 2024 04:31:13 +0000</pubDate></item><item><title>JavasSript常用方法</title><link>https://echozap.github.io/post/JavasSript-chang-yong-fang-fa.html</link><description># 获取 DOM 节点
 
 ### 1.选择匹配到的第一个元素
 
@@ -21,7 +21,7 @@ document.querySelector('css选择器')
 
 **参数：**
 
-包含一个或多个有效的css选择器 **字符串** ，查看 [更多css选择器](https://www.runoob.com/cssref/css-selectors.html)。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/JavasSript-chang-yong-fang-fa.html</guid><pubDate>Sun, 25 Aug 2024 05:07:16 +0000</pubDate></item><item><title>macOS去除重复PATH环境变量</title><link>https://blog.ronan.us.kg/post/macOS-qu-chu-zhong-fu-PATH-huan-jing-bian-liang.html</link><description>&gt; [!important]
+包含一个或多个有效的css选择器 **字符串** ，查看 [更多css选择器](https://www.runoob.com/cssref/css-selectors.html)。</description><guid isPermaLink="true">https://echozap.github.io/post/JavasSript-chang-yong-fang-fa.html</guid><pubDate>Sun, 25 Aug 2024 05:07:16 +0000</pubDate></item><item><title>macOS去除重复PATH环境变量</title><link>https://echozap.github.io/post/macOS-qu-chu-zhong-fu-PATH-huan-jing-bian-liang.html</link><description>&gt; [!important]
 &gt;
 &gt; 环境变量分为系统和用户，这里主要配置用户环境
 
@@ -29,7 +29,7 @@ document.querySelector('css选择器')
 
 1. **`/etc/profile`**：
 
-- 这是系统范围的 shell 配置文件，适用于所有用户。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/macOS-qu-chu-zhong-fu-PATH-huan-jing-bian-liang.html</guid><pubDate>Sat, 24 Aug 2024 03:57:57 +0000</pubDate></item><item><title>「python」Conda虚拟环境</title><link>https://blog.ronan.us.kg/post/%E3%80%8Cpython%E3%80%8DConda-xu-ni-huan-jing.html</link><description># 创建一个新的虚拟环境&#13;
+- 这是系统范围的 shell 配置文件，适用于所有用户。</description><guid isPermaLink="true">https://echozap.github.io/post/macOS-qu-chu-zhong-fu-PATH-huan-jing-bian-liang.html</guid><pubDate>Sat, 24 Aug 2024 03:57:57 +0000</pubDate></item><item><title>「python」Conda虚拟环境</title><link>https://echozap.github.io/post/%E3%80%8Cpython%E3%80%8DConda-xu-ni-huan-jing.html</link><description># 创建一个新的虚拟环境&#13;
 &#13;
 可以使用以下命令创建一个名为 `jupyter_env` 的新环境，并指定 Python 版本（例如 Python 3.11）&#13;
 &#13;
@@ -41,7 +41,7 @@ conda create -n jupyter_env python=3.11&#13;
 &gt;&#13;
 &gt; 通过上面命令创建的虚拟环境通常会保存在主环境目录，如果想指定虚拟环境的位置，可以使用下面的命令&#13;
 &#13;
-**指定路径**：如果你在创建环境时使用了 `-p` 或 `--prefix` 选项指定路径，环境会存储在你指定的位置。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/%E3%80%8Cpython%E3%80%8DConda-xu-ni-huan-jing.html</guid><pubDate>Fri, 23 Aug 2024 11:02:51 +0000</pubDate></item><item><title>JavaScript</title><link>https://blog.ronan.us.kg/post/JavaScript.html</link><description># 对象概述
+**指定路径**：如果你在创建环境时使用了 `-p` 或 `--prefix` 选项指定路径，环境会存储在你指定的位置。</description><guid isPermaLink="true">https://echozap.github.io/post/%E3%80%8Cpython%E3%80%8DConda-xu-ni-huan-jing.html</guid><pubDate>Fri, 23 Aug 2024 11:02:51 +0000</pubDate></item><item><title>JavaScript</title><link>https://echozap.github.io/post/JavaScript.html</link><description># 对象概述
 
 什么是对象？对象（object）是 JavaScript 语言的核心概念，也是最重要的数据类型
 
@@ -58,7 +58,7 @@ var user = {
 
 对象的每一个键名又称为“属性”（property），它的“键
 
-值”可以是任何数据类型。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/JavaScript.html</guid><pubDate>Thu, 22 Aug 2024 04:48:42 +0000</pubDate></item><item><title>Dockerfile的简单实现</title><link>https://blog.ronan.us.kg/post/Dockerfile-de-jian-dan-shi-xian.html</link><description># 构建第一个Dockerfile
+值”可以是任何数据类型。</description><guid isPermaLink="true">https://echozap.github.io/post/JavaScript.html</guid><pubDate>Thu, 22 Aug 2024 04:48:42 +0000</pubDate></item><item><title>Dockerfile的简单实现</title><link>https://echozap.github.io/post/Dockerfile-de-jian-dan-shi-xian.html</link><description># 构建第一个Dockerfile
 
 假设该镜像实现的等同于我们在已经配置好python环境的机器上通过`python hello.py`命令来运行一个python脚本
 
@@ -78,14 +78,14 @@ CMD python hello.py
 
 # Dockerfile语法说明
 
-`Dockerfile` 是 Docker 构建镜像的描述文件，它包含了一系列指令，描述了如何从基础镜像创建一个新的 Docker 镜像。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/Dockerfile-de-jian-dan-shi-xian.html</guid><pubDate>Thu, 22 Aug 2024 04:22:16 +0000</pubDate></item><item><title>fire,一个强大的「python」库</title><link>https://blog.ronan.us.kg/post/fire%2C-yi-ge-qiang-da-de-%E3%80%8Cpython%E3%80%8D-ku.html</link><description>Github地址：[https://github.com/google/python-fire](https://github.com/google/python-fire)
+`Dockerfile` 是 Docker 构建镜像的描述文件，它包含了一系列指令，描述了如何从基础镜像创建一个新的 Docker 镜像。</description><guid isPermaLink="true">https://echozap.github.io/post/Dockerfile-de-jian-dan-shi-xian.html</guid><pubDate>Thu, 22 Aug 2024 04:22:16 +0000</pubDate></item><item><title>fire,一个强大的「python」库</title><link>https://echozap.github.io/post/fire%2C-yi-ge-qiang-da-de-%E3%80%8Cpython%E3%80%8D-ku.html</link><description>Github地址：[https://github.com/google/python-fire](https://github.com/google/python-fire)
 
-在开发命令行工具时，开发者通常需要编写大量代码来解析命令行参数，这既耗时又容易出错。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/fire%2C-yi-ge-qiang-da-de-%E3%80%8Cpython%E3%80%8D-ku.html</guid><pubDate>Thu, 22 Aug 2024 03:55:12 +0000</pubDate></item><item><title>vscode个人配置文件</title><link>https://blog.ronan.us.kg/post/vscode-ge-ren-pei-zhi-wen-jian.html</link><description>&gt; [!note]&#13;
+在开发命令行工具时，开发者通常需要编写大量代码来解析命令行参数，这既耗时又容易出错。</description><guid isPermaLink="true">https://echozap.github.io/post/fire%2C-yi-ge-qiang-da-de-%E3%80%8Cpython%E3%80%8D-ku.html</guid><pubDate>Thu, 22 Aug 2024 03:55:12 +0000</pubDate></item><item><title>vscode个人配置文件</title><link>https://echozap.github.io/post/vscode-ge-ren-pei-zhi-wen-jian.html</link><description>&gt; [!note]&#13;
 &gt;&#13;
-&gt; 以下为个人自用配置文件，如需拷贝使用请把 **插件配置区** 的选项删除或者安装相应的插件。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/vscode-ge-ren-pei-zhi-wen-jian.html</guid><pubDate>Wed, 21 Aug 2024 05:25:54 +0000</pubDate></item><item><title>他决定偷一架飞机</title><link>https://blog.ronan.us.kg/post/ta-jue-ding-tou-yi-jia-fei-ji.html</link><description>
-2018年8月10日，地平线航空一架庞巴迪Dash 8 Q400在美国西雅图的塔科马国际机场（Sea-Tac）被盗。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/ta-jue-ding-tou-yi-jia-fei-ji.html</guid><pubDate>Wed, 21 Aug 2024 01:56:12 +0000</pubDate></item><item><title>「python」打包程序</title><link>https://blog.ronan.us.kg/post/%E3%80%8Cpython%E3%80%8D-da-bao-cheng-xu.html</link><description># 通过pyinstaller打包
+&gt; 以下为个人自用配置文件，如需拷贝使用请把 **插件配置区** 的选项删除或者安装相应的插件。</description><guid isPermaLink="true">https://echozap.github.io/post/vscode-ge-ren-pei-zhi-wen-jian.html</guid><pubDate>Wed, 21 Aug 2024 05:25:54 +0000</pubDate></item><item><title>他决定偷一架飞机</title><link>https://echozap.github.io/post/ta-jue-ding-tou-yi-jia-fei-ji.html</link><description>
+2018年8月10日，地平线航空一架庞巴迪Dash 8 Q400在美国西雅图的塔科马国际机场（Sea-Tac）被盗。</description><guid isPermaLink="true">https://echozap.github.io/post/ta-jue-ding-tou-yi-jia-fei-ji.html</guid><pubDate>Wed, 21 Aug 2024 01:56:12 +0000</pubDate></item><item><title>「python」打包程序</title><link>https://echozap.github.io/post/%E3%80%8Cpython%E3%80%8D-da-bao-cheng-xu.html</link><description># 通过pyinstaller打包
 
-要将Python脚本打包成一个独立运行的应用程序，可以使用工具PyInstaller，其可以将Python脚本打包成一个可执行文件 (.exe) 。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/%E3%80%8Cpython%E3%80%8D-da-bao-cheng-xu.html</guid><pubDate>Tue, 20 Aug 2024 00:44:46 +0000</pubDate></item><item><title>shell 文本、字符串处理</title><link>https://blog.ronan.us.kg/post/shell%20-wen-ben-%E3%80%81-zi-fu-chuan-chu-li.html</link><description>&#13;
+要将Python脚本打包成一个独立运行的应用程序，可以使用工具PyInstaller，其可以将Python脚本打包成一个可执行文件 (.exe) 。</description><guid isPermaLink="true">https://echozap.github.io/post/%E3%80%8Cpython%E3%80%8D-da-bao-cheng-xu.html</guid><pubDate>Tue, 20 Aug 2024 00:44:46 +0000</pubDate></item><item><title>shell 文本、字符串处理</title><link>https://echozap.github.io/post/shell%20-wen-ben-%E3%80%81-zi-fu-chuan-chu-li.html</link><description>&#13;
 ## 1、字符串切片&#13;
 ＄{变量：偏移量：截取长度｝&#13;
 &#13;
@@ -104,7 +104,7 @@ $ echo ${MYPATH: -4}  #这会右向左从末尾向前取四位，「-4和冒号�
 &#13;
 ## 2、基于模式取子串&#13;
 ${var#*word}&#13;
-其中word可以是指定的任意字符，自左而右，删除字符串开头至第一次出现word字符之间的所有字符。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/shell%20-wen-ben-%E3%80%81-zi-fu-chuan-chu-li.html</guid><pubDate>Wed, 14 Aug 2024 15:01:58 +0000</pubDate></item><item><title>个人自用vim配置文件</title><link>https://blog.ronan.us.kg/post/ge-ren-zi-yong-vim-pei-zhi-wen-jian.html</link><description>将以下内容写入 `.vimrc` 中
+其中word可以是指定的任意字符，自左而右，删除字符串开头至第一次出现word字符之间的所有字符。</description><guid isPermaLink="true">https://echozap.github.io/post/shell%20-wen-ben-%E3%80%81-zi-fu-chuan-chu-li.html</guid><pubDate>Wed, 14 Aug 2024 15:01:58 +0000</pubDate></item><item><title>个人自用vim配置文件</title><link>https://echozap.github.io/post/ge-ren-zi-yong-vim-pei-zhi-wen-jian.html</link><description>将以下内容写入 `.vimrc` 中
 
 
 ```
@@ -141,9 +141,9 @@ syntax on
 ```
 
 &lt;!-- ##{'timestamp':1723621841}## --&gt;
-。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/ge-ren-zi-yong-vim-pei-zhi-wen-jian.html</guid><pubDate>Wed, 14 Aug 2024 07:50:41 +0000</pubDate></item><item><title>「Python」模块和包</title><link>https://blog.ronan.us.kg/post/%E3%80%8CPython%E3%80%8D-mo-kuai-he-bao.html</link><description>Python 提供了强大的模块支持，主要体现在，不仅 Python 标准库中包含了大量的模块（称为标准模块），还有大量的第三方模块，开发者自己也可以开发自定义模块。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/%E3%80%8CPython%E3%80%8D-mo-kuai-he-bao.html</guid><pubDate>Tue, 13 Aug 2024 09:29:17 +0000</pubDate></item><item><title>「Python」异常处理</title><link>https://blog.ronan.us.kg/post/%E3%80%8CPython%E3%80%8D-yi-chang-chu-li.html</link><description>在 Python 中，常见的基本错误有两类，即语法错误和异常。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/%E3%80%8CPython%E3%80%8D-yi-chang-chu-li.html</guid><pubDate>Tue, 13 Aug 2024 07:58:22 +0000</pubDate></item><item><title>GCC</title><link>https://blog.ronan.us.kg/post/GCC.html</link><description>&#13;
-**GCC** 是 Linux 下的编译工具集，是 **GNU Compiler Collection** 的缩写，包含 gcc、g++ 等编译器。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/GCC.html</guid><pubDate>Sun, 11 Aug 2024 17:49:03 +0000</pubDate></item><item><title>「OrbStack」Mac 系统中一个更快的 Docker 可视化工具，可完全替代 Docker Desktop</title><link>https://blog.ronan.us.kg/post/%E3%80%8COrbStack%E3%80%8DMac%20-xi-tong-zhong-yi-ge-geng-kuai-de-%20Docker%20-ke-shi-hua-gong-ju-%EF%BC%8C-ke-wan-quan-ti-dai-%20Docker%20Desktop.html</link><description>&#13;
-我之前用的是 Docker Desktop，每次准备启动容器的时候，我都会把能关的应用都关闭，省的电脑卡， Docker Desktop 确实有点儿耗性能。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/%E3%80%8COrbStack%E3%80%8DMac%20-xi-tong-zhong-yi-ge-geng-kuai-de-%20Docker%20-ke-shi-hua-gong-ju-%EF%BC%8C-ke-wan-quan-ti-dai-%20Docker%20Desktop.html</guid><pubDate>Thu, 08 Aug 2024 13:53:24 +0000</pubDate></item><item><title>Docker常用命令</title><link>https://blog.ronan.us.kg/post/Docker-chang-yong-ming-ling.html</link><description>![DockerCheatSheet.png](https://wowpb.pages.dev/file/38386b215292115008331.png)&#13;
+。</description><guid isPermaLink="true">https://echozap.github.io/post/ge-ren-zi-yong-vim-pei-zhi-wen-jian.html</guid><pubDate>Wed, 14 Aug 2024 07:50:41 +0000</pubDate></item><item><title>「Python」模块和包</title><link>https://echozap.github.io/post/%E3%80%8CPython%E3%80%8D-mo-kuai-he-bao.html</link><description>Python 提供了强大的模块支持，主要体现在，不仅 Python 标准库中包含了大量的模块（称为标准模块），还有大量的第三方模块，开发者自己也可以开发自定义模块。</description><guid isPermaLink="true">https://echozap.github.io/post/%E3%80%8CPython%E3%80%8D-mo-kuai-he-bao.html</guid><pubDate>Tue, 13 Aug 2024 09:29:17 +0000</pubDate></item><item><title>「Python」异常处理</title><link>https://echozap.github.io/post/%E3%80%8CPython%E3%80%8D-yi-chang-chu-li.html</link><description>在 Python 中，常见的基本错误有两类，即语法错误和异常。</description><guid isPermaLink="true">https://echozap.github.io/post/%E3%80%8CPython%E3%80%8D-yi-chang-chu-li.html</guid><pubDate>Tue, 13 Aug 2024 07:58:22 +0000</pubDate></item><item><title>GCC</title><link>https://echozap.github.io/post/GCC.html</link><description>&#13;
+**GCC** 是 Linux 下的编译工具集，是 **GNU Compiler Collection** 的缩写，包含 gcc、g++ 等编译器。</description><guid isPermaLink="true">https://echozap.github.io/post/GCC.html</guid><pubDate>Sun, 11 Aug 2024 17:49:03 +0000</pubDate></item><item><title>「OrbStack」Mac 系统中一个更快的 Docker 可视化工具，可完全替代 Docker Desktop</title><link>https://echozap.github.io/post/%E3%80%8COrbStack%E3%80%8DMac%20-xi-tong-zhong-yi-ge-geng-kuai-de-%20Docker%20-ke-shi-hua-gong-ju-%EF%BC%8C-ke-wan-quan-ti-dai-%20Docker%20Desktop.html</link><description>&#13;
+我之前用的是 Docker Desktop，每次准备启动容器的时候，我都会把能关的应用都关闭，省的电脑卡， Docker Desktop 确实有点儿耗性能。</description><guid isPermaLink="true">https://echozap.github.io/post/%E3%80%8COrbStack%E3%80%8DMac%20-xi-tong-zhong-yi-ge-geng-kuai-de-%20Docker%20-ke-shi-hua-gong-ju-%EF%BC%8C-ke-wan-quan-ti-dai-%20Docker%20Desktop.html</guid><pubDate>Thu, 08 Aug 2024 13:53:24 +0000</pubDate></item><item><title>Docker常用命令</title><link>https://echozap.github.io/post/Docker-chang-yong-ming-ling.html</link><description>![DockerCheatSheet.png](https://wowpb.pages.dev/file/38386b215292115008331.png)&#13;
 &#13;
 # 列出所有已下载镜像&#13;
 ```shell&#13;
@@ -164,7 +164,7 @@ CONTAINER ID   IMAGE     COMMAND                   CREATED              STATUS  
 ``` &#13;
 &#13;
 输出详情介绍：&#13;
-- **CONTAINER ID:**  容器 ID。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/Docker-chang-yong-ming-ling.html</guid><pubDate>Sat, 03 Aug 2024 07:08:59 +0000</pubDate></item><item><title>ffmpeg常用用法</title><link>https://blog.ronan.us.kg/post/ffmpeg-chang-yong-yong-fa.html</link><description># 不改变原视频码率裁剪&#13;
+- **CONTAINER ID:**  容器 ID。</description><guid isPermaLink="true">https://echozap.github.io/post/Docker-chang-yong-ming-ling.html</guid><pubDate>Sat, 03 Aug 2024 07:08:59 +0000</pubDate></item><item><title>ffmpeg常用用法</title><link>https://echozap.github.io/post/ffmpeg-chang-yong-yong-fa.html</link><description># 不改变原视频码率裁剪&#13;
 ### 废话少说，直接举栗🌰&#13;
 1.从 `1时15分25秒` 开始裁剪到视频结束： &#13;
 ```shell&#13;
@@ -181,7 +181,7 @@ ffmpeg -i input.mp4 -to 00:15:05 -c copy output.mp4&#13;
 ffmpeg -i input.mp4 -ss 15:25 -to 01:15:25 -c copy output.mp4&#13;
 ``` &#13;
   &#13;
-`-i` 指定输入视频路径，`input.mp4`是要裁剪的视频文件的路径， `-ss` 裁剪视频起始时间，`-to` 裁剪视频结束时间，`-c copy` 在裁剪时不改变视频编码，从而保持原始视频码率， `output.mp4` 为裁剪后的视频文件。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/ffmpeg-chang-yong-yong-fa.html</guid><pubDate>Sat, 03 Aug 2024 06:54:09 +0000</pubDate></item><item><title>「Gmeek」上传脚本(单篇或批量)</title><link>https://blog.ronan.us.kg/post/%E3%80%8CGmeek%E3%80%8D-shang-chuan-jiao-ben-%28-dan-pian-huo-pi-liang-%29.html</link><description>&gt; [!caution]&#13;
+`-i` 指定输入视频路径，`input.mp4`是要裁剪的视频文件的路径， `-ss` 裁剪视频起始时间，`-to` 裁剪视频结束时间，`-c copy` 在裁剪时不改变视频编码，从而保持原始视频码率， `output.mp4` 为裁剪后的视频文件。</description><guid isPermaLink="true">https://echozap.github.io/post/ffmpeg-chang-yong-yong-fa.html</guid><pubDate>Sat, 03 Aug 2024 06:54:09 +0000</pubDate></item><item><title>「Gmeek」上传脚本(单篇或批量)</title><link>https://echozap.github.io/post/%E3%80%8CGmeek%E3%80%8D-shang-chuan-jiao-ben-%28-dan-pian-huo-pi-liang-%29.html</link><description>&gt; [!caution]&#13;
 &gt;&#13;
 &gt; **注意：** 该脚本仅适用于通过Gmeek项目搭建的博客网站&#13;
 &gt; 在开始使用之前，需要创建 github 的个人 Token&#13;
@@ -189,8 +189,8 @@ ffmpeg -i input.mp4 -ss 15:25 -to 01:15:25 -c copy output.mp4&#13;
 &#13;
 # 1.创建github个人Token&#13;
 &#13;
-1.在 GitHub 上任何页面的**右上角**，单击您的`个人资料照片`，然后单击 `Settings`。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/%E3%80%8CGmeek%E3%80%8D-shang-chuan-jiao-ben-%28-dan-pian-huo-pi-liang-%29.html</guid><pubDate>Fri, 02 Aug 2024 15:09:42 +0000</pubDate></item><item><title>「Gmeek」文章插入html标签以及图片源地址渲染</title><link>https://blog.ronan.us.kg/post/%E3%80%8CGmeek%E3%80%8D-wen-zhang-cha-ru-html-biao-qian-yi-ji-tu-pian-yuan-di-zhi-xuan-ran.html</link><description># 1.图片使用创建文章(issue)时输入的原始链接。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/%E3%80%8CGmeek%E3%80%8D-wen-zhang-cha-ru-html-biao-qian-yi-ji-tu-pian-yuan-di-zhi-xuan-ran.html</guid><pubDate>Fri, 02 Aug 2024 14:51:38 +0000</pubDate></item><item><title>「Gmeek」小Tips以及常见问题</title><link>https://blog.ronan.us.kg/post/%E3%80%8CGmeek%E3%80%8D-xiao-Tips-yi-ji-chang-jian-wen-ti.html</link><description># 修改文章发布时间&#13;
-如需修改发布时间，可以在文章 `最后一行(后面不能有空行)` 添加如下代码。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/%E3%80%8CGmeek%E3%80%8D-xiao-Tips-yi-ji-chang-jian-wen-ti.html</guid><pubDate>Fri, 02 Aug 2024 11:34:06 +0000</pubDate></item><item><title>macOS电池管理脚本</title><link>https://blog.ronan.us.kg/post/macOS-dian-chi-guan-li-jiao-ben.html</link><description>将以下内容保存为 `power_manager.sh` 并放入系统环境变量的路径中，接下来可通过 `nohub /path/power_manager.sh &amp;` 来实现后台运行&#13;
+1.在 GitHub 上任何页面的**右上角**，单击您的`个人资料照片`，然后单击 `Settings`。</description><guid isPermaLink="true">https://echozap.github.io/post/%E3%80%8CGmeek%E3%80%8D-shang-chuan-jiao-ben-%28-dan-pian-huo-pi-liang-%29.html</guid><pubDate>Fri, 02 Aug 2024 15:09:42 +0000</pubDate></item><item><title>「Gmeek」文章插入html标签以及图片源地址渲染</title><link>https://echozap.github.io/post/%E3%80%8CGmeek%E3%80%8D-wen-zhang-cha-ru-html-biao-qian-yi-ji-tu-pian-yuan-di-zhi-xuan-ran.html</link><description># 1.图片使用创建文章(issue)时输入的原始链接。</description><guid isPermaLink="true">https://echozap.github.io/post/%E3%80%8CGmeek%E3%80%8D-wen-zhang-cha-ru-html-biao-qian-yi-ji-tu-pian-yuan-di-zhi-xuan-ran.html</guid><pubDate>Fri, 02 Aug 2024 14:51:38 +0000</pubDate></item><item><title>「Gmeek」小Tips以及常见问题</title><link>https://echozap.github.io/post/%E3%80%8CGmeek%E3%80%8D-xiao-Tips-yi-ji-chang-jian-wen-ti.html</link><description># 修改文章发布时间&#13;
+如需修改发布时间，可以在文章 `最后一行(后面不能有空行)` 添加如下代码。</description><guid isPermaLink="true">https://echozap.github.io/post/%E3%80%8CGmeek%E3%80%8D-xiao-Tips-yi-ji-chang-jian-wen-ti.html</guid><pubDate>Fri, 02 Aug 2024 11:34:06 +0000</pubDate></item><item><title>macOS电池管理脚本</title><link>https://echozap.github.io/post/macOS-dian-chi-guan-li-jiao-ben.html</link><description>将以下内容保存为 `power_manager.sh` 并放入系统环境变量的路径中，接下来可通过 `nohub /path/power_manager.sh &amp;` 来实现后台运行&#13;
 &#13;
 ```&#13;
 #!/bin/zsh&#13;
@@ -239,7 +239,7 @@ while true; do&#13;
     fi&#13;
     sleep 5&#13;
 done&#13;
-```。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/macOS-dian-chi-guan-li-jiao-ben.html</guid><pubDate>Fri, 02 Aug 2024 06:08:01 +0000</pubDate></item><item><title>「Python」虚拟环境</title><link>https://blog.ronan.us.kg/post/%E3%80%8CPython%E3%80%8D-xu-ni-huan-jing.html</link><description>*在虚拟环境中，pip 和 pip3 通常会指向同一个 Python 版本的包管理器。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/%E3%80%8CPython%E3%80%8D-xu-ni-huan-jing.html</guid><pubDate>Mon, 29 Jul 2024 12:48:40 +0000</pubDate></item><item><title>「python」查看或切换当前解释器</title><link>https://blog.ronan.us.kg/post/%E3%80%8Cpython%E3%80%8D-cha-kan-huo-qie-huan-dang-qian-jie-shi-qi.html</link><description># 查看系统中所有安装的 Python 解释器&#13;
+```。</description><guid isPermaLink="true">https://echozap.github.io/post/macOS-dian-chi-guan-li-jiao-ben.html</guid><pubDate>Fri, 02 Aug 2024 06:08:01 +0000</pubDate></item><item><title>「Python」虚拟环境</title><link>https://echozap.github.io/post/%E3%80%8CPython%E3%80%8D-xu-ni-huan-jing.html</link><description>*在虚拟环境中，pip 和 pip3 通常会指向同一个 Python 版本的包管理器。</description><guid isPermaLink="true">https://echozap.github.io/post/%E3%80%8CPython%E3%80%8D-xu-ni-huan-jing.html</guid><pubDate>Mon, 29 Jul 2024 12:48:40 +0000</pubDate></item><item><title>「python」查看或切换当前解释器</title><link>https://echozap.github.io/post/%E3%80%8Cpython%E3%80%8D-cha-kan-huo-qie-huan-dang-qian-jie-shi-qi.html</link><description># 查看系统中所有安装的 Python 解释器&#13;
 ```&#13;
 which -a python python3&#13;
 ```&#13;
@@ -251,9 +251,9 @@ python not found&#13;
 /usr/bin/python3&#13;
 /opt/homebrew/bin/python3&#13;
 ```&#13;
-`-a` 选项确保显示所有匹配的路径，而不仅仅是第一个。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/%E3%80%8Cpython%E3%80%8D-cha-kan-huo-qie-huan-dang-qian-jie-shi-qi.html</guid><pubDate>Mon, 29 Jul 2024 11:44:59 +0000</pubDate></item><item><title>「各种摸不着头脑」意外修改PATH(环境变量)</title><link>https://blog.ronan.us.kg/post/%E3%80%8C-ge-zhong-mo-bu-zhao-tou-nao-%E3%80%8D-yi-wai-xiu-gai-PATH%28-huan-jing-bian-liang-%29.html</link><description># 1. **检查sudo是否已经安装**&#13;
+`-a` 选项确保显示所有匹配的路径，而不仅仅是第一个。</description><guid isPermaLink="true">https://echozap.github.io/post/%E3%80%8Cpython%E3%80%8D-cha-kan-huo-qie-huan-dang-qian-jie-shi-qi.html</guid><pubDate>Mon, 29 Jul 2024 11:44:59 +0000</pubDate></item><item><title>「各种摸不着头脑」意外修改PATH(环境变量)</title><link>https://echozap.github.io/post/%E3%80%8C-ge-zhong-mo-bu-zhao-tou-nao-%E3%80%8D-yi-wai-xiu-gai-PATH%28-huan-jing-bian-liang-%29.html</link><description># 1. **检查sudo是否已经安装**&#13;
 &#13;
-确保 **sudo** 已经正确地安装在你的系统中。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/%E3%80%8C-ge-zhong-mo-bu-zhao-tou-nao-%E3%80%8D-yi-wai-xiu-gai-PATH%28-huan-jing-bian-liang-%29.html</guid><pubDate>Sun, 28 Jul 2024 09:55:30 +0000</pubDate></item><item><title>Linux查看或修改主机名</title><link>https://blog.ronan.us.kg/post/Linux-cha-kan-huo-xiu-gai-zhu-ji-ming.html</link><description># 1查看当前主机名&#13;
+确保 **sudo** 已经正确地安装在你的系统中。</description><guid isPermaLink="true">https://echozap.github.io/post/%E3%80%8C-ge-zhong-mo-bu-zhao-tou-nao-%E3%80%8D-yi-wai-xiu-gai-PATH%28-huan-jing-bian-liang-%29.html</guid><pubDate>Sun, 28 Jul 2024 09:55:30 +0000</pubDate></item><item><title>Linux查看或修改主机名</title><link>https://echozap.github.io/post/Linux-cha-kan-huo-xiu-gai-zhu-ji-ming.html</link><description># 1查看当前主机名&#13;
 &#13;
 ```plain&#13;
 hostname&#13;
@@ -274,7 +274,7 @@ cat /etc/hostname&#13;
 sudo hostnamectl set-hostname &lt;new_hostname&gt;&#13;
 ```&#13;
 &#13;
-之后在文件中找到包含旧主机名的行，并将其替换为新主机名。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/Linux-cha-kan-huo-xiu-gai-zhu-ji-ming.html</guid><pubDate>Sun, 28 Jul 2024 09:46:14 +0000</pubDate></item><item><title>「国内解决方法」linux安装docker</title><link>https://blog.ronan.us.kg/post/%E3%80%8C-guo-nei-jie-jue-fang-fa-%E3%80%8Dlinux-an-zhuang-docker.html</link><description># 1.安装Docker&#13;
+之后在文件中找到包含旧主机名的行，并将其替换为新主机名。</description><guid isPermaLink="true">https://echozap.github.io/post/Linux-cha-kan-huo-xiu-gai-zhu-ji-ming.html</guid><pubDate>Sun, 28 Jul 2024 09:46:14 +0000</pubDate></item><item><title>「国内解决方法」linux安装docker</title><link>https://echozap.github.io/post/%E3%80%8C-guo-nei-jie-jue-fang-fa-%E3%80%8Dlinux-an-zhuang-docker.html</link><description># 1.安装Docker&#13;
 &#13;
 一键安装命令&#13;
 &#13;
@@ -452,11 +452,11 @@ else&#13;
 fi&#13;
 ```&#13;
 &lt;/code&gt;&lt;/pre&gt;&#13;
-&lt;/details&gt;。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/%E3%80%8C-guo-nei-jie-jue-fang-fa-%E3%80%8Dlinux-an-zhuang-docker.html</guid><pubDate>Sun, 28 Jul 2024 09:34:41 +0000</pubDate></item><item><title>mac使用主机名代替IP地址进行ssh连接</title><link>https://blog.ronan.us.kg/post/mac-shi-yong-zhu-ji-ming-dai-ti-IP-di-zhi-jin-xing-ssh-lian-jie.html</link><description># 1编辑本地SSH配置文件&#13;
+&lt;/details&gt;。</description><guid isPermaLink="true">https://echozap.github.io/post/%E3%80%8C-guo-nei-jie-jue-fang-fa-%E3%80%8Dlinux-an-zhuang-docker.html</guid><pubDate>Sun, 28 Jul 2024 09:34:41 +0000</pubDate></item><item><title>mac使用主机名代替IP地址进行ssh连接</title><link>https://echozap.github.io/post/mac-shi-yong-zhu-ji-ming-dai-ti-IP-di-zhi-jin-xing-ssh-lian-jie.html</link><description># 1编辑本地SSH配置文件&#13;
 &#13;
-1. **编辑本地 SSH 配置文件**：首先，你需要编辑本地 SSH 配置文件，可以使用任何文本编辑器打开 `~/.ssh/config` 文件。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/mac-shi-yong-zhu-ji-ming-dai-ti-IP-di-zhi-jin-xing-ssh-lian-jie.html</guid><pubDate>Sun, 28 Jul 2024 09:24:43 +0000</pubDate></item><item><title>Linux用户与用户组的创建、切换及删除</title><link>https://blog.ronan.us.kg/post/Linux-yong-hu-yu-yong-hu-zu-de-chuang-jian-%E3%80%81-qie-huan-ji-shan-chu.html</link><description># 1创建新用户&#13;
+1. **编辑本地 SSH 配置文件**：首先，你需要编辑本地 SSH 配置文件，可以使用任何文本编辑器打开 `~/.ssh/config` 文件。</description><guid isPermaLink="true">https://echozap.github.io/post/mac-shi-yong-zhu-ji-ming-dai-ti-IP-di-zhi-jin-xing-ssh-lian-jie.html</guid><pubDate>Sun, 28 Jul 2024 09:24:43 +0000</pubDate></item><item><title>Linux用户与用户组的创建、切换及删除</title><link>https://echozap.github.io/post/Linux-yong-hu-yu-yong-hu-zu-de-chuang-jian-%E3%80%81-qie-huan-ji-shan-chu.html</link><description># 1创建新用户&#13;
 &#13;
-1. 以root用户身份登录到Linux系统。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/Linux-yong-hu-yu-yong-hu-zu-de-chuang-jian-%E3%80%81-qie-huan-ji-shan-chu.html</guid><pubDate>Sun, 28 Jul 2024 09:15:25 +0000</pubDate></item><item><title>SSH 远程登录以及 SFTP 文件传输</title><link>https://blog.ronan.us.kg/post/SSH%20-yuan-cheng-deng-lu-yi-ji-%20SFTP%20-wen-jian-chuan-shu.html</link><description>**SSH 默认端口号是22.**&#13;
+1. 以root用户身份登录到Linux系统。</description><guid isPermaLink="true">https://echozap.github.io/post/Linux-yong-hu-yu-yong-hu-zu-de-chuang-jian-%E3%80%81-qie-huan-ji-shan-chu.html</guid><pubDate>Sun, 28 Jul 2024 09:15:25 +0000</pubDate></item><item><title>SSH 远程登录以及 SFTP 文件传输</title><link>https://echozap.github.io/post/SSH%20-yuan-cheng-deng-lu-yi-ji-%20SFTP%20-wen-jian-chuan-shu.html</link><description>**SSH 默认端口号是22.**&#13;
 &#13;
 # SSH 远程登录主机&#13;
 &#13;
@@ -464,7 +464,7 @@ fi&#13;
 ssh username@hostname&#13;
 ```&#13;
 &#13;
-其中，`username`是用户名，`hostname` 是主机名或IP 地址。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/SSH%20-yuan-cheng-deng-lu-yi-ji-%20SFTP%20-wen-jian-chuan-shu.html</guid><pubDate>Sun, 28 Jul 2024 09:07:40 +0000</pubDate></item><item><title>Mac以指纹授权sudo指令的</title><link>https://blog.ronan.us.kg/post/Mac-yi-zhi-wen-shou-quan-sudo-zhi-ling-de.html</link><description>使用以下命令打开；&#13;
+其中，`username`是用户名，`hostname` 是主机名或IP 地址。</description><guid isPermaLink="true">https://echozap.github.io/post/SSH%20-yuan-cheng-deng-lu-yi-ji-%20SFTP%20-wen-jian-chuan-shu.html</guid><pubDate>Sun, 28 Jul 2024 09:07:40 +0000</pubDate></item><item><title>Mac以指纹授权sudo指令的</title><link>https://echozap.github.io/post/Mac-yi-zhi-wen-shou-quan-sudo-zhi-ling-de.html</link><description>使用以下命令打开；&#13;
 &#13;
 ```zsh&#13;
 sudo vim /etc/pam.d/sudo&#13;
@@ -495,17 +495,17 @@ auth sufficient pam_smartcard.so&#13;
 auth sufficient pam_tid.so&#13;
 ```&#13;
 &#13;
-保存并退出即可。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/Mac-yi-zhi-wen-shou-quan-sudo-zhi-ling-de.html</guid><pubDate>Sun, 28 Jul 2024 09:04:06 +0000</pubDate></item><item><title>mac合盖不休眠、安装包损坏解决办法</title><link>https://blog.ronan.us.kg/post/mac-he-gai-bu-xiu-mian-%E3%80%81-an-zhuang-bao-sun-huai-jie-jue-ban-fa.html</link><description># 'app已损坏，无法打开'问题解决方法&#13;
+保存并退出即可。</description><guid isPermaLink="true">https://echozap.github.io/post/Mac-yi-zhi-wen-shou-quan-sudo-zhi-ling-de.html</guid><pubDate>Sun, 28 Jul 2024 09:04:06 +0000</pubDate></item><item><title>mac合盖不休眠、安装包损坏解决办法</title><link>https://echozap.github.io/post/mac-he-gai-bu-xiu-mian-%E3%80%81-an-zhuang-bao-sun-huai-jie-jue-ban-fa.html</link><description># 'app已损坏，无法打开'问题解决方法&#13;
 &#13;
 ```shell&#13;
 sudo xattr -rd com.apple.quarantine &lt;your_app_path&gt;&#13;
 ```&#13;
 &#13;
-将`your_app_path`替换成app路径，可以直接将应用程序里的app图标拖到终端窗口的这条命令里，按回车键执行。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/mac-he-gai-bu-xiu-mian-%E3%80%81-an-zhuang-bao-sun-huai-jie-jue-ban-fa.html</guid><pubDate>Sun, 28 Jul 2024 08:49:50 +0000</pubDate></item><item><title>sdcc工程创建模版程序</title><link>https://blog.ronan.us.kg/post/sdcc-gong-cheng-chuang-jian-mo-ban-cheng-xu.html</link><description>## 1.程序构建&#13;
+将`your_app_path`替换成app路径，可以直接将应用程序里的app图标拖到终端窗口的这条命令里，按回车键执行。</description><guid isPermaLink="true">https://echozap.github.io/post/mac-he-gai-bu-xiu-mian-%E3%80%81-an-zhuang-bao-sun-huai-jie-jue-ban-fa.html</guid><pubDate>Sun, 28 Jul 2024 08:49:50 +0000</pubDate></item><item><title>sdcc工程创建模版程序</title><link>https://echozap.github.io/post/sdcc-gong-cheng-chuang-jian-mo-ban-cheng-xu.html</link><description>## 1.程序构建&#13;
 &#13;
-新建一个txt文件并将以下代码复制到`xxx.txt`，之后将`xxx.txt（例如sdccpj.txt）`后缀名修改为`.sh（例如sdccpj.sh）`或者直接去掉后缀名只保留文件名（这在类linux系统中就是可执行程序）`sdccpj`。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/sdcc-gong-cheng-chuang-jian-mo-ban-cheng-xu.html</guid><pubDate>Sun, 28 Jul 2024 06:45:46 +0000</pubDate></item><item><title>Makefile</title><link>https://blog.ronan.us.kg/post/Makefile.html</link><description>## 1.规则&#13;
+新建一个txt文件并将以下代码复制到`xxx.txt`，之后将`xxx.txt（例如sdccpj.txt）`后缀名修改为`.sh（例如sdccpj.sh）`或者直接去掉后缀名只保留文件名（这在类linux系统中就是可执行程序）`sdccpj`。</description><guid isPermaLink="true">https://echozap.github.io/post/sdcc-gong-cheng-chuang-jian-mo-ban-cheng-xu.html</guid><pubDate>Sun, 28 Jul 2024 06:45:46 +0000</pubDate></item><item><title>Makefile</title><link>https://echozap.github.io/post/Makefile.html</link><description>## 1.规则&#13;
 &#13;
-&gt; Makefile的框架是由规则构成的。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/Makefile.html</guid><pubDate>Sun, 28 Jul 2024 06:36:41 +0000</pubDate></item><item><title>黄玄博客博文批量修改元信息</title><link>https://blog.ronan.us.kg/post/huang-xuan-bo-ke-bo-wen-pi-liang-xiu-gai-yuan-xin-xi.html</link><description>&gt; [!note]&#13;
+&gt; Makefile的框架是由规则构成的。</description><guid isPermaLink="true">https://echozap.github.io/post/Makefile.html</guid><pubDate>Sun, 28 Jul 2024 06:36:41 +0000</pubDate></item><item><title>黄玄博客博文批量修改元信息</title><link>https://echozap.github.io/post/huang-xuan-bo-ke-bo-wen-pi-liang-xiu-gai-yuan-xin-xi.html</link><description>&gt; [!note]&#13;
 &gt;&#13;
 &gt; 改脚本适用于黄玄博客模板仓库&#13;
 &gt;&#13;
@@ -575,7 +575,7 @@ echo 'All jobs done...'&#13;
 ```&#13;
 &#13;
 &#13;
-&lt;!-- ##{'timestamp':1722140467}## --&gt;。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/huang-xuan-bo-ke-bo-wen-pi-liang-xiu-gai-yuan-xin-xi.html</guid><pubDate>Sun, 28 Jul 2024 04:21:07 +0000</pubDate></item><item><title>静态库与动态库</title><link>https://blog.ronan.us.kg/post/jing-tai-ku-yu-dong-tai-ku.html</link><description>不管是Linux还是Windows中的库文件其本质和工作模式都是相同的, 只不过在不同的平台上库对应的文件格式和文件后缀不同。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/jing-tai-ku-yu-dong-tai-ku.html</guid><pubDate>Sun, 28 Jul 2024 03:36:47 +0000</pubDate></item><item><title>SSH 免密登录</title><link>https://blog.ronan.us.kg/post/SSH%20-mian-mi-deng-lu.html</link><description># 1创建密钥&#13;
+&lt;!-- ##{'timestamp':1722140467}## --&gt;。</description><guid isPermaLink="true">https://echozap.github.io/post/huang-xuan-bo-ke-bo-wen-pi-liang-xiu-gai-yuan-xin-xi.html</guid><pubDate>Sun, 28 Jul 2024 04:21:07 +0000</pubDate></item><item><title>静态库与动态库</title><link>https://echozap.github.io/post/jing-tai-ku-yu-dong-tai-ku.html</link><description>不管是Linux还是Windows中的库文件其本质和工作模式都是相同的, 只不过在不同的平台上库对应的文件格式和文件后缀不同。</description><guid isPermaLink="true">https://echozap.github.io/post/jing-tai-ku-yu-dong-tai-ku.html</guid><pubDate>Sun, 28 Jul 2024 03:36:47 +0000</pubDate></item><item><title>SSH 免密登录</title><link>https://echozap.github.io/post/SSH%20-mian-mi-deng-lu.html</link><description># 1创建密钥&#13;
 &#13;
 在本地主机终端输入&#13;
 &#13;
@@ -615,10 +615,10 @@ ls .ssh&#13;
 ssh-copy-id -i &lt;~/.ssh/id_ed25519.pub&gt; &lt;username&gt;@&lt;remote_ip&gt;&#13;
 ```&#13;
 &#13;
-其中的`&lt;~/.ssh/id_ed25519.pub&gt;` 是公钥所处的路径，`&lt;username&gt;`是用户名，`&lt;remote_ip&gt;`是主机名或IP 地址。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/SSH%20-mian-mi-deng-lu.html</guid><pubDate>Sun, 28 Jul 2024 03:19:49 +0000</pubDate></item><item><title>Typora图床自动上传脚本</title><link>https://blog.ronan.us.kg/post/Typora-tu-chuang-zi-dong-shang-chuan-jiao-ben.html</link><description>&gt; [!caution]&#13;
-&gt; typroa的图片上传脚本，针对[Telegraph-Image](https://github.com/cf-pages/Telegraph-Image)项目，适用于macOS和Linux系统。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/Typora-tu-chuang-zi-dong-shang-chuan-jiao-ben.html</guid><pubDate>Sun, 28 Jul 2024 03:03:04 +0000</pubDate></item><item><title>sdcc编译与链接</title><link>https://blog.ronan.us.kg/post/sdcc-bian-yi-yu-lian-jie.html</link><description>## 1.编译源文件&#13;
+其中的`&lt;~/.ssh/id_ed25519.pub&gt;` 是公钥所处的路径，`&lt;username&gt;`是用户名，`&lt;remote_ip&gt;`是主机名或IP 地址。</description><guid isPermaLink="true">https://echozap.github.io/post/SSH%20-mian-mi-deng-lu.html</guid><pubDate>Sun, 28 Jul 2024 03:19:49 +0000</pubDate></item><item><title>Typora图床自动上传脚本</title><link>https://echozap.github.io/post/Typora-tu-chuang-zi-dong-shang-chuan-jiao-ben.html</link><description>&gt; [!caution]&#13;
+&gt; typroa的图片上传脚本，针对[Telegraph-Image](https://github.com/cf-pages/Telegraph-Image)项目，适用于macOS和Linux系统。</description><guid isPermaLink="true">https://echozap.github.io/post/Typora-tu-chuang-zi-dong-shang-chuan-jiao-ben.html</guid><pubDate>Sun, 28 Jul 2024 03:03:04 +0000</pubDate></item><item><title>sdcc编译与链接</title><link>https://echozap.github.io/post/sdcc-bian-yi-yu-lian-jie.html</link><description>## 1.编译源文件&#13;
 &#13;
-首先，你需要编译你的源文件（例如 `main.c`）以生成目标文件（.rel）。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/sdcc-bian-yi-yu-lian-jie.html</guid><pubDate>Sat, 27 Jul 2024 07:37:39 +0000</pubDate></item><item><title>shell 编程</title><link>https://blog.ronan.us.kg/post/shell%20-bian-cheng.html</link><description># 一、运算符&#13;
+首先，你需要编译你的源文件（例如 `main.c`）以生成目标文件（.rel）。</description><guid isPermaLink="true">https://echozap.github.io/post/sdcc-bian-yi-yu-lian-jie.html</guid><pubDate>Sat, 27 Jul 2024 07:37:39 +0000</pubDate></item><item><title>shell 编程</title><link>https://echozap.github.io/post/shell%20-bian-cheng.html</link><description># 一、运算符&#13;
 &#13;
 ## 1、算术运算符&#13;
 &#13;
@@ -626,7 +626,7 @@ ssh-copy-id -i &lt;~/.ssh/id_ed25519.pub&gt; &lt;username&gt;@&lt;remote_ip&gt;&
 &#13;
 |运算符|说明|举例|&#13;
 | :----: | :-------------------------------------------: | :------------------------: |&#13;
-|+|加法|`expr $a + $b` 结果为 30。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/shell%20-bian-cheng.html</guid><pubDate>Sat, 27 Jul 2024 07:33:17 +0000</pubDate></item><item><title>vscode搭建用于8051单片机的sdcc环境</title><link>https://blog.ronan.us.kg/post/vscode-da-jian-yong-yu-8051-dan-pian-ji-de-sdcc-huan-jing.html</link><description># 查找sdcc以及8051头文件位置&#13;
+|+|加法|`expr $a + $b` 结果为 30。</description><guid isPermaLink="true">https://echozap.github.io/post/shell%20-bian-cheng.html</guid><pubDate>Sat, 27 Jul 2024 07:33:17 +0000</pubDate></item><item><title>vscode搭建用于8051单片机的sdcc环境</title><link>https://echozap.github.io/post/vscode-da-jian-yong-yu-8051-dan-pian-ji-de-sdcc-huan-jing.html</link><description># 查找sdcc以及8051头文件位置&#13;
 &#13;
 ```shell&#13;
 ❯ which sdcc&#13;
@@ -634,9 +634,9 @@ ssh-copy-id -i &lt;~/.ssh/id_ed25519.pub&gt; &lt;username&gt;@&lt;remote_ip&gt;&
 /opt/homebrew/bin//sdcc&#13;
 ```&#13;
 &#13;
-这将列出sdcc的安装位置。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/vscode-da-jian-yong-yu-8051-dan-pian-ji-de-sdcc-huan-jing.html</guid><pubDate>Sat, 27 Jul 2024 07:26:20 +0000</pubDate></item><item><title>vscode磨砂效果配置</title><link>https://blog.ronan.us.kg/post/vscode-mo-sha-xiao-guo-pei-zhi.html</link><description>## 1.安装插件&#13;
+这将列出sdcc的安装位置。</description><guid isPermaLink="true">https://echozap.github.io/post/vscode-da-jian-yong-yu-8051-dan-pian-ji-de-sdcc-huan-jing.html</guid><pubDate>Sat, 27 Jul 2024 07:26:20 +0000</pubDate></item><item><title>vscode磨砂效果配置</title><link>https://echozap.github.io/post/vscode-mo-sha-xiao-guo-pei-zhi.html</link><description>## 1.安装插件&#13;
 &#13;
-在vscode安装以下插件。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/vscode-mo-sha-xiao-guo-pei-zhi.html</guid><pubDate>Sat, 27 Jul 2024 01:44:00 +0000</pubDate></item><item><title>PlatformIO烧录失败解决方法</title><link>https://blog.ronan.us.kg/post/PlatformIO-shao-lu-shi-bai-jie-jue-fang-fa.html</link><description>## 遭遇问题&#13;
+在vscode安装以下插件。</description><guid isPermaLink="true">https://echozap.github.io/post/vscode-mo-sha-xiao-guo-pei-zhi.html</guid><pubDate>Sat, 27 Jul 2024 01:44:00 +0000</pubDate></item><item><title>PlatformIO烧录失败解决方法</title><link>https://echozap.github.io/post/PlatformIO-shao-lu-shi-bai-jie-jue-fang-fa.html</link><description>## 遭遇问题&#13;
 ​***platformIO一直卡在烧录程序中，导致开发版一直处于断电状态***&#13;
 ![问题](https://wowpb.pages.dev/file/de26c769e7e33ab9a64bb.png)&#13;
 &#13;
@@ -650,4 +650,4 @@ ssh-copy-id -i &lt;~/.ssh/id_ed25519.pub&gt; &lt;username&gt;@&lt;remote_ip&gt;&
 该文件在以下路径&#13;
 `~/.platformio/intel_mcs51/builder/main.py`&#13;
 ![解决2](https://wowpb.pages.dev/file/546b2d5e45c306275722c.png)&#13;
-。</description><guid isPermaLink="true">https://blog.ronan.us.kg/post/PlatformIO-shao-lu-shi-bai-jie-jue-fang-fa.html</guid><pubDate>Sat, 22 Jun 2024 07:16:18 +0000</pubDate></item></channel></rss>
+。</description><guid isPermaLink="true">https://echozap.github.io/post/PlatformIO-shao-lu-shi-bai-jie-jue-fang-fa.html</guid><pubDate>Sat, 22 Jun 2024 07:16:18 +0000</pubDate></item></channel></rss>
