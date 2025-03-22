@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="github-light" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    <script src='https://pub-43c06573bc27485093cd50efd04e9e7b.r2.dev/GmeekRonanTheme.js'></script><script src='https://pub-43c06573bc27485093cd50efd04e9e7b.r2.dev/GmeekVercount.js'></script>
+    <link rel="icon" href="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg">
+<meta name="description" content="通过 STM32CubeMX 建立的 Makefile 工程，应该会有以下结构：
+
+```shell
+❯ tree test
+test
+├── Core
+│   ├── Inc
+│   └── Src
+├── Drivers
+│   ├── CMSIS
+│   │   ├── Device
+│   │   │   └── ST
+│   │   │       └── STM32F1xx
+│   │   │           ├── Include
+│   │   │           ├── LICENSE.txt
+│   │   │           └── Source
+│   │   │               └── Templates
+│   │   ├── Include
+│   │   └── LICENSE.txt
+│   └── STM32F1xx_HAL_Driver
+│       ├── Inc
+│       │   ├── Legacy
+│       ├── LICENSE.txt
+│       └── Src
+├── Makefile
+├── STM32F103C8Tx_FLASH.ld
+├── build
+├── startup_stm32f103xb.s
+└── test.ioc
+```
+
+## 1.配置本机环境
+
+为了能顺利使用通过 STM32CubeMX 建立的 Makefile 工程，你需要先安装完成以下准备：
+
+- 安装 `arm-none-eabi-gcc` 交叉编译链
+- 安装 `openOCD`
+- 安装 `Make`
+
+安装 `arm-none-eabi-gcc` 交叉编译链：
+
+- windows：
+  - 链接: [https://caiyun.139.com/m/i?145CFu8T4pzZ9](https://caiyun.139.com/m/i?145CFu8T4pzZ9)
+  - 提取码:ifpa
+    
+- linux：
+  - 链接: [https://caiyun.139.com/m/i?145CFu8QjVMxO](https://caiyun.139.com/m/i?145CFu8QjVMxO)
+  - 提取码:sXCp
+  
+- macOS：
+  - 链接: [https://caiyun.139.com/m/i?145CFaDB85q9C](https://caiyun.139.com/m/i?145CFaDB85q9C)
+  - 提取码:OoEr
+  
+如果你是个 ~~大佬~~ ,当然大佬应该是不会看这种教程的，你喜欢自己构建的话，可以用下面的源码：
+
+- 链接: [https://caiyun.139.com/m/i?145CGY0p8xYON](https://caiyun.139.com/m/i?145CGY0p8xYON)
+- 提取码:t3bC
+
+下载安装好编译链之后，将其放入到环境变量 `PATH` 中(至于具体步骤，百度一下，你就知道)
+
+---
+
+## 2.创建工程并去掉警告(红色波浪线)
+
+> vscode 需要提前安装 C/C++ 插件
+
+1.新建一个 STM32CubeMX_projects 目录(以后的工程就统一放置在该目录下，建议不要放置在桌面，放在自己容易记忆的位置)，然后使用 vscode 打开该目录，并且将其保存为工作区，将工作区文件保存在希望的位置，以后可以通过双击该文件直接打开 STM32CubeMX_projects 工作区：
+
+![设立工作区](https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/vscode_stm32_makefile_config1.png)
+
+
+2.在 STM32CubeMX 配置好工程，点击左侧选项卡，然后勾选绿色框里的选项选择 Makefile 导出：
+
+![建立并导出工程](https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/cubemx_makefile_project1.png)
+![建立并导出工程](https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/cubemx_makefile_project2.png)
+
+3.使用 vscode 打开该工程目录，点开`./Core/Src/main.c`，你会发现：满是令人高血压的红色波浪线，难以忍受。">
+<meta property="og:title" content="vscode + stm32CubeMX + Makefile工程以及问题解决">
+<meta property="og:description" content="通过 STM32CubeMX 建立的 Makefile 工程，应该会有以下结构：
+
+```shell
+❯ tree test
+test
+├── Core
+│   ├── Inc
+│   └── Src
+├── Drivers
+│   ├── CMSIS
+│   │   ├── Device
+│   │   │   └── ST
+│   │   │       └── STM32F1xx
+│   │   │           ├── Include
+│   │   │           ├── LICENSE.txt
+│   │   │           └── Source
+│   │   │               └── Templates
+│   │   ├── Include
+│   │   └── LICENSE.txt
+│   └── STM32F1xx_HAL_Driver
+│       ├── Inc
+│       │   ├── Legacy
+│       ├── LICENSE.txt
+│       └── Src
+├── Makefile
+├── STM32F103C8Tx_FLASH.ld
+├── build
+├── startup_stm32f103xb.s
+└── test.ioc
+```
+
+## 1.配置本机环境
+
+为了能顺利使用通过 STM32CubeMX 建立的 Makefile 工程，你需要先安装完成以下准备：
+
+- 安装 `arm-none-eabi-gcc` 交叉编译链
+- 安装 `openOCD`
+- 安装 `Make`
+
+安装 `arm-none-eabi-gcc` 交叉编译链：
+
+- windows：
+  - 链接: [https://caiyun.139.com/m/i?145CFu8T4pzZ9](https://caiyun.139.com/m/i?145CFu8T4pzZ9)
+  - 提取码:ifpa
+    
+- linux：
+  - 链接: [https://caiyun.139.com/m/i?145CFu8QjVMxO](https://caiyun.139.com/m/i?145CFu8QjVMxO)
+  - 提取码:sXCp
+  
+- macOS：
+  - 链接: [https://caiyun.139.com/m/i?145CFaDB85q9C](https://caiyun.139.com/m/i?145CFaDB85q9C)
+  - 提取码:OoEr
+  
+如果你是个 ~~大佬~~ ,当然大佬应该是不会看这种教程的，你喜欢自己构建的话，可以用下面的源码：
+
+- 链接: [https://caiyun.139.com/m/i?145CGY0p8xYON](https://caiyun.139.com/m/i?145CGY0p8xYON)
+- 提取码:t3bC
+
+下载安装好编译链之后，将其放入到环境变量 `PATH` 中(至于具体步骤，百度一下，你就知道)
+
+---
+
+## 2.创建工程并去掉警告(红色波浪线)
+
+> vscode 需要提前安装 C/C++ 插件
+
+1.新建一个 STM32CubeMX_projects 目录(以后的工程就统一放置在该目录下，建议不要放置在桌面，放在自己容易记忆的位置)，然后使用 vscode 打开该目录，并且将其保存为工作区，将工作区文件保存在希望的位置，以后可以通过双击该文件直接打开 STM32CubeMX_projects 工作区：
+
+![设立工作区](https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/vscode_stm32_makefile_config1.png)
+
+
+2.在 STM32CubeMX 配置好工程，点击左侧选项卡，然后勾选绿色框里的选项选择 Makefile 导出：
+
+![建立并导出工程](https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/cubemx_makefile_project1.png)
+![建立并导出工程](https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/cubemx_makefile_project2.png)
+
+3.使用 vscode 打开该工程目录，点开`./Core/Src/main.c`，你会发现：满是令人高血压的红色波浪线，难以忍受。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://echozap.github.io/post/vscode%20%2B%20stm32CubeMX%20%2B%20Makefile-gong-cheng-yi-ji-wen-ti-jie-jue.html">
+<meta property="og:image" content="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg">
+<title>vscode + stm32CubeMX + Makefile工程以及问题解决</title>
+<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+.copy-feedback {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    color: var(--color-fg-on-emphasis);
+    background-color: var(--color-fg-muted);
+    border-radius: 3px;
+    padding: 5px 8px;
+    font-size: 12px;
+}
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">vscode + stm32CubeMX + Makefile工程以及问题解决</h1>
+<div class="title-right">
+    <a href="https://echozap.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题"style="display:none;">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><p>通过 STM32CubeMX 建立的 Makefile 工程，应该会有以下结构：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">❯ tree <span class="pl-c1">test</span>
+<span class="pl-c1">test</span>
+├── Core
+│   ├── Inc
+│   └── Src
+├── Drivers
+│   ├── CMSIS
+│   │   ├── Device
+│   │   │   └── ST
+│   │   │       └── STM32F1xx
+│   │   │           ├── Include
+│   │   │           ├── LICENSE.txt
+│   │   │           └── Source
+│   │   │               └── Templates
+│   │   ├── Include
+│   │   └── LICENSE.txt
+│   └── STM32F1xx_HAL_Driver
+│       ├── Inc
+│       │   ├── Legacy
+│       ├── LICENSE.txt
+│       └── Src
+├── Makefile
+├── STM32F103C8Tx_FLASH.ld
+├── build
+├── startup_stm32f103xb.s
+└── test.ioc</pre></div>
+<h2>1.配置本机环境</h2>
+<p>为了能顺利使用通过 STM32CubeMX 建立的 Makefile 工程，你需要先安装完成以下准备：</p>
+<ul>
+<li>安装 <code class="notranslate">arm-none-eabi-gcc</code> 交叉编译链</li>
+<li>安装 <code class="notranslate">openOCD</code></li>
+<li>安装 <code class="notranslate">Make</code></li>
+</ul>
+<p>安装 <code class="notranslate">arm-none-eabi-gcc</code> 交叉编译链：</p>
+<ul>
+<li>
+<p>windows：</p>
+<ul>
+<li>链接: <a href="https://caiyun.139.com/m/i?145CFu8T4pzZ9" rel="nofollow">https://caiyun.139.com/m/i?145CFu8T4pzZ9</a></li>
+<li>提取码:ifpa</li>
+</ul>
+</li>
+<li>
+<p>linux：</p>
+<ul>
+<li>链接: <a href="https://caiyun.139.com/m/i?145CFu8QjVMxO" rel="nofollow">https://caiyun.139.com/m/i?145CFu8QjVMxO</a></li>
+<li>提取码:sXCp</li>
+</ul>
+</li>
+<li>
+<p>macOS：</p>
+<ul>
+<li>链接: <a href="https://caiyun.139.com/m/i?145CFaDB85q9C" rel="nofollow">https://caiyun.139.com/m/i?145CFaDB85q9C</a></li>
+<li>提取码:OoEr</li>
+</ul>
+</li>
+</ul>
+<p>如果你是个 <del>大佬</del> ,当然大佬应该是不会看这种教程的，你喜欢自己构建的话，可以用下面的源码：</p>
+<ul>
+<li>链接: <a href="https://caiyun.139.com/m/i?145CGY0p8xYON" rel="nofollow">https://caiyun.139.com/m/i?145CGY0p8xYON</a></li>
+<li>提取码:t3bC</li>
+</ul>
+<p>下载安装好编译链之后，将其放入到环境变量 <code class="notranslate">PATH</code> 中(至于具体步骤，百度一下，你就知道)</p>
+<hr>
+<h2>2.创建工程并去掉警告(红色波浪线)</h2>
+<blockquote>
+<p>vscode 需要提前安装 C/C++ 插件</p>
+</blockquote>
+<p>1.新建一个 STM32CubeMX_projects 目录(以后的工程就统一放置在该目录下，建议不要放置在桌面，放在自己容易记忆的位置)，然后使用 vscode 打开该目录，并且将其保存为工作区，将工作区文件保存在希望的位置，以后可以通过双击该文件直接打开 STM32CubeMX_projects 工作区：</p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/a6091ba8fc47526b1a24c7c1f796f7e27a93628895c7a7976f19a87c7ac2410f/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f7673636f64655f73746d33325f6d616b6566696c655f636f6e666967312e706e67"><img src="https://camo.githubusercontent.com/a6091ba8fc47526b1a24c7c1f796f7e27a93628895c7a7976f19a87c7ac2410f/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f7673636f64655f73746d33325f6d616b6566696c655f636f6e666967312e706e67" alt="设立工作区" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/vscode_stm32_makefile_config1.png" style="max-width: 100%;"></a></p>
+<p>2.在 STM32CubeMX 配置好工程，点击左侧选项卡，然后勾选绿色框里的选项选择 Makefile 导出：</p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/79eadb52663052009ada065730c6436ce210b6c0e39f8d7e627712e62470fbed/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f637562656d785f6d616b6566696c655f70726f6a656374312e706e67"><img src="https://camo.githubusercontent.com/79eadb52663052009ada065730c6436ce210b6c0e39f8d7e627712e62470fbed/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f637562656d785f6d616b6566696c655f70726f6a656374312e706e67" alt="建立并导出工程" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/cubemx_makefile_project1.png" style="max-width: 100%;"></a><br>
+<a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/870f555954a63967dcb9236b31831f2cacc969f9c9eddfab2dad818fea544435/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f637562656d785f6d616b6566696c655f70726f6a656374322e706e67"><img src="https://camo.githubusercontent.com/870f555954a63967dcb9236b31831f2cacc969f9c9eddfab2dad818fea544435/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f637562656d785f6d616b6566696c655f70726f6a656374322e706e67" alt="建立并导出工程" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/cubemx_makefile_project2.png" style="max-width: 100%;"></a></p>
+<p>3.使用 vscode 打开该工程目录，点开<code class="notranslate">./Core/Src/main.c</code>，你会发现：满是令人高血压的红色波浪线，难以忍受。</p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/dcc2187e1a4d5c36012b7df176cc70b985d3ecd8f89f887bc943e6fb5a94d99f/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f7673636f64655f73746d33325f6d616b6566696c655f636f6e666967322e706e67"><img src="https://camo.githubusercontent.com/dcc2187e1a4d5c36012b7df176cc70b985d3ecd8f89f887bc943e6fb5a94d99f/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f7673636f64655f73746d33325f6d616b6566696c655f636f6e666967322e706e67" alt="红色波浪线" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/vscode_stm32_makefile_config2.png" style="max-width: 100%;"></a></p>
+<hr>
+<p>解决方法：</p>
+<blockquote>
+<p>动手能力比较强的可以通过 python 安装一个 compiledb ，之后在工程根目录中运行 <code class="notranslate">compiledb -n make</code> 命令，这将在工程根目录生成一个 <code class="notranslate">compile_commands.json</code> ，vscode 会根据该文件自动解析文件关系，小白可以忽略...请看下面：</p>
+</blockquote>
+<p>1.在工作区根目录中按下(macos)<code class="notranslate">cmd+shift+p</code>，(windows)<code class="notranslate">ctrl+shift+p</code>，输入 <code class="notranslate">C/C++</code> 然后点击<code class="notranslate">Edit Configurrations(JSON)</code>选择</p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/7b89cead4624a6b50ffaddbc6107e137f8ec826e8ddf2ce285ac44977308d5f9/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f7673636f64655f73746d33325f6d616b6566696c655f636f6e666967332e706e67"><img src="https://camo.githubusercontent.com/7b89cead4624a6b50ffaddbc6107e137f8ec826e8ddf2ce285ac44977308d5f9/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f7673636f64655f73746d33325f6d616b6566696c655f636f6e666967332e706e67" alt="创建 cpp_json" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/vscode_stm32_makefile_config3.png" style="max-width: 100%;"></a></p>
+<p>2.接下来 vscode 会在你的工作区根目录下创建一个 .vscode 目录和一个 c_cpp_properties.json ，默认情况下你在 c_cpp_properties.json 会看到以下内容</p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/b6f6da1339eb8cc28d0a3c67ad976e65f6b120ce5c1af3a2a71ada8b9c444841/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f7673636f64655f73746d33325f6d616b6566696c655f636f6e666967342e706e67"><img src="https://camo.githubusercontent.com/b6f6da1339eb8cc28d0a3c67ad976e65f6b120ce5c1af3a2a71ada8b9c444841/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f7673636f64655f73746d33325f6d616b6566696c655f636f6e666967342e706e67" alt="cpp_json" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/vscode_stm32_makefile_config4.png" style="max-width: 100%;"></a></p>
+<p>3.打开工程根目录的<code class="notranslate">Makefile</code>，找到<code class="notranslate">#C defines</code>（也就是宏定义这部分），然后<code class="notranslate">复制绿色框里的内容</code></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/0657c9b280e1bd65e68869d0399414c34ff330e91d1b46880a300add41d60447/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f7673636f64655f73746d33325f6d616b6566696c655f636f6e666967352e706e67"><img src="https://camo.githubusercontent.com/0657c9b280e1bd65e68869d0399414c34ff330e91d1b46880a300add41d60447/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f7673636f64655f73746d33325f6d616b6566696c655f636f6e666967352e706e67" alt="Makefile" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/vscode_stm32_makefile_config5.png" style="max-width: 100%;"></a></p>
+<p>4.回到<code class="notranslate">c_cpp_properties.json</code>，将上面复制的内容按 <code class="notranslate">以下格式(一定要注意格式)</code> 粘贴到<code class="notranslate">"defines"</code>的中括号里，就像下面这样：</p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/c08ac3b70000c35e4e0ef99eedeb6f8e682cfc4f5531c91cbdb695e068173a4d/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f7673636f64655f73746d33325f6d616b6566696c655f636f6e666967362e706e67"><img src="https://camo.githubusercontent.com/c08ac3b70000c35e4e0ef99eedeb6f8e682cfc4f5531c91cbdb695e068173a4d/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f7673636f64655f73746d33325f6d616b6566696c655f636f6e666967362e706e67" alt="c_cpp_properties.json" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/vscode_stm32_makefile_config6.png" style="max-width: 100%;"></a></p>
+<p>5.打开工程根目录的<code class="notranslate">Makefile</code>，找到<code class="notranslate">#C includes</code>（也就是头文件搜索这部分），然后<code class="notranslate">复制绿色框里的内容</code></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/93385f261f9f2ff6ab069a80607c81c95cb91972857af2e7fd22ea4971d8f00b/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f7673636f64655f73746d33325f6d616b6566696c655f636f6e666967372e706e67"><img src="https://camo.githubusercontent.com/93385f261f9f2ff6ab069a80607c81c95cb91972857af2e7fd22ea4971d8f00b/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f7673636f64655f73746d33325f6d616b6566696c655f636f6e666967372e706e67" alt="Makefile" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/vscode_stm32_makefile_config7.png" style="max-width: 100%;"></a></p>
+<p>6.回到<code class="notranslate">c_cpp_properties.json</code>，将上面复制的内容按 <code class="notranslate">以下格式(一定要注意格式)</code> 粘贴到<code class="notranslate">"includePath"</code>的中括号里。自带的第一行不要删除，在后面加上英文的逗号即可。将复制的内容前面的 -D 替换为工程名，这里的工程名是test，将所有内容使用英文引号包裹，每一行后面使用英文逗号结尾，最后一行不使用逗号，就像下面这样：</p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/3ebc2f0de43f740b22821e71549a35523f27e2efb9ea1c2bde23464998b912d0/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f7673636f64655f73746d33325f6d616b6566696c655f636f6e666967382e706e67"><img src="https://camo.githubusercontent.com/3ebc2f0de43f740b22821e71549a35523f27e2efb9ea1c2bde23464998b912d0/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f7673636f64655f73746d33325f6d616b6566696c655f636f6e666967382e706e67" alt="c_cpp_properties.json" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/vscode_stm32_makefile_config8.png" style="max-width: 100%;"></a></p>
+<blockquote>
+<p>以后每新增加一个工程都可用一样的方法，区别是替换的 <code class="notranslate">-D</code> 的工程名要修改为你希望添加的工程名，如果红色警告仍然存在，可能是重复包含，所以你可以在<code class="notranslate">c_cpp_properties.json</code> 中的 <code class="notranslate">"includePath"</code> 将之前添加的所有 include 路径注释掉，然后只保留你当前聚焦的工程 include 路径即可</p>
+</blockquote>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/648680a7bf5846d2dcd8e0aa26a3a7777bf61e01fe82b97252e637f22cb517d9/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f7673636f64655f73746d33325f6d616b6566696c655f636f6e666967382e312e706e67"><img src="https://camo.githubusercontent.com/648680a7bf5846d2dcd8e0aa26a3a7777bf61e01fe82b97252e637f22cb517d9/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f7673636f64655f73746d33325f6d616b6566696c655f636f6e666967382e312e706e67" alt="c_cpp_properties.json" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/vscode_stm32_makefile_config8.1.png" style="max-width: 100%;"></a></p>
+<p>在 <code class="notranslate">makefile</code> 的末尾加上（以下二选一）：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">flash:
+	st-flash write <span class="pl-s"><span class="pl-pds">$(</span>BUILD_DIR<span class="pl-pds">)</span></span>/<span class="pl-s"><span class="pl-pds">$(</span>TARGET<span class="pl-pds">)</span></span>.bin 0x08000000</pre></div>
+<div class="highlight highlight-source-makefile"><pre class="notranslate"><span class="pl-en">flash</span>:
+	openocd -f interface/stlink-v2.cfg -f target/stm32f1x.cfg -c <span class="pl-s"><span class="pl-pds">"</span>program <span class="pl-s"><span class="pl-pds">$(</span>BUILD_DIR<span class="pl-pds">)</span></span>/<span class="pl-s"><span class="pl-pds">$(</span>TARGET<span class="pl-pds">)</span></span>.bin verify reset exit 0x08000000<span class="pl-pds">"</span></span></pre></div>
+<p>之后即可在命令行通过 <code class="notranslate">make flash</code> 命令下载程序</p>
+<hr>
+<h2>3.工程调试</h2>
+<h3>3.1使用 openocd + stlink 调试</h3>
+<blockquote>
+<p>以stm32f103举例，<strong>注意：使用该方法调试需要安装 opencod 以及配置者具备较深的专业知识</strong></p>
+</blockquote>
+<p>1.在终端输入</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">openocd -f interface/stlink-v2.cfg -f target/stm32f1x.cfg</pre></div>
+<p>2.<strong>保持上面的终端不要退出，然后开启一个新的终端窗口</strong>，输入命令「arm-none-eabi-gdb -q path/build/&lt;your_project&gt;.elf」 就可以进入 gdb 调试：</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">❯ arm-none-eabi-gdb -q path/build/<span class="pl-k">&lt;</span>your_project<span class="pl-k">&gt;</span>.elf
+Reading symbols from .../build/<span class="pl-k">&lt;</span>your_project<span class="pl-k">&gt;</span>.elf...
+(gdb)</pre></div>
+<p>接着输入<code class="notranslate">target remote: 3333</code>，看见以下内容就可以开始调试了:</p>
+<div class="highlight highlight-source-shell"><pre class="notranslate">❯ arm-none-eabi-gdb -q path/build/<span class="pl-k">&lt;</span>your_project<span class="pl-k">&gt;</span>.elf
+Reading symbols from ./build/test.elf...
+(gdb) target remote: 3333
+Remote debugging using <span class="pl-c1">:</span> 3333</pre></div>
+<h3>3.2使用 vscode 的 cortex-debug 插件调试</h3>
+<blockquote>
+<p>使用此方法，vscode 需要安装 cortex-debug 插件</p>
+</blockquote>
+<p>先看效果;</p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/74181069cb3e71d63caf2a66df9de6dac5b52898eb0cfdb4434a24dc97332be4/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f7673636f64655f73746d33325f64656275672e706e67"><img src="https://camo.githubusercontent.com/74181069cb3e71d63caf2a66df9de6dac5b52898eb0cfdb4434a24dc97332be4/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f7673636f64655f73746d33325f64656275672e706e67" alt="debug" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/vscode_stm32_debug.png" style="max-width: 100%;"></a></p>
+<p>实现方法：</p>
+<p>在工作区根目录的 <code class="notranslate">.vscode</code> 目录中新建 <code class="notranslate">launch.json</code> 和 <code class="notranslate">tasks.json</code>。</p>
+<p>如果根目录没有 <code class="notranslate">.vscode</code> 目录，可以:</p>
+<ul>
+<li>点击顶部栏 <code class="notranslate">运行</code> -&gt; <code class="notranslate">添加配置</code> -&gt; 在弹出的 “选择调试器” 选项里随便选一个点击，这时候 <code class="notranslate">.vscode</code> 目录和 <code class="notranslate">launch.json</code> 就会创建好了。</li>
+<li>点击顶部栏 <code class="notranslate">终端</code> -&gt; <code class="notranslate">配置生成默认任务</code> -&gt; <code class="notranslate">使用模板创建 tasks.json 文件</code> -&gt; <code class="notranslate">Others</code> , <code class="notranslate">tasks.json</code> 就创建好了。</li>
+</ul>
+<p>打开刚刚创建的 <code class="notranslate">launch.json</code> ，可以看到一些默认配置，把其中 <code class="notranslate">version</code> 这一行到 <code class="notranslate">结尾花括号（不包括结尾花括号）</code> 的所有内容删除，然后把下面的内容复制并粘贴到 <code class="notranslate">version</code> 这一行到 <code class="notranslate">结尾花括号</code> 之间。</p>
+<p>launch.json:</p>
+<div class="highlight highlight-source-json"><pre class="notranslate"><span class="pl-ent">"configurations"</span>: [
+	{
+		<span class="pl-ent">"name"</span>: <span class="pl-s"><span class="pl-pds">"</span>Cortex Debug<span class="pl-pds">"</span></span>,
+		<span class="pl-ent">"cwd"</span>: <span class="pl-s"><span class="pl-pds">"</span>${workspaceRoot}<span class="pl-pds">"</span></span>,
+		<span class="pl-ent">"executable"</span>: <span class="pl-s"><span class="pl-pds">"</span>${workspaceFolder}/${input:projectName}/build/${input:projectName}.elf<span class="pl-pds">"</span></span>,<span class="pl-ii">//根据自己工程实际生成最终.elf 路径修改</span>
+		<span class="pl-ent">"request"</span>: <span class="pl-s"><span class="pl-pds">"</span>launch<span class="pl-pds">"</span></span>,
+		<span class="pl-ent">"type"</span>: <span class="pl-s"><span class="pl-pds">"</span>cortex-debug<span class="pl-pds">"</span></span>,
+		<span class="pl-ent">"servertype"</span>: <span class="pl-s"><span class="pl-pds">"</span>openocd<span class="pl-pds">"</span></span>,
+		<span class="pl-ent">"configFiles"</span>: [  <span class="pl-ii">//根据自己开发版以及调试器修改</span>
+			<span class="pl-s"><span class="pl-pds">"</span>interface/stlink-v2.cfg<span class="pl-pds">"</span></span>,
+			<span class="pl-s"><span class="pl-pds">"</span>target/stm32f1x.cfg<span class="pl-pds">"</span></span>
+		],
+		<span class="pl-ent">"armToolchainPath"</span>: <span class="pl-s"><span class="pl-pds">"</span>/opt/arm-none-eabi/bin<span class="pl-pds">"</span></span>,
+		<span class="pl-ent">"preLaunchTask"</span>: <span class="pl-s"><span class="pl-pds">"</span>stm32 debug<span class="pl-pds">"</span></span>,
+	}
+],
+
+<span class="pl-ent">"inputs"</span>: [
+	{
+		<span class="pl-ent">"id"</span>: <span class="pl-s"><span class="pl-pds">"</span>projectName<span class="pl-pds">"</span></span>,
+		<span class="pl-ent">"type"</span>: <span class="pl-s"><span class="pl-pds">"</span>promptString<span class="pl-pds">"</span></span>,
+		<span class="pl-ent">"description"</span>: <span class="pl-s"><span class="pl-pds">"</span>请输入你要调试的工程名<span class="pl-pds">"</span></span>,
+	}
+]</pre></div>
+<p>打开刚刚创建的 <code class="notranslate">tasks.json</code> ，可以看到一些默认配置，把其中 <code class="notranslate">version</code> 这一行到 <code class="notranslate">结尾花括号（不包括结尾花括号）</code> 的所有内容删除，然后把下面的内容复制并粘贴到 <code class="notranslate">version</code> 这一行到 <code class="notranslate">结尾花括号</code> 之间。</p>
+<p>tasks.json:</p>
+<div class="highlight highlight-source-json"><pre class="notranslate"><span class="pl-ent">"tasks"</span>: [
+	{
+	    <span class="pl-ent">"label"</span>: <span class="pl-s"><span class="pl-pds">"</span>stm32 debug<span class="pl-pds">"</span></span>,
+	    <span class="pl-ent">"type"</span>: <span class="pl-s"><span class="pl-pds">"</span>shell<span class="pl-pds">"</span></span>,
+	    <span class="pl-ent">"options"</span>: {
+		<span class="pl-ent">"cwd"</span>: <span class="pl-s"><span class="pl-pds">"</span>${workspaceFolder}/${input:projectName}<span class="pl-pds">"</span></span>
+	    },
+	    <span class="pl-ent">"command"</span>: <span class="pl-s"><span class="pl-pds">"</span>make<span class="pl-pds">"</span></span>,
+	    <span class="pl-ent">"detail"</span>: <span class="pl-s"><span class="pl-pds">"</span>任务用于构建 STM32 项目<span class="pl-pds">"</span></span>
+	}
+],
+<span class="pl-ent">"inputs"</span>: [
+	{
+	    <span class="pl-ent">"id"</span>: <span class="pl-s"><span class="pl-pds">"</span>projectName<span class="pl-pds">"</span></span>,
+	    <span class="pl-ent">"type"</span>: <span class="pl-s"><span class="pl-pds">"</span>promptString<span class="pl-pds">"</span></span>,
+	    <span class="pl-ent">"description"</span>: <span class="pl-s"><span class="pl-pds">"</span>请输入构建的工程名(应与调试的工程名一致)<span class="pl-pds">"</span></span>,
+	}
+]</pre></div>
+<p>然后运行一次 <code class="notranslate">make clean</code> 再重新 <code class="notranslate">make</code> 或者 <code class="notranslate">make DEBUG=1</code> ，再按下<code class="notranslate">f5</code>或者在 vscode 顶栏依次点击<code class="notranslate">运行</code>-&gt;<code class="notranslate">启用调试</code> 即可。</p>
+<h3>3.3调试遭遇问题</h3>
+<p>调试一直卡在 <code class="notranslate">HAL_Init</code> 函数里...</p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/14597f9e6e1c1b6cfaf9f567b8f4f422751259fdab6f60910ef0f663c8907045/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f7673636f64655f73746d33325f64656275675f6973737565312e706e67"><img src="https://camo.githubusercontent.com/14597f9e6e1c1b6cfaf9f567b8f4f422751259fdab6f60910ef0f663c8907045/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f7673636f64655f73746d33325f64656275675f6973737565312e706e67" alt="issue" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/vscode_stm32_debug_issue1.png" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/7b786157aacd964e663130116b4f37b8a69107bb6099f999f8fa4b87de84d6fa/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f7673636f64655f73746d33325f64656275675f6973737565322e706e67"><img src="https://camo.githubusercontent.com/7b786157aacd964e663130116b4f37b8a69107bb6099f999f8fa4b87de84d6fa/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f7673636f64655f73746d33325f64656275675f6973737565322e706e67" alt="issue" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/vscode_stm32_debug_issue2.png" style="max-width: 100%;"></a></p>
+<hr>
+<p>解决方法</p>
+<p>1.打开「.../&lt;Your_Project&gt;/Core/Src/stm32f1xx_hal_msp.c」，在其中找到<code class="notranslate">HAL_MspInit</code>函数，默认情况下，函数内部是这样的：</p>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">void</span> <span class="pl-en">HAL_MspInit</span>(<span class="pl-smi">void</span>)
+{
+  <span class="pl-en">__HAL_RCC_AFIO_CLK_ENABLE</span>();
+  <span class="pl-en">__HAL_RCC_PWR_CLK_ENABLE</span>();
+  <span class="pl-en">__HAL_AFIO_REMAP_SWJ_NOJTAG</span>();
+}</pre></div>
+<p>2.将<code class="notranslate">HAL_MspInit</code>函数内部的<code class="notranslate">__HAL_RCC_PWR_CLK_ENABLE()</code>和<code class="notranslate">__HAL_AFIO_REMAP_SWJ_NOJTAG()</code>这两个函数注释，就像这样：</p>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">void</span> <span class="pl-en">HAL_MspInit</span>(<span class="pl-smi">void</span>)
+{
+  <span class="pl-en">__HAL_RCC_AFIO_CLK_ENABLE</span>();
+  <span class="pl-c">// __HAL_RCC_PWR_CLK_ENABLE();</span>
+  <span class="pl-c">// __HAL_AFIO_REMAP_SWJ_NOJTAG();</span>
+}</pre></div>
+<p>然后 <code class="notranslate">打开终端把之前的调试任务全部停止</code> -&gt; <code class="notranslate">再次 make </code> -&gt; <code class="notranslate">重新启动调试</code> 。</p>
+<blockquote>
+<p>如需要减少编译优化等级，可以进入makefile，在 <code class="notranslate">if DEBUG</code> 判断的编译流程添加 <code class="notranslate">-O0</code> ,之后重新 <code class="notranslate">make DEBUG=1</code></p>
+</blockquote></div>
+<div style="font-size:small;margin-top:8px;float:right;">要做一个有swag的人</div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://echozap.github.io">Ronan's Blog</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z', 'copy': 'M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z', 'check': 'M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z'};
+var utterancesLoad=0;
+
+console.log("\n %c Gmeek  https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const createClipboardHTML = (codeContent, additionalClasses = '') => `
+        <pre class="notranslate"><code class="notranslate">${codeContent}</code></pre>
+        <div class="clipboard-container position-absolute right-0 top-0 ${additionalClasses}">
+            <clipboard-copy class="ClipboardButton btn m-2 p-0" role="button" style="display: inherit;">
+                <svg height="16" width="16" class="octicon octicon-copy m-2"><path d="${IconList["copy"]}"></path></svg>
+                <svg height="16" width="16" class="octicon octicon-check color-fg-success m-2 d-none"><path d="${IconList["check"]}"></path></svg>
+            </clipboard-copy>
+            <div class="copy-feedback">Copied!</div>
+        </div>
+    `;
+
+    const handleCodeElements = (selector = '') => {
+        document.querySelectorAll(selector).forEach(codeElement => {
+            const codeContent = codeElement.innerHTML;
+            const newStructure = document.createElement('div');
+            newStructure.className = 'snippet-clipboard-content position-relative overflow-auto';
+            newStructure.innerHTML = createClipboardHTML(codeContent);
+
+            const parentElement = codeElement.parentElement;
+            if (selector.includes('highlight')) {
+                parentElement.insertBefore(newStructure, codeElement.nextSibling);
+                parentElement.removeChild(codeElement);
+            } else {
+                parentElement.parentElement.replaceChild(newStructure, parentElement);
+            }
+        });
+    };
+
+    handleCodeElements('pre.notranslate > code.notranslate');
+    handleCodeElements('div.highlight > pre.notranslate');
+
+    let currentFeedback = null;
+    document.querySelectorAll('clipboard-copy').forEach(copyButton => {
+        copyButton.addEventListener('click', () => {
+            const codeContent = copyButton.closest('.snippet-clipboard-content').innerText;
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = codeContent;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextArea);
+
+            const copyIcon = copyButton.querySelector('.octicon-copy');
+            const checkIcon = copyButton.querySelector('.octicon-check');
+            const copyFeedback = copyButton.nextElementSibling;
+
+            if (currentFeedback && currentFeedback !== copyFeedback) {currentFeedback.style.display = 'none';}
+            currentFeedback = copyFeedback;
+
+            copyIcon.classList.add('d-none');
+            checkIcon.classList.remove('d-none');
+            copyFeedback.style.display = 'block';
+            copyButton.style.borderColor = 'var(--color-success-fg)';
+
+            setTimeout(() => {
+                copyIcon.classList.remove('d-none');
+                checkIcon.classList.add('d-none');
+                copyFeedback.style.display = 'none';
+                copyButton.style.borderColor = '';
+            }, 2000);
+        });
+    });
+});
+
+</script>
+<script src='https://pub-43c06573bc27485093cd50efd04e9e7b.r2.dev/GmeekArticleTOC.js'></script><script src='https://pub-43c06573bc27485093cd50efd04e9e7b.r2.dev/Gmeeklightbox.js'></script><script>document.querySelectorAll('a').forEach(anchor => {const img = anchor.querySelector('img');if (img && img.hasAttribute('data-canonical-src')) {const canonicalSrc = img.getAttribute('data-canonical-src');anchor.setAttribute('href', canonicalSrc);img.setAttribute('src', canonicalSrc);img.removeAttribute('data-canonical-src');}});</script>
+
+</html>

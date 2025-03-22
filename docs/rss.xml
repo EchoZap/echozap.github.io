@@ -1,5 +1,81 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan's Blog</title><link>https://echozap.github.io</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg</url><title>avatar</title><link>https://echozap.github.io</link></image><lastBuildDate>Sat, 22 Mar 2025 10:45:41 +0000</lastBuildDate><managingEditor>Ronan's Blog</managingEditor><ttl>60</ttl><webMaster>Ronan's Blog</webMaster><item><title>stm32程序烧录方式</title><link>https://echozap.github.io/post/stm32-cheng-xu-shao-lu-fang-shi.html</link><description>&gt; 以下以stm32f103c8t6芯片为例
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Ronan's Blog</title><link>https://echozap.github.io</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>Ronan's Blog</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg</url><title>avatar</title><link>https://echozap.github.io</link></image><lastBuildDate>Sat, 22 Mar 2025 10:46:23 +0000</lastBuildDate><managingEditor>Ronan's Blog</managingEditor><ttl>60</ttl><webMaster>Ronan's Blog</webMaster><item><title>vscode + stm32CubeMX + Makefile工程以及问题解决</title><link>https://echozap.github.io/post/vscode%20%2B%20stm32CubeMX%20%2B%20Makefile-gong-cheng-yi-ji-wen-ti-jie-jue.html</link><description>通过 STM32CubeMX 建立的 Makefile 工程，应该会有以下结构：
+
+```shell
+❯ tree test
+test
+├── Core
+│   ├── Inc
+│   └── Src
+├── Drivers
+│   ├── CMSIS
+│   │   ├── Device
+│   │   │   └── ST
+│   │   │       └── STM32F1xx
+│   │   │           ├── Include
+│   │   │           ├── LICENSE.txt
+│   │   │           └── Source
+│   │   │               └── Templates
+│   │   ├── Include
+│   │   └── LICENSE.txt
+│   └── STM32F1xx_HAL_Driver
+│       ├── Inc
+│       │   ├── Legacy
+│       ├── LICENSE.txt
+│       └── Src
+├── Makefile
+├── STM32F103C8Tx_FLASH.ld
+├── build
+├── startup_stm32f103xb.s
+└── test.ioc
+```
+
+## 1.配置本机环境
+
+为了能顺利使用通过 STM32CubeMX 建立的 Makefile 工程，你需要先安装完成以下准备：
+
+- 安装 `arm-none-eabi-gcc` 交叉编译链
+- 安装 `openOCD`
+- 安装 `Make`
+
+安装 `arm-none-eabi-gcc` 交叉编译链：
+
+- windows：
+  - 链接: [https://caiyun.139.com/m/i?145CFu8T4pzZ9](https://caiyun.139.com/m/i?145CFu8T4pzZ9)
+  - 提取码:ifpa
+    
+- linux：
+  - 链接: [https://caiyun.139.com/m/i?145CFu8QjVMxO](https://caiyun.139.com/m/i?145CFu8QjVMxO)
+  - 提取码:sXCp
+  
+- macOS：
+  - 链接: [https://caiyun.139.com/m/i?145CFaDB85q9C](https://caiyun.139.com/m/i?145CFaDB85q9C)
+  - 提取码:OoEr
+  
+如果你是个 ~~大佬~~ ,当然大佬应该是不会看这种教程的，你喜欢自己构建的话，可以用下面的源码：
+
+- 链接: [https://caiyun.139.com/m/i?145CGY0p8xYON](https://caiyun.139.com/m/i?145CGY0p8xYON)
+- 提取码:t3bC
+
+下载安装好编译链之后，将其放入到环境变量 `PATH` 中(至于具体步骤，百度一下，你就知道)
+
+---
+
+## 2.创建工程并去掉警告(红色波浪线)
+
+&gt; vscode 需要提前安装 C/C++ 插件
+
+1.新建一个 STM32CubeMX_projects 目录(以后的工程就统一放置在该目录下，建议不要放置在桌面，放在自己容易记忆的位置)，然后使用 vscode 打开该目录，并且将其保存为工作区，将工作区文件保存在希望的位置，以后可以通过双击该文件直接打开 STM32CubeMX_projects 工作区：
+
+![设立工作区](https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/vscode_stm32_makefile_config1.png)
+
+
+2.在 STM32CubeMX 配置好工程，点击左侧选项卡，然后勾选绿色框里的选项选择 Makefile 导出：
+
+![建立并导出工程](https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/cubemx_makefile_project1.png)
+![建立并导出工程](https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/cubemx_makefile_project2.png)
+
+3.使用 vscode 打开该工程目录，点开`./Core/Src/main.c`，你会发现：满是令人高血压的红色波浪线，难以忍受。</description><guid isPermaLink="true">https://echozap.github.io/post/vscode%20%2B%20stm32CubeMX%20%2B%20Makefile-gong-cheng-yi-ji-wen-ti-jie-jue.html</guid><pubDate>Sat, 22 Mar 2025 10:45:57 +0000</pubDate></item><item><title>stm32程序烧录方式</title><link>https://echozap.github.io/post/stm32-cheng-xu-shao-lu-fang-shi.html</link><description>&gt; 以下以stm32f103c8t6芯片为例
 
 ## 使用stlink
 
