@@ -1,6 +1,6 @@
-在 main 函数的 old_domain 为旧的图片链接，new_domain 是新的图片链接，根据自身情况填写。
+在 main 函数的 「old_domain」 为旧的图片链接，「new_domain」 是新的图片链接，根据自身情况填写。
 
-将以下代码保存为 `re.py` ,使用方法：`usage: re.py [-h] input_dir`，参数是一个目录路径。
+将以下代码保存为 `rn.py` ,使用方法：`usage: python rn.py input_dir`，参数是一个目录路径。
 
 ```python
 import os
