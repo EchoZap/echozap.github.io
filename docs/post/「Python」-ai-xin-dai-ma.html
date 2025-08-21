@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="github-light" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    <script src='https://pub-43c06573bc27485093cd50efd04e9e7b.r2.dev/GmeekVercount.js'></script><script src='https://pub-43c06573bc27485093cd50efd04e9e7b.r2.dev/GmeekRonanTheme.js'></script>
+    <link rel="icon" href="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg">
+<meta name="description" content="# 1.先看效果
+
+![爱心代码效果图](https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/250822003308.png)
+
+# 2.源代码👇
+
+```Python
+import random
+from math import sin, cos, pi, log
+from tkinter import *
+CANVAS_WIDTH = 640
+CANVAS_HEIGHT = 480
+CANVAS_CENTER_X = CANVAS_WIDTH / 2
+CANVAS_CENTER_Y = CANVAS_HEIGHT / 2
+IMAGE_ENLARGE = 11
+HEART_COLOR = '#FF99CC'
+
+
+def heart_function(t, shrink_ratio: float = IMAGE_ENLARGE):
+    x = 16 * (sin(t) ** 3)
+    y = -(13 * cos(t) - 5 * cos(2 * t) - 2 * cos(3 * t) - cos(4 * t))
+    # 放大
+    x *= shrink_ratio
+    y *= shrink_ratio
+    # 移到画布中央
+    x += CANVAS_CENTER_X
+    y += CANVAS_CENTER_Y
+    return int(x), int(y)
+
+
+def scatter_inside(x, y, beta=0.15):
+    ratio_x = - beta * log(random.random())
+    ratio_y = - beta * log(random.random())
+    dx = ratio_x * (x - CANVAS_CENTER_X)
+    dy = ratio_y * (y - CANVAS_CENTER_Y)
+    return x - dx, y - dy
+
+
+def shrink(x, y, ratio):
+    force = -1 / (((x - CANVAS_CENTER_X) ** 2 +
+                  (y - CANVAS_CENTER_Y) ** 2) ** 0.6)
+    dx = ratio * force * (x - CANVAS_CENTER_X)
+    dy = ratio * force * (y - CANVAS_CENTER_Y)
+    return x - dx, y - dy
+
+
+def curve(p):
+    return 2 * (2 * sin(4 * p)) / (2 * pi)
+
+
+class Heart:
+    def __init__(self, generate_frame=20):
+        self._points = set()  # 原始爱心坐标集合
+        self._edge_diffusion_points = set()  # 边缘扩散效果点坐标集合
+        self._center_diffusion_points = set()  # 中心扩散效果点坐标集合
+        self.all_points = {}  # 每帧动态点坐标
+        self.build(2000)
+        self.random_halo = 1000
+        self.generate_frame = generate_frame
+        for frame in range(generate_frame):
+            self.calc(frame)
+
+    def build(self, number):
+        for _ in range(number):
+            t = random.uniform(0, 2 * pi)
+            x, y = heart_function(t)
+            self._points.add((x, y))
+        # 爱心内扩散
+        for _x, _y in list(self._points):
+            for _ in range(3):
+                x, y = scatter_inside(_x, _y, 0.05)
+                self._edge_diffusion_points.add((x, y))
+        # 爱心内再次扩散
+        point_list = list(self._points)
+        for _ in range(4000):
+            x, y = random.choice(point_list)
+            x, y = scatter_inside(x, y, 0.17)
+            self._center_diffusion_points.add((x, y))
+
+    @staticmethod
+    def calc_position(x, y, ratio):
+        force = 1 / (((x - CANVAS_CENTER_X) ** 2 +
+                      (y - CANVAS_CENTER_Y) ** 2) ** 0.520)
+        dx = ratio * force * (x - CANVAS_CENTER_X) + random.randint(-1, 1)
+        dy = ratio * force * (y - CANVAS_CENTER_Y) + random.randint(-1, 1)
+        return x - dx, y - dy
+
+    def calc(self, generate_frame):
+        ratio = 10 * curve(generate_frame / 10 * pi)
+        halo_radius = int(4 + 6 * (1 + curve(generate_frame / 10 * pi)))
+        halo_number = int(
+            3000 + 4000 * abs(curve(generate_frame / 10 * pi) ** 2))
+        all_points = []
+        # 光环
+        heart_halo_point = set()
+        for _ in range(halo_number):
+            t = random.uniform(0, 2 * pi)
+            x, y = heart_function(t, shrink_ratio=11.6)
+            x, y = shrink(x, y, halo_radius)
+            if (x, y) not in heart_halo_point:
+                heart_halo_point.add((x, y))
+                x += random.randint(-14, 14)
+                y += random.randint(-14, 14)
+                size = random.choice((1, 2, 2))
+                all_points.append((x, y, size))
+        # 轮廓
+        for x, y in self._points:
+            x, y = self.calc_position(x, y, ratio)
+            size = random.randint(1, 3)
+            all_points.append((x, y, size))
+        # 内容
+        for x, y in self._edge_diffusion_points:
+            x, y = self.calc_position(x, y, ratio)
+            size = random.randint(1, 2)
+            all_points.append((x, y, size))
+        self.all_points[generate_frame] = all_points
+        for x, y in self._center_diffusion_points:
+            x, y = self.calc_position(x, y, ratio)
+            size = random.randint(1, 2)
+            all_points.append((x, y, size))
+        self.all_points[generate_frame] = all_points
+
+    def render(self, render_canvas, render_frame):
+        for x, y, size in self.all_points[render_frame % self.generate_frame]:
+            render_canvas.create_rectangle(
+                x, y, x + size, y + size, width=0, fill=HEART_COLOR)
+
+
+def draw(main: Tk, render_canvas: Canvas, render_heart: Heart, render_frame=0):
+    render_canvas.delete('all')
+    render_heart.render(render_canvas, render_frame)
+    main.after(160, draw, main, render_canvas, render_heart, render_frame + 1)
+
+
+if __name__ == '__main__':
+    root = Tk()
+    root.title('这是给公主的...')
+    canvas = Canvas(root, bg='black', height=CANVAS_HEIGHT, width=CANVAS_WIDTH)
+    canvas.pack()
+    heart = Heart()
+    draw(root, canvas, heart)
+    root.mainloop()
+```。">
+<meta property="og:title" content="「Python」爱心代码">
+<meta property="og:description" content="# 1.先看效果
+
+![爱心代码效果图](https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/250822003308.png)
+
+# 2.源代码👇
+
+```Python
+import random
+from math import sin, cos, pi, log
+from tkinter import *
+CANVAS_WIDTH = 640
+CANVAS_HEIGHT = 480
+CANVAS_CENTER_X = CANVAS_WIDTH / 2
+CANVAS_CENTER_Y = CANVAS_HEIGHT / 2
+IMAGE_ENLARGE = 11
+HEART_COLOR = '#FF99CC'
+
+
+def heart_function(t, shrink_ratio: float = IMAGE_ENLARGE):
+    x = 16 * (sin(t) ** 3)
+    y = -(13 * cos(t) - 5 * cos(2 * t) - 2 * cos(3 * t) - cos(4 * t))
+    # 放大
+    x *= shrink_ratio
+    y *= shrink_ratio
+    # 移到画布中央
+    x += CANVAS_CENTER_X
+    y += CANVAS_CENTER_Y
+    return int(x), int(y)
+
+
+def scatter_inside(x, y, beta=0.15):
+    ratio_x = - beta * log(random.random())
+    ratio_y = - beta * log(random.random())
+    dx = ratio_x * (x - CANVAS_CENTER_X)
+    dy = ratio_y * (y - CANVAS_CENTER_Y)
+    return x - dx, y - dy
+
+
+def shrink(x, y, ratio):
+    force = -1 / (((x - CANVAS_CENTER_X) ** 2 +
+                  (y - CANVAS_CENTER_Y) ** 2) ** 0.6)
+    dx = ratio * force * (x - CANVAS_CENTER_X)
+    dy = ratio * force * (y - CANVAS_CENTER_Y)
+    return x - dx, y - dy
+
+
+def curve(p):
+    return 2 * (2 * sin(4 * p)) / (2 * pi)
+
+
+class Heart:
+    def __init__(self, generate_frame=20):
+        self._points = set()  # 原始爱心坐标集合
+        self._edge_diffusion_points = set()  # 边缘扩散效果点坐标集合
+        self._center_diffusion_points = set()  # 中心扩散效果点坐标集合
+        self.all_points = {}  # 每帧动态点坐标
+        self.build(2000)
+        self.random_halo = 1000
+        self.generate_frame = generate_frame
+        for frame in range(generate_frame):
+            self.calc(frame)
+
+    def build(self, number):
+        for _ in range(number):
+            t = random.uniform(0, 2 * pi)
+            x, y = heart_function(t)
+            self._points.add((x, y))
+        # 爱心内扩散
+        for _x, _y in list(self._points):
+            for _ in range(3):
+                x, y = scatter_inside(_x, _y, 0.05)
+                self._edge_diffusion_points.add((x, y))
+        # 爱心内再次扩散
+        point_list = list(self._points)
+        for _ in range(4000):
+            x, y = random.choice(point_list)
+            x, y = scatter_inside(x, y, 0.17)
+            self._center_diffusion_points.add((x, y))
+
+    @staticmethod
+    def calc_position(x, y, ratio):
+        force = 1 / (((x - CANVAS_CENTER_X) ** 2 +
+                      (y - CANVAS_CENTER_Y) ** 2) ** 0.520)
+        dx = ratio * force * (x - CANVAS_CENTER_X) + random.randint(-1, 1)
+        dy = ratio * force * (y - CANVAS_CENTER_Y) + random.randint(-1, 1)
+        return x - dx, y - dy
+
+    def calc(self, generate_frame):
+        ratio = 10 * curve(generate_frame / 10 * pi)
+        halo_radius = int(4 + 6 * (1 + curve(generate_frame / 10 * pi)))
+        halo_number = int(
+            3000 + 4000 * abs(curve(generate_frame / 10 * pi) ** 2))
+        all_points = []
+        # 光环
+        heart_halo_point = set()
+        for _ in range(halo_number):
+            t = random.uniform(0, 2 * pi)
+            x, y = heart_function(t, shrink_ratio=11.6)
+            x, y = shrink(x, y, halo_radius)
+            if (x, y) not in heart_halo_point:
+                heart_halo_point.add((x, y))
+                x += random.randint(-14, 14)
+                y += random.randint(-14, 14)
+                size = random.choice((1, 2, 2))
+                all_points.append((x, y, size))
+        # 轮廓
+        for x, y in self._points:
+            x, y = self.calc_position(x, y, ratio)
+            size = random.randint(1, 3)
+            all_points.append((x, y, size))
+        # 内容
+        for x, y in self._edge_diffusion_points:
+            x, y = self.calc_position(x, y, ratio)
+            size = random.randint(1, 2)
+            all_points.append((x, y, size))
+        self.all_points[generate_frame] = all_points
+        for x, y in self._center_diffusion_points:
+            x, y = self.calc_position(x, y, ratio)
+            size = random.randint(1, 2)
+            all_points.append((x, y, size))
+        self.all_points[generate_frame] = all_points
+
+    def render(self, render_canvas, render_frame):
+        for x, y, size in self.all_points[render_frame % self.generate_frame]:
+            render_canvas.create_rectangle(
+                x, y, x + size, y + size, width=0, fill=HEART_COLOR)
+
+
+def draw(main: Tk, render_canvas: Canvas, render_heart: Heart, render_frame=0):
+    render_canvas.delete('all')
+    render_heart.render(render_canvas, render_frame)
+    main.after(160, draw, main, render_canvas, render_heart, render_frame + 1)
+
+
+if __name__ == '__main__':
+    root = Tk()
+    root.title('这是给公主的...')
+    canvas = Canvas(root, bg='black', height=CANVAS_HEIGHT, width=CANVAS_WIDTH)
+    canvas.pack()
+    heart = Heart()
+    draw(root, canvas, heart)
+    root.mainloop()
+```。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://blog.ronan.cloudns.ch/post/%E3%80%8CPython%E3%80%8D-ai-xin-dai-ma.html">
+<meta property="og:image" content="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg">
+<title>「Python」爱心代码</title>
+<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+.copy-feedback {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    color: var(--color-fg-on-emphasis);
+    background-color: var(--color-fg-muted);
+    border-radius: 3px;
+    padding: 5px 8px;
+    font-size: 12px;
+}
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">「Python」爱心代码</h1>
+<div class="title-right">
+    <a href="https://blog.ronan.cloudns.ch" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题"style="display:none;">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><h1>1.先看效果</h1>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/2338a4303e3079f1ba2f0e4590e0685012ef67b3266331675d433f0be015e479/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f3235303832323030333330382e706e67"><img src="https://camo.githubusercontent.com/2338a4303e3079f1ba2f0e4590e0685012ef67b3266331675d433f0be015e479/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f3235303832323030333330382e706e67" alt="爱心代码效果图" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/250822003308.png" style="max-width: 100%;"></a></p>
+<h1>2.源代码👇</h1>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-k">import</span> <span class="pl-s1">random</span>
+<span class="pl-k">from</span> <span class="pl-s1">math</span> <span class="pl-k">import</span> <span class="pl-s1">sin</span>, <span class="pl-s1">cos</span>, <span class="pl-s1">pi</span>, <span class="pl-s1">log</span>
+<span class="pl-k">from</span> <span class="pl-s1">tkinter</span> <span class="pl-k">import</span> <span class="pl-c1">*</span>
+<span class="pl-c1">CANVAS_WIDTH</span> <span class="pl-c1">=</span> <span class="pl-c1">640</span>
+<span class="pl-c1">CANVAS_HEIGHT</span> <span class="pl-c1">=</span> <span class="pl-c1">480</span>
+<span class="pl-c1">CANVAS_CENTER_X</span> <span class="pl-c1">=</span> <span class="pl-c1">CANVAS_WIDTH</span> <span class="pl-c1">/</span> <span class="pl-c1">2</span>
+<span class="pl-c1">CANVAS_CENTER_Y</span> <span class="pl-c1">=</span> <span class="pl-c1">CANVAS_HEIGHT</span> <span class="pl-c1">/</span> <span class="pl-c1">2</span>
+<span class="pl-c1">IMAGE_ENLARGE</span> <span class="pl-c1">=</span> <span class="pl-c1">11</span>
+<span class="pl-c1">HEART_COLOR</span> <span class="pl-c1">=</span> <span class="pl-s">"#FF99CC"</span>
+
+
+<span class="pl-k">def</span> <span class="pl-en">heart_function</span>(<span class="pl-s1">t</span>, <span class="pl-s1">shrink_ratio</span>: <span class="pl-smi">float</span> <span class="pl-c1">=</span> <span class="pl-c1">IMAGE_ENLARGE</span>):
+    <span class="pl-s1">x</span> <span class="pl-c1">=</span> <span class="pl-c1">16</span> <span class="pl-c1">*</span> (<span class="pl-en">sin</span>(<span class="pl-s1">t</span>) <span class="pl-c1">**</span> <span class="pl-c1">3</span>)
+    <span class="pl-s1">y</span> <span class="pl-c1">=</span> <span class="pl-c1">-</span>(<span class="pl-c1">13</span> <span class="pl-c1">*</span> <span class="pl-en">cos</span>(<span class="pl-s1">t</span>) <span class="pl-c1">-</span> <span class="pl-c1">5</span> <span class="pl-c1">*</span> <span class="pl-en">cos</span>(<span class="pl-c1">2</span> <span class="pl-c1">*</span> <span class="pl-s1">t</span>) <span class="pl-c1">-</span> <span class="pl-c1">2</span> <span class="pl-c1">*</span> <span class="pl-en">cos</span>(<span class="pl-c1">3</span> <span class="pl-c1">*</span> <span class="pl-s1">t</span>) <span class="pl-c1">-</span> <span class="pl-en">cos</span>(<span class="pl-c1">4</span> <span class="pl-c1">*</span> <span class="pl-s1">t</span>))
+    <span class="pl-c"># 放大</span>
+    <span class="pl-s1">x</span> <span class="pl-c1">*=</span> <span class="pl-s1">shrink_ratio</span>
+    <span class="pl-s1">y</span> <span class="pl-c1">*=</span> <span class="pl-s1">shrink_ratio</span>
+    <span class="pl-c"># 移到画布中央</span>
+    <span class="pl-s1">x</span> <span class="pl-c1">+=</span> <span class="pl-c1">CANVAS_CENTER_X</span>
+    <span class="pl-s1">y</span> <span class="pl-c1">+=</span> <span class="pl-c1">CANVAS_CENTER_Y</span>
+    <span class="pl-k">return</span> <span class="pl-en">int</span>(<span class="pl-s1">x</span>), <span class="pl-en">int</span>(<span class="pl-s1">y</span>)
+
+
+<span class="pl-k">def</span> <span class="pl-en">scatter_inside</span>(<span class="pl-s1">x</span>, <span class="pl-s1">y</span>, <span class="pl-s1">beta</span><span class="pl-c1">=</span><span class="pl-c1">0.15</span>):
+    <span class="pl-s1">ratio_x</span> <span class="pl-c1">=</span> <span class="pl-c1">-</span> <span class="pl-s1">beta</span> <span class="pl-c1">*</span> <span class="pl-en">log</span>(<span class="pl-s1">random</span>.<span class="pl-c1">random</span>())
+    <span class="pl-s1">ratio_y</span> <span class="pl-c1">=</span> <span class="pl-c1">-</span> <span class="pl-s1">beta</span> <span class="pl-c1">*</span> <span class="pl-en">log</span>(<span class="pl-s1">random</span>.<span class="pl-c1">random</span>())
+    <span class="pl-s1">dx</span> <span class="pl-c1">=</span> <span class="pl-s1">ratio_x</span> <span class="pl-c1">*</span> (<span class="pl-s1">x</span> <span class="pl-c1">-</span> <span class="pl-c1">CANVAS_CENTER_X</span>)
+    <span class="pl-s1">dy</span> <span class="pl-c1">=</span> <span class="pl-s1">ratio_y</span> <span class="pl-c1">*</span> (<span class="pl-s1">y</span> <span class="pl-c1">-</span> <span class="pl-c1">CANVAS_CENTER_Y</span>)
+    <span class="pl-k">return</span> <span class="pl-s1">x</span> <span class="pl-c1">-</span> <span class="pl-s1">dx</span>, <span class="pl-s1">y</span> <span class="pl-c1">-</span> <span class="pl-s1">dy</span>
+
+
+<span class="pl-k">def</span> <span class="pl-en">shrink</span>(<span class="pl-s1">x</span>, <span class="pl-s1">y</span>, <span class="pl-s1">ratio</span>):
+    <span class="pl-s1">force</span> <span class="pl-c1">=</span> <span class="pl-c1">-</span><span class="pl-c1">1</span> <span class="pl-c1">/</span> (((<span class="pl-s1">x</span> <span class="pl-c1">-</span> <span class="pl-c1">CANVAS_CENTER_X</span>) <span class="pl-c1">**</span> <span class="pl-c1">2</span> <span class="pl-c1">+</span>
+                  (<span class="pl-s1">y</span> <span class="pl-c1">-</span> <span class="pl-c1">CANVAS_CENTER_Y</span>) <span class="pl-c1">**</span> <span class="pl-c1">2</span>) <span class="pl-c1">**</span> <span class="pl-c1">0.6</span>)
+    <span class="pl-s1">dx</span> <span class="pl-c1">=</span> <span class="pl-s1">ratio</span> <span class="pl-c1">*</span> <span class="pl-s1">force</span> <span class="pl-c1">*</span> (<span class="pl-s1">x</span> <span class="pl-c1">-</span> <span class="pl-c1">CANVAS_CENTER_X</span>)
+    <span class="pl-s1">dy</span> <span class="pl-c1">=</span> <span class="pl-s1">ratio</span> <span class="pl-c1">*</span> <span class="pl-s1">force</span> <span class="pl-c1">*</span> (<span class="pl-s1">y</span> <span class="pl-c1">-</span> <span class="pl-c1">CANVAS_CENTER_Y</span>)
+    <span class="pl-k">return</span> <span class="pl-s1">x</span> <span class="pl-c1">-</span> <span class="pl-s1">dx</span>, <span class="pl-s1">y</span> <span class="pl-c1">-</span> <span class="pl-s1">dy</span>
+
+
+<span class="pl-k">def</span> <span class="pl-en">curve</span>(<span class="pl-s1">p</span>):
+    <span class="pl-k">return</span> <span class="pl-c1">2</span> <span class="pl-c1">*</span> (<span class="pl-c1">2</span> <span class="pl-c1">*</span> <span class="pl-en">sin</span>(<span class="pl-c1">4</span> <span class="pl-c1">*</span> <span class="pl-s1">p</span>)) <span class="pl-c1">/</span> (<span class="pl-c1">2</span> <span class="pl-c1">*</span> <span class="pl-s1">pi</span>)
+
+
+<span class="pl-k">class</span> <span class="pl-v">Heart</span>:
+    <span class="pl-k">def</span> <span class="pl-en">__init__</span>(<span class="pl-s1">self</span>, <span class="pl-s1">generate_frame</span><span class="pl-c1">=</span><span class="pl-c1">20</span>):
+        <span class="pl-s1">self</span>.<span class="pl-c1">_points</span> <span class="pl-c1">=</span> <span class="pl-en">set</span>()  <span class="pl-c"># 原始爱心坐标集合</span>
+        <span class="pl-s1">self</span>.<span class="pl-c1">_edge_diffusion_points</span> <span class="pl-c1">=</span> <span class="pl-en">set</span>()  <span class="pl-c"># 边缘扩散效果点坐标集合</span>
+        <span class="pl-s1">self</span>.<span class="pl-c1">_center_diffusion_points</span> <span class="pl-c1">=</span> <span class="pl-en">set</span>()  <span class="pl-c"># 中心扩散效果点坐标集合</span>
+        <span class="pl-s1">self</span>.<span class="pl-c1">all_points</span> <span class="pl-c1">=</span> {}  <span class="pl-c"># 每帧动态点坐标</span>
+        <span class="pl-s1">self</span>.<span class="pl-c1">build</span>(<span class="pl-c1">2000</span>)
+        <span class="pl-s1">self</span>.<span class="pl-c1">random_halo</span> <span class="pl-c1">=</span> <span class="pl-c1">1000</span>
+        <span class="pl-s1">self</span>.<span class="pl-c1">generate_frame</span> <span class="pl-c1">=</span> <span class="pl-s1">generate_frame</span>
+        <span class="pl-k">for</span> <span class="pl-s1">frame</span> <span class="pl-c1">in</span> <span class="pl-en">range</span>(<span class="pl-s1">generate_frame</span>):
+            <span class="pl-s1">self</span>.<span class="pl-c1">calc</span>(<span class="pl-s1">frame</span>)
+
+    <span class="pl-k">def</span> <span class="pl-en">build</span>(<span class="pl-s1">self</span>, <span class="pl-s1">number</span>):
+        <span class="pl-k">for</span> <span class="pl-s1">_</span> <span class="pl-c1">in</span> <span class="pl-en">range</span>(<span class="pl-s1">number</span>):
+            <span class="pl-s1">t</span> <span class="pl-c1">=</span> <span class="pl-s1">random</span>.<span class="pl-c1">uniform</span>(<span class="pl-c1">0</span>, <span class="pl-c1">2</span> <span class="pl-c1">*</span> <span class="pl-s1">pi</span>)
+            <span class="pl-s1">x</span>, <span class="pl-s1">y</span> <span class="pl-c1">=</span> <span class="pl-en">heart_function</span>(<span class="pl-s1">t</span>)
+            <span class="pl-s1">self</span>.<span class="pl-c1">_points</span>.<span class="pl-c1">add</span>((<span class="pl-s1">x</span>, <span class="pl-s1">y</span>))
+        <span class="pl-c"># 爱心内扩散</span>
+        <span class="pl-k">for</span> <span class="pl-s1">_x</span>, <span class="pl-s1">_y</span> <span class="pl-c1">in</span> <span class="pl-en">list</span>(<span class="pl-s1">self</span>.<span class="pl-c1">_points</span>):
+            <span class="pl-k">for</span> <span class="pl-s1">_</span> <span class="pl-c1">in</span> <span class="pl-en">range</span>(<span class="pl-c1">3</span>):
+                <span class="pl-s1">x</span>, <span class="pl-s1">y</span> <span class="pl-c1">=</span> <span class="pl-en">scatter_inside</span>(<span class="pl-s1">_x</span>, <span class="pl-s1">_y</span>, <span class="pl-c1">0.05</span>)
+                <span class="pl-s1">self</span>.<span class="pl-c1">_edge_diffusion_points</span>.<span class="pl-c1">add</span>((<span class="pl-s1">x</span>, <span class="pl-s1">y</span>))
+        <span class="pl-c"># 爱心内再次扩散</span>
+        <span class="pl-s1">point_list</span> <span class="pl-c1">=</span> <span class="pl-en">list</span>(<span class="pl-s1">self</span>.<span class="pl-c1">_points</span>)
+        <span class="pl-k">for</span> <span class="pl-s1">_</span> <span class="pl-c1">in</span> <span class="pl-en">range</span>(<span class="pl-c1">4000</span>):
+            <span class="pl-s1">x</span>, <span class="pl-s1">y</span> <span class="pl-c1">=</span> <span class="pl-s1">random</span>.<span class="pl-c1">choice</span>(<span class="pl-s1">point_list</span>)
+            <span class="pl-s1">x</span>, <span class="pl-s1">y</span> <span class="pl-c1">=</span> <span class="pl-en">scatter_inside</span>(<span class="pl-s1">x</span>, <span class="pl-s1">y</span>, <span class="pl-c1">0.17</span>)
+            <span class="pl-s1">self</span>.<span class="pl-c1">_center_diffusion_points</span>.<span class="pl-c1">add</span>((<span class="pl-s1">x</span>, <span class="pl-s1">y</span>))
+
+    <span class="pl-en">@<span class="pl-s1">staticmethod</span></span>
+    <span class="pl-k">def</span> <span class="pl-en">calc_position</span>(<span class="pl-s1">x</span>, <span class="pl-s1">y</span>, <span class="pl-s1">ratio</span>):
+        <span class="pl-s1">force</span> <span class="pl-c1">=</span> <span class="pl-c1">1</span> <span class="pl-c1">/</span> (((<span class="pl-s1">x</span> <span class="pl-c1">-</span> <span class="pl-c1">CANVAS_CENTER_X</span>) <span class="pl-c1">**</span> <span class="pl-c1">2</span> <span class="pl-c1">+</span>
+                      (<span class="pl-s1">y</span> <span class="pl-c1">-</span> <span class="pl-c1">CANVAS_CENTER_Y</span>) <span class="pl-c1">**</span> <span class="pl-c1">2</span>) <span class="pl-c1">**</span> <span class="pl-c1">0.520</span>)
+        <span class="pl-s1">dx</span> <span class="pl-c1">=</span> <span class="pl-s1">ratio</span> <span class="pl-c1">*</span> <span class="pl-s1">force</span> <span class="pl-c1">*</span> (<span class="pl-s1">x</span> <span class="pl-c1">-</span> <span class="pl-c1">CANVAS_CENTER_X</span>) <span class="pl-c1">+</span> <span class="pl-s1">random</span>.<span class="pl-c1">randint</span>(<span class="pl-c1">-</span><span class="pl-c1">1</span>, <span class="pl-c1">1</span>)
+        <span class="pl-s1">dy</span> <span class="pl-c1">=</span> <span class="pl-s1">ratio</span> <span class="pl-c1">*</span> <span class="pl-s1">force</span> <span class="pl-c1">*</span> (<span class="pl-s1">y</span> <span class="pl-c1">-</span> <span class="pl-c1">CANVAS_CENTER_Y</span>) <span class="pl-c1">+</span> <span class="pl-s1">random</span>.<span class="pl-c1">randint</span>(<span class="pl-c1">-</span><span class="pl-c1">1</span>, <span class="pl-c1">1</span>)
+        <span class="pl-k">return</span> <span class="pl-s1">x</span> <span class="pl-c1">-</span> <span class="pl-s1">dx</span>, <span class="pl-s1">y</span> <span class="pl-c1">-</span> <span class="pl-s1">dy</span>
+
+    <span class="pl-k">def</span> <span class="pl-en">calc</span>(<span class="pl-s1">self</span>, <span class="pl-s1">generate_frame</span>):
+        <span class="pl-s1">ratio</span> <span class="pl-c1">=</span> <span class="pl-c1">10</span> <span class="pl-c1">*</span> <span class="pl-en">curve</span>(<span class="pl-s1">generate_frame</span> <span class="pl-c1">/</span> <span class="pl-c1">10</span> <span class="pl-c1">*</span> <span class="pl-s1">pi</span>)
+        <span class="pl-s1">halo_radius</span> <span class="pl-c1">=</span> <span class="pl-en">int</span>(<span class="pl-c1">4</span> <span class="pl-c1">+</span> <span class="pl-c1">6</span> <span class="pl-c1">*</span> (<span class="pl-c1">1</span> <span class="pl-c1">+</span> <span class="pl-en">curve</span>(<span class="pl-s1">generate_frame</span> <span class="pl-c1">/</span> <span class="pl-c1">10</span> <span class="pl-c1">*</span> <span class="pl-s1">pi</span>)))
+        <span class="pl-s1">halo_number</span> <span class="pl-c1">=</span> <span class="pl-en">int</span>(
+            <span class="pl-c1">3000</span> <span class="pl-c1">+</span> <span class="pl-c1">4000</span> <span class="pl-c1">*</span> <span class="pl-en">abs</span>(<span class="pl-en">curve</span>(<span class="pl-s1">generate_frame</span> <span class="pl-c1">/</span> <span class="pl-c1">10</span> <span class="pl-c1">*</span> <span class="pl-s1">pi</span>) <span class="pl-c1">**</span> <span class="pl-c1">2</span>))
+        <span class="pl-s1">all_points</span> <span class="pl-c1">=</span> []
+        <span class="pl-c"># 光环</span>
+        <span class="pl-s1">heart_halo_point</span> <span class="pl-c1">=</span> <span class="pl-en">set</span>()
+        <span class="pl-k">for</span> <span class="pl-s1">_</span> <span class="pl-c1">in</span> <span class="pl-en">range</span>(<span class="pl-s1">halo_number</span>):
+            <span class="pl-s1">t</span> <span class="pl-c1">=</span> <span class="pl-s1">random</span>.<span class="pl-c1">uniform</span>(<span class="pl-c1">0</span>, <span class="pl-c1">2</span> <span class="pl-c1">*</span> <span class="pl-s1">pi</span>)
+            <span class="pl-s1">x</span>, <span class="pl-s1">y</span> <span class="pl-c1">=</span> <span class="pl-en">heart_function</span>(<span class="pl-s1">t</span>, <span class="pl-s1">shrink_ratio</span><span class="pl-c1">=</span><span class="pl-c1">11.6</span>)
+            <span class="pl-s1">x</span>, <span class="pl-s1">y</span> <span class="pl-c1">=</span> <span class="pl-en">shrink</span>(<span class="pl-s1">x</span>, <span class="pl-s1">y</span>, <span class="pl-s1">halo_radius</span>)
+            <span class="pl-k">if</span> (<span class="pl-s1">x</span>, <span class="pl-s1">y</span>) <span class="pl-c1"><span class="pl-c1">not</span> <span class="pl-c1">in</span></span> <span class="pl-s1">heart_halo_point</span>:
+                <span class="pl-s1">heart_halo_point</span>.<span class="pl-c1">add</span>((<span class="pl-s1">x</span>, <span class="pl-s1">y</span>))
+                <span class="pl-s1">x</span> <span class="pl-c1">+=</span> <span class="pl-s1">random</span>.<span class="pl-c1">randint</span>(<span class="pl-c1">-</span><span class="pl-c1">14</span>, <span class="pl-c1">14</span>)
+                <span class="pl-s1">y</span> <span class="pl-c1">+=</span> <span class="pl-s1">random</span>.<span class="pl-c1">randint</span>(<span class="pl-c1">-</span><span class="pl-c1">14</span>, <span class="pl-c1">14</span>)
+                <span class="pl-s1">size</span> <span class="pl-c1">=</span> <span class="pl-s1">random</span>.<span class="pl-c1">choice</span>((<span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-c1">2</span>))
+                <span class="pl-s1">all_points</span>.<span class="pl-c1">append</span>((<span class="pl-s1">x</span>, <span class="pl-s1">y</span>, <span class="pl-s1">size</span>))
+        <span class="pl-c"># 轮廓</span>
+        <span class="pl-k">for</span> <span class="pl-s1">x</span>, <span class="pl-s1">y</span> <span class="pl-c1">in</span> <span class="pl-s1">self</span>.<span class="pl-c1">_points</span>:
+            <span class="pl-s1">x</span>, <span class="pl-s1">y</span> <span class="pl-c1">=</span> <span class="pl-s1">self</span>.<span class="pl-c1">calc_position</span>(<span class="pl-s1">x</span>, <span class="pl-s1">y</span>, <span class="pl-s1">ratio</span>)
+            <span class="pl-s1">size</span> <span class="pl-c1">=</span> <span class="pl-s1">random</span>.<span class="pl-c1">randint</span>(<span class="pl-c1">1</span>, <span class="pl-c1">3</span>)
+            <span class="pl-s1">all_points</span>.<span class="pl-c1">append</span>((<span class="pl-s1">x</span>, <span class="pl-s1">y</span>, <span class="pl-s1">size</span>))
+        <span class="pl-c"># 内容</span>
+        <span class="pl-k">for</span> <span class="pl-s1">x</span>, <span class="pl-s1">y</span> <span class="pl-c1">in</span> <span class="pl-s1">self</span>.<span class="pl-c1">_edge_diffusion_points</span>:
+            <span class="pl-s1">x</span>, <span class="pl-s1">y</span> <span class="pl-c1">=</span> <span class="pl-s1">self</span>.<span class="pl-c1">calc_position</span>(<span class="pl-s1">x</span>, <span class="pl-s1">y</span>, <span class="pl-s1">ratio</span>)
+            <span class="pl-s1">size</span> <span class="pl-c1">=</span> <span class="pl-s1">random</span>.<span class="pl-c1">randint</span>(<span class="pl-c1">1</span>, <span class="pl-c1">2</span>)
+            <span class="pl-s1">all_points</span>.<span class="pl-c1">append</span>((<span class="pl-s1">x</span>, <span class="pl-s1">y</span>, <span class="pl-s1">size</span>))
+        <span class="pl-s1">self</span>.<span class="pl-c1">all_points</span>[<span class="pl-s1">generate_frame</span>] <span class="pl-c1">=</span> <span class="pl-s1">all_points</span>
+        <span class="pl-k">for</span> <span class="pl-s1">x</span>, <span class="pl-s1">y</span> <span class="pl-c1">in</span> <span class="pl-s1">self</span>.<span class="pl-c1">_center_diffusion_points</span>:
+            <span class="pl-s1">x</span>, <span class="pl-s1">y</span> <span class="pl-c1">=</span> <span class="pl-s1">self</span>.<span class="pl-c1">calc_position</span>(<span class="pl-s1">x</span>, <span class="pl-s1">y</span>, <span class="pl-s1">ratio</span>)
+            <span class="pl-s1">size</span> <span class="pl-c1">=</span> <span class="pl-s1">random</span>.<span class="pl-c1">randint</span>(<span class="pl-c1">1</span>, <span class="pl-c1">2</span>)
+            <span class="pl-s1">all_points</span>.<span class="pl-c1">append</span>((<span class="pl-s1">x</span>, <span class="pl-s1">y</span>, <span class="pl-s1">size</span>))
+        <span class="pl-s1">self</span>.<span class="pl-c1">all_points</span>[<span class="pl-s1">generate_frame</span>] <span class="pl-c1">=</span> <span class="pl-s1">all_points</span>
+
+    <span class="pl-k">def</span> <span class="pl-en">render</span>(<span class="pl-s1">self</span>, <span class="pl-s1">render_canvas</span>, <span class="pl-s1">render_frame</span>):
+        <span class="pl-k">for</span> <span class="pl-s1">x</span>, <span class="pl-s1">y</span>, <span class="pl-s1">size</span> <span class="pl-c1">in</span> <span class="pl-s1">self</span>.<span class="pl-c1">all_points</span>[<span class="pl-s1">render_frame</span> <span class="pl-c1">%</span> <span class="pl-s1">self</span>.<span class="pl-c1">generate_frame</span>]:
+            <span class="pl-s1">render_canvas</span>.<span class="pl-c1">create_rectangle</span>(
+                <span class="pl-s1">x</span>, <span class="pl-s1">y</span>, <span class="pl-s1">x</span> <span class="pl-c1">+</span> <span class="pl-s1">size</span>, <span class="pl-s1">y</span> <span class="pl-c1">+</span> <span class="pl-s1">size</span>, <span class="pl-s1">width</span><span class="pl-c1">=</span><span class="pl-c1">0</span>, <span class="pl-s1">fill</span><span class="pl-c1">=</span><span class="pl-c1">HEART_COLOR</span>)
+
+
+<span class="pl-k">def</span> <span class="pl-en">draw</span>(<span class="pl-s1">main</span>: <span class="pl-smi">Tk</span>, <span class="pl-s1">render_canvas</span>: <span class="pl-smi">Canvas</span>, <span class="pl-s1">render_heart</span>: <span class="pl-smi">Heart</span>, <span class="pl-s1">render_frame</span><span class="pl-c1">=</span><span class="pl-c1">0</span>):
+    <span class="pl-s1">render_canvas</span>.<span class="pl-c1">delete</span>(<span class="pl-s">'all'</span>)
+    <span class="pl-s1">render_heart</span>.<span class="pl-c1">render</span>(<span class="pl-s1">render_canvas</span>, <span class="pl-s1">render_frame</span>)
+    <span class="pl-s1">main</span>.<span class="pl-c1">after</span>(<span class="pl-c1">160</span>, <span class="pl-s1">draw</span>, <span class="pl-s1">main</span>, <span class="pl-s1">render_canvas</span>, <span class="pl-s1">render_heart</span>, <span class="pl-s1">render_frame</span> <span class="pl-c1">+</span> <span class="pl-c1">1</span>)
+
+
+<span class="pl-k">if</span> <span class="pl-s1">__name__</span> <span class="pl-c1">==</span> <span class="pl-s">'__main__'</span>:
+    <span class="pl-s1">root</span> <span class="pl-c1">=</span> <span class="pl-en">Tk</span>()
+    <span class="pl-s1">root</span>.<span class="pl-c1">title</span>(<span class="pl-s">"这是给公主的..."</span>)
+    <span class="pl-s1">canvas</span> <span class="pl-c1">=</span> <span class="pl-en">Canvas</span>(<span class="pl-s1">root</span>, <span class="pl-s1">bg</span><span class="pl-c1">=</span><span class="pl-s">'black'</span>, <span class="pl-s1">height</span><span class="pl-c1">=</span><span class="pl-c1">CANVAS_HEIGHT</span>, <span class="pl-s1">width</span><span class="pl-c1">=</span><span class="pl-c1">CANVAS_WIDTH</span>)
+    <span class="pl-s1">canvas</span>.<span class="pl-c1">pack</span>()
+    <span class="pl-s1">heart</span> <span class="pl-c1">=</span> <span class="pl-en">Heart</span>()
+    <span class="pl-en">draw</span>(<span class="pl-s1">root</span>, <span class="pl-s1">canvas</span>, <span class="pl-s1">heart</span>)
+    <span class="pl-s1">root</span>.<span class="pl-c1">mainloop</span>()</pre></div></div>
+<div style="font-size:small;margin-top:8px;float:right;">要做一个有swag的人</div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://blog.ronan.cloudns.ch">罗华东_@Ronan_个人博客</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z', 'copy': 'M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z', 'check': 'M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z'};
+var utterancesLoad=0;
+
+console.log("\n %c Gmeek  https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const createClipboardHTML = (codeContent, additionalClasses = '') => `
+        <pre class="notranslate"><code class="notranslate">${codeContent}</code></pre>
+        <div class="clipboard-container position-absolute right-0 top-0 ${additionalClasses}">
+            <clipboard-copy class="ClipboardButton btn m-2 p-0" role="button" style="display: inherit;">
+                <svg height="16" width="16" class="octicon octicon-copy m-2"><path d="${IconList["copy"]}"></path></svg>
+                <svg height="16" width="16" class="octicon octicon-check color-fg-success m-2 d-none"><path d="${IconList["check"]}"></path></svg>
+            </clipboard-copy>
+            <div class="copy-feedback">Copied!</div>
+        </div>
+    `;
+
+    const handleCodeElements = (selector = '') => {
+        document.querySelectorAll(selector).forEach(codeElement => {
+            const codeContent = codeElement.innerHTML;
+            const newStructure = document.createElement('div');
+            newStructure.className = 'snippet-clipboard-content position-relative overflow-auto';
+            newStructure.innerHTML = createClipboardHTML(codeContent);
+
+            const parentElement = codeElement.parentElement;
+            if (selector.includes('highlight')) {
+                parentElement.insertBefore(newStructure, codeElement.nextSibling);
+                parentElement.removeChild(codeElement);
+            } else {
+                parentElement.parentElement.replaceChild(newStructure, parentElement);
+            }
+        });
+    };
+
+    handleCodeElements('pre.notranslate > code.notranslate');
+    handleCodeElements('div.highlight > pre.notranslate');
+
+    let currentFeedback = null;
+    document.querySelectorAll('clipboard-copy').forEach(copyButton => {
+        copyButton.addEventListener('click', () => {
+            const codeContent = copyButton.closest('.snippet-clipboard-content').innerText;
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = codeContent;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextArea);
+
+            const copyIcon = copyButton.querySelector('.octicon-copy');
+            const checkIcon = copyButton.querySelector('.octicon-check');
+            const copyFeedback = copyButton.nextElementSibling;
+
+            if (currentFeedback && currentFeedback !== copyFeedback) {currentFeedback.style.display = 'none';}
+            currentFeedback = copyFeedback;
+
+            copyIcon.classList.add('d-none');
+            checkIcon.classList.remove('d-none');
+            copyFeedback.style.display = 'block';
+            copyButton.style.borderColor = 'var(--color-success-fg)';
+
+            setTimeout(() => {
+                copyIcon.classList.remove('d-none');
+                checkIcon.classList.add('d-none');
+                copyFeedback.style.display = 'none';
+                copyButton.style.borderColor = '';
+            }, 2000);
+        });
+    });
+});
+
+</script>
+<script src='https://pub-43c06573bc27485093cd50efd04e9e7b.r2.dev/GmeekArticleTOC.js'><script src='https://pub-43c06573bc27485093cd50efd04e9e7b.r2.dev/Gmeeklightbox.js'></script><script>document.querySelectorAll('a').forEach(anchor => {const img = anchor.querySelector('img');if (img && img.hasAttribute('data-canonical-src')) {const canonicalSrc = img.getAttribute('data-canonical-src');anchor.setAttribute('href', canonicalSrc);img.setAttribute('src', canonicalSrc);img.removeAttribute('data-canonical-src');}});</script>
+
+</html>
