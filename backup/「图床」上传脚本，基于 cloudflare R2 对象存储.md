@@ -15,7 +15,7 @@
 
   ![cloudflare_R2_bucket_name](https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/cloudflare_R2_bucket_name.png)
 
-可以直接运行脚本或者将脚本[打包为应用程序](https://blog.ronan.us.kg/2024/09/02/python-%E6%89%93%E5%8C%85%E7%A8%8B%E5%BA%8F/)。
+可以直接运行脚本或者将脚本[打包为应用程序](https://blog.ronan.cloudns.ch/post/%E3%80%8Cpython%E3%80%8D-da-bao-cheng-xu.html)。
 
 ```python
 import boto3
