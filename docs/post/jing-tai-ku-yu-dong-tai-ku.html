@@ -95,7 +95,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <li><code class="notranslate">参数s</code>：创建目标文件索引，这在创建较大的库时能加快时间。</li>
 <li><code class="notranslate">参数r</code>：在库中插入模块(替换)。默认新的成员添加在库的结尾处，如果模块名已经在库中存在，则替换同名的模块。</li>
 </ul>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/6673b4d8a5ca02f9957dfa483e5c4a57faaa5aa2f3fc7e8cf09de0469e08fde9/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f6c6962312e706e67"><img src="https://camo.githubusercontent.com/6673b4d8a5ca02f9957dfa483e5c4a57faaa5aa2f3fc7e8cf09de0469e08fde9/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f6c6962312e706e67" alt="img" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/lib1.png" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/a9f15ad3316ae798cb2405fe250dc8a0fe54bb25d7c58ce4476b480c4550bc51/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f6c6962312e706e67"><img src="https://camo.githubusercontent.com/a9f15ad3316ae798cb2405fe250dc8a0fe54bb25d7c58ce4476b480c4550bc51/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f6c6962312e706e67" alt="img" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/lib1.png" style="max-width: 100%;"></a></p>
 <p>生成静态链接库的具体步骤如下:</p>
 <p>1.需要将源文件进行汇编, 得到 .o 文件, 需要使用参数 -c</p>
 <div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 执行如下操作, 默认生成二进制的 .o 文件</span>
@@ -299,7 +299,7 @@ $ tree
 <li>-fPIC 或 -fpic 参数的作用是使得 gcc 生成的代码是与位置无关的，也就是使用相对位置。</li>
 <li>-shared参数的作用是告诉编译器生成一个动态链接库。</li>
 </ul>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/6673b4d8a5ca02f9957dfa483e5c4a57faaa5aa2f3fc7e8cf09de0469e08fde9/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f6c6962312e706e67"><img src="https://camo.githubusercontent.com/6673b4d8a5ca02f9957dfa483e5c4a57faaa5aa2f3fc7e8cf09de0469e08fde9/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f6c6962312e706e67" alt="img" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/lib1.png" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/a9f15ad3316ae798cb2405fe250dc8a0fe54bb25d7c58ce4476b480c4550bc51/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f6c6962312e706e67"><img src="https://camo.githubusercontent.com/a9f15ad3316ae798cb2405fe250dc8a0fe54bb25d7c58ce4476b480c4550bc51/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f6c6962312e706e67" alt="img" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/lib1.png" style="max-width: 100%;"></a></p>
 <p>生成动态链接库的具体步骤如下:</p>
 <p>1.将源文件进行汇编操作, 需要使用参数 -c, 还需要添加额外参数 -fpic / -fPIC</p>
 <div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 得到若干个 .o文件</span>
@@ -521,7 +521,7 @@ $ ldd app
 <p>缺点：<br>
 相同的库文件数据可能在内存中被加载多份, 消耗系统资源，浪费内存<br>
 库文件更新需要重新编译项目文件, 生成新的可执行程序, 浪费时间。</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/6673b4d8a5ca02f9957dfa483e5c4a57faaa5aa2f3fc7e8cf09de0469e08fde9/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f6c6962312e706e67"><img src="https://camo.githubusercontent.com/6673b4d8a5ca02f9957dfa483e5c4a57faaa5aa2f3fc7e8cf09de0469e08fde9/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f6c6962312e706e67" alt="img" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/lib1.png" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/a9f15ad3316ae798cb2405fe250dc8a0fe54bb25d7c58ce4476b480c4550bc51/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f6c6962312e706e67"><img src="https://camo.githubusercontent.com/a9f15ad3316ae798cb2405fe250dc8a0fe54bb25d7c58ce4476b480c4550bc51/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f6c6962312e706e67" alt="img" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/lib1.png" style="max-width: 100%;"></a></p>
 <h4>3.2 动态库</h4>
 <p>优点：<br>
 - 可实现不同进程间的资源共享<br>
@@ -530,7 +530,7 @@ $ ldd app
 缺点：<br>
 - 加载速度比静态库慢, 以现在计算机的性能可以忽略<br>
 - 发布程序需要提供依赖的动态库</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/94cd210594817240aa1eef26e5983c3bdd517b47d62153b2f66fcebfd3f07d57/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f6c6962312e312e706e67"><img src="https://camo.githubusercontent.com/94cd210594817240aa1eef26e5983c3bdd517b47d62153b2f66fcebfd3f07d57/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f6c6962312e312e706e67" alt="img" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/lib1.1.png" style="max-width: 100%;"></a></p></div>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/95e00eed22fa7d3b08fa1ba494cec45e424be1ea0b3c87d38a2e177d4320c223/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f6c6962312e312e706e67"><img src="https://camo.githubusercontent.com/95e00eed22fa7d3b08fa1ba494cec45e424be1ea0b3c87d38a2e177d4320c223/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f6c6962312e312e706e67" alt="img" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/lib1.1.png" style="max-width: 100%;"></a></p></div>
 <div style="font-size:small;margin-top:8px;float:right;">要做一个有swag的人</div>
 
 </div>
