@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>罗华东_@Ronan_个人博客</title><link>https://blog.ronan.cloudns.ch</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>罗华东_@Ronan_个人博客</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg</url><title>avatar</title><link>https://blog.ronan.cloudns.ch</link></image><lastBuildDate>Mon, 17 Nov 2025 07:35:57 +0000</lastBuildDate><managingEditor>罗华东_@Ronan_个人博客</managingEditor><ttl>60</ttl><webMaster>罗华东_@Ronan_个人博客</webMaster><item><title>波特律动OLED驱动库(STM32+HAL+SSD1306)</title><link>https://blog.ronan.cloudns.ch/post/bo-te-lv-dong-OLED-qu-dong-ku-%28STM32%2BHAL%2BSSD1306%29.html</link><description>[驱动库源代码](https://gist.github.com/EchoZap/86b91bb98386ad34d9e95661200dada7)
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>罗华东_@Ronan_个人博客</title><link>https://blog.ronan.cloudns.ch</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>罗华东_@Ronan_个人博客</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg</url><title>avatar</title><link>https://blog.ronan.cloudns.ch</link></image><lastBuildDate>Mon, 17 Nov 2025 07:41:53 +0000</lastBuildDate><managingEditor>罗华东_@Ronan_个人博客</managingEditor><ttl>60</ttl><webMaster>罗华东_@Ronan_个人博客</webMaster><item><title>波特律动OLED驱动库(STM32+HAL+SSD1306)</title><link>https://blog.ronan.cloudns.ch/post/bo-te-lv-dong-OLED-qu-dong-ku-%28STM32%2BHAL%2BSSD1306%29.html</link><description>[驱动库源代码](https://gist.github.com/EchoZap/86b91bb98386ad34d9e95661200dada7)
 
 &gt; 本库适配SSD1306/SSD1315等系列芯片
 
@@ -27,10 +27,12 @@ while(1){
 ```。</description><guid isPermaLink="true">https://blog.ronan.cloudns.ch/post/bo-te-lv-dong-OLED-qu-dong-ku-%28STM32%2BHAL%2BSSD1306%29.html</guid><pubDate>Mon, 17 Nov 2025 07:33:02 +0000</pubDate></item><item><title>个人自用nvim配置文件</title><link>https://blog.ronan.cloudns.ch/post/ge-ren-zi-yong-nvim-pei-zhi-wen-jian.html</link><description>nvim是vim的“进阶版”，使用前需要系统已安装nvim，配置好后可使用 `nvim xxx.txt` 打开文本
 
 [点击这里查看视频教程](https://b23.tv/aYAmxjl)
+[这是各个配置文件的原内容，请对照文件树复制粘贴](https://gist.github.com/EchoZap/9cf5b6738c4757b509011a8c75fa4d72)
 
 nvim的整体配置文件存放位置以及文件树如下：
-![nvim配置文件夹存放位置](https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/2511171456.png)
-[以下是各个文件的原内容，请对照以上文件树复制粘贴](https://gist.github.com/EchoZap/9cf5b6738c4757b509011a8c75fa4d72)。</description><guid isPermaLink="true">https://blog.ronan.cloudns.ch/post/ge-ren-zi-yong-nvim-pei-zhi-wen-jian.html</guid><pubDate>Mon, 17 Nov 2025 07:21:41 +0000</pubDate></item><item><title>「Python」爱心代码</title><link>https://blog.ronan.cloudns.ch/post/%E3%80%8CPython%E3%80%8D-ai-xin-dai-ma.html</link><description># 1.先看效果
+&gt; .config文件夹一般情况下是隐藏的，在macOS中需要「显示/隐藏」以.开头的文件夹可以同时按下「command+shift+.」
+
+![nvim配置文件夹存放位置](https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/2511171456.png)。</description><guid isPermaLink="true">https://blog.ronan.cloudns.ch/post/ge-ren-zi-yong-nvim-pei-zhi-wen-jian.html</guid><pubDate>Mon, 17 Nov 2025 07:21:41 +0000</pubDate></item><item><title>「Python」爱心代码</title><link>https://blog.ronan.cloudns.ch/post/%E3%80%8CPython%E3%80%8D-ai-xin-dai-ma.html</link><description># 1.先看效果
 
 ![爱心代码效果图](https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/250822003308.png)
 
