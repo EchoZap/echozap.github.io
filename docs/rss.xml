@@ -1,5 +1,30 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>罗华东_@Ronan_个人博客</title><link>https://blog.ronan.cloudns.ch</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>罗华东_@Ronan_个人博客</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg</url><title>avatar</title><link>https://blog.ronan.cloudns.ch</link></image><lastBuildDate>Mon, 17 Nov 2025 07:22:10 +0000</lastBuildDate><managingEditor>罗华东_@Ronan_个人博客</managingEditor><ttl>60</ttl><webMaster>罗华东_@Ronan_个人博客</webMaster><item><title>个人自用nvim配置文件</title><link>https://blog.ronan.cloudns.ch/post/ge-ren-zi-yong-nvim-pei-zhi-wen-jian.html</link><description>nvim是vim的“进阶版”，使用前需要系统已安装nvim，配置好后可使用 `nvim xxx.txt` 打开文本
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>罗华东_@Ronan_个人博客</title><link>https://blog.ronan.cloudns.ch</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>罗华东_@Ronan_个人博客</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg</url><title>avatar</title><link>https://blog.ronan.cloudns.ch</link></image><lastBuildDate>Mon, 17 Nov 2025 07:33:38 +0000</lastBuildDate><managingEditor>罗华东_@Ronan_个人博客</managingEditor><ttl>60</ttl><webMaster>罗华东_@Ronan_个人博客</webMaster><item><title>波特律动·OLED驱动库(STM32+HAL+SSD1306)</title><link>https://blog.ronan.cloudns.ch/post/bo-te-lv-dong-%C2%B7OLED-qu-dong-ku-%28STM32%2BHAL%2BSSD1306%29.html</link><description>[驱动库源代码](https://gist.github.com/EchoZap/86b91bb98386ad34d9e95661200dada7)
+
+&gt; 本库适配SSD1306/SSD1315等系列芯片
+
+## 0. 工程配置
+示例工程默认使用的是STM32F103C8T6的I2C2. 如有其他I2C或SPI需求, 仅需修改oled.h中的Send函数即可完成移植.
+
+## 1. 引入
+CubeIDE
+将本库的oled.c, font.c文件放入到Src文件夹, 将oled.h, font.h文件放入Inc文件夹.
+
+## 2. 使用
+1.STM32初始化IIC完成后调用OLED_Init()初始化OLED. 注意STM32启动比OLED上电快, 可等待20ms再初始化OLED  
+2.调用OLED_NewFrame()开始绘制新的一帧  
+3.调用OLED_DrawXXX()系列函数绘制图形到显存 调用OLED_Printxxx()系列函数绘制文本到显存  
+4.调用OLED_ShowFrame()将显存内容显示到OLED  
+```c
+OLED_Init();
+
+while(1){
+    OLED_NewFrame();
+    OLED_PrintString(i, i, '波特律动hello', &amp;font16x16, OLED_COLOR_NORMAL);
+    OLED_ShowFrame();
+    HAL_Delay(100);
+}
+```。</description><guid isPermaLink="true">https://blog.ronan.cloudns.ch/post/bo-te-lv-dong-%C2%B7OLED-qu-dong-ku-%28STM32%2BHAL%2BSSD1306%29.html</guid><pubDate>Mon, 17 Nov 2025 07:33:02 +0000</pubDate></item><item><title>个人自用nvim配置文件</title><link>https://blog.ronan.cloudns.ch/post/ge-ren-zi-yong-nvim-pei-zhi-wen-jian.html</link><description>nvim是vim的“进阶版”，使用前需要系统已安装nvim，配置好后可使用 `nvim xxx.txt` 打开文本
 
 [点击这里查看视频教程](https://b23.tv/aYAmxjl)
 
