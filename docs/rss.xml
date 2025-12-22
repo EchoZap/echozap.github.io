@@ -1,5 +1,14 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>罗华东_@Ronan_个人博客</title><link>https://blog.ronan.cloudns.ch</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>罗华东_@Ronan_个人博客</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg</url><title>avatar</title><link>https://blog.ronan.cloudns.ch</link></image><lastBuildDate>Mon, 17 Nov 2025 07:41:53 +0000</lastBuildDate><managingEditor>罗华东_@Ronan_个人博客</managingEditor><ttl>60</ttl><webMaster>罗华东_@Ronan_个人博客</webMaster><item><title>波特律动OLED驱动库(STM32+HAL+SSD1306)</title><link>https://blog.ronan.cloudns.ch/post/bo-te-lv-dong-OLED-qu-dong-ku-%28STM32%2BHAL%2BSSD1306%29.html</link><description>[驱动库源代码](https://gist.github.com/EchoZap/86b91bb98386ad34d9e95661200dada7)
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>罗华东_@Ronan_个人博客</title><link>https://blog.ronan.cloudns.ch</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>罗华东_@Ronan_个人博客</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg</url><title>avatar</title><link>https://blog.ronan.cloudns.ch</link></image><lastBuildDate>Mon, 22 Dec 2025 13:13:55 +0000</lastBuildDate><managingEditor>罗华东_@Ronan_个人博客</managingEditor><ttl>60</ttl><webMaster>罗华东_@Ronan_个人博客</webMaster><item><title>色环电阻这样看</title><link>https://blog.ronan.cloudns.ch/post/se-huan-dian-zu-zhe-yang-kan.html</link><description>为了区分左右，C带和D带之间有一个间隙：
+![色带分布abcd](https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/2512222001.png)
+![色带分布](https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/2512222002.png)
+
+- A.元件值第一位有效数字（左侧）
+- B.第二个有效数字（某些精密电阻器有第三个有效数字，因此有五个色带）
+- C.十进制乘数（也就是有效数字后跟着多少个0，或者说10的几次方）
+- D.如果存在，则表示百分比值的公差（没有色带则表示20%）
+
+在上面的例子中，一个电阻器带有红色、紫色、绿色和金色的色环（对照下表），其第一个数字为2（红色），第二个数字为7（紫色），后面跟着5个零（绿色）：2700000 欧。</description><guid isPermaLink="true">https://blog.ronan.cloudns.ch/post/se-huan-dian-zu-zhe-yang-kan.html</guid><pubDate>Mon, 22 Dec 2025 13:13:26 +0000</pubDate></item><item><title>波特律动OLED驱动库(STM32+HAL+SSD1306)</title><link>https://blog.ronan.cloudns.ch/post/bo-te-lv-dong-OLED-qu-dong-ku-%28STM32%2BHAL%2BSSD1306%29.html</link><description>[驱动库源代码](https://gist.github.com/EchoZap/86b91bb98386ad34d9e95661200dada7)
 
 &gt; 本库适配SSD1306/SSD1315等系列芯片
 
