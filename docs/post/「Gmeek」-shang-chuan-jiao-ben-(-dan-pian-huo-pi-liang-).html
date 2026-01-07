@@ -68,6 +68,89 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
     padding: 5px 8px;
     font-size: 12px;
 }
+
+/* 新插入======================================================================= */
+/* ===== 基础定位 ===== */
+.snippet-clipboard-content {
+    position: relative;
+}
+
+/* 右上角 hover 热区 */
+.snippet-clipboard-content .clipboard-container {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+/* 只有 hover 右上角区域才显示 */
+.snippet-clipboard-content .clipboard-container:hover,
+.snippet-clipboard-content.show-copy .clipboard-container {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* 缩小复制按钮 */
+.ClipboardButton {
+    transform: scale(0.8);
+    padding: 2px;
+    border-radius: 6px;
+}
+
+/* hover 效果 */
+.ClipboardButton:hover {
+    background-color: var(--color-btn-hover-bg);
+}
+
+/* 图标动画 */
+.octicon-copy,
+.octicon-check {
+    transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.octicon-check {
+    transform: scale(0.6);
+}
+
+.octicon-check:not(.d-none) {
+    transform: scale(1);
+}
+
+/* ===== Tooltip 风格 Copied ===== */
+.copy-feedback {
+    position: absolute;
+    top: 36px;
+    right: 0;
+    background: var(--color-neutral-emphasis-plus);
+    color: var(--color-fg-on-emphasis);
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    pointer-events: none;
+}
+
+/* tooltip 小箭头 */
+.copy-feedback::after {
+    content: "";
+    position: absolute;
+    top: -4px;
+    right: 10px;
+    border-width: 4px;
+    border-style: solid;
+    border-color: transparent transparent var(--color-neutral-emphasis-plus) transparent;
+}
+
+/* 显示 tooltip */
+.copy-feedback.show {
+    opacity: 1;
+    transform: translateY(0);
+}
 </style>
 <style>.markdown-alert{padding:0.5rem 1rem;margin-bottom:1rem;border-left:.25em solid var(--borderColor-default,var(--color-border-default));}.markdown-alert .markdown-alert-title {display:flex;font-weight:var(--base-text-weight-medium,500);align-items:center;line-height:1;}.markdown-alert>:first-child {margin-top:0;}.markdown-alert>:last-child {margin-bottom:0;}</style><style>.markdown-alert.markdown-alert-tip {border-left-color:var(--borderColor-success-emphasis, var(--color-success-emphasis));background-color:var(--color-success-subtle);}.markdown-alert.markdown-alert-tip .markdown-alert-title {color: var(--fgColor-success,var(--color-success-fg));}</style><style>.markdown-alert.markdown-alert-important {border-left-color:var(--borderColor-done-emphasis, var(--color-done-emphasis));background-color:var(--color-done-subtle);}.markdown-alert.markdown-alert-important .markdown-alert-title {color: var(--fgColor-done,var(--color-done-fg));}</style><style>.markdown-alert.markdown-alert-caution {border-left-color:var(--borderColor-danger-emphasis, var(--color-danger-emphasis));background-color:var(--color-danger-subtle);}.markdown-alert.markdown-alert-caution .markdown-alert-title {color: var(--fgColor-danger,var(--color-danger-fg));}</style>
 
@@ -497,24 +580,59 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const copyIcon = copyButton.querySelector('.octicon-copy');
             const checkIcon = copyButton.querySelector('.octicon-check');
-            const copyFeedback = copyButton.nextElementSibling;
+            
+
+            
+            copyIcon.classList.add('d-none');
+			
+			checkIcon.classList.remove('d-none');
+			copyFeedback.classList.add('show');
+
+			setTimeout(() => {
+    			copyIcon.classList.remove('d-none');
+    			checkIcon.classList.add('d-none');
+    			copyFeedback.classList.remove('show');
+			}, 2000);
+
+
 
             if (currentFeedback && currentFeedback !== copyFeedback) {currentFeedback.style.display = 'none';}
             currentFeedback = copyFeedback;
 
             copyIcon.classList.add('d-none');
             checkIcon.classList.remove('d-none');
-            copyFeedback.style.display = 'block';
+            copyFeedback.classList.add('show');
             copyButton.style.borderColor = 'var(--color-success-fg)';
 
             setTimeout(() => {
                 copyIcon.classList.remove('d-none');
                 checkIcon.classList.add('d-none');
-                copyFeedback.style.display = 'none';
+                copyFeedback.classList.remove('show');
                 copyButton.style.borderColor = '';
             }, 2000);
         });
     });
+    
+    
+/* ===== 新增：移动端长按显示复制按钮 ===== */
+document.querySelectorAll('.snippet-clipboard-content').forEach(block => {
+    let pressTimer;
+
+    block.addEventListener('touchstart', () => {
+        pressTimer = setTimeout(() => {
+            block.classList.add('show-copy');
+        }, 500);
+    });
+
+    block.addEventListener('touchend', () => {
+        clearTimeout(pressTimer);
+        setTimeout(() => {
+            block.classList.remove('show-copy');
+        }, 3000);
+    });
+});
+/* ===== 新增结束 ===== */
+
 });
 
 </script>
