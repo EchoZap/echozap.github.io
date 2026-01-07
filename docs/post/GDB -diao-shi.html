@@ -135,6 +135,22 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
     opacity: 1;
     transform: translateY(0);
 }
+
+/* ===== 清除代码块纵向滚动条，只保留横向 ===== */
+.snippet-clipboard-content {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.snippet-clipboard-content pre {
+    overflow: visible;
+}
+
+/* 隐藏滚动条但仍可滚动 */
+.snippet-clipboard-content::-webkit-scrollbar {
+    height: 0;
+}
+
 </style>
 
 
@@ -770,46 +786,66 @@ document.addEventListener('DOMContentLoaded', () => {
     
     
 /* ===== 新增：移动端长按显示复制按钮 ===== */
-/*
+
+// document.querySelectorAll('.snippet-clipboard-content').forEach(block => {
+//     let pressTimer;
+
+//     block.addEventListener('touchstart', () => {
+//         pressTimer = setTimeout(() => {
+//             block.classList.add('show-copy');
+//         }, 500);
+//     });
+
+//     block.addEventListener('touchend', () => {
+//         clearTimeout(pressTimer);
+//         setTimeout(() => {
+//             block.classList.remove('show-copy');
+//         }, 3000);
+//     });
+// });
+
+
+/* ===== 移动端：长按 3 秒直接复制（iOS / Android 稳定版） ===== */
 document.querySelectorAll('.snippet-clipboard-content').forEach(block => {
     let pressTimer;
 
     block.addEventListener('touchstart', () => {
-        pressTimer = setTimeout(() => {
-            block.classList.add('show-copy');
-        }, 500);
-    });
+        pressTimer = setTimeout(async () => {
+            const codeEl = block.querySelector('pre code');
+            if (!codeEl) return;
 
-    block.addEventListener('touchend', () => {
-        clearTimeout(pressTimer);
-        setTimeout(() => {
-            block.classList.remove('show-copy');
-        }, 3000);
-    });
-});
-*/
+            const text = codeEl.innerText;
 
-/* ===== 移动端：长按代码 3 秒直接复制 ===== */
-document.querySelectorAll('.snippet-clipboard-content').forEach(block => {
-    let pressTimer;
+            let copied = false;
 
-    block.addEventListener('touchstart', () => {
-        pressTimer = setTimeout(() => {
-            const codeText = block.querySelector('pre code')?.innerText || '';
+            // ① 优先使用现代 Clipboard API
+            try {
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    await navigator.clipboard.writeText(text);
+                    copied = true;
+                }
+            } catch (e) {}
 
-            if (!codeText) return;
+            // ② fallback：选中文本（iOS 必须）
+            if (!copied) {
+                const range = document.createRange();
+                range.selectNodeContents(codeEl);
 
-            // 复制到剪贴板
-            const tempTextArea = document.createElement('textarea');
-            tempTextArea.value = codeText;
-            document.body.appendChild(tempTextArea);
-            tempTextArea.select();
-            document.execCommand('copy');
-            document.body.removeChild(tempTextArea);
+                const selection = window.getSelection();
+                selection.removeAllRanges();
+                selection.addRange(range);
 
-            // 显示 “代码已复制” 提示
-            let feedback = block.querySelector('.copy-feedback');
-            if (feedback) {
+                try {
+                    document.execCommand('copy');
+                    copied = true;
+                } catch (e) {}
+
+                selection.removeAllRanges();
+            }
+
+            // 显示提示
+            const feedback = block.querySelector('.copy-feedback');
+            if (copied && feedback) {
                 feedback.textContent = '代码已复制';
                 feedback.classList.add('show');
 
@@ -828,6 +864,7 @@ document.querySelectorAll('.snippet-clipboard-content').forEach(block => {
         clearTimeout(pressTimer);
     });
 });
+
 
 /* ===== 新增结束 ===== */
 
