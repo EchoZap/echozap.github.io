@@ -347,84 +347,22 @@ document.addEventListener('DOMContentLoaded', () => {
     
 /* ===== 新增：移动端长按显示复制按钮 ===== */
 
-// document.querySelectorAll('.snippet-clipboard-content').forEach(block => {
-//     let pressTimer;
-
-//     block.addEventListener('touchstart', () => {
-//         pressTimer = setTimeout(() => {
-//             block.classList.add('show-copy');
-//         }, 500);
-//     });
-
-//     block.addEventListener('touchend', () => {
-//         clearTimeout(pressTimer);
-//         setTimeout(() => {
-//             block.classList.remove('show-copy');
-//         }, 3000);
-//     });
-// });
-
-
-/* ===== 移动端：长按 3 秒直接复制（iOS / Android 稳定版） ===== */
 document.querySelectorAll('.snippet-clipboard-content').forEach(block => {
     let pressTimer;
 
     block.addEventListener('touchstart', () => {
-        pressTimer = setTimeout(async () => {
-            const codeEl = block.querySelector('pre code');
-            if (!codeEl) return;
-
-            const text = codeEl.innerText;
-
-            let copied = false;
-
-            // ① 优先使用现代 Clipboard API
-            try {
-                if (navigator.clipboard && navigator.clipboard.writeText) {
-                    await navigator.clipboard.writeText(text);
-                    copied = true;
-                }
-            } catch (e) {}
-
-            // ② fallback：选中文本（iOS 必须）
-            if (!copied) {
-                const range = document.createRange();
-                range.selectNodeContents(codeEl);
-
-                const selection = window.getSelection();
-                selection.removeAllRanges();
-                selection.addRange(range);
-
-                try {
-                    document.execCommand('copy');
-                    copied = true;
-                } catch (e) {}
-
-                selection.removeAllRanges();
-            }
-
-            // 显示提示
-            const feedback = block.querySelector('.copy-feedback');
-            if (copied && feedback) {
-                feedback.textContent = '代码已复制';
-                feedback.classList.add('show');
-
-                setTimeout(() => {
-                    feedback.classList.remove('show');
-                }, 2000);
-            }
-        }, 3000); // 👈 长按 3 秒
+        pressTimer = setTimeout(() => {
+            block.classList.add('show-copy');
+        }, 500);
     });
 
     block.addEventListener('touchend', () => {
         clearTimeout(pressTimer);
-    });
-
-    block.addEventListener('touchmove', () => {
-        clearTimeout(pressTimer);
+        setTimeout(() => {
+            block.classList.remove('show-copy');
+        }, 3000);
     });
 });
-
 
 /* ===== 新增结束 ===== */
 
