@@ -179,14 +179,14 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
     top: 8px;
     right: 8px;
     opacity: 0;
-    pointer-events: none;
+    /* pointer-events: none;  针对桌面端鼠标移动时不显示复制按钮，注释即可正常运行*/
     transition: opacity 0.2s ease;
 }
 
 /* 只有 hover 右上角区域才显示 */
 .snippet-clipboard-content .clipboard-container:hover,
 .snippet-clipboard-content.show-copy .clipboard-container {
-    opacity: 0;
+    opacity: 1;
     pointer-events: auto;
 }
 
@@ -453,6 +453,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     
 /* ===== 新增：移动端长按显示复制按钮 ===== */
+/*
 document.querySelectorAll('.snippet-clipboard-content').forEach(block => {
     let pressTimer;
 
@@ -469,6 +470,48 @@ document.querySelectorAll('.snippet-clipboard-content').forEach(block => {
         }, 3000);
     });
 });
+*/
+
+/* ===== 移动端：长按代码 3 秒直接复制 ===== */
+document.querySelectorAll('.snippet-clipboard-content').forEach(block => {
+    let pressTimer;
+
+    block.addEventListener('touchstart', () => {
+        pressTimer = setTimeout(() => {
+            const codeText = block.querySelector('pre code')?.innerText || '';
+
+            if (!codeText) return;
+
+            // 复制到剪贴板
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = codeText;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextArea);
+
+            // 显示 “代码已复制” 提示
+            let feedback = block.querySelector('.copy-feedback');
+            if (feedback) {
+                feedback.textContent = '代码已复制';
+                feedback.classList.add('show');
+
+                setTimeout(() => {
+                    feedback.classList.remove('show');
+                }, 2000);
+            }
+        }, 3000); // 👈 长按 3 秒
+    });
+
+    block.addEventListener('touchend', () => {
+        clearTimeout(pressTimer);
+    });
+
+    block.addEventListener('touchmove', () => {
+        clearTimeout(pressTimer);
+    });
+});
+
 /* ===== 新增结束 ===== */
 
 });
