@@ -10,9 +10,43 @@
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
-<meta name="description" content="这是一个 **Markdown 样式全集示例**，用于测试博客 / 编辑器 / 主题的渲染效果。">
+<meta name="description" content="我们用 **ChatGPT** 生成了以下 **Markdown** 格式的示例，仅供参考
+
+---
+
+## 一、标题（Headings）
+
+# 一级标题 H1
+## 二级标题 H2
+### 三级标题 H3
+#### 四级标题 H4
+##### 五级标题 H5
+###### 六级标题 H6
+
+---
+
+## 二、段落与文本样式
+
+这是一个段落。">
 <meta property="og:title" content="Markdown 全样式示例文档">
-<meta property="og:description" content="这是一个 **Markdown 样式全集示例**，用于测试博客 / 编辑器 / 主题的渲染效果。">
+<meta property="og:description" content="我们用 **ChatGPT** 生成了以下 **Markdown** 格式的示例，仅供参考
+
+---
+
+## 一、标题（Headings）
+
+# 一级标题 H1
+## 二级标题 H2
+### 三级标题 H3
+#### 四级标题 H4
+##### 五级标题 H5
+###### 六级标题 H6
+
+---
+
+## 二、段落与文本样式
+
+这是一个段落。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://blog.ronan.cloudns.ch/post/Markdown%20-quan-yang-shi-shi-li-wen-dang.html">
 <meta property="og:image" content="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg">
@@ -176,7 +210,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
 </div>
     <div id="content">
-<div class="markdown-body" id="postBody"><p>这是一个 <strong>Markdown 样式全集示例</strong>，用于测试博客 / 编辑器 / 主题的渲染效果。</p>
+<div class="markdown-body" id="postBody"><p>我们用 <strong>ChatGPT</strong> 生成了以下 <strong>Markdown</strong> 格式的示例，仅供参考</p>
 <hr>
 <h2>一、标题（Headings）</h2>
 <h1>一级标题 H1</h1>
@@ -187,59 +221,40 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <h6>六级标题 H6</h6>
 <hr>
 <h2>二、段落与文本样式</h2>
-<p>这是一个普通段落。</p>
-<p>这是两个空格结尾实现的换行<br>
-这是下一行。</p>
+<p>这是一个段落。在 <strong>Markdown</strong> 中，一个或多个连续的文本行被视为一个段落，段落之间通过一个或多个空行分隔。</p>
+<p>如果想在同一行显示多个段落，可以使用 <code class="notranslate">&lt;br&gt;</code> 标签进行换行。</p>
+<p>这是一个<br>
+换行后的段落。</p>
 <hr>
-<h3>1️⃣ 强调文本</h3>
-<ul>
-<li><em>斜体文本</em></li>
-<li><em>斜体文本</em></li>
-<li><strong>粗体文本</strong></li>
-<li><strong>粗体文本</strong></li>
-<li><em><strong>粗斜体</strong></em></li>
-<li><del>删除线</del></li>
-<li><code class="notranslate">行内代码</code></li>
-</ul>
+<h3>强调文本</h3>
+<p>Markdown 中可以使用星号或下划线对文本进行强调，使用单个星号或下划线表示斜体，使用两个星号或下划线表示粗体，使用三个星号或下划线表示粗斜体。</p>
+<p><em>斜体</em><br>
+<em>斜体</em></p>
+<p><strong>粗体</strong><br>
+<strong>粗体</strong></p>
+<p><em><strong>粗斜体</strong></em><br>
+<em><strong>粗斜体</strong></em></p>
+<p><del>删除线</del></p>
 <hr>
-<h3>2️⃣ 引用（Blockquote）</h3>
+<h3>引用（Blockquote）</h3>
 <blockquote>
-<p>这是一级引用</p>
-<blockquote>
-<p>这是二级引用</p>
-<blockquote>
-<p>这是三级引用</p>
-</blockquote>
-</blockquote>
+<p>这是一个引用</p>
 </blockquote>
 <hr>
 <h2>三、列表（Lists）</h2>
 <h3>无序列表</h3>
 <ul>
-<li>项目一</li>
-<li>项目二
-<ul>
-<li>子项目 2.1</li>
-<li>子项目 2.2
-<ul>
-<li>子项目 2.2.1</li>
-</ul>
-</li>
-</ul>
-</li>
+<li>无序列表项 1</li>
+<li>无序列表项 2</li>
+<li>无序列表项 3</li>
 </ul>
 <h3>有序列表</h3>
 <ol>
-<li>第一项</li>
-<li>第二项
-<ol>
-<li>子项 2.1</li>
-<li>子项 2.2</li>
+<li>有序列表项 1</li>
+<li>有序列表项 2</li>
+<li>有序列表项 3</li>
 </ol>
-</li>
-<li>第三项</li>
-</ol>
-<h3>任务列表（GFM）</h3>
+<h3>任务列表</h3>
 <ul class="contains-task-list">
 <li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Completed task" checked=""> 已完成任务</li>
 <li class="task-list-item"><input type="checkbox" id="" disabled="" class="task-list-item-checkbox" aria-label="Incomplete task"> 未完成任务</li>
@@ -248,11 +263,9 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <hr>
 <h2>四、链接与图片</h2>
 <h3>链接</h3>
-<ul>
-<li>普通链接：<a href="https://www.google.com" rel="nofollow">Google</a></li>
-<li>带标题链接：<a href="https://openai.com" title="OpenAI 官网" rel="nofollow">OpenAI</a></li>
-<li>自动链接：<a href="https://github.com">https://github.com</a></li>
-</ul>
+<p>普通链接：<a href="https://www.google.com" rel="nofollow">Google</a><br>
+带标题链接：<a href="https://openai.com" title="OpenAI 官网" rel="nofollow">OpenAI</a><br>
+自动链接：<a href="https://github.com">https://github.com</a></p>
 <h3>图片</h3>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/1e76ff473a45b7fbee2e4dfaa9c8f767d22fc2a2b232242650a69ea4551389eb/68747470733a2f2f6d61726b646f776e2d686572652e636f6d2f696d672f69636f6e3235362e706e67"><img src="https://camo.githubusercontent.com/1e76ff473a45b7fbee2e4dfaa9c8f767d22fc2a2b232242650a69ea4551389eb/68747470733a2f2f6d61726b646f776e2d686572652e636f6d2f696d672f69636f6e3235362e706e67" alt="Markdown Logo" data-canonical-src="https://markdown-here.com/img/icon256.png" style="max-width: 100%;"></a></p>
 <hr>
