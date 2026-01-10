@@ -1,22 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>罗华东_@Ronan_个人博客</title><link>https://blog.ronan.cloudns.ch</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>罗华东_@Ronan_个人博客</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg</url><title>avatar</title><link>https://blog.ronan.cloudns.ch</link></image><lastBuildDate>Thu, 08 Jan 2026 12:28:48 +0000</lastBuildDate><managingEditor>罗华东_@Ronan_个人博客</managingEditor><ttl>60</ttl><webMaster>罗华东_@Ronan_个人博客</webMaster><item><title>Markdown 全样式示例文档</title><link>https://blog.ronan.cloudns.ch/post/Markdown%20-quan-yang-shi-shi-li-wen-dang.html</link><description>我们用 **ChatGPT** 生成了以下 **Markdown** 格式的示例，仅供参考
-
----
-
-## 一、标题（Headings）
-
-# 一级标题 H1
-## 二级标题 H2
-### 三级标题 H3
-#### 四级标题 H4
-##### 五级标题 H5
-###### 六级标题 H6
-
----
-
-## 二、段落与文本样式
-
-这是一个段落。</description><guid isPermaLink="true">https://blog.ronan.cloudns.ch/post/Markdown%20-quan-yang-shi-shi-li-wen-dang.html</guid><pubDate>Thu, 08 Jan 2026 08:27:05 +0000</pubDate></item><item><title>色环电阻这样看</title><link>https://blog.ronan.cloudns.ch/post/se-huan-dian-zu-zhe-yang-kan.html</link><description>为了区分左右，C带和D带之间有一个间隙：
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>罗华东_@Ronan_个人博客</title><link>https://blog.ronan.cloudns.ch</link><description>接受过《中华人民共和国义务教育法》规定的完整「九年义务教育」，如今也是个「正儿八经」的「文化人」，目前的物理活动范围主要在「某东亚大国」。</description><copyright>罗华东_@Ronan_个人博客</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg</url><title>avatar</title><link>https://blog.ronan.cloudns.ch</link></image><lastBuildDate>Sat, 10 Jan 2026 12:16:54 +0000</lastBuildDate><managingEditor>罗华东_@Ronan_个人博客</managingEditor><ttl>60</ttl><webMaster>罗华东_@Ronan_个人博客</webMaster><item><title>色环电阻这样看</title><link>https://blog.ronan.cloudns.ch/post/se-huan-dian-zu-zhe-yang-kan.html</link><description>为了区分左右，C带和D带之间有一个间隙：
 ![色带分布abcd](https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/2512222001.png)
 ![色带分布](https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/2512222002.png)
 
