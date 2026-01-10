@@ -206,17 +206,13 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <div class="highlight highlight-source-shell"><pre class="notranslate">http:/192.168.1.1/cgi-bin/telnetenable.cgi<span class="pl-k">?</span>telnetenable=1<span class="pl-k">&amp;</span>key=“12位大写字母和数字”</pre></div>
 <p>输入的最终URL形如：</p>
 <div class="highlight highlight-source-shell"><pre class="notranslate">http:/192.168.1.1/cgi-bin/telnetenable.cgi<span class="pl-k">?</span>telnetenable=1<span class="pl-k">&amp;</span>key=AFJB267348C2</pre></div>
-<p>输入完成后按下回车访问该URL，应该看到“Telenet开启”的提示。若提示错误，请检查输入的url和转换后的MAC地址是否正确。</p>
-<blockquote>
-<p>如遭遇错误， mac 地址如果尾数是0，要加1。</p>
-</blockquote>
+<p>输入完成后按下回车访问该URL，应该看到“Telenet开启”的提示。若提示错误，请检查输入的url和转换后的MAC地址是否正确。<br>
+<em><g-emoji class="g-emoji" alias="warning">⚠️</g-emoji>如遭遇错误， mac 地址如果尾数是0，要加1。</em></p>
 <hr>
 <h1>2.通过Telnet获取超级账户名和密码</h1>
-<blockquote>
 <p>如果使用 windows ，可能需要提前开启 telnet 功能：<br>
 打开开始菜单，搜索“启用或关闭”，在结果中找到“启用或关闭 Windows 功能”并打开，勾选“Telnet客户端”后确定，等待Windows完成Telnet功能的开启。<br>
 <a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/33e787ba54ec065cd81dc3f0d3a23f9db9b8b4304a7fa5e3a423e1f441805d3f/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f77696e646f77735f74656c6e65742e706e67"><img src="https://camo.githubusercontent.com/33e787ba54ec065cd81dc3f0d3a23f9db9b8b4304a7fa5e3a423e1f441805d3f/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f77696e646f77735f74656c6e65742e706e67" alt="windows_telnet" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/windows_telnet.png" style="max-width: 100%;"></a></p>
-</blockquote>
 <p>在终端输入并回车以下内容并回车：</p>
 <div class="highlight highlight-source-shell"><pre class="notranslate">telnet 192.168.1.1</pre></div>
 <p>界面会显示“login:”字样。在其后面输入以下内容并回车：</p>
@@ -230,9 +226,7 @@ show admin_pwd</pre></div>
 <a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/a74d6fb6920fd4b13b58dc2267dba3943256e38fb4827aaa7d62e88c1e144bc4/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f254537254137254242254535253841254138254535253835253839254537253843254142484736313435442545382542362538352545372542412541372545372539342541382545362538382542372545382542342541362545352538462542372e706e67"><img src="https://camo.githubusercontent.com/a74d6fb6920fd4b13b58dc2267dba3943256e38fb4827aaa7d62e88c1e144bc4/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f254537254137254242254535253841254138254535253835253839254537253843254142484736313435442545382542362538352545372542412541372545372539342541382545362538382542372545382542342541362545352538462542372e706e67" alt="su" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/%E7%A7%BB%E5%8A%A8%E5%85%89%E7%8C%ABHG6145D%E8%B6%85%E7%BA%A7%E7%94%A8%E6%88%B7%E8%B4%A6%E5%8F%B7.png" style="max-width: 100%;"></a></p>
 <hr>
 <h1>3.获取宽带账户名和密码</h1>
-<blockquote>
-<p><g-emoji class="g-emoji" alias="warning">⚠️</g-emoji>在没有明确获取宽带账号和密码前，请别急着把光猫改桥接，因为没有宽带账号和密码就无法在路由器拨号上网。后续要找回宽带账号密码比较麻烦。</p>
-</blockquote>
+<p><em><g-emoji class="g-emoji" alias="warning">⚠️</g-emoji>在没有明确获取宽带账号和密码前，请别急着把光猫改桥接，因为没有宽带账号和密码就无法在路由器拨号上网。后续要找回宽带账号密码比较麻烦。</em></p>
 <p>在安装宽带时，师傅可能只会提供宽带账户名而不告诉宽带密码（理由可能是“现在都是自动下发的”、“我们也不知道”等等）。而更改光猫为桥接后需要在路由器手动拨号上网，这就需要知道宽带密码。可以尝试询问中国移动的宽带客服获取密码，但在拥有光猫的超级账户之后，不用联系客服也能找到记录在光猫中的宽带密码。</p>
 <p>1.在浏览器地址栏输入 <code class="notranslate">192.168.1.1</code> （不同光猫可能地址不同，具体请查看其背后铭牌）并回车，然后用刚才获取到的超级账户登录光猫管理后台。</p>
 <p>2.切换到“网络-宽带设置“页面。首先查看 “连接模式” 的模式和 “业务类型” 的类型，如果是 <code class="notranslate">路由</code>、 <code class="notranslate">管理</code>且处于不能编辑状态，则在 “连接名称” 一个一个切换，直到看到 “连接模式” 中的路由可以编辑以及 “业务类型” 中的类型是 <code class="notranslate">上网</code> ，此时的 “封装类型” 应该是 <code class="notranslate">PPPoE</code> ，宽带用户名和密码输入框会显示在当前界面。<br>
@@ -242,10 +236,8 @@ show admin_pwd</pre></div>
 <hr>
 <h1>4.更改光猫为桥接模式</h1>
 <p>记下宽带账号密码后，同样在”网络-宽带设置“页面，就可以把”连接模式“从”路由“改为”桥接”了。随后，滚动到页面底部保存修改并退出光猫管理后台。最后，重启光猫即可让桥接模式生效。</p>
-<blockquote>
-<p>若要使光猫在桥接模式下正常工作，有的地区还需要删除”连接名称”里包含”vlan69“或”TR069“的项目，具体方法看下一节。</p>
-</blockquote>
 <hr>
+<p><em>若要使光猫在桥接模式下正常工作，有的地区还需要删除”连接名称”里包含”vlan69“或”TR069“的项目。</em></p>
 <h1>5.删除TR069-摆脱运营商对你的光猫控制</h1>
 <h2>5.1 什么是TR069？</h2>
 <p>TR069是 CPE 和 ACS之间沟通的通讯协定。CPE 可以借着这个协定完成服务开通、功能设定、档案上传下载、系统检测 等等初始化及营运管理的必须动作。简单来说你的运营商通过这个东西远程控制你的光猫进行修改，业务下发。</p>
