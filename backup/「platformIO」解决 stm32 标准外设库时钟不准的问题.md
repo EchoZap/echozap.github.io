@@ -1,4 +1,4 @@
-> 以下以stm32f407系列举例
+*以下以stm32f407系列举例*
 
 ### 1.遭遇问题：
 
@@ -10,18 +10,13 @@
 
 ### 3.解决方法
 
-> 假设当前stm32f407的板子上外部晶振是8MHz（根据自身情况不同）
+*假设当前stm32f407的板子上外部晶振是8MHz（根据自身情况不同）*
 
-1.将 platformIO 的安装目录中的 **/Users/<xxx>/.platformio/packages/  
-framework-cmsis-stm32f4/Source/Templates/system_stm32f4xx.c** 文件删除。
+1.将 platformIO 的安装目录中的 `/Users/<xxx>/.platformio/packages/framework-cmsis-stm32f4/Source/Templates/system_stm32f4xx.c` 文件删除。
 
-2.将解压得到的标准库的 **.../STM32F4xx_DSP_StdPeriph_Lib_V1.9.0/Project/  
-STM32F4xx_StdPeriph_Templates/system_stm32f4xx.c** 文件复制到   
-**/Users/<xxx>/.platformio/packages/framework-cmsis-stm32f4/  
-Source/Templates/** 目录下。
+2.将解压得到的标准库的 `.../STM32F4xx_DSP_StdPeriph_Lib_V1.9.0/Project/STM32F4xx_StdPeriph_Templates/system_stm32f4xx.c` 文件复制到 `/Users/<xxx>/.platformio/packages/framework-cmsis-stm32f4/Source/Templates/` 目录下。
 
-3.打开 **/Users/<xxx>/.platformio/packages/framework-cmsis-stm32f4/  
-Source/Templates/system_stm32f4xx.c**，在其中搜索到`PLL_M`
+3.打开 `/Users/<xxx>/.platformio/packages/framework-cmsis-stm32f4/Source/Templates/system_stm32f4xx.c`，在其中搜索到`PLL_M`
 
 ```c
 #if defined(STM32F40_41xxx) || defined(STM32F427_437xx) || defined(STM32F429_439xx) || defined(STM32F401xx) || defined(STM32F469_479xx)
@@ -31,8 +26,7 @@ Source/Templates/system_stm32f4xx.c**，在其中搜索到`PLL_M`
 
 将 `PLL_M` 后的`25`修改为 `8`。
 
-4.找到 **.../STM32F4xx_DSP_StdPeriph_Lib_V1.9.0/Libraries/CMSIS/  
-Device/ST/STM32F4xx/Include/stm32f4xx.h**，在其中搜索`HSE_VALUE`，找到
+4.找到 `.../STM32F4xx_DSP_StdPeriph_Lib_V1.9.0/Libraries/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h`，在其中搜索`HSE_VALUE`，找到
 
 ```c
 #if defined(STM32F40_41xxx) || defined(STM32F427_437xx)  || defined(STM32F429_439xx) || defined(STM32F401xx) || \

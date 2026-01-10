@@ -7,13 +7,13 @@
     <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
     <script src='https://pub-43c06573bc27485093cd50efd04e9e7b.r2.dev/GmeekTheme-Ronan.js'></script><script src='https://pub-43c06573bc27485093cd50efd04e9e7b.r2.dev/GmeekVercount.js'></script>
     <link rel="icon" href="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg">
-<meta name="description" content="> 以下以stm32f407系列举例
+<meta name="description" content="*以下以stm32f407系列举例*
 
 ### 1.遭遇问题：
 
 在使用[ platformIO 搭建标准外设库](https://blog.ronan.us.kg/2024/09/08/platformIO-%E5%9F%BA%E4%BA%8E-stm32-%E6%A0%87%E5%87%86%E5%A4%96%E8%AE%BE%E5%BA%93%E7%9A%84%E5%B7%A5%E7%A8%8B%E6%A8%A1%E6%9D%BF/)进行实际开发时遇到了外部时钟不准的问题。">
 <meta property="og:title" content="「platformIO」解决 stm32 标准外设库时钟不准的问题">
-<meta property="og:description" content="> 以下以stm32f407系列举例
+<meta property="og:description" content="*以下以stm32f407系列举例*
 
 ### 1.遭遇问题：
 
@@ -181,32 +181,22 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
 </div>
     <div id="content">
-<div class="markdown-body" id="postBody"><blockquote>
-<p>以下以stm32f407系列举例</p>
-</blockquote>
+<div class="markdown-body" id="postBody"><p><em>以下以stm32f407系列举例</em></p>
 <h3>1.遭遇问题：</h3>
 <p>在使用<a href="https://blog.ronan.us.kg/2024/09/08/platformIO-%E5%9F%BA%E4%BA%8E-stm32-%E6%A0%87%E5%87%86%E5%A4%96%E8%AE%BE%E5%BA%93%E7%9A%84%E5%B7%A5%E7%A8%8B%E6%A8%A1%E6%9D%BF/" rel="nofollow"> platformIO 搭建标准外设库</a>进行实际开发时遇到了外部时钟不准的问题。</p>
 <h3>2.原因分析：</h3>
 <p>这是因为 HSE 的配置有问题，platformIO 自带以及从 ST 官网下载的标准库中的 <code class="notranslate">system_stm32f4xx.c</code> 的<code class="notranslate">PLL_M</code>和<code class="notranslate">stm32f4xx.h</code>中的<code class="notranslate"> HSE_VALUE</code>默认值与实际开发版的外部晶振频率不一致</p>
 <h3>3.解决方法</h3>
-<blockquote>
-<p>假设当前stm32f407的板子上外部晶振是8MHz（根据自身情况不同）</p>
-</blockquote>
-<p>1.将 platformIO 的安装目录中的 <strong>/Users//.platformio/packages/<br>
-framework-cmsis-stm32f4/Source/Templates/system_stm32f4xx.c</strong> 文件删除。</p>
-<p>2.将解压得到的标准库的 <strong>.../STM32F4xx_DSP_StdPeriph_Lib_V1.9.0/Project/<br>
-STM32F4xx_StdPeriph_Templates/system_stm32f4xx.c</strong> 文件复制到<br>
-<strong>/Users//.platformio/packages/framework-cmsis-stm32f4/<br>
-Source/Templates/</strong> 目录下。</p>
-<p>3.打开 <strong>/Users//.platformio/packages/framework-cmsis-stm32f4/<br>
-Source/Templates/system_stm32f4xx.c</strong>，在其中搜索到<code class="notranslate">PLL_M</code></p>
+<p><em>假设当前stm32f407的板子上外部晶振是8MHz（根据自身情况不同）</em></p>
+<p>1.将 platformIO 的安装目录中的 <code class="notranslate">/Users/&lt;xxx&gt;/.platformio/packages/framework-cmsis-stm32f4/Source/Templates/system_stm32f4xx.c</code> 文件删除。</p>
+<p>2.将解压得到的标准库的 <code class="notranslate">.../STM32F4xx_DSP_StdPeriph_Lib_V1.9.0/Project/STM32F4xx_StdPeriph_Templates/system_stm32f4xx.c</code> 文件复制到 <code class="notranslate">/Users/&lt;xxx&gt;/.platformio/packages/framework-cmsis-stm32f4/Source/Templates/</code> 目录下。</p>
+<p>3.打开 <code class="notranslate">/Users/&lt;xxx&gt;/.platformio/packages/framework-cmsis-stm32f4/Source/Templates/system_stm32f4xx.c</code>，在其中搜索到<code class="notranslate">PLL_M</code></p>
 <div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">#if</span> defined(<span class="pl-s1">STM32F40_41xxx</span>) <span class="pl-c1">||</span> defined(<span class="pl-s1">STM32F427_437xx</span>) <span class="pl-c1">||</span> defined(<span class="pl-s1">STM32F429_439xx</span>) <span class="pl-c1">||</span> defined(<span class="pl-s1">STM32F401xx</span>) <span class="pl-c1">||</span> defined(<span class="pl-s1">STM32F469_479xx</span>)
  <span class="pl-c">/* PLL_VCO = (HSE_VALUE or HSI_VALUE / PLL_M) * PLL_N */</span>
  <span class="pl-k">#define</span> <span class="pl-c1">PLL_M</span>      25
 <span class="pl-k"></span></pre></div>
 <p>将 <code class="notranslate">PLL_M</code> 后的<code class="notranslate">25</code>修改为 <code class="notranslate">8</code>。</p>
-<p>4.找到 <strong>.../STM32F4xx_DSP_StdPeriph_Lib_V1.9.0/Libraries/CMSIS/<br>
-Device/ST/STM32F4xx/Include/stm32f4xx.h</strong>，在其中搜索<code class="notranslate">HSE_VALUE</code>，找到</p>
+<p>4.找到 <code class="notranslate">.../STM32F4xx_DSP_StdPeriph_Lib_V1.9.0/Libraries/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h</code>，在其中搜索<code class="notranslate">HSE_VALUE</code>，找到</p>
 <div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">#if</span> defined(<span class="pl-s1">STM32F40_41xxx</span>) <span class="pl-c1">||</span> defined(<span class="pl-s1">STM32F427_437xx</span>)  <span class="pl-c1">||</span> defined(<span class="pl-s1">STM32F429_439xx</span>) <span class="pl-c1">||</span> defined(<span class="pl-s1">STM32F401xx</span>) <span class="pl-c1">||</span> \
     defined(<span class="pl-s1">STM32F410xx</span>) <span class="pl-c1">||</span> defined(<span class="pl-s1">STM32F411xE</span>) <span class="pl-c1">||</span> defined(<span class="pl-s1">STM32F469_479xx</span>)
  <span class="pl-k">#if</span> !defined  (<span class="pl-c1">HSE_VALUE</span>)
