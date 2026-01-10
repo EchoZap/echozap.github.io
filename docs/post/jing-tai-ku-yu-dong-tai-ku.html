@@ -177,18 +177,14 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <p>在项目中使用库一般有两个目的，一个是为了使程序更加简洁不需要在项目中维护太多的源文件，另一方面是为了源代码保密，毕竟不是所有人都想把自己编写的程序开源出来。</p>
 <p>当我们拿到了库文件（动态库、静态库）之后要想使用还必须有这些库中提供的API函数的声明，也就是头文件，把这些都添加到项目中，就可以快乐的写代码了。</p>
 <h2>1.静态库</h2>
-<blockquote>
 <p>在Linux中静态库由程序 ar 生成，现在静态库已经不像之前那么普遍了，这主要是由于程序都在使用动态库。关于静态库的命名规则如下:</p>
-</blockquote>
 <ul>
 <li>在Linux中静态库以lib作为前缀, 以.a作为后缀, 中间是库的名字自己指定即可, 即: libxxx.a</li>
 <li>在Windows中静态库一般以lib作为前缀, 以lib作为后缀, 中间是库的名字需要自己指定, 即: libxxx.lib</li>
 </ul>
 <h3>1.1生成静态链接库</h3>
-<blockquote>
 <p>生成静态库，需要先对源文件进行汇编操作 (<code class="notranslate">使用参数 -c</code>) 得到二进制格式的目标文件 (<code class="notranslate">.o 格式</code>), 然后在通过<code class="notranslate"> ar</code>工具将目标文件打包就可以得到静态库文件了 (<code class="notranslate">libxxx.a</code>)。</p>
 <p>使用<code class="notranslate">ar</code>工具创建静态库的时候需要三个参数:</p>
-</blockquote>
 <ul>
 <li><code class="notranslate">参数c</code>：创建一个库，不管库是否存在，都将创建。</li>
 <li><code class="notranslate">参数s</code>：创建目标文件索引，这在创建较大的库时能加快时间。</li>
@@ -358,14 +354,14 @@ main.c:(.text+0x38): undefined reference to <span class="pl-s"><span class="pl-p
 <span class="pl-s">main.c:(.text+0x78): undefined reference to <span class="pl-pds">`</span></span>multiply<span class="pl-s"><span class="pl-pds">'</span></span>
 <span class="pl-s">main.c:(.text+0x98): undefined reference to `divide<span class="pl-pds">'</span></span>
 collect2: error: ld returned 1 <span class="pl-c1">exit</span> status</pre></div>
-<blockquote>
 <p>上述错误分析:</p>
 <p>编译的源文件中包含了头文件 <code class="notranslate">head.h</code>, 这个头文件中声明的函数对应的定义（也就是函数体实现）在静态库中，程序在编译的时候没有找到函数实现，因此提示 <code class="notranslate">undefined reference to xxxx</code>。</p>
 <p>解决方案：在编译的时将<code class="notranslate">静态库的路径</code>和<code class="notranslate">名字</code>都指定出来</p>
-<p><code class="notranslate"> -L</code>: 指定库所在的目录(相对或者绝对路径)</p>
-<p><code class="notranslate">-l</code>: 指定库的名字, 需要掐头(lib)去尾(.a) 剩下的才是需要的静态库的名字</p>
-<p><code class="notranslate">-I</code>: 指定头文件所在目录</p>
-</blockquote>
+<ul>
+<li><code class="notranslate"> -L</code>: 指定库所在的目录(相对或者绝对路径)</li>
+<li><code class="notranslate">-l</code>: 指定库的名字, 需要掐头(lib)去尾(.a) 剩下的才是需要的静态库的名字</li>
+<li><code class="notranslate">-I</code>: 指定头文件所在目录</li>
+</ul>
 <div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 4. 编译的时候指定库信息</span>
 	-L: 指定库所在的目录(相对或者绝对路径)
 	-l: 指定库的名字, 掐头(lib)去尾(.a) ==<span class="pl-k">&gt;</span> calc
@@ -381,19 +377,15 @@ $ tree
 └── main.c</pre></div>
 <hr>
 <h2>2. 动态库</h2>
-<blockquote>
 <p>动态链接库是程序运行时加载的库，当动态链接库正确部署之后，运行的多个程序可以使用同一个加载到内存中的动态库，因此在Linux中动态链接库也可称之为共享库。</p>
 <p>动态链接库是目标文件的集合，目标文件在动态链接库中的组织方式是按照特殊方式形成的。库中函数和变量的地址使用的是相对地址（静态库中使用的是绝对地址），其真实地址是在应用程序加载动态库时形成的。</p>
 <p>关于动态库的命名规则如下:</p>
-</blockquote>
 <ul>
 <li>在Linux中动态库以<code class="notranslate">lib</code>作为前缀, 以.<code class="notranslate">so</code>作为后缀, 中间是库的名字自己指定即可, 即: <code class="notranslate">libxxx.so</code></li>
 <li>在Windows中动态库一般以<code class="notranslate">lib</code>作为前缀, 以<code class="notranslate">dll</code>作为后缀, 中间是库的名字需要自己指定, 即: <code class="notranslate">libxxx.dll</code></li>
 </ul>
 <h3>2.1 生成动态链接库</h3>
-<blockquote>
 <p>生成动态链接库是直接使用<code class="notranslate">gcc</code>命令并且需要添加<code class="notranslate">-fPIC（-fpic）</code> 以及<code class="notranslate">-shared </code>参数。</p>
-</blockquote>
 <ul>
 <li>-fPIC 或 -fpic 参数的作用是使得 gcc 生成的代码是与位置无关的，也就是使用相对位置。</li>
 <li>-shared参数的作用是告诉编译器生成一个动态链接库。</li>
@@ -496,10 +488,8 @@ main.c:(.text+0x38): undefined reference to <span class="pl-s"><span class="pl-p
 <span class="pl-s">main.c:(.text+0x78): undefined reference to <span class="pl-pds">`</span></span>multiply<span class="pl-s"><span class="pl-pds">'</span></span>
 <span class="pl-s">main.c:(.text+0x98): undefined reference to `divide<span class="pl-pds">'</span></span>
 collect2: error: ld returned 1 <span class="pl-c1">exit</span> status</pre></div>
-<blockquote>
-<p>错误原因:</p>
-<p>和使用静态库一样, 在编译的时候需要指定库相关的信息: <code class="notranslate">库的路径 -L</code>和 <code class="notranslate">库的名字 -l</code></p>
-</blockquote>
+<p>错误原因:<br>
+和使用静态库一样, 在编译的时候需要指定库相关的信息: <code class="notranslate">库的路径 -L</code>和 <code class="notranslate">库的名字 -l</code></p>
 <p>添加库信息相关参数, 重新编译测试代码:</p>
 <div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> 在编译的时候指定动态库相关的信息: 库的路径 -L, 库的名字 -l</span>
 $ gcc main.c -o app -L./ -lcalc
@@ -515,10 +505,8 @@ $ tree
 <span class="pl-c"><span class="pl-c">#</span> 执行生成的可执行程序, 错误提示 ==&gt; 可执行程序执行的时候找不到动态库</span>
 $ ./app
 ./app: error <span class="pl-k">while</span> loading shared libraries: libcalc.so: cannot open shared object file: No such file or directory</pre></div>
-<blockquote>
-<p>关于整个操作过程的报告：</p>
-<p>gcc通过指定的动态库信息生成了可执行程序, 但是可执行程序运行却提示<code class="notranslate">无法加载到动态库</code>。</p>
-</blockquote>
+<p>关于整个操作过程的报告：<br>
+gcc通过指定的动态库信息生成了可执行程序, 但是可执行程序运行却提示<code class="notranslate">无法加载到动态库</code>。</p>
 <h3>2.4 解决动态库无法加载问题</h3>
 <h4>2.4.1 库的工作原理</h4>
 <ul>
@@ -548,19 +536,15 @@ $ ./app
 </li>
 </ul>
 <h4>2.4.2 动态链接器</h4>
-<blockquote>
 <p>动态链接器是一个独立于应用程序的进程, 属于操作系统, 当用户的程序需要加载动态库的时候动态连接器就开始工作了，很显然动态连接器根本就不知道用户通过 gcc 编译程序的时候通过参数 -L指定的路径。</p>
 <p>那么动态链接器是如何搜索某一个动态库的呢，在它内部有一个默认的搜索顺序，按照优先级从高到低的顺序分别是：</p>
-</blockquote>
 <p>1.可执行文件内部的 <code class="notranslate">DT_RPATH</code> 段</p>
 <p>2.系统的环境变量 <code class="notranslate">LD_LIBRARY_PATH</code></p>
 <p>3.系统动态库的缓存文件 <code class="notranslate">/etc/ld.so.cache</code></p>
 <p>4.存储动态库/静态库的系统目录<code class="notranslate"> /lib/</code>, <code class="notranslate">/usr/lib</code>等<br>
 按照以上四个顺序, 依次搜索, 找到之后结束遍历, 最终还是没找到, 动态连接器就会提示动态库找不到的错误信息。</p>
 <h4>2.4.3 解决方案</h4>
-<blockquote>
 <p>可执行程序生成之后, 根据动态链接器的搜索路径, 我们可以提供三种解决方案，我们只需要将动态库的路径放到对应的环境变量或者系统配置文件中，同样也可以将动态库拷贝到系统库目录（或者是将动态库的软链接文件放到这些系统库目录中）。</p>
-</blockquote>
 <h5>方案1</h5>
 <p>将库路径添加到环境变量 <code class="notranslate">LD_LIBRARY_PATH</code> 中</p>
 <p>1.找到相关的配置文件<br>
@@ -614,21 +598,29 @@ $ ldd app
 <hr>
 <h2>3.优缺点</h2>
 <h4>3.1 静态库</h4>
-<p>优点：<br>
-静态库被打包到应用程序中加载速度快<br>
-发布程序无需提供静态库，移植方便</p>
-<p>缺点：<br>
-相同的库文件数据可能在内存中被加载多份, 消耗系统资源，浪费内存<br>
-库文件更新需要重新编译项目文件, 生成新的可执行程序, 浪费时间。</p>
+<p>优点：</p>
+<ul>
+<li>静态库被打包到应用程序中加载速度快</li>
+<li>发布程序无需提供静态库，移植方便</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>相同的库文件数据可能在内存中被加载多份, 消耗系统资源，浪费内存</li>
+<li>库文件更新需要重新编译项目文件, 生成新的可执行程序, 浪费时间。</li>
+</ul>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/a9f15ad3316ae798cb2405fe250dc8a0fe54bb25d7c58ce4476b480c4550bc51/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f6c6962312e706e67"><img src="https://camo.githubusercontent.com/a9f15ad3316ae798cb2405fe250dc8a0fe54bb25d7c58ce4476b480c4550bc51/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f6c6962312e706e67" alt="img" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/lib1.png" style="max-width: 100%;"></a></p>
 <h4>3.2 动态库</h4>
-<p>优点：<br>
-- 可实现不同进程间的资源共享<br>
-- 动态库升级简单, 只需要替换库文件, 无需重新编译应用程序<br>
-- 程序猿可以控制何时加载动态库, 不调用库函数动态库不会被加载<br>
-缺点：<br>
-- 加载速度比静态库慢, 以现在计算机的性能可以忽略<br>
-- 发布程序需要提供依赖的动态库</p>
+<p>优点：</p>
+<ul>
+<li>可实现不同进程间的资源共享</li>
+<li>动态库升级简单, 只需要替换库文件, 无需重新编译应用程序</li>
+<li>程序猿可以控制何时加载动态库, 不调用库函数动态库不会被加载</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>加载速度比静态库慢, 以现在计算机的性能可以忽略</li>
+<li>发布程序需要提供依赖的动态库</li>
+</ul>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/95e00eed22fa7d3b08fa1ba494cec45e424be1ea0b3c87d38a2e177d4320c223/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f6c6962312e312e706e67"><img src="https://camo.githubusercontent.com/95e00eed22fa7d3b08fa1ba494cec45e424be1ea0b3c87d38a2e177d4320c223/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f6c6962312e312e706e67" alt="img" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/lib1.1.png" style="max-width: 100%;"></a></p></div>
 <div style="font-size:small;margin-top:8px;float:right;">要做一个有swag的人</div>
 
