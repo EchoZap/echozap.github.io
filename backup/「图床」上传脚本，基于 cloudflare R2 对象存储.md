@@ -10,7 +10,12 @@
 - `access_key_id`：s3客户端访问密钥
 - `secret_access_key`：s3客户端机密访问密钥
 
+  ![a](https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/202601192007.png)
+
+  ![b](https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/202601192008.png)
+
   ![cloudflare_R2_S3_API_Token](https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/cloudflare_R2_S3_API_Token.png)
+
 - `bucket_name`：R2 存储桶名称
 
   ![cloudflare_R2_bucket_name](https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/cloudflare_R2_bucket_name.png)
