@@ -7,9 +7,9 @@
     <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
     <script src='https://pub-43c06573bc27485093cd50efd04e9e7b.r2.dev/GmeekTheme-Ronan.js'></script><script src='https://pub-43c06573bc27485093cd50efd04e9e7b.r2.dev/GmeekVercount.js'></script>
     <link rel="icon" href="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg">
-<meta name="description" content="使用之前需要通过 `pip install boto3` 安装 boto3 库。">
+<meta name="description" content="**使用之前需要通过 `pip install boto3` 安装 boto3 库。">
 <meta property="og:title" content="「图床」上传脚本，基于 cloudflare R2 对象存储">
-<meta property="og:description" content="使用之前需要通过 `pip install boto3` 安装 boto3 库。">
+<meta property="og:description" content="**使用之前需要通过 `pip install boto3` 安装 boto3 库。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://blog.ronan.cloudns.ch/post/%E3%80%8C-tu-chuang-%E3%80%8D-shang-chuan-jiao-ben-%EF%BC%8C-ji-yu-%20cloudflare%20R2%20-dui-xiang-cun-chu.html">
 <meta property="og:image" content="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/avatar.jpg">
@@ -173,26 +173,30 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
 </div>
     <div id="content">
-<div class="markdown-body" id="postBody"><p>使用之前需要通过 <code class="notranslate">pip install boto3</code> 安装 boto3 库。</p>
+<div class="markdown-body" id="postBody"><p><strong>使用之前需要通过 <code class="notranslate">pip install boto3</code> 安装 boto3 库。</strong></p>
 <p>使用方法：<code class="notranslate">usage: python imgs.py input_file</code></p>
-<p>在 <code class="notranslate">7-10</code> 行填入相应信息并将代码保存为 imgs.py：</p>
+<p>在 <code class="notranslate">7-11</code> 行填入相应信息并将代码保存为 imgs.py：</p>
 <ul>
 <li>
-<p><code class="notranslate">account_id</code>：账户 id</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/85c8a3e2beb8d8cd36ae33558a3c1f9510ad5849e61c8d0c42e410e0b6b1d00e/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f636c6f7564666c6172655f52325f6163636f756e745f69642e706e67"><img src="https://camo.githubusercontent.com/85c8a3e2beb8d8cd36ae33558a3c1f9510ad5849e61c8d0c42e410e0b6b1d00e/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f636c6f7564666c6172655f52325f6163636f756e745f69642e706e67" alt="cloudflare_R2_account_id" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/cloudflare_R2_account_id.png" style="max-width: 100%;"></a></p>
+<p><code class="notranslate">account_id</code>：账户 id<br>
+<a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/85c8a3e2beb8d8cd36ae33558a3c1f9510ad5849e61c8d0c42e410e0b6b1d00e/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f636c6f7564666c6172655f52325f6163636f756e745f69642e706e67"><img src="https://camo.githubusercontent.com/85c8a3e2beb8d8cd36ae33558a3c1f9510ad5849e61c8d0c42e410e0b6b1d00e/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f636c6f7564666c6172655f52325f6163636f756e745f69642e706e67" alt="cloudflare_R2_account_id" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/cloudflare_R2_account_id.png" style="max-width: 100%;"></a></p>
 </li>
 <li>
 <p><code class="notranslate">access_key_id</code>：s3客户端访问密钥</p>
 </li>
 <li>
-<p><code class="notranslate">secret_access_key</code>：s3客户端机密访问密钥</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/c9e36cf0e22d9527f6ede6c64cd300e5cabb78e198563d3a6a7d7b82c613cb90/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f3230323630313139323030372e706e67"><img src="https://camo.githubusercontent.com/c9e36cf0e22d9527f6ede6c64cd300e5cabb78e198563d3a6a7d7b82c613cb90/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f3230323630313139323030372e706e67" alt="a" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/202601192007.png" style="max-width: 100%;"></a></p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/72dfb5de0f37d20efea81c37abb4a61332d7b2a4c5bf38163d2104e8652bdf4b/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f3230323630313139323030382e706e67"><img src="https://camo.githubusercontent.com/72dfb5de0f37d20efea81c37abb4a61332d7b2a4c5bf38163d2104e8652bdf4b/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f3230323630313139323030382e706e67" alt="b" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/202601192008.png" style="max-width: 100%;"></a></p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/6546b436664ab586e9ce3a45e1c231d11f3970d92ba8f7d974c969414b742ecd/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f636c6f7564666c6172655f52325f53335f4150495f546f6b656e2e706e67"><img src="https://camo.githubusercontent.com/6546b436664ab586e9ce3a45e1c231d11f3970d92ba8f7d974c969414b742ecd/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f636c6f7564666c6172655f52325f53335f4150495f546f6b656e2e706e67" alt="cloudflare_R2_S3_API_Token" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/cloudflare_R2_S3_API_Token.png" style="max-width: 100%;"></a></p>
+<p><code class="notranslate">secret_access_key</code>：s3客户端机密访问密钥<br>
+<a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/c9e36cf0e22d9527f6ede6c64cd300e5cabb78e198563d3a6a7d7b82c613cb90/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f3230323630313139323030372e706e67"><img src="https://camo.githubusercontent.com/c9e36cf0e22d9527f6ede6c64cd300e5cabb78e198563d3a6a7d7b82c613cb90/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f3230323630313139323030372e706e67" alt="a" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/202601192007.png" style="max-width: 100%;"></a><br>
+<a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/72dfb5de0f37d20efea81c37abb4a61332d7b2a4c5bf38163d2104e8652bdf4b/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f3230323630313139323030382e706e67"><img src="https://camo.githubusercontent.com/72dfb5de0f37d20efea81c37abb4a61332d7b2a4c5bf38163d2104e8652bdf4b/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f3230323630313139323030382e706e67" alt="b" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/202601192008.png" style="max-width: 100%;"></a><br>
+<a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/6546b436664ab586e9ce3a45e1c231d11f3970d92ba8f7d974c969414b742ecd/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f636c6f7564666c6172655f52325f53335f4150495f546f6b656e2e706e67"><img src="https://camo.githubusercontent.com/6546b436664ab586e9ce3a45e1c231d11f3970d92ba8f7d974c969414b742ecd/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f636c6f7564666c6172655f52325f53335f4150495f546f6b656e2e706e67" alt="cloudflare_R2_S3_API_Token" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/cloudflare_R2_S3_API_Token.png" style="max-width: 100%;"></a></p>
 </li>
 <li>
-<p><code class="notranslate">bucket_name</code>：R2 存储桶名称</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/85ea898f13c6dee4083c73d8e6e752c7b7d4bc43b24cfed4204ac56a89e8d75f/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f636c6f7564666c6172655f52325f6275636b65745f6e616d652e706e67"><img src="https://camo.githubusercontent.com/85ea898f13c6dee4083c73d8e6e752c7b7d4bc43b24cfed4204ac56a89e8d75f/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f636c6f7564666c6172655f52325f6275636b65745f6e616d652e706e67" alt="cloudflare_R2_bucket_name" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/cloudflare_R2_bucket_name.png" style="max-width: 100%;"></a></p>
+<p><code class="notranslate">bucket_name</code>：R2 存储桶名称<br>
+<a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/85ea898f13c6dee4083c73d8e6e752c7b7d4bc43b24cfed4204ac56a89e8d75f/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f636c6f7564666c6172655f52325f6275636b65745f6e616d652e706e67"><img src="https://camo.githubusercontent.com/85ea898f13c6dee4083c73d8e6e752c7b7d4bc43b24cfed4204ac56a89e8d75f/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f636c6f7564666c6172655f52325f6275636b65745f6e616d652e706e67" alt="cloudflare_R2_bucket_name" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/cloudflare_R2_bucket_name.png" style="max-width: 100%;"></a></p>
+</li>
+<li>
+<p><code class="notranslate">pub_url</code>：该存储桶的公共开发URL<br>
+<a target="_blank" rel="noopener noreferrer nofollow" href="https://camo.githubusercontent.com/8bf91c2b25746aa56874fd9409103bf9dd32ce6f526311c3ede31f7ef7e78bde/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f3230323630313139323032392e706e67"><img src="https://camo.githubusercontent.com/8bf91c2b25746aa56874fd9409103bf9dd32ce6f526311c3ede31f7ef7e78bde/68747470733a2f2f7075622d61323562366138336132643834363935386662363366363964303764373961352e72322e6465762f3230323630313139323032392e706e67" alt="pub_url" data-canonical-src="https://pub-a25b6a83a2d846958fb63f69d07d79a5.r2.dev/202601192029.png" style="max-width: 100%;"></a></p>
 </li>
 </ul>
 <p>可以直接运行脚本或者将脚本<a href="https://blog.ronan.cloudns.ch/post/%E3%80%8Cpython%E3%80%8D-da-bao-cheng-xu.html" rel="nofollow">打包为应用程序</a>。</p>
@@ -202,10 +206,11 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <span class="pl-k">import</span> <span class="pl-s1">argparse</span>
 
 <span class="pl-c"># Cloudflare R2 配置</span>
-<span class="pl-s1">account_id</span> <span class="pl-c1">=</span> <span class="pl-s">""</span> <span class="pl-c"># 这里填入账户 id</span>
-<span class="pl-s1">access_key_id</span> <span class="pl-c1">=</span> <span class="pl-s">""</span> <span class="pl-c"># 这里填写 S3 客户端的‘访问密钥’</span>
-<span class="pl-s1">secret_access_key</span> <span class="pl-c1">=</span> <span class="pl-s">""</span> <span class="pl-c">#这里填写 S3 客户端的‘机密访问密钥’</span>
-<span class="pl-s1">bucket_name</span> <span class="pl-c1">=</span> <span class="pl-s">""</span> <span class="pl-c"># 这里填入你要上传文件到哪个 R2 存储桶的名称</span>
+<span class="pl-s1">account_id</span> <span class="pl-c1">=</span> <span class="pl-s">""</span>                <span class="pl-c"># 这里填入账户 id</span>
+<span class="pl-s1">access_key_id</span> <span class="pl-c1">=</span> <span class="pl-s">""</span>          <span class="pl-c"># 这里填写 S3 客户端的‘访问密钥’</span>
+<span class="pl-s1">secret_access_key</span> <span class="pl-c1">=</span> <span class="pl-s">""</span>  <span class="pl-c"># 这里填写 S3 客户端的‘机密访问密钥’</span>
+<span class="pl-s1">bucket_name</span> <span class="pl-c1">=</span> <span class="pl-s">""</span>            <span class="pl-c"># 这里填入你要上传文件到哪个 R2 存储桶的名称</span>
+<span class="pl-s1">pub_url</span> <span class="pl-c1">=</span> <span class="pl-s">""</span>                      <span class="pl-c"># 这里填入存储桶的公共开发 URL（可填可不填）</span>
 <span class="pl-s1">endpoint_url</span> <span class="pl-c1">=</span> <span class="pl-s">f"https://<span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">account_id</span><span class="pl-kos">}</span></span>.r2.cloudflarestorage.com"</span>
 
 <span class="pl-c"># 创建 S3 客户端</span>
@@ -227,7 +232,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 
     <span class="pl-k">try</span>:
         <span class="pl-s1">s3</span>.<span class="pl-c1">upload_file</span>(<span class="pl-s1">file_path</span>, <span class="pl-s1">bucket_name</span>, <span class="pl-s1">object_name</span>)
-        <span class="pl-en">print</span>(<span class="pl-s">f"File <span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">file_path</span><span class="pl-kos">}</span></span> uploaded successfully as <span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">object_name</span><span class="pl-kos">}</span></span> <span class="pl-cce">\n</span><span class="pl-cce">\n</span>https://imgs.ronan.us.kg/<span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">object_name</span><span class="pl-kos">}</span></span>"</span>)
+        <span class="pl-en">print</span>(<span class="pl-s">f"File <span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">file_path</span><span class="pl-kos">}</span></span> uploaded successfully as <span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">object_name</span><span class="pl-kos">}</span></span> <span class="pl-cce">\n</span><span class="pl-cce">\n</span><span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">pub_url</span><span class="pl-kos">}</span></span>/<span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">object_name</span><span class="pl-kos">}</span></span>"</span>)
         <span class="pl-k">return</span> <span class="pl-c1">True</span>
     <span class="pl-k">except</span> <span class="pl-v">ClientError</span> <span class="pl-k">as</span> <span class="pl-s1">e</span>:
         <span class="pl-en">print</span>(<span class="pl-s">f"Error uploading file <span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">file_path</span><span class="pl-kos">}</span></span>: <span class="pl-s1"><span class="pl-kos">{</span><span class="pl-s1">e</span><span class="pl-kos">}</span></span>"</span>)
