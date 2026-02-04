@@ -221,7 +221,7 @@ Enter same passphrase again:</pre></div>
 <p>注意：在输入密码时，终端不会显示任何字符（包括星号），这是正常现象。</p>
 <p>如果你忘记了 SSH 密钥的密码，将无法使用该密钥进行身份验证，因为 SSH 并没有提供恢复密码的功能。最简单的解决方案是生成一个新的 SSH 密钥对。</p>
 <hr>
-<h1>2. 配置 <code class="notranslate">~/.ssh/config</code> 文件</h1>
+<h1>2.  配置多个密钥（让系统自动选择）</h1>
 <p>你创建了多个密钥后，怎么让系统知道用哪个呢？答案是：配置文件！</p>
 <p>打开（或创建）配置文件 <code class="notranslate">~/.ssh/config</code>，写入：</p>
 <div class="highlight highlight-source-shell"><pre class="notranslate"><span class="pl-c"><span class="pl-c">#</span> GitHub 使用的密钥</span>
