@@ -1,7 +1,9 @@
 在终端cd到singbox内核所在目录，建议将面板文件（UI）和config.json和内核放到同一目录下。
 
-开启singbox
+开启singbox前先执行一个简单的 sudo 命令（如 sudo -v）来获取权限缓存，然后再运行你的完整命令：
 ```
+sudo -v
+# 输入密码后
 sudo nohup ./sing-box run -c config.json &> sing-box.log &
 ```
 

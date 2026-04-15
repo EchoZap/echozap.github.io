@@ -177,8 +177,10 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
     <div id="content">
 <div class="markdown-body" id="postBody"><p>在终端cd到singbox内核所在目录，建议将面板文件（UI）和config.json和内核放到同一目录下。</p>
-<p>开启singbox</p>
-<pre class="notranslate"><code class="notranslate">sudo nohup ./sing-box run -c config.json &amp;&gt; sing-box.log &amp;
+<p>开启singbox前先执行一个简单的 sudo 命令（如 sudo -v）来获取权限缓存，然后再运行你的完整命令：</p>
+<pre class="notranslate"><code class="notranslate">sudo -v
+# 输入密码后
+sudo nohup ./sing-box run -c config.json &amp;&gt; sing-box.log &amp;
 </code></pre>
 <p>关闭singbox</p>
 <pre class="notranslate"><code class="notranslate">sudo pkill sing-box
