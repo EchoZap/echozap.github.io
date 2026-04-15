@@ -31,4 +31,13 @@ sudo networksetup -setsecurewebproxy Wi-Fi 127.0.0.1 7890
 sudo networksetup -setsocksfirewallproxy Wi-Fi 127.0.0.1 7890
 ```
 
+关闭singbox内核后，发现网络用不了：
+因为上面命令行手动开启了系统的全局代理设置。当你运行这些 networksetup 命令时，你是在 macOS 的系统设置里硬编码了“流量必须经过 127.0.0.1:7890”。现在你关掉了 sing-box，那个端口（7890）就没有程序在监听了，系统依然在往那儿发流量，结果自然是“撞了墙”，网络全断。
+
+要恢复网络，你需要手动把这些代理开关关掉。
+```
+sudo networksetup -setwebproxystate Wi-Fi off
+sudo networksetup -setsecurewebproxystate Wi-Fi off
+sudo networksetup -setsocksfirewallproxystate Wi-Fi off
+```
 
