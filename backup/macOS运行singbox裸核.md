@@ -10,7 +10,7 @@ sudo nohup ./sing-box run -c config.json &> sing-box.log &
 sudo pkill sing-box
 ```
 
-使用控制面板，需要在[metacubexd](https://github.com/MetaCubeX/metacubexd/releases)下载想要版本的「compressed-dist.tgz」，里面是网页静态文件。下载后解压并将目录重名为ui，将其移到singbox内核同一目录下。在config.json的 "experimental"->"clash_api"里添加👇，开启内核后可在浏览器通过http://127.0.0.1:9090/ui访问本地面板：
+使用控制面板，需要在[metacubexd](https://github.com/MetaCubeX/metacubexd/releases)下载想要版本的「compressed-dist.tgz」，里面是网页静态文件。下载后解压并将目录重名为ui，将其移到singbox内核同一目录下。在config.json的 "experimental"->"clash_api"里添加👇，开启内核后可在浏览器通过[http://127.0.0.1:9090/ui](http://127.0.0.1:9090/ui)访问本地面板：
 
 >    "external_controller": "127.0.0.1:9090",
       "external_ui": "ui",
